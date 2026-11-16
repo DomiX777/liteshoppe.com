@@ -1,0 +1,1087 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dar Zellij QR Menu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one-column phone app — zellij-patterned hero, sticky category rail, list menu, sheets for detail, fixed tab bar. */
+:root{
+  --bg:#F3F6F4; --surface:#FFFFFF; --surface-2:#E8EEEA; --ink:#12201B; --muted:#5B6A63; --line:#DCE4DF;
+  --accent:#0E6B53; --accent-ink:#FFFFFF; --accent-soft:#DDEFE7;
+  --saffron:#C77A0E; --saffron-soft:#FBEBD2; --danger:#B9381A; --danger-soft:#FBE3DC;
+  --hero-bg:#0D4F3F; --hero-ink:#F1FAF5;
+  --thumb-s:42%; --thumb-l:88%; --thumb-ink:32%;
+  --shadow:0 1px 2px rgb(18 32 27 / .06), 0 8px 24px rgb(18 32 27 / .08);
+  --font-display:"Bricolage Grotesque", "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-body:"Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-ar:"IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+  --r-lg:22px; --r-md:16px; --r-sm:12px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0C1311; --surface:#141E1B; --surface-2:#1C2925; --ink:#E8F0EC; --muted:#93A39B; --line:#24322E;
+  --accent:#43C59A; --accent-ink:#04140E; --accent-soft:#163A2F;
+  --saffron:#F2B34E; --saffron-soft:#3A2A12; --danger:#FF8A65; --danger-soft:#3B1D15;
+  --hero-bg:#0F2E26; --hero-ink:#E6F5EE;
+  --thumb-s:24%; --thumb-l:19%; --thumb-ink:72%;
+  --shadow:0 1px 2px rgb(0 0 0 / .3), 0 8px 24px rgb(0 0 0 / .35);
+  color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#0C1311; --surface:#141E1B; --surface-2:#1C2925; --ink:#E8F0EC; --muted:#93A39B; --line:#24322E;
+  --accent:#43C59A; --accent-ink:#04140E; --accent-soft:#163A2F;
+  --saffron:#F2B34E; --saffron-soft:#3A2A12; --danger:#FF8A65; --danger-soft:#3B1D15;
+  --hero-bg:#0F2E26; --hero-ink:#E6F5EE;
+  --thumb-s:24%; --thumb-l:19%; --thumb-ink:72%;
+  --shadow:0 1px 2px rgb(0 0 0 / .3), 0 8px 24px rgb(0 0 0 / .35);
+  color-scheme:dark }
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased;
+  padding-bottom:calc(88px + env(safe-area-inset-bottom,0px))}
+html[lang="ar"] body{font-family:var(--font-ar)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--bg)}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
+.ic{width:1.25em;height:1.25em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+[dir="rtl"] .flip{transform:scaleX(-1)}
+.wrap{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--font-display);text-wrap:balance;margin:0;letter-spacing:-.01em}
+html[lang="ar"] h1,html[lang="ar"] h2,html[lang="ar"] h3{font-family:var(--font-ar);letter-spacing:0}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+html[lang="ar"] .eyebrow{letter-spacing:0}
+.num{font-variant-numeric:tabular-nums}
+
+/* Hero */
+.hero{position:relative;background:var(--hero-bg);color:var(--hero-ink);overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background:var(--hero-ink);opacity:.08;pointer-events:none;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='%23000' stroke-width='1.4'%3E%3Crect x='16' y='16' width='24' height='24'/%3E%3Crect x='16' y='16' width='24' height='24' transform='rotate(45 28 28)'/%3E%3Ccircle cx='28' cy='28' r='4'/%3E%3Cpath d='M0 0l8 8M56 0l-8 8M0 56l8-8M56 56l-8-8'/%3E%3C/g%3E%3C/svg%3E") 0 0/56px 56px;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='%23000' stroke-width='1.4'%3E%3Crect x='16' y='16' width='24' height='24'/%3E%3Crect x='16' y='16' width='24' height='24' transform='rotate(45 28 28)'/%3E%3Ccircle cx='28' cy='28' r='4'/%3E%3Cpath d='M0 0l8 8M56 0l-8 8M0 56l8-8M56 56l-8-8'/%3E%3C/g%3E%3C/svg%3E") 0 0/56px 56px}
+.hero .wrap{position:relative;z-index:1;padding-block:18px 26px;display:grid;gap:14px}
+.hero-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{width:52px;height:52px;border-radius:16px;background:var(--hero-ink);color:var(--hero-bg);display:grid;place-items:center;font-family:var(--font-display);font-weight:800;font-size:20px;overflow:hidden}
+.logo img{width:100%;height:100%;object-fit:cover}
+.pill-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:999px;font-weight:600;font-size:13px;
+  background:color-mix(in srgb,var(--hero-ink) 14%,transparent);color:var(--hero-ink)}
+.hero h1{font-size:30px;font-weight:800;line-height:1.1}
+.hero p{margin:4px 0 0;opacity:.82;max-width:46ch}
+.hero-meta{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;font-size:13px;font-weight:600;
+  background:color-mix(in srgb,var(--hero-ink) 12%,transparent)}
+.chip.table{background:var(--saffron);color:#1E1404}
+.dot{width:8px;height:8px;border-radius:50%;background:#5BE3A6;box-shadow:0 0 0 3px rgb(91 227 166 / .25)}
+
+/* Search + categories */
+.menu-tools{padding-block:16px 4px;display:grid;gap:12px}
+.search{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:0 14px;color:var(--muted)}
+.search input{flex:1;min-width:0;border:0;background:transparent;padding:13px 0;outline:none;color:var(--ink)}
+.search input::placeholder{color:var(--muted)}
+.cats-bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.cats{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-block:10px}
+.cats::-webkit-scrollbar{display:none}
+.cat{flex:none;display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);font-weight:600;font-size:14px;color:var(--muted);white-space:nowrap}
+.cat.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+
+/* Banner */
+.banner{display:flex;align-items:center;gap:12px;width:100%;text-align:start;margin-top:16px;padding:12px 14px;border-radius:var(--r-md);background:var(--accent-soft);color:var(--ink)}
+.banner .b-ic{width:38px;height:38px;border-radius:12px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center}
+.banner .b-txt{flex:1;min-width:0}
+.banner strong{display:block;font-size:14px}
+.banner span{font-size:13px;color:var(--muted)}
+.banner .go{color:var(--accent);font-weight:700;font-size:13px;display:flex;align-items:center;gap:4px}
+
+/* Sections & items */
+.sec{padding-top:22px;scroll-margin-top:calc(64px + env(safe-area-inset-top,0px))}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:4px}
+.sec h2{font-size:21px;font-weight:700}
+.sec .count{font-size:13px;color:var(--muted)}
+.rail{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;padding:10px 0 4px;margin:0;scroll-snap-type:x mandatory}
+.rail::-webkit-scrollbar{display:none}
+.card{flex:none;width:150px;scroll-snap-align:start;text-align:start;display:grid;gap:8px}
+.card .t-name{font-weight:600;font-size:14px;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card .price{font-weight:700;color:var(--accent);font-size:14px}
+.list{display:grid}
+.item{display:grid;grid-template-columns:minmax(0,1fr) 104px;gap:14px;padding:14px 0;border-bottom:1px solid var(--line);text-align:start;width:100%}
+.list .item:last-child{border-bottom:0}
+.item .body{min-width:0;display:grid;gap:5px;align-content:start}
+.item .name{font-weight:700;font-size:16px;line-height:1.25}
+.item .desc{color:var(--muted);font-size:13.5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.item .foot{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:2px}
+.item .price{font-weight:700;font-size:15px}
+.item.out{opacity:.55}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:600;padding:3px 8px;border-radius:999px;background:var(--surface-2);color:var(--muted)}
+.tag .ic{width:12px;height:12px}
+.tag.popular{background:var(--saffron-soft);color:var(--saffron)}
+.tag.new{background:var(--accent-soft);color:var(--accent)}
+.tag.spicy{background:var(--danger-soft);color:var(--danger)}
+.tag.out{background:var(--ink);color:var(--bg)}
+.thumbbox{position:relative}
+.thumb{--h:150;aspect-ratio:1;max-width:100%;border-radius:var(--r-md);display:grid;place-items:center;overflow:hidden;
+  background:radial-gradient(120% 90% at 30% 20%,hsl(var(--h) var(--thumb-s) calc(var(--thumb-l) + 4%)),hsl(var(--h) var(--thumb-s) var(--thumb-l)));
+  color:hsl(var(--h) 45% var(--thumb-ink))}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb .ic{width:42%;height:42%;stroke-width:1.3}
+.add{position:absolute;inset-inline-end:6px;bottom:6px;width:34px;height:34px;border-radius:50%;background:var(--surface);color:var(--accent);display:grid;place-items:center;box-shadow:var(--shadow)}
+.qtybadge{position:absolute;inset-inline-start:6px;top:6px;min-width:24px;height:24px;padding:0 7px;border-radius:999px;background:var(--accent);color:var(--accent-ink);font-size:12px;font-weight:700;display:grid;place-items:center}
+.empty{padding:48px 8px;text-align:center;display:grid;justify-items:center;gap:10px;color:var(--muted)}
+.empty .e-ic{width:72px;height:72px;border-radius:24px;background:var(--surface-2);display:grid;place-items:center;color:var(--accent)}
+.empty .e-ic .ic{width:32px;height:32px}
+.empty h3{color:var(--ink);font-size:19px}
+.empty p{margin:0;max-width:34ch}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 18px;border-radius:var(--r-md);font-weight:700;font-size:15px}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:var(--surface-2);color:var(--ink)}
+.btn.block{width:100%}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+
+/* Page headers */
+.page-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:18px 6px}
+.page-head h1{font-size:26px;font-weight:800}
+.icon-btn{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--surface);border:1px solid var(--line)}
+.lang-btn{display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 12px;border-radius:12px;background:var(--surface);border:1px solid var(--line);font-weight:700;font-size:13px}
+
+/* Panels */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:16px}
+.stack{display:grid;gap:14px;padding-block:8px 16px}
+.label{font-weight:700;font-size:15px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.label small{font-weight:600;font-size:12px;color:var(--muted)}
+
+/* Cart */
+.line{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:12px;align-items:start;padding:12px 0;border-bottom:1px solid var(--line)}
+.line:last-child{border-bottom:0}
+.line .thumb{border-radius:12px}
+.line .thumb .ic{width:50%;height:50%}
+.line .n{font-weight:700}
+.line .o{font-size:13px;color:var(--muted)}
+.line .lp{font-weight:700;text-align:end}
+.stepper{display:inline-flex;align-items:center;gap:2px;background:var(--surface-2);border-radius:999px;padding:3px;margin-top:8px}
+.stepper button{width:30px;height:30px;border-radius:50%;display:grid;place-items:center}
+.stepper button:hover{background:var(--surface)}
+.stepper span{min-width:24px;text-align:center;font-weight:700}
+.stepper.lg button{width:40px;height:40px}
+.stepper.lg{margin:0}
+textarea.field,input.field{width:100%;border:1px solid var(--line);background:var(--bg);border-radius:var(--r-sm);padding:12px;resize:vertical;min-height:46px;outline:none}
+textarea.field:focus,input.field:focus{border-color:var(--accent)}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.seg button{display:flex;align-items:center;gap:10px;padding:14px;border-radius:var(--r-md);border:1.5px solid var(--line);background:var(--bg);font-weight:600}
+.seg button.on{border-color:var(--accent);background:var(--accent-soft)}
+.seg button .ic{color:var(--accent)}
+.hint{font-size:13px;color:var(--muted);margin:10px 0 0}
+.totals{display:grid;gap:8px}
+.totals div{display:flex;justify-content:space-between}
+.totals .grand{font-weight:800;font-size:18px;padding-top:10px;border-top:1px dashed var(--line)}
+.sticky-cta{position:sticky;bottom:calc(76px + env(safe-area-inset-bottom,0px));padding-block:8px 4px;background:linear-gradient(to bottom,transparent,var(--bg) 30%)}
+
+/* Tracking */
+.status-card{background:var(--hero-bg);color:var(--hero-ink);border-radius:var(--r-lg);padding:18px;display:grid;gap:12px;position:relative;overflow:hidden}
+.status-card .sc-top{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px;opacity:.85}
+.status-card h2{font-size:28px;font-weight:800;line-height:1.1}
+.status-card p{margin:0;opacity:.85}
+.bars{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.bars i{height:6px;border-radius:99px;background:color-mix(in srgb,var(--hero-ink) 20%,transparent);overflow:hidden;position:relative}
+.bars i.done{background:var(--hero-ink)}
+.bars i.cur::after{content:"";position:absolute;inset:0;background:var(--hero-ink);transform-origin:left;animation:fill 1.8s ease-in-out infinite}
+[dir="rtl"] .bars i.cur::after{transform-origin:right}
+@keyframes fill{0%{transform:scaleX(0)}60%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
+.eta{display:flex;align-items:center;gap:10px}
+.eta .big{font-family:var(--font-display);font-size:22px;font-weight:800}
+.status-card .sc-ic{position:absolute;inset-inline-end:-10px;top:-10px;opacity:.12}
+.status-card .sc-ic .ic{width:130px;height:130px;stroke-width:1}
+.tl{display:grid}
+.step{display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:12px;position:relative;padding-bottom:18px}
+.step:last-child{padding-bottom:0}
+.step::before{content:"";position:absolute;inset-inline-start:19px;top:40px;bottom:0;width:2px;background:var(--line)}
+.step:last-child::before{display:none}
+.step.done::before{background:var(--accent)}
+.step .s-ic{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--surface-2);color:var(--muted);position:relative;z-index:1}
+.step.done .s-ic{background:var(--accent);color:var(--accent-ink)}
+.step.cur .s-ic{background:var(--accent);color:var(--accent-ink);box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 50%,transparent);animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 45%,transparent)}100%{box-shadow:0 0 0 12px transparent}}
+.step .s-t{font-weight:700;padding-top:2px}
+.step .s-d{font-size:13px;color:var(--muted)}
+.step.todo .s-t{color:var(--muted);font-weight:600}
+.step .s-time{font-size:12.5px;color:var(--muted);padding-top:4px}
+.switch{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-block:4px 2px}
+.switch button{flex:none;padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);font-weight:600;font-size:13px;display:inline-flex;gap:6px;align-items:center}
+.switch button.on{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.oi{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--line)}
+.oi:last-of-type{border-bottom:0}
+.oi .q{color:var(--accent);font-weight:700;margin-inline-end:6px}
+.oi small{display:block;color:var(--muted)}
+
+/* Waiter grid */
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (min-width:560px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.tile{--h:160;display:grid;justify-items:center;align-content:start;gap:10px;padding:16px 8px 14px;border-radius:var(--r-md);background:var(--surface);border:1px solid var(--line);text-align:center;font-weight:600;font-size:13px;line-height:1.25;min-height:112px;transition:transform .12s}
+.tile:active{transform:scale(.97)}
+.tile .t-ic{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;
+  background:hsl(var(--h) var(--thumb-s) var(--thumb-l));color:hsl(var(--h) 50% var(--thumb-ink))}
+.tile .t-ic .ic{width:24px;height:24px}
+.tile.hero-tile{grid-column:1/-1;grid-template-columns:auto 1fr auto;justify-items:start;align-items:center;text-align:start;min-height:0;padding:16px;background:var(--accent);color:var(--accent-ink);border-color:transparent;font-size:16px}
+.tile.hero-tile .t-ic{background:color-mix(in srgb,var(--accent-ink) 18%,transparent);color:var(--accent-ink)}
+.tile.hero-tile small{display:block;font-weight:500;font-size:13px;opacity:.85}
+.tile.busy{opacity:.6}
+.req{display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.req:last-child{border-bottom:0}
+.req .t-ic{--h:160;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:hsl(var(--h) var(--thumb-s) var(--thumb-l));color:hsl(var(--h) 50% var(--thumb-ink))}
+.req .r-n{font-weight:700}
+.req .r-s{font-size:12.5px;color:var(--muted)}
+.req.done{opacity:.55}
+.state{font-size:12px;font-weight:700;padding:4px 9px;border-radius:999px;white-space:nowrap}
+.state.sent{background:var(--surface-2);color:var(--muted)}
+.state.seen{background:var(--saffron-soft);color:var(--saffron)}
+.state.coming{background:var(--accent-soft);color:var(--accent)}
+.state.done{background:var(--surface-2);color:var(--muted)}
+.quick{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.quick .tile{min-height:96px;padding:12px 4px;font-size:12px}
+.quick .tile .t-ic{width:40px;height:40px}
+
+/* Cart bar & tab bar */
+.cartbar{position:fixed;left:0;right:0;bottom:calc(68px + env(safe-area-inset-bottom,0px));z-index:25;pointer-events:none}
+.cartbar .wrap{padding-block:8px}
+.cartbar button{pointer-events:auto;width:100%;display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:var(--r-md);background:var(--accent);color:var(--accent-ink);font-weight:700;box-shadow:var(--shadow)}
+.cartbar .n{min-width:28px;height:28px;padding:0 8px;border-radius:9px;background:color-mix(in srgb,var(--accent-ink) 20%,transparent);display:grid;place-items:center}
+.cartbar .lbl{flex:1;text-align:start}
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);
+  padding-bottom:env(safe-area-inset-bottom,0px)}
+.tabbar .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+.tab{display:grid;justify-items:center;gap:3px;padding:9px 0 10px;font-size:11.5px;font-weight:600;color:var(--muted);position:relative}
+.tab .ic{width:24px;height:24px}
+.tab.on{color:var(--accent)}
+.tab .badge{position:absolute;top:4px;inset-inline-start:calc(50% + 6px);min-width:18px;height:18px;padding:0 5px;border-radius:99px;background:var(--saffron);color:#1E1404;font-size:11px;font-weight:800;display:grid;place-items:center}
+.tab .live{position:absolute;top:8px;inset-inline-start:calc(50% + 8px);width:9px;height:9px;border-radius:50%;background:var(--saffron);box-shadow:0 0 0 3px var(--surface)}
+
+/* Sheet */
+.scrim{position:fixed;inset:0;background:rgb(6 12 10 / .5);z-index:50;animation:fade .2s}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:51;max-height:92dvh;display:flex;flex-direction:column;background:var(--surface);border-radius:26px 26px 0 0;
+  max-width:720px;margin:0 auto;animation:up .28s cubic-bezier(.2,.8,.2,1);box-shadow:0 -10px 40px rgb(0 0 0 / .2)}
+.sheet .grab{width:40px;height:5px;border-radius:9px;background:var(--line);margin:10px auto 0;flex:none}
+.sheet .s-body{overflow-y:auto;padding:12px max(18px,env(safe-area-inset-right,0px)) 18px max(18px,env(safe-area-inset-left,0px));display:grid;gap:16px}
+.sheet .s-foot{flex:none;display:flex;gap:10px;align-items:center;padding:12px max(18px,env(safe-area-inset-right,0px)) calc(14px + env(safe-area-inset-bottom,0px)) max(18px,env(safe-area-inset-left,0px));border-top:1px solid var(--line)}
+.sheet .s-foot .btn{flex:1}
+.sheet .x{position:absolute;inset-inline-end:14px;top:14px;width:36px;height:36px;border-radius:50%;background:var(--surface);display:grid;place-items:center;box-shadow:var(--shadow);z-index:2}
+.sheet .big-thumb{border-radius:var(--r-lg);aspect-ratio:16/10}
+.sheet .big-thumb .ic{width:28%;height:auto}
+.sheet h2{font-size:24px;font-weight:800}
+.sheet .p-desc{color:var(--muted);margin:6px 0 0}
+.p-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:13px;color:var(--muted)}
+.p-meta .price{font-size:20px;font-weight:800;color:var(--ink)}
+.p-meta span{display:inline-flex;align-items:center;gap:4px}
+.opt{display:flex;align-items:center;gap:12px;width:100%;padding:12px;border-radius:var(--r-sm);border:1.5px solid var(--line);text-align:start;font-weight:600}
+.opt + .opt{margin-top:8px}
+.opt .mark{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;flex:none}
+.opt.multi .mark{border-radius:7px}
+.opt.on{border-color:var(--accent);background:var(--accent-soft)}
+.opt.on .mark{border-color:var(--accent);background:var(--accent);color:var(--accent-ink)}
+.opt .mark .ic{width:14px;height:14px;stroke-width:3}
+.opt .on-l{flex:1}
+.opt .pp{color:var(--muted);font-size:13px}
+.langs{display:grid;gap:8px}
+.langs button{display:flex;align-items:center;gap:12px;padding:14px;border-radius:var(--r-md);border:1.5px solid var(--line);text-align:start;font-weight:600}
+.langs button.on{border-color:var(--accent);background:var(--accent-soft)}
+.langs .code{width:36px;height:36px;border-radius:10px;background:var(--surface-2);display:grid;place-items:center;font-size:12px;font-weight:800;letter-spacing:.04em}
+.langs .nm{flex:1}
+.langs small{display:block;color:var(--muted);font-weight:500}
+.confirm-ic{width:64px;height:64px;border-radius:20px;display:grid;place-items:center;margin:4px auto 0}
+.confirm-ic .ic{width:30px;height:30px}
+
+/* Toast */
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(140px + env(safe-area-inset-bottom,0px));z-index:60;max-width:calc(100% - 32px);
+  background:var(--ink);color:var(--bg);padding:12px 16px;border-radius:14px;font-weight:600;font-size:14px;display:flex;gap:10px;align-items:center;box-shadow:var(--shadow);animation:up .25s}
+.demo{font-size:12px;color:var(--muted);text-align:center;margin:6px 0 0}
+@keyframes up{from{transform:translateY(24px);opacity:0}}
+.toast{animation-name:toastIn}
+@keyframes toastIn{from{transform:translate(-50%,16px);opacity:0}}
+@keyframes fade{from{opacity:0}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div id="app">
+  <section class="view" id="view-menu">
+    <header class="hero" id="hero"></header>
+    <div class="wrap">
+      <div id="banner"></div>
+      <div class="menu-tools">
+        <label class="search"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="q" type="search" autocomplete="off" aria-label="Search">
+        </label>
+      </div>
+    </div>
+    <div class="cats-bar"><div class="wrap"><nav class="cats" id="cats" aria-label="Categories"></nav></div></div>
+    <div class="wrap" id="menuBody"></div>
+  </section>
+  <section class="view" id="view-cart" hidden><div class="wrap" id="cartBody"></div></section>
+  <section class="view" id="view-track" hidden><div class="wrap" id="trackBody"></div></section>
+  <section class="view" id="view-waiter" hidden><div class="wrap" id="waiterBody"></div></section>
+</div>
+<div class="cartbar" id="cartbar" hidden></div>
+<nav class="tabbar" id="tabbar"></nav>
+<div class="scrim" id="scrim" hidden></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" hidden></div>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+/* =====================================================================
+   1) CONFIG — the platform fills these values per restaurant.
+   ===================================================================== */
+const CONFIG = {
+  restaurant: {
+    name: "Dar Zellij",
+    logo: null,                                   // image URL, or null to show initials
+    tagline: { en:"Café & Moroccan kitchen · Marrakech", fr:"Café & cuisine marocaine · Marrakech", ar:"مقهى ومطبخ مغربي · مراكش", de:"Café & marokkanische Küche · Marrakesch", es:"Café y cocina marroquí · Marrakech", nl:"Café & Marokkaanse keuken · Marrakech" },
+  },
+  table: new URLSearchParams(location.search).get("table") || "12",   // QR code link: ?table=12
+  currency: { default:"DH", ar:"درهم" },
+  serviceFeePercent: 0,                           // e.g. 10 for 10% service
+  languages: ["fr","ar","en","es","de","nl"],
+  defaultLang: "fr",
+  waiterCooldownSec: 45,
+  demo: true,                                     // true = statuses advance by themselves (preview mode)
+  api: {                                          // set these on the platform; null = demo mode
+    menu: null,          // GET  → { categories, products, optionGroups }
+    placeOrder: null,    // POST order JSON → { id, number }
+    orderStatus: null,   // GET  "/orders/{id}" → { status, eta }
+    waiterCall: null,    // POST request JSON → { id }
+    requestStatus: null  // GET  "/calls/{id}" → { status }
+  }
+};
+
+/* =====================================================================
+   2) MENU DATA — categories, products, prices. Replaced by the platform.
+   Text fields are objects keyed by language; missing languages fall back to English.
+   ===================================================================== */
+let MENU = {
+  categories: [
+    { id:"hot", icon:"coffee", hue:28, name:{ en:"Hot drinks", fr:"Boissons chaudes", ar:"مشروبات ساخنة", de:"Heißgetränke", es:"Bebidas calientes", nl:"Warme dranken" } },
+    { id:"cold", icon:"glass", hue:38, name:{ en:"Juices & cold drinks", fr:"Jus & boissons fraîches", ar:"عصائر ومشروبات باردة", de:"Säfte & Kaltgetränke", es:"Zumos y bebidas frías", nl:"Sappen & koude dranken" } },
+    { id:"breakfast", icon:"sun", hue:45, name:{ en:"Breakfast", fr:"Petit-déjeuner", ar:"الفطور", de:"Frühstück", es:"Desayuno", nl:"Ontbijt" } },
+    { id:"starters", icon:"salad", hue:110, name:{ en:"Soups & salads", fr:"Soupes & salades", ar:"شوربات وسلطات", de:"Suppen & Salate", es:"Sopas y ensaladas", nl:"Soepen & salades" } },
+    { id:"mains", icon:"tagine", hue:14, name:{ en:"Tagines & couscous", fr:"Tajines & couscous", ar:"طواجن وكسكس", de:"Tajines & Couscous", es:"Tajines y cuscús", nl:"Tajines & couscous" } },
+    { id:"grill", icon:"burger", hue:350, name:{ en:"Burgers & grill", fr:"Burgers & grillades", ar:"برغر ومشويات", de:"Burger & Grill", es:"Hamburguesas y parrilla", nl:"Burgers & grill" } },
+    { id:"desserts", icon:"cake", hue:320, name:{ en:"Desserts", fr:"Desserts", ar:"حلويات", de:"Desserts", es:"Postres", nl:"Desserts" } }
+  ],
+  optionGroups: {
+    size: { type:"single", required:true, name:{ en:"Size", fr:"Taille", ar:"الحجم", de:"Größe", es:"Tamaño", nl:"Formaat" }, choices:[
+      { id:"reg", price:0, name:{ en:"Regular", fr:"Normal", ar:"عادي", de:"Normal", es:"Normal", nl:"Normaal" } },
+      { id:"lg", price:5, name:{ en:"Large", fr:"Grand", ar:"كبير", de:"Groß", es:"Grande", nl:"Groot" } } ] },
+    milk: { type:"single", required:true, name:{ en:"Milk", fr:"Lait", ar:"الحليب", de:"Milch", es:"Leche", nl:"Melk" }, choices:[
+      { id:"whole", price:0, name:{ en:"Whole milk", fr:"Lait entier", ar:"حليب كامل", de:"Vollmilch", es:"Leche entera", nl:"Volle melk" } },
+      { id:"oat", price:6, name:{ en:"Oat milk", fr:"Lait d'avoine", ar:"حليب الشوفان", de:"Hafermilch", es:"Leche de avena", nl:"Havermelk" } },
+      { id:"lf", price:4, name:{ en:"Lactose-free", fr:"Sans lactose", ar:"بدون لاكتوز", de:"Laktosefrei", es:"Sin lactosa", nl:"Lactosevrij" } } ] },
+    teaSize: { type:"single", required:true, name:{ en:"Serving", fr:"Service", ar:"التقديم", de:"Portion", es:"Servicio", nl:"Portie" }, choices:[
+      { id:"glass", price:0, name:{ en:"Glass", fr:"Verre", ar:"كأس", de:"Glas", es:"Vaso", nl:"Glas" } },
+      { id:"pot", price:13, name:{ en:"Teapot for two", fr:"Théière pour deux", ar:"براد لشخصين", de:"Kanne für zwei", es:"Tetera para dos", nl:"Theepot voor twee" } } ] },
+    sugar: { type:"single", required:true, name:{ en:"Sugar", fr:"Sucre", ar:"السكر", de:"Zucker", es:"Azúcar", nl:"Suiker" }, choices:[
+      { id:"normal", price:0, name:{ en:"Normal", fr:"Normal", ar:"عادي", de:"Normal", es:"Normal", nl:"Normaal" } },
+      { id:"less", price:0, name:{ en:"Less sugar", fr:"Peu sucré", ar:"سكر قليل", de:"Weniger Zucker", es:"Poco azúcar", nl:"Minder suiker" } },
+      { id:"none", price:0, name:{ en:"No sugar", fr:"Sans sucre", ar:"بدون سكر", de:"Ohne Zucker", es:"Sin azúcar", nl:"Zonder suiker" } } ] },
+    eggExtras: { type:"multi", required:false, name:{ en:"Extras", fr:"Suppléments", ar:"إضافات", de:"Extras", es:"Extras", nl:"Extra's" }, choices:[
+      { id:"cheese", price:8, name:{ en:"Cheese", fr:"Fromage", ar:"جبن", de:"Käse", es:"Queso", nl:"Kaas" } },
+      { id:"khlii", price:12, name:{ en:"Khlii (cured beef)", fr:"Khlii (viande séchée)", ar:"خليع", de:"Khlii (Trockenfleisch)", es:"Khlii (carne curada)", nl:"Khlii (gedroogd vlees)" } },
+      { id:"olives", price:4, name:{ en:"Olives", fr:"Olives", ar:"زيتون", de:"Oliven", es:"Aceitunas", nl:"Olijven" } } ] },
+    cooking: { type:"single", required:true, name:{ en:"Cooking", fr:"Cuisson", ar:"درجة الطهي", de:"Garstufe", es:"Punto", nl:"Garing" }, choices:[
+      { id:"medium", price:0, name:{ en:"Medium", fr:"À point", ar:"متوسط", de:"Medium", es:"Al punto", nl:"Medium" } },
+      { id:"well", price:0, name:{ en:"Well done", fr:"Bien cuit", ar:"مطهو جيداً", de:"Durch", es:"Muy hecho", nl:"Doorbakken" } } ] },
+    burgerExtras: { type:"multi", required:false, name:{ en:"Extras", fr:"Suppléments", ar:"إضافات", de:"Extras", es:"Extras", nl:"Extra's" }, choices:[
+      { id:"cheese", price:8, name:{ en:"Cheddar", fr:"Cheddar", ar:"جبن شيدر", de:"Cheddar", es:"Cheddar", nl:"Cheddar" } },
+      { id:"egg", price:5, name:{ en:"Fried egg", fr:"Œuf", ar:"بيضة", de:"Spiegelei", es:"Huevo frito", nl:"Gebakken ei" } },
+      { id:"double", price:22, name:{ en:"Double patty", fr:"Double steak", ar:"لحم مضاعف", de:"Doppeltes Patty", es:"Doble carne", nl:"Dubbele burger" } } ] }
+  },
+  products: [
+    { id:"espresso", cat:"hot", price:12, prep:3, tags:["popular"], img:null,
+      name:{ en:"Espresso", fr:"Espresso", ar:"إسبريسو", de:"Espresso", es:"Espresso", nl:"Espresso" },
+      desc:{ en:"Short, intense, single-origin roast.", fr:"Court et intense, torréfaction pure origine.", ar:"قهوة مركزة وقصيرة من بن أحادي المصدر.", de:"Kurz und kräftig, Single-Origin-Röstung.", es:"Corto e intenso, tueste de origen único.", nl:"Kort en krachtig, single-origin branding." } },
+    { id:"nousnous", cat:"hot", price:14, prep:4, tags:["popular"], options:["milk"],
+      name:{ en:"Nous-Nous", fr:"Nous-Nous", ar:"نص نص", de:"Nous-Nous", es:"Nous-Nous", nl:"Nous-Nous" },
+      desc:{ en:"Half espresso, half steamed milk, served in a glass.", fr:"Moitié espresso, moitié lait chaud, servi en verre.", ar:"نصف قهوة ونصف حليب ساخن، يقدم في كأس.", de:"Halb Espresso, halb heiße Milch, im Glas serviert.", es:"Mitad espresso, mitad leche caliente, en vaso.", nl:"Half espresso, half warme melk, in een glas." } },
+    { id:"cappuccino", cat:"hot", price:18, prep:4, options:["size","milk"],
+      name:{ en:"Cappuccino", fr:"Cappuccino", ar:"كابتشينو", de:"Cappuccino", es:"Capuchino", nl:"Cappuccino" },
+      desc:{ en:"Double shot with velvety milk foam.", fr:"Double shot et mousse de lait onctueuse.", ar:"جرعة مزدوجة مع رغوة حليب ناعمة.", de:"Doppelter Shot mit samtigem Milchschaum.", es:"Doble carga con espuma de leche sedosa.", nl:"Dubbele shot met fluweelzacht melkschuim." } },
+    { id:"atay", cat:"hot", price:12, prep:5, tags:["popular","veg"], options:["teaSize","sugar"],
+      name:{ en:"Mint tea", fr:"Thé à la menthe", ar:"أتاي بالنعناع", de:"Minztee", es:"Té a la menta", nl:"Muntthee" },
+      desc:{ en:"Green gunpowder tea with fresh mint, poured from height.", fr:"Thé vert gunpowder et menthe fraîche, servi de haut.", ar:"شاي أخضر بالنعناع الطري، يُسكب من الأعلى.", de:"Grüner Gunpowder-Tee mit frischer Minze, von hoch eingeschenkt.", es:"Té verde gunpowder con menta fresca, servido desde lo alto.", nl:"Groene gunpowder-thee met verse munt, van hoog ingeschonken." } },
+    { id:"orange", cat:"cold", price:15, prep:3, tags:["veg"], options:["sugar"],
+      name:{ en:"Fresh orange juice", fr:"Jus d'orange pressé", ar:"عصير برتقال طبيعي", de:"Frisch gepresster Orangensaft", es:"Zumo de naranja natural", nl:"Verse jus d'orange" },
+      desc:{ en:"Squeezed to order from Berkane oranges.", fr:"Pressé à la minute, oranges de Berkane.", ar:"يُعصر عند الطلب من برتقال بركان.", de:"Frisch gepresst aus Berkane-Orangen.", es:"Exprimido al momento, naranjas de Berkane.", nl:"Vers geperst van sinaasappels uit Berkane." } },
+    { id:"avocado", cat:"cold", price:28, prep:5, tags:["new","veg"],
+      name:{ en:"Avocado & date smoothie", fr:"Smoothie avocat & dattes", ar:"عصير الأفوكادو والتمر", de:"Avocado-Dattel-Smoothie", es:"Batido de aguacate y dátiles", nl:"Avocado-dadel smoothie" },
+      desc:{ en:"Avocado, Medjool dates, milk and a touch of almonds.", fr:"Avocat, dattes Medjool, lait et une touche d'amandes.", ar:"أفوكادو، تمر المجهول، حليب ولمسة لوز.", de:"Avocado, Medjool-Datteln, Milch und etwas Mandel.", es:"Aguacate, dátiles Medjool, leche y un toque de almendra.", nl:"Avocado, medjool-dadels, melk en een vleugje amandel." } },
+    { id:"icedlatte", cat:"cold", price:24, prep:4, options:["milk"],
+      name:{ en:"Iced latte", fr:"Latte glacé", ar:"لاتيه مثلج", de:"Iced Latte", es:"Latte con hielo", nl:"IJslatte" },
+      desc:{ en:"Espresso over ice and cold milk.", fr:"Espresso sur glace et lait froid.", ar:"إسبريسو على الثلج مع حليب بارد.", de:"Espresso auf Eis mit kalter Milch.", es:"Espresso sobre hielo y leche fría.", nl:"Espresso op ijs met koude melk." } },
+    { id:"beldi", cat:"breakfast", price:45, prep:12, tags:["popular","veg"],
+      name:{ en:"Beldi breakfast", fr:"Petit-déjeuner beldi", ar:"فطور بلدي", de:"Beldi-Frühstück", es:"Desayuno beldi", nl:"Beldi-ontbijt" },
+      desc:{ en:"Msemen, baghrir, amlou, olive oil, olives, eggs and mint tea.", fr:"Msemen, baghrir, amlou, huile d'olive, olives, œufs et thé à la menthe.", ar:"مسمن، بغرير، أملو، زيت زيتون، زيتون، بيض وأتاي.", de:"Msemen, Baghrir, Amlou, Olivenöl, Oliven, Eier und Minztee.", es:"Msemen, baghrir, amlou, aceite de oliva, aceitunas, huevos y té.", nl:"Msemen, baghrir, amlou, olijfolie, olijven, eieren en muntthee." } },
+    { id:"shakshuka", cat:"breakfast", price:35, prep:12, tags:["spicy","veg"], options:["eggExtras"],
+      name:{ en:"Shakshuka", fr:"Chakchouka", ar:"شكشوكة", de:"Shakshuka", es:"Shakshuka", nl:"Shakshuka" },
+      desc:{ en:"Eggs poached in spiced tomato and pepper sauce, with khobz.", fr:"Œufs pochés dans une sauce tomate-poivron épicée, avec khobz.", ar:"بيض مطهو في صلصة الطماطم والفلفل مع الخبز.", de:"Eier in würziger Tomaten-Paprika-Soße, mit Khobz.", es:"Huevos en salsa especiada de tomate y pimiento, con pan.", nl:"Eieren in pittige tomaten-paprikasaus, met khobz." } },
+    { id:"harira", cat:"starters", price:20, prep:5, tags:["popular"],
+      name:{ en:"Harira", fr:"Harira", ar:"حريرة", de:"Harira", es:"Harira", nl:"Harira" },
+      desc:{ en:"Tomato, lentil and chickpea soup with dates and chebakia.", fr:"Soupe tomate, lentilles et pois chiches, avec dattes et chebakia.", ar:"شوربة الطماطم والعدس والحمص مع التمر والشباكية.", de:"Tomaten-Linsen-Kichererbsen-Suppe mit Datteln und Chebakia.", es:"Sopa de tomate, lentejas y garbanzos con dátiles y chebakia.", nl:"Soep van tomaat, linzen en kikkererwten, met dadels en chebakia." } },
+    { id:"salad", cat:"starters", price:25, prep:6, tags:["veg"],
+      name:{ en:"Moroccan salad", fr:"Salade marocaine", ar:"سلطة مغربية", de:"Marokkanischer Salat", es:"Ensalada marroquí", nl:"Marokkaanse salade" },
+      desc:{ en:"Tomato, cucumber, onion, parsley and lemon dressing.", fr:"Tomate, concombre, oignon, persil et vinaigrette au citron.", ar:"طماطم، خيار، بصل، معدنوس وتتبيلة الحامض.", de:"Tomate, Gurke, Zwiebel, Petersilie und Zitronendressing.", es:"Tomate, pepino, cebolla, perejil y aliño de limón.", nl:"Tomaat, komkommer, ui, peterselie en citroendressing." } },
+    { id:"chickentagine", cat:"mains", price:75, prep:20, tags:["popular"],
+      name:{ en:"Chicken tagine, lemon & olives", fr:"Tajine poulet citron & olives", ar:"طاجين دجاج بالحامض والزيتون", de:"Hähnchen-Tajine mit Zitrone & Oliven", es:"Tajine de pollo, limón y aceitunas", nl:"Kiptajine met citroen & olijven" },
+      desc:{ en:"Slow-cooked with preserved lemon, green olives and saffron.", fr:"Mijoté au citron confit, olives vertes et safran.", ar:"مطهو ببطء مع الحامض المصيّر والزيتون الأخضر والزعفران.", de:"Langsam geschmort mit Salzzitrone, grünen Oliven und Safran.", es:"Cocinado lentamente con limón confitado, aceitunas y azafrán.", nl:"Langzaam gegaard met gekonfijte citroen, groene olijven en saffraan." } },
+    { id:"kefta", cat:"mains", price:65, prep:18, tags:["spicy"],
+      name:{ en:"Kefta & egg tagine", fr:"Tajine kefta aux œufs", ar:"طاجين الكفتة بالبيض", de:"Kefta-Tajine mit Ei", es:"Tajine de kefta con huevo", nl:"Keftatajine met ei" },
+      desc:{ en:"Spiced beef meatballs in tomato sauce, finished with eggs.", fr:"Boulettes de bœuf épicées en sauce tomate, œufs cassés dessus.", ar:"كرات لحم متبلة في صلصة الطماطم مع البيض.", de:"Gewürzte Rindfleischbällchen in Tomatensoße mit Ei.", es:"Albóndigas especiadas en salsa de tomate con huevo.", nl:"Gekruide gehaktballetjes in tomatensaus met ei." } },
+    { id:"couscous", cat:"mains", price:85, prep:25, soldOut:true,
+      name:{ en:"Seven-vegetable couscous", fr:"Couscous aux sept légumes", ar:"كسكس بسبع خضاري", de:"Couscous mit sieben Gemüsen", es:"Cuscús de siete verduras", nl:"Couscous met zeven groenten" },
+      desc:{ en:"Hand-rolled semolina, beef and seasonal vegetables. Fridays.", fr:"Semoule roulée à la main, bœuf et légumes de saison. Le vendredi.", ar:"كسكس مفتول باليد مع اللحم وخضر الموسم. يوم الجمعة.", de:"Handgerollter Grieß, Rind und Saisongemüse. Freitags.", es:"Sémola enrollada a mano, ternera y verduras. Los viernes.", nl:"Handgerolde griesmeel, rund en seizoensgroenten. Op vrijdag." } },
+    { id:"burger", cat:"grill", price:60, prep:15, tags:["new"], options:["cooking","burgerExtras"],
+      name:{ en:"Atlas burger", fr:"Burger Atlas", ar:"برغر الأطلس", de:"Atlas-Burger", es:"Hamburguesa Atlas", nl:"Atlas-burger" },
+      desc:{ en:"Beef patty, cumin mayo, caramelised onions, fries.", fr:"Steak de bœuf, mayo au cumin, oignons caramélisés, frites.", ar:"لحم بقري، مايونيز بالكمون، بصل مكرمل وبطاطس.", de:"Rindfleisch-Patty, Kreuzkümmel-Mayo, Karamellzwiebeln, Pommes.", es:"Carne de ternera, mayonesa de comino, cebolla caramelizada, patatas.", nl:"Runderburger, komijnmayo, gekarameliseerde ui, friet." } },
+    { id:"brochettes", cat:"grill", price:70, prep:16,
+      name:{ en:"Mixed grill skewers", fr:"Brochettes mixtes", ar:"قطبان مشوية مشكلة", de:"Gemischte Grillspieße", es:"Brochetas mixtas", nl:"Gemengde grillspiesjes" },
+      desc:{ en:"Chicken and kefta skewers with chermoula, salad and fries.", fr:"Brochettes de poulet et kefta, chermoula, salade et frites.", ar:"قطبان الدجاج والكفتة مع الشرمولة والسلطة والبطاطس.", de:"Hähnchen- und Kefta-Spieße mit Chermoula, Salat und Pommes.", es:"Brochetas de pollo y kefta con chermoula, ensalada y patatas.", nl:"Kip- en keftaspiesjes met chermoula, salade en friet." } },
+    { id:"pastilla", cat:"desserts", price:30, prep:6, tags:["popular","veg"],
+      name:{ en:"Milk pastilla", fr:"Pastilla au lait", ar:"بسطيلة بالحليب", de:"Milch-Pastilla", es:"Pastela de leche", nl:"Melkpastilla" },
+      desc:{ en:"Crisp warqa layers, orange-blossom custard and almonds.", fr:"Feuilles de warqa croustillantes, crème à la fleur d'oranger et amandes.", ar:"أوراق الورقة المقرمشة مع كريمة ماء الزهر واللوز.", de:"Knusprige Warqa-Blätter, Orangenblütencreme und Mandeln.", es:"Hojas crujientes de warqa, crema de azahar y almendras.", nl:"Knapperige warqa, oranjebloesemcrème en amandelen." } },
+    { id:"fondant", cat:"desserts", price:32, prep:10, tags:["veg"],
+      name:{ en:"Chocolate fondant", fr:"Fondant au chocolat", ar:"فوندان الشوكولاتة", de:"Schokoladen-Fondant", es:"Coulant de chocolate", nl:"Chocoladefondant" },
+      desc:{ en:"Warm molten centre, vanilla ice cream.", fr:"Cœur coulant, glace vanille.", ar:"قلب ذائب دافئ مع آيس كريم الفانيليا.", de:"Warmer flüssiger Kern, Vanilleeis.", es:"Corazón fundido, helado de vainilla.", nl:"Warme vloeibare kern, vanille-ijs." } }
+  ]
+};
+
+/* =====================================================================
+   3) UI TEXT — 6 languages
+   ===================================================================== */
+const LANGS = {
+  fr:{ native:"Français", en:"French", locale:"fr-FR", dir:"ltr" },
+  ar:{ native:"العربية", en:"Arabic", locale:"ar-MA", dir:"rtl" },
+  en:{ native:"English", en:"English", locale:"en-GB", dir:"ltr" },
+  es:{ native:"Español", en:"Spanish", locale:"es-ES", dir:"ltr" },
+  de:{ native:"Deutsch", en:"German", locale:"de-DE", dir:"ltr" },
+  nl:{ native:"Nederlands", en:"Dutch", locale:"nl-NL", dir:"ltr" }
+};
+const I18N = {
+ en:{ table:"Table", openNow:"Open now", search:"Search the menu", popular:"Most ordered", add:"Add", addToOrder:"Add to order", viewCart:"View order", items1:"1 item", itemsN:"{n} items",
+  navMenu:"Menu", navTrack:"My order", navWaiter:"Waiter", navCart:"Cart", yourOrder:"Your order", emptyCart:"Your order is empty", emptyCartHint:"Pick something from the menu to get started.", browseMenu:"Browse the menu",
+  orderNote:"Note for the kitchen", orderNotePh:"Allergies, no onions, extra spicy…", itemNotePh:"Add a note for this item", payment:"Payment", payCash:"Cash", payCard:"Card", payHint:"You pay at the table when you're done.",
+  subtotal:"Subtotal", service:"Service", total:"Total", placeOrder:"Send order", orderSent:"Order sent to the kitchen", order:"Order", estimated:"Estimated time", min:"min",
+  st_sent:"Sent", st_sent_d:"We received your order.", st_accepted:"Accepted", st_accepted_d:"The staff confirmed your order.", st_preparing:"In the kitchen", st_preparing_d:"Your food is being prepared.", st_ready:"Ready", st_ready_d:"Your order is ready and on its way to your table.", st_served:"Served", st_served_d:"Enjoy your meal!", st_cancelled:"Cancelled",
+  noOrder:"No active order", noOrderHint:"Orders you send will appear here so you can follow them live.", addMore:"Add more items", needSomething:"Need something?", more:"More",
+  waiterTitle:"Call the waiter", waiterSub:"Tap what you need. We'll bring it to table {t}.", requests:"Your requests", rq_sent:"Sent", rq_seen:"Seen", rq_coming:"On the way", rq_done:"Done",
+  send:"Send request", cancel:"Cancel", noteOptional:"Add a note (optional)", requestSent:"Request sent. A waiter is coming.", cooldown:"Already requested. Please wait {s}s.",
+  required:"Required", optional:"Optional", noResults:"Nothing matches “{q}”.", language:"Language", tag_popular:"Popular", tag_new:"New", tag_veg:"Vegetarian", tag_spicy:"Spicy", soldOut:"Sold out",
+  added:"Added: {name}", track:"Track", itemsLabel:"Items", placedAt:"Placed at {time}", demo:"Preview mode: statuses update automatically.", callNow:"A waiter comes to your table", served:"Served", paidBy:"Payment: {m}" },
+ fr:{ table:"Table", openNow:"Ouvert", search:"Rechercher dans le menu", popular:"Les plus commandés", add:"Ajouter", addToOrder:"Ajouter à la commande", viewCart:"Voir la commande", items1:"1 article", itemsN:"{n} articles",
+  navMenu:"Menu", navTrack:"Ma commande", navWaiter:"Serveur", navCart:"Panier", yourOrder:"Votre commande", emptyCart:"Votre commande est vide", emptyCartHint:"Choisissez un plat dans le menu pour commencer.", browseMenu:"Voir le menu",
+  orderNote:"Note pour la cuisine", orderNotePh:"Allergies, sans oignons, bien épicé…", itemNotePh:"Ajouter une note pour cet article", payment:"Paiement", payCash:"Espèces", payCard:"Carte", payHint:"Vous payez à table à la fin du repas.",
+  subtotal:"Sous-total", service:"Service", total:"Total", placeOrder:"Envoyer la commande", orderSent:"Commande envoyée en cuisine", order:"Commande", estimated:"Temps estimé", min:"min",
+  st_sent:"Envoyée", st_sent_d:"Nous avons reçu votre commande.", st_accepted:"Acceptée", st_accepted_d:"L'équipe a confirmé votre commande.", st_preparing:"En cuisine", st_preparing_d:"Votre commande est en préparation.", st_ready:"Prête", st_ready_d:"Votre commande est prête et arrive à votre table.", st_served:"Servie", st_served_d:"Bon appétit !", st_cancelled:"Annulée",
+  noOrder:"Aucune commande en cours", noOrderHint:"Vos commandes apparaîtront ici pour les suivre en direct.", addMore:"Ajouter des articles", needSomething:"Besoin de quelque chose ?", more:"Plus",
+  waiterTitle:"Appeler le serveur", waiterSub:"Touchez ce dont vous avez besoin. On l'apporte à la table {t}.", requests:"Vos demandes", rq_sent:"Envoyée", rq_seen:"Vue", rq_coming:"En route", rq_done:"Fait",
+  send:"Envoyer", cancel:"Annuler", noteOptional:"Ajouter une note (facultatif)", requestSent:"Demande envoyée. Un serveur arrive.", cooldown:"Déjà demandé. Patientez {s}s.",
+  required:"Obligatoire", optional:"Facultatif", noResults:"Aucun résultat pour « {q} ».", language:"Langue", tag_popular:"Populaire", tag_new:"Nouveau", tag_veg:"Végétarien", tag_spicy:"Épicé", soldOut:"Épuisé",
+  added:"Ajouté : {name}", track:"Suivre", itemsLabel:"Articles", placedAt:"Passée à {time}", demo:"Mode aperçu : les statuts changent automatiquement.", callNow:"Un serveur vient à votre table", served:"Servie", paidBy:"Paiement : {m}" },
+ ar:{ table:"طاولة", openNow:"مفتوح الآن", search:"ابحث في القائمة", popular:"الأكثر طلباً", add:"أضف", addToOrder:"أضف إلى الطلب", viewCart:"عرض الطلب", items1:"منتج واحد", itemsN:"{n} منتجات",
+  navMenu:"القائمة", navTrack:"طلبي", navWaiter:"النادل", navCart:"السلة", yourOrder:"طلبك", emptyCart:"طلبك فارغ", emptyCartHint:"اختر شيئاً من القائمة للبدء.", browseMenu:"تصفح القائمة",
+  orderNote:"ملاحظة للمطبخ", orderNotePh:"حساسية، بدون بصل، حار جداً…", itemNotePh:"أضف ملاحظة لهذا المنتج", payment:"الدفع", payCash:"نقداً", payCard:"بطاقة", payHint:"تدفع في الطاولة عند الانتهاء.",
+  subtotal:"المجموع الفرعي", service:"الخدمة", total:"المجموع", placeOrder:"أرسل الطلب", orderSent:"تم إرسال الطلب إلى المطبخ", order:"طلب", estimated:"الوقت المتوقع", min:"د",
+  st_sent:"تم الإرسال", st_sent_d:"توصلنا بطلبك.", st_accepted:"تم القبول", st_accepted_d:"أكد الفريق طلبك.", st_preparing:"في المطبخ", st_preparing_d:"يتم تحضير طلبك الآن.", st_ready:"جاهز", st_ready_d:"طلبك جاهز وفي الطريق إلى طاولتك.", st_served:"تم التقديم", st_served_d:"بالصحة والهناء!", st_cancelled:"أُلغي",
+  noOrder:"لا يوجد طلب حالياً", noOrderHint:"ستظهر طلباتك هنا لتتابعها مباشرة.", addMore:"أضف منتجات أخرى", needSomething:"تحتاج شيئاً؟", more:"المزيد",
+  waiterTitle:"نادِ النادل", waiterSub:"اضغط على ما تحتاجه وسنحضره إلى الطاولة {t}.", requests:"طلباتك", rq_sent:"أُرسل", rq_seen:"تمت الرؤية", rq_coming:"في الطريق", rq_done:"تم",
+  send:"أرسل", cancel:"إلغاء", noteOptional:"أضف ملاحظة (اختياري)", requestSent:"تم الإرسال. النادل قادم.", cooldown:"تم الطلب مسبقاً. انتظر {s} ث.",
+  required:"إجباري", optional:"اختياري", noResults:"لا توجد نتائج لـ «{q}».", language:"اللغة", tag_popular:"مطلوب", tag_new:"جديد", tag_veg:"نباتي", tag_spicy:"حار", soldOut:"نفد",
+  added:"تمت الإضافة: {name}", track:"تتبع", itemsLabel:"المنتجات", placedAt:"أُرسل على {time}", demo:"وضع المعاينة: الحالات تتغير تلقائياً.", callNow:"سيأتي النادل إلى طاولتك", served:"تم التقديم", paidBy:"الدفع: {m}" },
+ es:{ table:"Mesa", openNow:"Abierto", search:"Buscar en el menú", popular:"Los más pedidos", add:"Añadir", addToOrder:"Añadir al pedido", viewCart:"Ver pedido", items1:"1 artículo", itemsN:"{n} artículos",
+  navMenu:"Menú", navTrack:"Mi pedido", navWaiter:"Camarero", navCart:"Cesta", yourOrder:"Tu pedido", emptyCart:"Tu pedido está vacío", emptyCartHint:"Elige algo del menú para empezar.", browseMenu:"Ver el menú",
+  orderNote:"Nota para la cocina", orderNotePh:"Alergias, sin cebolla, muy picante…", itemNotePh:"Añade una nota para este plato", payment:"Pago", payCash:"Efectivo", payCard:"Tarjeta", payHint:"Pagas en la mesa al terminar.",
+  subtotal:"Subtotal", service:"Servicio", total:"Total", placeOrder:"Enviar pedido", orderSent:"Pedido enviado a cocina", order:"Pedido", estimated:"Tiempo estimado", min:"min",
+  st_sent:"Enviado", st_sent_d:"Hemos recibido tu pedido.", st_accepted:"Aceptado", st_accepted_d:"El equipo confirmó tu pedido.", st_preparing:"En cocina", st_preparing_d:"Se está preparando tu comida.", st_ready:"Listo", st_ready_d:"Tu pedido está listo y va a tu mesa.", st_served:"Servido", st_served_d:"¡Buen provecho!", st_cancelled:"Cancelado",
+  noOrder:"No hay pedidos activos", noOrderHint:"Tus pedidos aparecerán aquí para seguirlos en directo.", addMore:"Añadir más", needSomething:"¿Necesitas algo?", more:"Más",
+  waiterTitle:"Llamar al camarero", waiterSub:"Toca lo que necesites. Lo llevamos a la mesa {t}.", requests:"Tus solicitudes", rq_sent:"Enviado", rq_seen:"Visto", rq_coming:"En camino", rq_done:"Hecho",
+  send:"Enviar", cancel:"Cancelar", noteOptional:"Añadir nota (opcional)", requestSent:"Solicitud enviada. Un camarero va en camino.", cooldown:"Ya solicitado. Espera {s}s.",
+  required:"Obligatorio", optional:"Opcional", noResults:"Nada coincide con «{q}».", language:"Idioma", tag_popular:"Popular", tag_new:"Nuevo", tag_veg:"Vegetariano", tag_spicy:"Picante", soldOut:"Agotado",
+  added:"Añadido: {name}", track:"Seguir", itemsLabel:"Artículos", placedAt:"Hecho a las {time}", demo:"Modo vista previa: los estados cambian solos.", callNow:"Un camarero viene a tu mesa", served:"Servido", paidBy:"Pago: {m}" },
+ de:{ table:"Tisch", openNow:"Geöffnet", search:"Speisekarte durchsuchen", popular:"Am meisten bestellt", add:"Hinzufügen", addToOrder:"Zur Bestellung", viewCart:"Bestellung ansehen", items1:"1 Artikel", itemsN:"{n} Artikel",
+  navMenu:"Karte", navTrack:"Bestellung", navWaiter:"Kellner", navCart:"Warenkorb", yourOrder:"Ihre Bestellung", emptyCart:"Ihre Bestellung ist leer", emptyCartHint:"Wählen Sie etwas aus der Speisekarte.", browseMenu:"Zur Speisekarte",
+  orderNote:"Hinweis für die Küche", orderNotePh:"Allergien, ohne Zwiebeln, extra scharf…", itemNotePh:"Notiz zu diesem Artikel", payment:"Zahlung", payCash:"Bar", payCard:"Karte", payHint:"Sie zahlen am Tisch, wenn Sie fertig sind.",
+  subtotal:"Zwischensumme", service:"Service", total:"Gesamt", placeOrder:"Bestellung senden", orderSent:"Bestellung an die Küche gesendet", order:"Bestellung", estimated:"Geschätzte Zeit", min:"Min.",
+  st_sent:"Gesendet", st_sent_d:"Wir haben Ihre Bestellung erhalten.", st_accepted:"Angenommen", st_accepted_d:"Das Team hat Ihre Bestellung bestätigt.", st_preparing:"In der Küche", st_preparing_d:"Ihr Essen wird zubereitet.", st_ready:"Fertig", st_ready_d:"Ihre Bestellung ist fertig und kommt an Ihren Tisch.", st_served:"Serviert", st_served_d:"Guten Appetit!", st_cancelled:"Storniert",
+  noOrder:"Keine aktive Bestellung", noOrderHint:"Ihre Bestellungen erscheinen hier und sind live verfolgbar.", addMore:"Mehr bestellen", needSomething:"Brauchen Sie etwas?", more:"Mehr",
+  waiterTitle:"Kellner rufen", waiterSub:"Tippen Sie, was Sie brauchen. Wir bringen es an Tisch {t}.", requests:"Ihre Anfragen", rq_sent:"Gesendet", rq_seen:"Gesehen", rq_coming:"Unterwegs", rq_done:"Erledigt",
+  send:"Senden", cancel:"Abbrechen", noteOptional:"Notiz hinzufügen (optional)", requestSent:"Anfrage gesendet. Ein Kellner kommt.", cooldown:"Bereits angefragt. Bitte {s}s warten.",
+  required:"Pflicht", optional:"Optional", noResults:"Keine Treffer für „{q}“.", language:"Sprache", tag_popular:"Beliebt", tag_new:"Neu", tag_veg:"Vegetarisch", tag_spicy:"Scharf", soldOut:"Ausverkauft",
+  added:"Hinzugefügt: {name}", track:"Verfolgen", itemsLabel:"Artikel", placedAt:"Aufgegeben um {time}", demo:"Vorschaumodus: Status ändern sich automatisch.", callNow:"Ein Kellner kommt an Ihren Tisch", served:"Serviert", paidBy:"Zahlung: {m}" },
+ nl:{ table:"Tafel", openNow:"Nu open", search:"Zoek in het menu", popular:"Meest besteld", add:"Toevoegen", addToOrder:"Aan bestelling toevoegen", viewCart:"Bestelling bekijken", items1:"1 item", itemsN:"{n} items",
+  navMenu:"Menu", navTrack:"Bestelling", navWaiter:"Ober", navCart:"Mandje", yourOrder:"Je bestelling", emptyCart:"Je bestelling is leeg", emptyCartHint:"Kies iets uit het menu om te beginnen.", browseMenu:"Bekijk het menu",
+  orderNote:"Opmerking voor de keuken", orderNotePh:"Allergieën, zonder ui, extra pittig…", itemNotePh:"Notitie voor dit item", payment:"Betaling", payCash:"Contant", payCard:"Pinpas", payHint:"Je betaalt aan tafel als je klaar bent.",
+  subtotal:"Subtotaal", service:"Service", total:"Totaal", placeOrder:"Bestelling versturen", orderSent:"Bestelling naar de keuken gestuurd", order:"Bestelling", estimated:"Geschatte tijd", min:"min",
+  st_sent:"Verstuurd", st_sent_d:"We hebben je bestelling ontvangen.", st_accepted:"Geaccepteerd", st_accepted_d:"Het team heeft je bestelling bevestigd.", st_preparing:"In de keuken", st_preparing_d:"Je eten wordt bereid.", st_ready:"Klaar", st_ready_d:"Je bestelling is klaar en komt naar je tafel.", st_served:"Geserveerd", st_served_d:"Eet smakelijk!", st_cancelled:"Geannuleerd",
+  noOrder:"Geen actieve bestelling", noOrderHint:"Je bestellingen verschijnen hier, live te volgen.", addMore:"Meer toevoegen", needSomething:"Iets nodig?", more:"Meer",
+  waiterTitle:"Ober roepen", waiterSub:"Tik wat je nodig hebt. We brengen het naar tafel {t}.", requests:"Je verzoeken", rq_sent:"Verstuurd", rq_seen:"Gezien", rq_coming:"Onderweg", rq_done:"Klaar",
+  send:"Versturen", cancel:"Annuleren", noteOptional:"Notitie toevoegen (optioneel)", requestSent:"Verzoek verstuurd. Er komt een ober.", cooldown:"Al gevraagd. Wacht {s}s.",
+  required:"Verplicht", optional:"Optioneel", noResults:"Geen resultaten voor ‘{q}’.", language:"Taal", tag_popular:"Populair", tag_new:"Nieuw", tag_veg:"Vegetarisch", tag_spicy:"Pittig", soldOut:"Uitverkocht",
+  added:"Toegevoegd: {name}", track:"Volgen", itemsLabel:"Items", placedAt:"Geplaatst om {time}", demo:"Voorbeeldmodus: statussen veranderen automatisch.", callNow:"Er komt een ober naar je tafel", served:"Geserveerd", paidBy:"Betaling: {m}" }
+};
+
+/* Waiter call types */
+const WAITER_TYPES = [
+  { id:"waiter", icon:"concierge", hue:160, name:{ en:"Call waiter", fr:"Appeler le serveur", ar:"نادِ النادل", de:"Kellner rufen", es:"Llamar al camarero", nl:"Ober roepen" } },
+  { id:"bill_cash", icon:"cash", hue:140, name:{ en:"Bill · cash", fr:"Addition · espèces", ar:"الحساب · نقداً", de:"Rechnung · bar", es:"Cuenta · efectivo", nl:"Rekening · contant" } },
+  { id:"bill_card", icon:"card", hue:210, name:{ en:"Bill · card", fr:"Addition · carte", ar:"الحساب · بطاقة", de:"Rechnung · Karte", es:"Cuenta · tarjeta", nl:"Rekening · pin" } },
+  { id:"delay", icon:"hourglass", hue:20, name:{ en:"Order is late", fr:"Commande en retard", ar:"الطلب تأخر", de:"Bestellung verspätet", es:"Pedido con retraso", nl:"Bestelling is laat" } },
+  { id:"water", icon:"droplet", hue:200, name:{ en:"Water", fr:"De l'eau", ar:"ماء", de:"Wasser", es:"Agua", nl:"Water" } },
+  { id:"napkins", icon:"tissue", hue:260, name:{ en:"Napkins", fr:"Serviettes", ar:"مناديل", de:"Servietten", es:"Servilletas", nl:"Servetten" } },
+  { id:"cutlery", icon:"utensils", hue:180, name:{ en:"Cutlery", fr:"Couverts", ar:"أدوات الأكل", de:"Besteck", es:"Cubiertos", nl:"Bestek" } },
+  { id:"ice", icon:"snow", hue:195, name:{ en:"Ice", fr:"Glaçons", ar:"ثلج", de:"Eiswürfel", es:"Hielo", nl:"IJsblokjes" } },
+  { id:"bread", icon:"bread", hue:35, name:{ en:"Bread", fr:"Pain", ar:"خبز", de:"Brot", es:"Pan", nl:"Brood" } },
+  { id:"condiments", icon:"shaker", hue:0, name:{ en:"Salt & sauces", fr:"Sel & sauces", ar:"ملح وصلصات", de:"Salz & Soßen", es:"Sal y salsas", nl:"Zout & sauzen" } },
+  { id:"clean", icon:"sparkles", hue:280, name:{ en:"Clean the table", fr:"Nettoyer la table", ar:"تنظيف الطاولة", de:"Tisch abräumen", es:"Limpiar la mesa", nl:"Tafel afruimen" } },
+  { id:"takeaway", icon:"box", hue:45, name:{ en:"Takeaway box", fr:"Boîte à emporter", ar:"علبة للأخذ", de:"Box zum Mitnehmen", es:"Caja para llevar", nl:"Meeneembakje" } },
+  { id:"other", icon:"message", hue:220, name:{ en:"Something else", fr:"Autre chose", ar:"شيء آخر", de:"Etwas anderes", es:"Otra cosa", nl:"Iets anders" } }
+];
+
+/* =====================================================================
+   4) ICONS
+   ===================================================================== */
+const ICONS = {
+  search:'<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
+  globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+  bag:'<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>', minus:'<path d="M5 12h14"/>', x:'<path d="M18 6 6 18M6 6l12 12"/>', check:'<path d="M20 6 9 17l-5-5"/>',
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  chef:'<path d="M17 21a1 1 0 0 0 1-1v-5.35c0-.46.32-.84.73-1.04a4 4 0 0 0-2.13-7.59 5 5 0 0 0-9.2 0 4 4 0 0 0-2.13 7.59c.41.2.73.58.73 1.04V20a1 1 0 0 0 1 1Z"/><path d="M6 17h12"/>',
+  flame:'<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>',
+  leaf:'<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>',
+  star:'<path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/>',
+  card:'<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/>',
+  cash:'<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/>',
+  droplet:'<path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/>',
+  tissue:'<rect x="3" y="11" width="18" height="10" rx="2"/><path d="M8 11c0-3.5 1.8-6 4-7.5 2.2 1.5 4 4 4 7.5M7 16h10"/>',
+  utensils:'<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2M7 2v20M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>',
+  snow:'<path d="M12 2v20M3.3 7l17.4 10M3.3 17 20.7 7M9 4l3 2 3-2M9 20l3-2 3 2"/>',
+  bread:'<path d="M5 12a7 4.5 0 0 1 14 0 2 2 0 0 1-1 1.7V19a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-5.3A2 2 0 0 1 5 12Z"/><path d="M10 9.5l-1 2M14 9.5l-1 2"/>',
+  shaker:'<path d="M9 2h6l1 6H8z"/><path d="M8 8h8l1 13H7z"/><path d="M11 4.5h.01M13 4.5h.01"/>',
+  sparkles:'<path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/>',
+  hourglass:'<path d="M5 22h14M5 2h14M17 22v-4.17a2 2 0 0 0-.59-1.42L12 12l-4.41 4.41A2 2 0 0 0 7 17.83V22M7 2v4.17a2 2 0 0 0 .59 1.42L12 12l4.41-4.41A2 2 0 0 0 17 6.17V2"/>',
+  chair:'<path d="M7 3h10v8H7zM5 11h14v3H5zM7 14v7M17 14v7"/>',
+  box:'<path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/>',
+  message:'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8M8 13h5"/>',
+  concierge:'<path d="M3 19h18M5 19a7 7 0 0 1 14 0M12 9V7M10 7h4"/>',
+  coffee:'<path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><path d="M6 2v2M10 2v2M14 2v2"/>',
+  glass:'<path d="M5 3h14l-1.6 17.2a2 2 0 0 1-2 1.8H8.6a2 2 0 0 1-2-1.8z"/><path d="M5.6 9h12.8M13 3l2.5-2"/>',
+  sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+  salad:'<path d="M7 21h10M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9Z"/><path d="M11.4 12a4 4 0 0 1 5.6-5.5M7.5 12a4.5 4.5 0 0 1 6-5"/>',
+  tagine:'<path d="M2 19h20M4 19c.5-4.5 3.5-9.5 8-13 4.5 3.5 7.5 8.5 8 13"/><path d="M12 6V4"/><circle cx="12" cy="3" r="1"/><path d="M8.5 14h7"/>',
+  burger:'<path d="M4 11a8 6 0 0 1 16 0z"/><path d="M3 14.5h18M5 17.5h14a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3"/>',
+  cake:'<path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1M2 21h20M7 8v3M12 8v3M17 8v3M7 4h.01M12 4h.01M17 4h.01"/>',
+  arrow:'<path d="M5 12h14M12 5l7 7-7 7"/>', back:'<path d="M19 12H5M12 19l-7-7 7-7"/>',
+  book:'<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/>',
+  route:'<path d="M3 12h4l3-8 4 16 3-8h4"/>',
+  send:'<path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>',
+  trash:'<path d="M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15"/>',
+  grid:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>'
+};
+const STATUS_FLOW = ["sent","accepted","preparing","ready","served"];
+const STATUS_ICON = { sent:"send", accepted:"check", preparing:"chef", ready:"concierge", served:"utensils" };
+const REQ_FLOW = ["sent","seen","coming","done"];
+const DEMO_ORDER = { accepted:8, preparing:18, ready:50, served:70 };    // seconds after sending
+const DEMO_REQ = { seen:4, coming:10, done:40 };
+
+/* =====================================================================
+   5) STATE
+   ===================================================================== */
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem("qrmenu:"+k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem("qrmenu:"+k, JSON.stringify(v)); }catch(e){} }
+};
+const state = {
+  lang: store.get("lang", null) || pickLang(),
+  cart: store.get("cart", []),
+  orders: store.get("orders", []),
+  requests: store.get("requests", []),
+  note: store.get("note", ""),
+  pay: store.get("pay", "cash"),
+  q: "", trackId: null, sheet: null, activeCat: null
+};
+function pickLang(){
+  const nav = (navigator.language || "").slice(0,2).toLowerCase();
+  return CONFIG.languages.includes(nav) ? nav : CONFIG.defaultLang;
+}
+function save(){ ["lang","cart","orders","requests","note","pay"].forEach(k => store.set(k, state[k])); }
+
+/* =====================================================================
+   6) HELPERS
+   ===================================================================== */
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+const t = (k, vars) => { let s = (I18N[state.lang] || {})[k] ?? I18N.en[k] ?? k; if (vars) for (const v in vars) s = s.split("{"+v+"}").join(vars[v]); return s; };
+const L = o => !o ? "" : typeof o === "string" ? o : (o[state.lang] ?? o.en ?? Object.values(o)[0]);
+const icon = (n, cls="") => `<svg class="ic ${cls}" viewBox="0 0 24 24" aria-hidden="true">${ICONS[n] || ICONS.grid}</svg>`;
+const money = n => { const v = Number.isInteger(n) ? n : n.toFixed(2); const c = CONFIG.currency[state.lang] || CONFIG.currency.default; return `<span class="num">${v}</span> ${c}`; };
+const moneyTxt = n => `${Number.isInteger(n) ? n : n.toFixed(2)} ${CONFIG.currency[state.lang] || CONFIG.currency.default}`;
+const fmtTime = ts => new Date(ts).toLocaleTimeString(LANGS[state.lang].locale, { hour:"2-digit", minute:"2-digit" });
+const prod = id => MENU.products.find(p => p.id === id);
+const cat = id => MENU.categories.find(c => c.id === id);
+const plural = n => n === 1 ? t("items1") : t("itemsN", { n });
+function thumb(p, extra=""){
+  const c = cat(p.cat) || {};
+  return `<div class="thumb ${extra}" style="--h:${c.hue ?? 150}">${p.img ? `<img src="${esc(p.img)}" alt="" loading="lazy">` : icon(c.icon)}</div>`;
+}
+function unitPrice(p, opts){
+  let x = p.price;
+  for (const gid in (opts || {})) { const g = MENU.optionGroups[gid]; if (!g) continue; (opts[gid] || []).forEach(cid => { const ch = g.choices.find(c => c.id === cid); if (ch) x += ch.price; }); }
+  return x;
+}
+function optSummary(p, opts){
+  const out = [];
+  (p.options || []).forEach(gid => { const g = MENU.optionGroups[gid]; (opts?.[gid] || []).forEach(cid => { const ch = g.choices.find(c => c.id === cid); if (ch) out.push(L(ch.name)); }); });
+  return out.join(" · ");
+}
+const cartCount = () => state.cart.reduce((a, l) => a + l.qty, 0);
+const cartSub = () => state.cart.reduce((a, l) => { const p = prod(l.pid); return p ? a + unitPrice(p, l.opts) * l.qty : a; }, 0);
+const fee = sub => Math.round(sub * (CONFIG.serviceFeePercent || 0)) / 100;
+const activeOrders = () => state.orders.filter(o => o.status !== "served" && o.status !== "cancelled");
+const qtyInCart = pid => state.cart.filter(l => l.pid === pid).reduce((a, l) => a + l.qty, 0);
+
+let toastTimer;
+function toast(msg, ic="check"){
+  const el = $("#toast"); el.innerHTML = icon(ic) + `<span>${esc(msg)}</span>`; el.hidden = false;
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => el.hidden = true, 2600);
+}
+
+/* =====================================================================
+   7) API ADAPTER — demo by default, real endpoints when CONFIG.api is set
+   ===================================================================== */
+const API = {
+  async json(url, opts){ const r = await fetch(url, { headers:{ "Content-Type":"application/json" }, ...opts }); if (!r.ok) throw new Error(r.status); return r.json(); },
+  async loadMenu(){ if (CONFIG.api.menu) { try { MENU = await this.json(CONFIG.api.menu); } catch(e) {} } },
+  async placeOrder(o){
+    if (CONFIG.api.placeOrder) return this.json(CONFIG.api.placeOrder, { method:"POST", body: JSON.stringify(o) });
+    const n = store.get("seq", 1040) + 1; store.set("seq", n); return { id: "demo-" + n, number: n };
+  },
+  async orderStatus(o){ if (!CONFIG.api.orderStatus) return null; return this.json(CONFIG.api.orderStatus.replace("{id}", encodeURIComponent(o.id))); },
+  async callWaiter(r){ if (CONFIG.api.waiterCall) return this.json(CONFIG.api.waiterCall, { method:"POST", body: JSON.stringify(r) }); return { id: "call-" + Date.now() }; },
+  async requestStatus(r){ if (!CONFIG.api.requestStatus) return null; return this.json(CONFIG.api.requestStatus.replace("{id}", encodeURIComponent(r.id))); }
+};
+
+/* Platform hooks: the dashboard / websocket can push updates directly */
+window.QRMenu = {
+  setMenu(data){ MENU = data; renderAll(); },
+  setConfig(patch){ Object.assign(CONFIG, patch); renderAll(); },
+  updateOrderStatus(id, status, eta){ const o = state.orders.find(x => x.id === id); if (o) { setOrderStatus(o, status); if (eta) o.eta = eta; save(); renderLive(); } },
+  updateRequestStatus(id, status){ const r = state.requests.find(x => x.id === id); if (r) { r.status = status; save(); renderLive(); } }
+};
+
+/* =====================================================================
+   8) RENDER — MENU
+   ===================================================================== */
+function renderHero(){
+  const r = CONFIG.restaurant;
+  const initials = r.name.split(/\s+/).map(w => w[0]).join("").slice(0,2).toUpperCase();
+  $("#hero").innerHTML = `<div class="wrap">
+    <div class="hero-top">
+      <div class="logo">${r.logo ? `<img src="${esc(r.logo)}" alt="">` : esc(initials)}</div>
+      <button class="pill-btn" data-act="lang" aria-label="${esc(t("language"))}">${icon("globe")} ${LANGS[state.lang].native}</button>
+    </div>
+    <div><h1>${esc(r.name)}</h1><p>${esc(L(r.tagline))}</p></div>
+    <div class="hero-meta">
+      <span class="chip table">${icon("utensils")} ${esc(t("table"))} ${esc(CONFIG.table)}</span>
+      <span class="chip"><i class="dot"></i> ${esc(t("openNow"))}</span>
+    </div></div>`;
+}
+function renderBanner(){
+  const o = activeOrders().at(-1);
+  $("#banner").innerHTML = !o ? "" : `<button class="banner" data-go="track" data-order="${esc(o.id)}">
+    <span class="b-ic">${icon(STATUS_ICON[o.status])}</span>
+    <span class="b-txt"><strong>${esc(t("order"))} #${o.number} · ${esc(t("st_" + o.status))}</strong><span>${esc(t("st_" + o.status + "_d"))}</span></span>
+    <span class="go">${esc(t("track"))} ${icon("arrow","flip")}</span></button>`;
+}
+function renderCats(){
+  $("#cats").innerHTML = MENU.categories.map(c =>
+    `<button class="cat ${state.activeCat === c.id ? "on" : ""}" data-cat="${c.id}">${icon(c.icon)} ${esc(L(c.name))}</button>`).join("");
+  $("#cats").parentElement.parentElement.hidden = !!state.q;
+}
+function itemRow(p){
+  const q = qtyInCart(p.id);
+  const tags = [...(p.tags || [])];
+  return `<button class="item ${p.soldOut ? "out" : ""}" data-open="${p.id}">
+    <div class="body">
+      <div class="name">${esc(L(p.name))}</div>
+      <div class="desc">${esc(L(p.desc))}</div>
+      <div class="foot"><span class="price">${money(p.price)}</span>${tagPills(tags, p.soldOut)}</div>
+    </div>
+    <div class="thumbbox">${thumb(p)}
+      ${q ? `<span class="qtybadge num">×${q}</span>` : ""}
+      ${p.soldOut ? "" : `<span class="add" data-quick="${p.id}" role="button" aria-label="${esc(t("add"))}">${icon("plus")}</span>`}
+    </div></button>`;
+}
+function tagPills(tags, soldOut){
+  const map = { popular:"star", new:"sparkles", veg:"leaf", spicy:"flame" };
+  let h = tags.map(x => `<span class="tag ${x}">${icon(map[x])}${esc(t("tag_" + x))}</span>`).join("");
+  if (soldOut) h = `<span class="tag out">${esc(t("soldOut"))}</span>` + h;
+  return h ? `<span class="tags">${h}</span>` : "";
+}
+function renderMenuBody(){
+  const q = state.q.trim().toLowerCase();
+  let html = "";
+  if (q) {
+    const hits = MENU.products.filter(p => (L(p.name) + " " + L(p.desc) + " " + (p.name?.en || "")).toLowerCase().includes(q));
+    html = hits.length ? `<section class="sec"><div class="list">${hits.map(itemRow).join("")}</div></section>`
+      : `<div class="empty"><div class="e-ic">${icon("search")}</div><p>${esc(t("noResults", { q: state.q }))}</p></div>`;
+  } else {
+    const pop = MENU.products.filter(p => p.tags?.includes("popular") && !p.soldOut);
+    if (pop.length) html += `<section class="sec"><div class="sec-head"><h2>${esc(t("popular"))}</h2></div>
+      <div class="rail">${pop.map(p => `<button class="card" data-open="${p.id}"><div class="thumbbox">${thumb(p)}<span class="add" data-quick="${p.id}" role="button" aria-label="${esc(t("add"))}">${icon("plus")}</span></div>
+      <span class="t-name">${esc(L(p.name))}</span><span class="price">${money(p.price)}</span></button>`).join("")}</div></section>`;
+    MENU.categories.forEach(c => {
+      const ps = MENU.products.filter(p => p.cat === c.id);
+      if (!ps.length) return;
+      html += `<section class="sec cat-sec" id="cat-${c.id}" data-cid="${c.id}"><div class="sec-head"><h2>${esc(L(c.name))}</h2><span class="count">${plural(ps.length)}</span></div>
+        <div class="list">${ps.map(itemRow).join("")}</div></section>`;
+    });
+  }
+  $("#menuBody").innerHTML = html;
+  observeSections();
+}
+let io;
+function observeSections(){
+  io?.disconnect();
+  if (!("IntersectionObserver" in window)) return;
+  io = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting) setActiveCat(e.target.dataset.cid); });
+  }, { rootMargin: "-80px 0px -65% 0px" });
+  document.querySelectorAll(".cat-sec").forEach(s => io.observe(s));
+}
+function setActiveCat(id){
+  if (state.activeCat === id) return;
+  state.activeCat = id;
+  document.querySelectorAll(".cat").forEach(b => b.classList.toggle("on", b.dataset.cat === id));
+  const b = document.querySelector(`.cat[data-cat="${id}"]`), rail = $("#cats");
+  if (b && rail) { const br = b.getBoundingClientRect(), rr = rail.getBoundingClientRect(); rail.scrollBy({ left: (br.left + br.width/2) - (rr.left + rr.width/2), behavior:"smooth" }); }
+}
+
+/* =====================================================================
+   9) RENDER — CART
+   ===================================================================== */
+function pageHead(title){
+  return `<div class="page-head"><h1>${esc(title)}</h1><button class="lang-btn" data-act="lang" aria-label="${esc(t("language"))}">${icon("globe")} ${state.lang.toUpperCase()}</button></div>`;
+}
+function renderCart(){
+  if (!state.cart.length) {
+    $("#cartBody").innerHTML = pageHead(t("yourOrder")) + `<div class="empty"><div class="e-ic">${icon("bag")}</div><h3>${esc(t("emptyCart"))}</h3><p>${esc(t("emptyCartHint"))}</p>
+      <button class="btn primary" data-go="menu">${icon("book")} ${esc(t("browseMenu"))}</button></div>`;
+    return;
+  }
+  const sub = cartSub(), f = fee(sub);
+  $("#cartBody").innerHTML = pageHead(t("yourOrder")) + `<div class="stack">
+    <div class="panel">
+      <div class="label">${esc(t("table"))} ${esc(CONFIG.table)} <small>${plural(cartCount())}</small></div>
+      ${state.cart.map((l, i) => { const p = prod(l.pid); if (!p) return ""; const os = optSummary(p, l.opts);
+        return `<div class="line">${thumb(p)}
+          <div style="min-width:0"><div class="n">${esc(L(p.name))}</div>${os ? `<div class="o">${esc(os)}</div>` : ""}${l.note ? `<div class="o">“${esc(l.note)}”</div>` : ""}
+            <div class="stepper"><button data-dec="${i}" aria-label="−">${icon(l.qty === 1 ? "trash" : "minus")}</button><span class="num">${l.qty}</span><button data-inc="${i}" aria-label="+">${icon("plus")}</button></div></div>
+          <div class="lp">${money(unitPrice(p, l.opts) * l.qty)}</div></div>`; }).join("")}
+    </div>
+    <div class="panel">
+      <label class="label" for="orderNote">${esc(t("orderNote"))} <small>${esc(t("optional"))}</small></label>
+      <textarea class="field" id="orderNote" rows="2" placeholder="${esc(t("orderNotePh"))}">${esc(state.note)}</textarea>
+    </div>
+    <div class="panel">
+      <div class="label">${esc(t("payment"))}</div>
+      <div class="seg">
+        <button class="${state.pay === "cash" ? "on" : ""}" data-pay="cash">${icon("cash")} ${esc(t("payCash"))}</button>
+        <button class="${state.pay === "card" ? "on" : ""}" data-pay="card">${icon("card")} ${esc(t("payCard"))}</button>
+      </div>
+      <p class="hint">${esc(t("payHint"))}</p>
+    </div>
+    <div class="panel totals">
+      <div><span>${esc(t("subtotal"))}</span><span>${money(sub)}</span></div>
+      ${f ? `<div><span>${esc(t("service"))} (${CONFIG.serviceFeePercent}%)</span><span>${money(f)}</span></div>` : ""}
+      <div class="grand"><span>${esc(t("total"))}</span><span>${money(sub + f)}</span></div>
+    </div>
+    <div class="sticky-cta"><button class="btn primary block" data-act="place" id="placeBtn">${icon("send")} ${esc(t("placeOrder"))} · ${money(sub + f)}</button></div>
+  </div>`;
+}
+
+/* =====================================================================
+   10) RENDER — TRACKING
+   ===================================================================== */
+function renderTrack(){
+  const box = $("#trackBody");
+  if (!state.orders.length) {
+    box.innerHTML = pageHead(t("navTrack")) + `<div class="empty"><div class="e-ic">${icon("route")}</div><h3>${esc(t("noOrder"))}</h3><p>${esc(t("noOrderHint"))}</p>
+      <button class="btn primary" data-go="menu">${icon("book")} ${esc(t("browseMenu"))}</button></div>` + quickActions();
+    return;
+  }
+  let o = state.orders.find(x => x.id === state.trackId) || activeOrders().at(-1) || state.orders.at(-1);
+  state.trackId = o.id;
+  const idx = STATUS_FLOW.indexOf(o.status);
+  const elapsedMin = (Date.now() - o.createdAt) / 60000;
+  const left = Math.max(1, Math.ceil(o.eta - elapsedMin));
+  const orders = [...state.orders].reverse().slice(0, 6);
+  box.innerHTML = pageHead(t("navTrack")) + `<div class="stack">
+    ${orders.length > 1 ? `<div class="switch">${orders.map(x => `<button class="${x.id === o.id ? "on" : ""}" data-order="${esc(x.id)}">#${x.number} · ${esc(t("st_" + x.status))}</button>`).join("")}</div>` : ""}
+    <div class="status-card">
+      <span class="sc-ic">${icon(STATUS_ICON[o.status])}</span>
+      <div class="sc-top"><span>${esc(t("order"))} #${o.number} · ${esc(t("table"))} ${esc(o.table)}</span><span>${esc(t("placedAt", { time: fmtTime(o.createdAt) }))}</span></div>
+      <h2>${esc(t("st_" + o.status))}</h2>
+      <p>${esc(t("st_" + o.status + "_d"))}</p>
+      <div class="bars">${STATUS_FLOW.map((s, i) => `<i class="${i < idx || o.status === "served" ? "done" : i === idx ? "cur" : ""}"></i>`).join("")}</div>
+      ${o.status !== "served" ? `<div class="eta">${icon("clock")}<span>${esc(t("estimated"))}</span><span class="big num">~${left} ${esc(t("min"))}</span></div>` : ""}
+    </div>
+    <div class="panel"><div class="tl">
+      ${STATUS_FLOW.map((s, i) => { const cls = i < idx || o.status === "served" ? "done" : i === idx ? "cur" : "todo"; const ts = o.history?.[s];
+        return `<div class="step ${cls}"><div class="s-ic">${icon(cls === "done" ? "check" : STATUS_ICON[s])}</div>
+          <div><div class="s-t">${esc(t("st_" + s))}</div>${cls !== "todo" ? `<div class="s-d">${esc(t("st_" + s + "_d"))}</div>` : ""}</div>
+          <div class="s-time num">${ts ? fmtTime(ts) : ""}</div></div>`; }).join("")}
+    </div></div>
+    ${quickActions()}
+    <div class="panel">
+      <div class="label">${esc(t("itemsLabel"))} <small>${plural(o.items.reduce((a, l) => a + l.qty, 0))}</small></div>
+      ${o.items.map(l => `<div class="oi"><div><span class="q num">${l.qty}×</span>${esc(L(l.name))}${l.options ? `<small>${esc(l.options)}</small>` : ""}${l.note ? `<small>“${esc(l.note)}”</small>` : ""}</div><div class="num">${money(l.total)}</div></div>`).join("")}
+      <div class="totals" style="margin-top:10px"><div class="grand"><span>${esc(t("total"))}</span><span>${money(o.total)}</span></div></div>
+      <p class="hint">${esc(t("paidBy", { m: t(o.payment === "card" ? "payCard" : "payCash") }))}</p>
+    </div>
+    <button class="btn ghost block" data-go="menu">${icon("plus")} ${esc(t("addMore"))}</button>
+    ${CONFIG.demo && !CONFIG.api.orderStatus ? `<p class="demo">${esc(t("demo"))}</p>` : ""}
+  </div>`;
+}
+function quickActions(){
+  const ids = ["waiter","bill_cash","delay","water"];
+  return `<div class="panel"><div class="label">${esc(t("needSomething"))} <button class="tag new" data-go="waiter">${esc(t("more"))} ${icon("arrow","flip")}</button></div>
+    <div class="quick">${ids.map(id => waiterTile(WAITER_TYPES.find(w => w.id === id))).join("")}</div></div>`;
+}
+
+/* =====================================================================
+   11) RENDER — WAITER
+   ===================================================================== */
+function cooldownLeft(type){
+  const last = state.requests.filter(r => r.type === type && r.status !== "done").at(-1);
+  if (!last) return 0;
+  return Math.max(0, Math.ceil(CONFIG.waiterCooldownSec - (Date.now() - last.ts) / 1000));
+}
+function waiterTile(w, hero){
+  const busy = cooldownLeft(w.id) > 0;
+  if (hero) return `<button class="tile hero-tile ${busy ? "busy" : ""}" data-call="${w.id}"><span class="t-ic">${icon(w.icon)}</span><span>${esc(L(w.name))}<small>${esc(t("callNow"))}</small></span>${icon("arrow","flip")}</button>`;
+  return `<button class="tile ${busy ? "busy" : ""}" data-call="${w.id}" style="--h:${w.hue}"><span class="t-ic">${icon(w.icon)}</span><span>${esc(L(w.name))}</span></button>`;
+}
+function renderWaiter(){
+  const reqs = [...state.requests].reverse().slice(0, 12);
+  $("#waiterBody").innerHTML = pageHead(t("waiterTitle")) + `<div class="stack">
+    <p style="margin:0;color:var(--muted)">${esc(t("waiterSub", { t: CONFIG.table }))}</p>
+    <div class="grid">${waiterTile(WAITER_TYPES[0], true)}${WAITER_TYPES.slice(1).map(w => waiterTile(w)).join("")}</div>
+    ${reqs.length ? `<div class="panel"><div class="label">${esc(t("requests"))}</div>
+      ${reqs.map(r => { const w = WAITER_TYPES.find(x => x.id === r.type) || WAITER_TYPES.at(-1);
+        return `<div class="req ${r.status === "done" ? "done" : ""}"><span class="t-ic" style="--h:${w.hue}">${icon(w.icon)}</span>
+          <div style="min-width:0"><div class="r-n">${esc(L(w.name))}</div><div class="r-s">${fmtTime(r.ts)}${r.note ? " · “" + esc(r.note) + "”" : ""}</div></div>
+          <span class="state ${r.status}">${esc(t("rq_" + r.status))}</span></div>`; }).join("")}</div>` : ""}
+  </div>`;
+}
+
+/* =====================================================================
+   12) TAB BAR, CART BAR, VIEWS
+   ===================================================================== */
+function currentView(){ const h = location.hash.slice(1); return ["menu","cart","track","waiter"].includes(h) ? h : "menu"; }
+function renderTabbar(){
+  const v = currentView(), n = cartCount(), live = activeOrders().length > 0;
+  const tabs = [["menu","book","navMenu"],["track","route","navTrack"],["waiter","concierge","navWaiter"],["cart","bag","navCart"]];
+  $("#tabbar").innerHTML = `<div class="wrap">${tabs.map(([id, ic, k]) => `<button class="tab ${v === id ? "on" : ""}" data-go="${id}" ${v === id ? 'aria-current="page"' : ""}>
+    ${icon(ic)}<span>${esc(t(k))}</span>${id === "cart" && n ? `<span class="badge num">${n}</span>` : ""}${id === "track" && live ? `<span class="live"></span>` : ""}</button>`).join("")}</div>`;
+  const bar = $("#cartbar");
+  bar.hidden = !(n && v === "menu");
+  if (!bar.hidden) bar.innerHTML = `<div class="wrap"><button data-go="cart"><span class="n num">${n}</span><span class="lbl">${esc(t("viewCart"))}</span><span>${money(cartSub())}</span></button></div>`;
+}
+function showView(){
+  const v = currentView();
+  document.querySelectorAll(".view").forEach(s => s.hidden = s.id !== "view-" + v);
+  if (v === "cart") renderCart();
+  if (v === "track") renderTrack();
+  if (v === "waiter") renderWaiter();
+  renderTabbar();
+  window.scrollTo(0, 0);
+}
+function go(v){ if (location.hash.slice(1) === v) showView(); else location.hash = v; }
+function applyLang(){
+  document.documentElement.lang = state.lang;
+  document.documentElement.dir = LANGS[state.lang].dir;
+  $("#q").placeholder = t("search");
+}
+function renderAll(){
+  applyLang(); renderHero(); renderBanner(); renderCats(); renderMenuBody();
+  const v = currentView();
+  if (v === "cart") renderCart(); if (v === "track") renderTrack(); if (v === "waiter") renderWaiter();
+  renderTabbar(); if (state.sheet) renderSheet();
+}
+function renderLive(){
+  renderBanner(); renderTabbar();
+  const v = currentView();
+  if (v === "track") renderTrack();
+  if (v === "waiter") renderWaiter();
+}
+
+/* =====================================================================
+   13) SHEETS — product detail, language, waiter confirm
+   ===================================================================== */
+function openSheet(s){ state.sheet = s; renderSheet(); $("#scrim").hidden = false; $("#sheet").hidden = false; document.body.style.overflow = "hidden"; }
+function closeSheet(){ state.sheet = null; $("#scrim").hidden = true; $("#sheet").hidden = true; document.body.style.overflow = ""; }
+function openProduct(pid){
+  const p = prod(pid); if (!p || p.soldOut) return;
+  const opts = {};
+  (p.options || []).forEach(gid => { const g = MENU.optionGroups[gid]; opts[gid] = g.type === "single" && g.required ? [g.choices[0].id] : []; });
+  openSheet({ kind:"product", pid, qty:1, opts, note:"" });
+}
+function renderSheet(){
+  const s = state.sheet, el = $("#sheet"); if (!s) return;
+  const keep = el.querySelector(".s-body")?.scrollTop || 0;
+  let body = "", foot = "";
+  if (s.kind === "product") {
+    const p = prod(s.pid);
+    body = `<button class="x" data-act="close" aria-label="${esc(t("cancel"))}">${icon("x")}</button>
+      ${thumb(p, "big-thumb")}
+      <div><h2>${esc(L(p.name))}</h2><p class="p-desc">${esc(L(p.desc))}</p>
+        <div class="p-meta"><span class="price">${money(p.price)}</span>${p.prep ? `<span>${icon("clock")} ${p.prep} ${esc(t("min"))}</span>` : ""}${tagPills(p.tags || [])}</div></div>
+      ${(p.options || []).map(gid => { const g = MENU.optionGroups[gid];
+        return `<div><div class="label">${esc(L(g.name))} <small>${esc(t(g.required ? "required" : "optional"))}</small></div>
+          ${g.choices.map(c => { const on = s.opts[gid]?.includes(c.id);
+            return `<button class="opt ${g.type === "multi" ? "multi" : ""} ${on ? "on" : ""}" data-g="${gid}" data-c="${c.id}" role="${g.type === "multi" ? "checkbox" : "radio"}" aria-checked="${on}">
+              <span class="mark">${on ? icon("check") : ""}</span><span class="on-l">${esc(L(c.name))}</span>${c.price ? `<span class="pp">+${money(c.price)}</span>` : ""}</button>`; }).join("")}</div>`; }).join("")}
+      <div><label class="label" for="itemNote">${esc(t("orderNote"))} <small>${esc(t("optional"))}</small></label>
+        <textarea class="field" id="itemNote" rows="2" placeholder="${esc(t("itemNotePh"))}">${esc(s.note)}</textarea></div>`;
+    foot = `<div class="stepper lg"><button data-act="sq-" aria-label="−">${icon("minus")}</button><span class="num">${s.qty}</span><button data-act="sq+" aria-label="+">${icon("plus")}</button></div>
+      <button class="btn primary" data-act="addsheet">${esc(t("add"))} · ${money(unitPrice(p, s.opts) * s.qty)}</button>`;
+  }
+  if (s.kind === "lang") {
+    body = `<button class="x" data-act="close" aria-label="${esc(t("cancel"))}">${icon("x")}</button><h2>${esc(t("language"))}</h2>
+      <div class="langs">${CONFIG.languages.map(c => `<button class="${c === state.lang ? "on" : ""}" data-setlang="${c}" lang="${c}" dir="${LANGS[c].dir}">
+        <span class="code">${c.toUpperCase()}</span><span class="nm">${LANGS[c].native}<small>${LANGS[c].en}</small></span>${c === state.lang ? icon("check") : ""}</button>`).join("")}</div>`;
+  }
+  if (s.kind === "call") {
+    const w = WAITER_TYPES.find(x => x.id === s.type);
+    body = `<button class="x" data-act="close" aria-label="${esc(t("cancel"))}">${icon("x")}</button>
+      <div class="confirm-ic tile" style="--h:${w.hue};border:0;padding:0;min-height:0;background:none"><span class="t-ic" style="width:64px;height:64px;border-radius:20px">${icon(w.icon)}</span></div>
+      <div style="text-align:center"><h2>${esc(L(w.name))}</h2><p class="p-desc">${esc(t("table"))} ${esc(CONFIG.table)}</p></div>
+      <div><label class="label" for="callNote">${esc(t("noteOptional"))}</label><textarea class="field" id="callNote" rows="2">${esc(s.note || "")}</textarea></div>`;
+    foot = `<button class="btn ghost" data-act="close">${esc(t("cancel"))}</button><button class="btn primary" data-act="sendcall">${icon("send")} ${esc(t("send"))}</button>`;
+  }
+  el.innerHTML = `<div class="grab"></div><div class="s-body">${body}</div>${foot ? `<div class="s-foot">${foot}</div>` : ""}`;
+  el.querySelector(".s-body").scrollTop = keep;
+}
+
+/* =====================================================================
+   14) ACTIONS
+   ===================================================================== */
+function addToCart(pid, qty, opts, note){
+  const key = pid + "|" + JSON.stringify(opts || {}) + "|" + (note || "");
+  const ex = state.cart.find(l => l.key === key);
+  if (ex) ex.qty += qty; else state.cart.push({ key, pid, qty, opts: opts || {}, note: note || "" });
+  save(); renderMenuBody(); renderTabbar();
+  toast(t("added", { name: L(prod(pid).name) }));
+}
+async function placeOrder(){
+  if (!state.cart.length) return;
+  const btn = $("#placeBtn"); if (btn) btn.disabled = true;
+  const sub = cartSub(), f = fee(sub);
+  const items = state.cart.map(l => { const p = prod(l.pid); return { pid:p.id, name:p.name, qty:l.qty, opts:l.opts, options: optSummary(p, l.opts), note:l.note, unit: unitPrice(p, l.opts), total: unitPrice(p, l.opts) * l.qty, prep: p.prep || 10 }; });
+  const payload = { table: CONFIG.table, lang: state.lang, items, note: state.note, payment: state.pay, subtotal: sub, service: f, total: sub + f, createdAt: Date.now() };
+  try {
+    const res = await API.placeOrder(payload);
+    const o = { ...payload, id: res.id, number: res.number ?? res.id, status: "sent", history: { sent: Date.now() }, eta: res.eta || Math.max(...items.map(i => i.prep)) + 5 };
+    state.orders.push(o); state.cart = []; state.note = ""; state.trackId = o.id; save();
+    renderMenuBody(); renderBanner(); go("track"); toast(t("orderSent"), "send");
+  } catch(e) { if (btn) btn.disabled = false; toast("Network error — try again", "x"); }
+}
+function setOrderStatus(o, s){
+  if (o.status === s) return false;
+  o.status = s; o.history = o.history || {}; o.history[s] = o.history[s] || Date.now();
+  STATUS_FLOW.slice(0, STATUS_FLOW.indexOf(s)).forEach(p => { if (!o.history[p]) o.history[p] = Date.now(); });
+  return true;
+}
+async function sendCall(type, note){
+  const r = { type, note, table: CONFIG.table, lang: state.lang, ts: Date.now(), status: "sent", orderId: activeOrders().at(-1)?.id || null };
+  try { const res = await API.callWaiter(r); r.id = res.id; } catch(e) { r.id = "local-" + r.ts; }
+  state.requests.push(r); save(); closeSheet(); renderLive(); toast(t("requestSent"), "concierge");
+}
+
+document.addEventListener("click", e => {
+  const a = e.target.closest("[data-act],[data-go],[data-open],[data-quick],[data-cat],[data-g],[data-inc],[data-dec],[data-pay],[data-call],[data-order],[data-setlang]");
+  if (!a) { if (e.target === $("#scrim")) closeSheet(); return; }
+  const d = a.dataset;
+  if (d.quick) { e.stopPropagation(); const p = prod(d.quick); if (p.options?.length) openProduct(p.id); else addToCart(p.id, 1, {}, ""); return; }
+  if (d.order && !d.go) { state.trackId = d.order; renderTrack(); return; }
+  if (d.go) { if (d.order) state.trackId = d.order; closeSheet(); go(d.go); return; }
+  if (d.open) { openProduct(d.open); return; }
+  if (d.cat) { document.getElementById("cat-" + d.cat)?.scrollIntoView({ behavior:"smooth", block:"start" }); setActiveCat(d.cat); return; }
+  if (d.g) { const s = state.sheet, g = MENU.optionGroups[d.g], cur = s.opts[d.g] || [];
+    s.opts[d.g] = g.type === "single" ? [d.c] : cur.includes(d.c) ? cur.filter(x => x !== d.c) : [...cur, d.c]; renderSheet(); return; }
+  if (d.inc) { state.cart[+d.inc].qty++; save(); renderCart(); renderTabbar(); renderMenuBody(); return; }
+  if (d.dec) { const l = state.cart[+d.dec]; l.qty--; if (l.qty <= 0) state.cart.splice(+d.dec, 1); save(); renderCart(); renderTabbar(); renderMenuBody(); return; }
+  if (d.pay) { state.pay = d.pay; save(); renderCart(); return; }
+  if (d.call) { const left = cooldownLeft(d.call); if (left) { toast(t("cooldown", { s: left }), "clock"); return; } openSheet({ kind:"call", type: d.call, note:"" }); return; }
+  if (d.setlang) { state.lang = d.setlang; save(); closeSheet(); renderAll(); return; }
+  switch (d.act) {
+    case "lang": openSheet({ kind:"lang" }); break;
+    case "close": closeSheet(); break;
+    case "sq-": state.sheet.qty = Math.max(1, state.sheet.qty - 1); renderSheet(); break;
+    case "sq+": state.sheet.qty++; renderSheet(); break;
+    case "addsheet": { const s = state.sheet; closeSheet(); addToCart(s.pid, s.qty, s.opts, s.note.trim()); break; }
+    case "sendcall": sendCall(state.sheet.type, ($("#callNote")?.value || "").trim()); break;
+    case "place": placeOrder(); break;
+  }
+});
+document.addEventListener("input", e => {
+  if (e.target.id === "q") { state.q = e.target.value; renderCats(); renderMenuBody(); }
+  if (e.target.id === "orderNote") { state.note = e.target.value; save(); }
+  if (e.target.id === "itemNote" && state.sheet) state.sheet.note = e.target.value;
+  if (e.target.id === "callNote" && state.sheet) state.sheet.note = e.target.value;
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape" && state.sheet) closeSheet(); });
+window.addEventListener("hashchange", showView);
+
+/* =====================================================================
+   15) LIVE UPDATES — demo timeline or polling the platform
+   ===================================================================== */
+let pollTick = 0;
+async function tick(){
+  let changed = false;
+  const now = Date.now();
+  for (const o of activeOrders()) {
+    if (CONFIG.api.orderStatus) {
+      if (pollTick % 10 === 0) { try { const r = await API.orderStatus(o); if (r?.status && setOrderStatus(o, r.status)) { changed = true; toast(`#${o.number} · ${t("st_" + o.status)}`, STATUS_ICON[o.status]); } if (r?.eta) o.eta = r.eta; } catch(e) {} }
+    } else if (CONFIG.demo) {
+      const sec = (now - o.createdAt) / 1000;
+      let target = "sent"; for (const s of STATUS_FLOW.slice(1)) if (sec >= DEMO_ORDER[s]) target = s;
+      if (STATUS_FLOW.indexOf(target) > STATUS_FLOW.indexOf(o.status) && setOrderStatus(o, target)) { changed = true; toast(`#${o.number} · ${t("st_" + target)}`, STATUS_ICON[target]); }
+    }
+  }
+  for (const r of state.requests.filter(x => x.status !== "done")) {
+    if (CONFIG.api.requestStatus) {
+      if (pollTick % 10 === 0) { try { const x = await API.requestStatus(r); if (x?.status && x.status !== r.status) { r.status = x.status; changed = true; } } catch(e) {} }
+    } else if (CONFIG.demo) {
+      const sec = (now - r.ts) / 1000; let target = "sent";
+      for (const s of REQ_FLOW.slice(1)) if (sec >= DEMO_REQ[s]) target = s;
+      if (target !== r.status && REQ_FLOW.indexOf(target) > REQ_FLOW.indexOf(r.status)) { r.status = target; changed = true; }
+    }
+  }
+  pollTick++;
+  if (changed) { save(); renderLive(); }
+  else if (pollTick % 15 === 0) renderLive();   // refresh ETA countdown & cooldowns
+}
+
+/* =====================================================================
+   16) BOOT
+   ===================================================================== */
+(async function boot(){
+  await API.loadMenu();
+  state.activeCat = MENU.categories[0]?.id;
+  renderAll(); showView();
+  setInterval(tick, 1000);
+})();
+</script>
+</body>
+</html>
