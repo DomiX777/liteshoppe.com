@@ -11,6 +11,8 @@ One self-contained file: `index.html`. Customers scan the table QR code, browse 
 
 Languages: French, Arabic (RTL), English, Spanish, German, Dutch. Light and dark mode follow the phone.
 
+Illustrations: 3D icons from Microsoft Fluent Emoji (MIT licence), embedded in the file. A product with an `img` URL shows that photo instead.
+
 ## Connecting it to the platform
 Everything to change is at the top of the `<script>`:
 
