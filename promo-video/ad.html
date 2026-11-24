@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>Promo Ad</title>
+<style>
+@font-face{font-family:Cairo;src:url(fonts/Cairo.ttf);font-weight:200 1000}
+:root{
+  --bg:#04050d; --cy:#22d3ee; --vi:#8b5cf6; --mg:#ec4899; --gr:#34d399; --am:#fbbf24;
+  --glass:rgba(255,255,255,.06); --line:rgba(255,255,255,.12); --tx:#eef2ff; --mut:#94a3b8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);font-family:Cairo,'Noto Color Emoji',sans-serif;color:var(--tx)}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden}
+canvas{position:absolute;inset:0}
+.scene{position:absolute;inset:0;opacity:0;will-change:transform,opacity}
+.abs{position:absolute}
+.c{left:50%;transform-origin:center}
+.mono{font-family:'JetBrains Mono',monospace;direction:ltr}
+.kicker{font-family:'JetBrains Mono',monospace;direction:ltr;letter-spacing:.35em;font-size:26px;color:var(--cy);text-transform:uppercase}
+.h1{font-weight:900;font-size:104px;line-height:1.15;text-align:center}
+.h2{font-weight:900;font-size:84px;line-height:1.15;text-align:center}
+.sub{font-weight:600;font-size:38px;color:#cbd5e1;text-align:center}
+.grad{background:linear-gradient(90deg,var(--cy),var(--vi) 50%,var(--mg));-webkit-background-clip:text;background-clip:text;color:transparent}
+.glass{background:linear-gradient(160deg,rgba(255,255,255,.10),rgba(255,255,255,.03));border:1.5px solid var(--line);border-radius:36px;box-shadow:0 40px 120px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.15);backdrop-filter:blur(18px)}
+.word{display:inline-block;margin:0 .12em}
+.titleblk{position:absolute;top:150px;left:0;right:0;text-align:center}
+.titleblk .kicker{margin-bottom:18px}
+.glow{filter:drop-shadow(0 0 30px rgba(34,211,238,.45))}
+/* overlays */
+#streak{position:absolute;left:-50%;top:-50%;width:200%;height:200%;pointer-events:none;mix-blend-mode:screen;opacity:0;
+  background:linear-gradient(105deg,transparent 42%,rgba(139,92,246,.25) 46%,rgba(255,255,255,.95) 50%,rgba(34,211,238,.25) 54%,transparent 58%)}
+#flash{position:absolute;inset:0;background:#fff;opacity:0;mix-blend-mode:screen}
+#vig{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.75) 100%);pointer-events:none}
+#grain{position:absolute;inset:0;width:1080px;height:1920px;opacity:.09;mix-blend-mode:overlay;image-rendering:pixelated}
+#bars{position:absolute;inset:0;pointer-events:none}
+#bars:before,#bars:after{content:"";position:absolute;left:0;right:0;height:0;background:#000}
+/* scene 2 */
+.browser{width:940px;height:860px;left:70px;top:520px;overflow:hidden}
+.bbar{height:74px;display:flex;align-items:center;gap:14px;padding:0 28px;border-bottom:1.5px solid var(--line);direction:ltr}
+.dot{width:18px;height:18px;border-radius:50%}
+.url{flex:1;height:42px;border-radius:21px;background:rgba(255,255,255,.07);margin-left:20px;font-size:22px;color:#cbd5e1;display:flex;align-items:center;padding:0 22px}
+.blk{position:absolute;border-radius:18px}
+.codep{width:560px;height:400px;left:40px;top:1290px;background:rgba(8,10,24,.92);border:1.5px solid rgba(34,211,238,.35);border-radius:28px;padding:30px 34px;font-size:23px;line-height:1.75;color:#a5b4fc;white-space:pre;overflow:hidden;box-shadow:0 0 60px rgba(34,211,238,.25)}
+.phone{width:300px;height:610px;left:720px;top:1170px;border-radius:54px;background:#0b0e1e;border:10px solid #1e2440;box-shadow:0 30px 90px rgba(0,0,0,.6),0 0 50px rgba(139,92,246,.4);overflow:hidden}
+.cursor{width:56px;height:56px;left:0;top:0}
+.ripple{width:120px;height:120px;border-radius:50%;border:5px solid var(--cy);left:0;top:0}
+/* scene 3 */
+.dash{width:960px;height:1060px;left:60px;top:560px;padding:36px;direction:ltr}
+.kpi{position:absolute;top:36px;width:280px;height:170px;border-radius:26px;background:rgba(255,255,255,.05);border:1.5px solid var(--line);padding:22px 26px}
+.kpi .l{font-size:22px;color:var(--mut);font-family:'JetBrains Mono',monospace}
+.kpi .v{font-size:58px;font-weight:900;margin-top:4px}
+.chart{position:absolute;border-radius:26px;background:rgba(255,255,255,.04);border:1.5px solid var(--line)}
+.bar{position:absolute;bottom:40px;width:56px;border-radius:12px 12px 4px 4px;background:linear-gradient(to top,var(--vi),var(--cy))}
+.notif{width:560px;height:120px;right:50px;top:1520px;border-radius:30px;display:flex;align-items:center;gap:22px;padding:0 30px;font-size:34px;font-weight:800}
+.ico{width:70px;height:70px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:38px}
+/* scene 4 */
+.carcard{width:960px;height:1080px;left:60px;top:540px;overflow:hidden}
+.cal{position:absolute;left:60px;right:60px;top:560px;display:grid;grid-template-columns:repeat(7,1fr);gap:12px;direction:ltr}
+.cal div{height:62px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700;color:#cbd5e1;background:rgba(255,255,255,.04)}
+.btn{border-radius:26px;display:flex;align-items:center;justify-content:center;font-weight:900}
+.toast{border-radius:28px;display:flex;align-items:center;gap:20px;padding:0 34px;font-size:36px;font-weight:800;background:rgba(16,40,32,.92);border:1.5px solid rgba(52,211,153,.6);box-shadow:0 0 60px rgba(52,211,153,.35)}
+/* scene 5 */
+.tablet{width:1000px;height:900px;left:40px;top:560px;border-radius:50px;background:#0a0d1d;border:14px solid #1b2140;box-shadow:0 40px 120px rgba(0,0,0,.6),0 0 70px rgba(236,72,153,.25);overflow:hidden}
+.tile{position:absolute;width:186px;height:186px;border-radius:26px;background:rgba(255,255,255,.05);border:1.5px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.tile .e{font-size:66px;line-height:1}
+.tile .n{font-size:24px;font-weight:800;margin-top:8px}
+.tile .p{font-size:20px;color:var(--cy);font-family:'JetBrains Mono',monospace}
+.ticket{position:absolute;left:24px;top:24px;width:330px;bottom:24px;border-radius:28px;background:rgba(255,255,255,.04);border:1.5px solid var(--line);padding:24px}
+.line{display:flex;justify-content:space-between;font-size:25px;font-weight:700;padding:10px 0;border-bottom:1px dashed rgba(255,255,255,.12)}
+.receipt{width:360px;left:110px;top:1400px;background:#f8fafc;color:#0f172a;border-radius:6px;padding:24px 28px;font-size:24px;font-weight:700;box-shadow:0 30px 60px rgba(0,0,0,.5)}
+/* scene 6 */
+.chip{position:absolute;left:0;top:0;padding:22px 38px;border-radius:999px;font-size:38px;font-weight:800;white-space:nowrap;display:flex;align-items:center;gap:14px}
+.core{width:300px;height:300px;left:390px;top:700px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#fff,var(--cy) 20%,var(--vi) 55%,#1e1b4b 80%);box-shadow:0 0 120px rgba(139,92,246,.8),0 0 240px rgba(34,211,238,.4);
+  display:flex;align-items:center;justify-content:center;font-size:110px;font-weight:900;color:#fff;font-family:'JetBrains Mono',monospace;direction:ltr}
+.ring{position:absolute;border-radius:50%;border:2px solid rgba(139,92,246,.5)}
+/* scene 7 */
+.brand{font-weight:1000;font-size:150px;line-height:1;text-align:center;letter-spacing:-.01em;direction:ltr;
+  background:linear-gradient(100deg,#fff 0%,var(--cy) 25%,var(--vi) 50%,var(--mg) 75%,#fff 100%);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
+.wa{width:820px;height:150px;left:130px;top:1340px;border-radius:80px;background:linear-gradient(90deg,#16a34a,#22c55e);box-shadow:0 0 80px rgba(34,197,94,.55);display:flex;align-items:center;justify-content:center;gap:26px;font-size:50px;font-weight:900;color:#fff}
+</style>
+</head>
+<body>
+<div id="stage">
+  <canvas id="bg" width="1080" height="1920"></canvas>
+
+  <!-- ============ SCENE 1 : HOOK ============ -->
+  <div class="scene" id="s1">
+    <div class="abs kicker" id="s1k" style="top:640px;left:0;right:0;text-align:center">WEB · PLATFORMS · POS</div>
+    <div class="abs h1" id="s1a" style="top:740px;left:0;right:0;font-size:110px">عندك مشروع؟</div>
+    <div class="abs h1" id="s1b" style="top:900px;left:0;right:0;font-size:88px">بغيتي تديه أونلاين؟</div>
+    <div class="abs" id="s1line" style="top:1110px;left:240px;width:600px;height:6px;border-radius:3px;background:linear-gradient(90deg,var(--cy),var(--vi),var(--mg))"></div>
+  </div>
+
+  <!-- ============ SCENE 2 : WEBSITES ============ -->
+  <div class="scene" id="s2">
+    <div class="titleblk" id="s2t"><div class="kicker">01 — Websites</div><div class="h2" id="s2h">سيتات ويب <span class="grad">احترافية</span></div><div class="sub" id="s2s">سريعة · عصرية · كتبان زوينة فالتيليفون</div></div>
+    <div class="abs glass browser" id="s2b">
+      <div class="bbar"><div class="dot" style="background:#f87171"></div><div class="dot" style="background:#fbbf24"></div><div class="dot" style="background:#34d399"></div><div class="url mono" id="s2url"></div></div>
+      <div class="blk" id="b_nav" style="left:30px;right:30px;top:100px;height:70px;background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:space-between;padding:0 26px;direction:ltr">
+        <div style="width:120px;height:30px;border-radius:10px;background:linear-gradient(90deg,var(--cy),var(--vi))"></div>
+        <div style="display:flex;gap:22px"><i style="width:80px;height:14px;border-radius:7px;background:#475569;display:block"></i><i style="width:80px;height:14px;border-radius:7px;background:#475569;display:block"></i><i style="width:80px;height:14px;border-radius:7px;background:#475569;display:block"></i></div>
+      </div>
+      <div class="blk" id="b_hero" style="left:30px;right:30px;top:200px;height:330px;overflow:hidden;background:linear-gradient(130deg,#1e1b4b,#312e81 40%,#0e7490)">
+        <div id="b_h1" style="position:absolute;right:40px;top:60px;font-size:54px;font-weight:900">البيزنس ديالك</div>
+        <div id="b_h2" style="position:absolute;right:40px;top:132px;font-size:54px;font-weight:900" class="grad">ولا عالمي</div>
+        <div id="b_btn" class="btn" style="position:absolute;right:40px;top:230px;width:240px;height:66px;font-size:28px;background:linear-gradient(90deg,var(--cy),var(--vi))">ابدأ دابا</div>
+        <div id="b_orb" style="position:absolute;left:60px;top:40px;width:250px;height:250px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,var(--mg) 30%,var(--vi) 70%);box-shadow:0 0 90px rgba(236,72,153,.7)"></div>
+      </div>
+      <div class="blk card3" style="left:30px;top:560px;width:280px;height:260px;background:rgba(255,255,255,.05)"><div style="margin:24px;height:120px;border-radius:14px;background:linear-gradient(135deg,var(--vi),var(--cy))"></div><i style="display:block;margin:0 24px;height:16px;width:160px;border-radius:8px;background:#64748b"></i><i style="display:block;margin:14px 24px;height:14px;width:110px;border-radius:7px;background:#334155"></i></div>
+      <div class="blk card3" style="left:330px;top:560px;width:280px;height:260px;background:rgba(255,255,255,.05)"><div style="margin:24px;height:120px;border-radius:14px;background:linear-gradient(135deg,var(--mg),var(--vi))"></div><i style="display:block;margin:0 24px;height:16px;width:160px;border-radius:8px;background:#64748b"></i><i style="display:block;margin:14px 24px;height:14px;width:110px;border-radius:7px;background:#334155"></i></div>
+      <div class="blk card3" style="left:630px;top:560px;width:280px;height:260px;background:rgba(255,255,255,.05)"><div style="margin:24px;height:120px;border-radius:14px;background:linear-gradient(135deg,var(--cy),var(--gr))"></div><i style="display:block;margin:0 24px;height:16px;width:160px;border-radius:8px;background:#64748b"></i><i style="display:block;margin:14px 24px;height:14px;width:110px;border-radius:7px;background:#334155"></i></div>
+    </div>
+    <div class="abs codep mono" id="s2code"></div>
+    <div class="abs phone" id="s2p">
+      <div style="height:40px"></div>
+      <div style="margin:0 18px;height:210px;border-radius:22px;background:linear-gradient(130deg,#1e1b4b,#312e81 40%,#0e7490);position:relative;overflow:hidden">
+        <div style="position:absolute;right:16px;top:30px;font-size:30px;font-weight:900">البيزنس ديالك</div>
+        <div style="position:absolute;right:16px;top:118px;width:130px;height:44px;border-radius:14px;background:linear-gradient(90deg,var(--cy),var(--vi))"></div>
+      </div>
+      <div class="pc" style="margin:16px 18px;height:120px;border-radius:18px;background:linear-gradient(135deg,var(--vi),var(--cy))"></div>
+      <div class="pc" style="margin:16px 18px;height:120px;border-radius:18px;background:linear-gradient(135deg,var(--mg),var(--vi))"></div>
+    </div>
+    <svg class="abs cursor" id="s2cur" viewBox="0 0 24 24"><path d="M3 2l17 9-7 2-3 7z" fill="#fff" stroke="#0f172a" stroke-width="1.2"/></svg>
+    <div class="abs ripple" id="s2rip"></div>
+  </div>
+
+  <!-- ============ SCENE 3 : PLATFORMS ============ -->
+  <div class="scene" id="s3" style="perspective:2200px">
+    <div class="titleblk" id="s3t"><div class="kicker">02 — Platforms</div><div class="h2">بلاتفورمات <span class="grad">ولوحات تحكم</span></div><div class="sub">سيّر كلشي من بلاصة وحدة</div></div>
+    <div class="abs glass dash" id="s3d">
+      <div class="kpi" id="k1" style="left:36px"><div class="l">REVENUE</div><div class="v" id="k1v">0</div></div>
+      <div class="kpi" id="k2" style="left:340px"><div class="l">USERS</div><div class="v" id="k2v">0</div></div>
+      <div class="kpi" id="k3" style="left:644px"><div class="l">ORDERS</div><div class="v" id="k3v">0</div></div>
+      <div class="chart" id="ch1" style="left:36px;top:240px;width:888px;height:380px">
+        <div class="mono" style="position:absolute;left:28px;top:20px;font-size:22px;color:var(--mut)">SALES / MONTH</div>
+      </div>
+      <div class="chart" id="ch2" style="left:36px;top:650px;width:560px;height:340px">
+        <svg width="560" height="340" style="position:absolute;inset:0">
+          <defs><linearGradient id="lg" x1="0" x2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#ec4899"/></linearGradient>
+          <linearGradient id="lf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8b5cf6" stop-opacity=".45"/><stop offset="1" stop-color="#8b5cf6" stop-opacity="0"/></linearGradient></defs>
+          <path id="lfill" d="M30 290 L30 250 C90 240 110 200 170 205 S260 150 310 160 S400 90 450 95 S520 50 535 45 L535 290 Z" fill="url(#lf)"/>
+          <path id="lpath" d="M30 250 C90 240 110 200 170 205 S260 150 310 160 S400 90 450 95 S520 50 535 45" fill="none" stroke="url(#lg)" stroke-width="8" stroke-linecap="round"/>
+          <circle id="ldot" r="14" fill="#fff" stroke="#ec4899" stroke-width="6" cx="535" cy="45"/>
+        </svg>
+      </div>
+      <div class="chart" id="ch3" style="left:624px;top:650px;width:300px;height:340px">
+        <svg width="300" height="340" style="position:absolute;inset:0">
+          <circle cx="150" cy="170" r="95" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="30"/>
+          <circle id="donut" cx="150" cy="170" r="95" fill="none" stroke="url(#lg)" stroke-width="30" stroke-linecap="round" transform="rotate(-90 150 170)" stroke-dasharray="597" stroke-dashoffset="597"/>
+          <text id="dtx" x="150" y="186" text-anchor="middle" font-size="52" font-weight="900" fill="#fff" font-family="Cairo">0%</text>
+        </svg>
+      </div>
+    </div>
+    <div class="abs glass notif" id="s3n"><div class="ico" style="background:rgba(52,211,153,.18)">✅</div><div>طلب جديد وصل <span class="mono" style="color:var(--gr);font-size:28px">+1,250 DH</span></div></div>
+  </div>
+
+  <!-- ============ SCENE 4 : CAR RENTAL ============ -->
+  <div class="scene" id="s4">
+    <div class="titleblk" id="s4t"><div class="kicker">03 — Car Rental</div><div class="h2">سيتات <span class="grad">كرا الطوموبيلات</span></div><div class="sub">حجز أونلاين · تواريخ · أثمنة</div></div>
+    <div class="abs glass carcard" id="s4c">
+      <div id="speed" style="position:absolute;left:0;right:0;top:120px;height:300px"></div>
+      <svg id="car" viewBox="0 0 640 260" width="760" height="309" style="position:absolute;left:100px;top:110px">
+        <defs>
+          <linearGradient id="cb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e0e7ff"/><stop offset=".45" stop-color="#8b5cf6"/><stop offset="1" stop-color="#312e81"/></linearGradient>
+          <linearGradient id="cw" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#67e8f9"/><stop offset="1" stop-color="#0e7490"/></linearGradient>
+        </defs>
+        <ellipse cx="320" cy="236" rx="290" ry="16" fill="rgba(0,0,0,.5)"/>
+        <path d="M40 190 C40 150 70 140 120 132 L210 80 C240 62 270 56 330 56 L410 58 C450 60 480 74 510 100 L560 132 C600 140 620 156 620 185 L620 200 C620 208 614 212 606 212 L52 212 C44 212 40 206 40 198 Z" fill="url(#cb)"/>
+        <path d="M228 92 C250 78 272 74 320 74 L330 74 L330 130 L170 132 Z" fill="url(#cw)" opacity=".9"/>
+        <path d="M350 74 L405 76 C440 78 462 90 490 112 L505 130 L350 130 Z" fill="url(#cw)" opacity=".9"/>
+        <rect x="582" y="150" width="34" height="14" rx="7" fill="#fde68a"/>
+        <rect x="44" y="152" width="26" height="12" rx="6" fill="#f87171"/>
+        <path d="M110 160 L580 160" stroke="rgba(255,255,255,.35)" stroke-width="3"/>
+        <g id="w1" transform="translate(165 210)"><circle r="46" fill="#0b0e1e"/><circle r="30" fill="#334155"/><path d="M0-28V28M-28 0H28M-20-20L20 20M20-20L-20 20" stroke="#94a3b8" stroke-width="5"/><circle r="8" fill="#e2e8f0"/></g>
+        <g id="w2" transform="translate(488 210)"><circle r="46" fill="#0b0e1e"/><circle r="30" fill="#334155"/><path d="M0-28V28M-28 0H28M-20-20L20 20M20-20L-20 20" stroke="#94a3b8" stroke-width="5"/><circle r="8" fill="#e2e8f0"/></g>
+      </svg>
+      <div id="carinfo" style="position:absolute;left:60px;right:60px;top:440px;display:flex;justify-content:space-between;align-items:center">
+        <div><div style="font-size:44px;font-weight:900">طوموبيل اقتصادية</div><div style="font-size:26px;color:var(--mut)">أوطوماتيك · ديزل · 5 بلايص</div></div>
+        <div style="text-align:left;direction:ltr"><span class="mono grad" style="font-size:64px;font-weight:900">350</span><span style="font-size:28px;color:var(--mut)"> DH/نهار</span></div>
+      </div>
+      <div class="cal" id="cal"></div>
+      <div class="abs btn" id="s4btn" style="left:60px;right:60px;top:920px;height:110px;font-size:44px;background:linear-gradient(90deg,var(--cy),var(--vi),var(--mg))">احجز دابا</div>
+    </div>
+    <div class="abs toast" id="s4toast" style="left:170px;top:1660px;height:120px"><span style="font-size:46px">✅</span> تأكد الحجز ديالك</div>
+  </div>
+
+  <!-- ============ SCENE 5 : POS ============ -->
+  <div class="scene" id="s5">
+    <div class="titleblk" id="s5t"><div class="kicker">04 — Restaurant POS</div><div class="h2">POS <span class="grad">للمطاعم والكافيهات</span></div><div class="sub">كوموندات · كيصة · تيكيات</div></div>
+    <div class="abs tablet" id="s5tab">
+      <div id="tiles"></div>
+      <div class="ticket">
+        <div style="font-size:28px;font-weight:900;margin-bottom:10px">طاولة 7 <span class="mono" style="font-size:20px;color:var(--mut)">#0427</span></div>
+        <div id="tlines"></div>
+        <div style="position:absolute;left:24px;right:24px;bottom:110px;display:flex;justify-content:space-between;font-size:30px;font-weight:900"><span>المجموع</span><span class="mono" id="ttot" style="color:var(--cy)">0 DH</span></div>
+        <div class="btn" id="paybtn" style="position:absolute;left:24px;right:24px;bottom:22px;height:76px;font-size:34px;background:linear-gradient(90deg,var(--mg),var(--vi))">خلّص</div>
+      </div>
+      <div class="abs ripple" id="s5rip" style="border-color:var(--mg)"></div>
+    </div>
+    <div class="abs receipt" id="s5rec">
+      <div style="text-align:center;font-weight:900;font-size:30px">REÇU ✓</div>
+      <div style="border-top:2px dashed #94a3b8;margin:12px 0"></div>
+      <div id="rlines" style="direction:rtl"></div>
+      <div style="border-top:2px dashed #94a3b8;margin:12px 0"></div>
+      <div style="display:flex;justify-content:space-between;font-weight:900;direction:rtl"><span>المجموع</span><span class="mono" id="rtot"></span></div>
+    </div>
+  </div>
+
+  <!-- ============ SCENE 6 : EVERYTHING ============ -->
+  <div class="scene" id="s6">
+    <div class="ring" id="r1" style="left:240px;top:550px;width:600px;height:600px"></div>
+    <div class="ring" id="r2" style="left:140px;top:450px;width:800px;height:800px;border-color:rgba(34,211,238,.35)"></div>
+    <div class="abs core" id="core">&lt;/&gt;</div>
+    <div id="chips"></div>
+    <div class="abs" id="s6t" style="top:1430px;left:0;right:0;text-align:center">
+      <div class="h2" id="s6a">وأي حاجة فبالك...</div>
+      <div class="h1 grad" id="s6b" style="margin-top:10px">كنصاوبوها ليك</div>
+    </div>
+    <div class="abs kicker" id="s6k" style="top:230px;left:0;right:0;text-align:center">05 — & much more</div>
+  </div>
+
+  <!-- ============ SCENE 7 : CTA ============ -->
+  <div class="scene" id="s7">
+    <div class="ring" id="c1" style="left:290px;top:430px;width:500px;height:500px;border-width:3px;border-color:rgba(34,211,238,.6)"></div>
+    <div class="ring" id="c2" style="left:290px;top:430px;width:500px;height:500px;border-width:3px;border-color:rgba(236,72,153,.6)"></div>
+    <div class="abs" id="logo" style="left:390px;top:530px;width:300px;height:300px;border-radius:80px;background:linear-gradient(135deg,var(--cy),var(--vi) 55%,var(--mg));box-shadow:0 0 140px rgba(139,92,246,.8);display:flex;align-items:center;justify-content:center;font-size:120px;font-weight:900;font-family:'JetBrains Mono',monospace;direction:ltr;color:#fff">&lt;/&gt;</div>
+    <div class="abs brand" id="brand" style="top:900px;left:0;right:0"></div>
+    <div class="abs kicker" id="tag" style="top:1080px;left:0;right:0;text-align:center;color:#cbd5e1">Websites · Platforms · POS</div>
+    <div class="abs h2" id="cta" style="top:1170px;left:0;right:0">تواصل معايا <span class="grad">دابا</span></div>
+    <div class="abs wa" id="wa"><svg width="64" height="64" viewBox="0 0 24 24"><path fill="#fff" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.6-.1 1.2z"/></svg><span class="mono" id="phone"></span></div>
+    <div class="abs sub" id="cta2" style="top:1560px;left:0;right:0">خلّي المشروع ديالك يبان كيف خاصو ✨</div>
+  </div>
+
+  <div id="streak"></div>
+  <div id="flash"></div>
+  <canvas id="grain" width="270" height="480"></canvas>
+  <div id="vig"></div>
+</div>
+
+<script>
+/* ================= CONFIG (بدّل هادو) ================= */
+const CONFIG = {
+  brand: "YOUR BRAND",          // سمية البراند ديالك
+  phone: "06 00 00 00 00",      // نمرة الواتساب
+  url:   "www.your-brand.ma",   // الدومين ديالك
+};
+/* ====================================================== */
+const DUR = 37;
+const $ = s => document.querySelector(s);
+const cl = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const P = (t, a, d) => cl((t - a) / d);
+const eo = x => 1 - Math.pow(1 - x, 3);
+const eio = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+const eb = x => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
+const lerp = (a, b, k) => a + (b - a) * k;
+function rng(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function tf(el, { x = 0, y = 0, s = 1, r = 0, o = 1, b = 0, extra = '' } = {}) {
+  el.style.transform = `${extra} translate(${x}px,${y}px) scale(${s}) rotate(${r}deg)`;
+  el.style.opacity = o; el.style.filter = b > .05 ? `blur(${b}px)` : '';
+}
+function pop(el, t, a, d = .6, f = {}) {
+  const k = P(t, a, d), e = eb(k), o = eo(k);
+  const y0 = f.y ?? 70, x0 = f.x ?? 0, s0 = f.s ?? .92, b0 = f.b ?? 14;
+  tf(el, { x: x0 * (1 - e), y: y0 * (1 - e), s: lerp(s0, 1, e), o, b: b0 * (1 - o), r: (f.r || 0) * (1 - e), extra: f.extra || '' });
+}
+function words(el) { // split into word spans (keeps Arabic ligatures)
+  const nodes = [...el.childNodes]; el.innerHTML = '';
+  nodes.forEach(n => {
+    if (n.nodeType === 3) n.textContent.split(/(\s+)/).forEach(w => { if (!w.trim()) { el.append(w); return; } const s = document.createElement('span'); s.className = 'word'; s.textContent = w; el.append(s); });
+    else { n.classList.add('word'); el.append(n); }
+  });
+  return [...el.querySelectorAll('.word')];
+}
+
+/* ---------- scenes timing ---------- */
+const SC = [
+  { id: 's1', a: 0,    b: 4.5 },
+  { id: 's2', a: 4.5,  b: 10.0 },
+  { id: 's3', a: 10.0, b: 15.5 },
+  { id: 's4', a: 15.5, b: 21.0 },
+  { id: 's5', a: 21.0, b: 26.5 },
+  { id: 's6', a: 26.5, b: 31.0 },
+  { id: 's7', a: 31.0, b: 37.5 },
+];
+const TR = .5;
+window.CUTS = SC.slice(1).map(s => s.a);
+
+/* ---------- background ---------- */
+const bg = $('#bg'), g = bg.getContext('2d');
+const R = rng(7); const parts = Array.from({ length: 140 }, () => ({ x: R() * 1080, y: R() * 1920, z: .3 + R() * .7, ph: R() * 6.28, h: R() }));
+const orbs = [
+  { c: [139, 92, 246], r: 760, fx: .13, fy: .09, px: 0, py: 1 },
+  { c: [34, 211, 238], r: 640, fx: .11, fy: .15, px: 2, py: 0 },
+  { c: [236, 72, 153], r: 560, fx: .17, fy: .07, px: 4, py: 3 },
+];
+let sceneHue = 0;
+function drawBG(t) {
+  g.fillStyle = '#04050d'; g.fillRect(0, 0, 1080, 1920);
+  g.globalCompositeOperation = 'lighter';
+  orbs.forEach((o, i) => {
+    const x = 540 + Math.sin(t * o.fx * 6.28 + o.px) * 380, y = 960 + Math.cos(t * o.fy * 6.28 + o.py) * 650;
+    const gr = g.createRadialGradient(x, y, 0, x, y, o.r);
+    gr.addColorStop(0, `rgba(${o.c},.34)`); gr.addColorStop(1, `rgba(${o.c},0)`);
+    g.fillStyle = gr; g.fillRect(0, 0, 1080, 1920);
+  });
+  g.globalCompositeOperation = 'source-over';
+  // perspective grid floor
+  g.save(); g.strokeStyle = 'rgba(139,92,246,.22)'; g.lineWidth = 2;
+  const hz = 1250, vx = 540;
+  for (let i = -12; i <= 12; i++) { g.beginPath(); g.moveTo(vx, hz); g.lineTo(vx + i * 260, 1920); g.stroke(); }
+  const off = (t * .6) % 1;
+  for (let j = 0; j < 14; j++) { const k = (j + off) / 14; const y = hz + Math.pow(k, 2.2) * (1920 - hz); g.globalAlpha = k; g.beginPath(); g.moveTo(0, y); g.lineTo(1080, y); g.stroke(); }
+  g.restore();
+  const fade = g.createLinearGradient(0, hz - 40, 0, hz + 260); fade.addColorStop(0, 'rgba(4,5,13,1)'); fade.addColorStop(1, 'rgba(4,5,13,0)');
+  g.fillStyle = fade; g.fillRect(0, hz - 40, 1080, 300);
+  // particles
+  parts.forEach(p => {
+    const y = ((p.y - t * 60 * p.z) % 1920 + 1920) % 1920;
+    const x = p.x + Math.sin(t * .8 + p.ph) * 20 * p.z;
+    const a = (.35 + .65 * Math.abs(Math.sin(t * 1.7 + p.ph))) * p.z;
+    g.fillStyle = p.h < .5 ? `rgba(34,211,238,${a})` : (p.h < .8 ? `rgba(196,181,253,${a})` : `rgba(244,114,182,${a})`);
+    g.beginPath(); g.arc(x, y, 1.2 + p.z * 2.6, 0, 6.28); g.fill();
+  });
+}
+const grain = $('#grain'), gg = grain.getContext('2d'); const gimg = gg.createImageData(270, 480);
+function drawGrain(f) { const r = rng(f * 13 + 1); const d = gimg.data; for (let i = 0; i < d.length; i += 4) { const v = r() * 255; d[i] = d[i + 1] = d[i + 2] = v; d[i + 3] = 255; } gg.putImageData(gimg, 0, 0); }
+
+/* ---------- build dynamic DOM ---------- */
+$('#s2url').textContent = '';
+$('#brand').textContent = CONFIG.brand; $('#phone').textContent = CONFIG.phone;
+const s1aW = words($('#s1a')), s1bW = words($('#s1b')); s1bW.forEach(w => w.classList.add('grad'));
+const code = `<section class="hero">\n  <h1>Your Business</h1>\n  <button>Start now</button>\n</section>\n<script>\n  app.deploy({ fast: true })\n<\/script>`;
+// bars
+const ch1 = $('#ch1'); const barH = [120, 170, 140, 210, 190, 250, 230, 290, 270, 310, 300];
+barH.forEach((h, i) => { const b = document.createElement('div'); b.className = 'bar'; b.style.left = (40 + i * 76) + 'px'; b.dataset.h = h; ch1.append(b); });
+const bars = [...ch1.querySelectorAll('.bar')];
+const lpath = $('#lpath'), L = lpath.getTotalLength(); lpath.style.strokeDasharray = L;
+// speed lines
+const sp = $('#speed'); const RS = rng(3); for (let i = 0; i < 16; i++) { const d = document.createElement('div'); d.style.cssText = `position:absolute;height:${2 + RS() * 4}px;border-radius:3px;top:${RS() * 280}px;background:linear-gradient(90deg,transparent,rgba(34,211,238,.9),transparent)`; d.dataset.w = 120 + RS() * 300; d.dataset.sp = 1 + RS() * 1.5; d.dataset.o = RS(); sp.append(d); }
+const speeds = [...sp.children];
+// calendar
+const cal = $('#cal'); ['L', 'M', 'M', 'J', 'V', 'S', 'D'].forEach(d => { const e = document.createElement('div'); e.textContent = d; e.style.background = 'transparent'; e.style.color = '#64748b'; e.style.height = '40px'; cal.append(e); });
+for (let d = 1; d <= 28; d++) { const e = document.createElement('div'); e.textContent = d; e.className = 'day'; cal.append(e); }
+const days = [...cal.querySelectorAll('.day')];
+// POS
+const MENU = [['☕', 'قهوة', 15], ['🍔', 'برڭر', 45], ['🍕', 'بيتزا', 60], ['🥤', 'عصير', 20], ['🍟', 'فريت', 15], ['🥗', 'سلاطة', 30], ['🌮', 'طاكوس', 40], ['🍰', 'كيك', 25], ['🍵', 'أتاي', 10]];
+const tilesEl = $('#tiles');
+MENU.forEach((m, i) => { const c = i % 3, r = Math.floor(i / 3); const e = document.createElement('div'); e.className = 'tile'; e.style.right = (30 + c * 206) + 'px'; e.style.top = (60 + r * 206) + 'px'; e.innerHTML = `<div class="e">${m[0]}</div><div class="n">${m[1]}</div><div class="p">${m[2]} DH</div>`; tilesEl.append(e); });
+const tiles = [...tilesEl.children];
+const TAPS = [[1, 1.1], [4, 1.55], [0, 2.0], [2, 2.45], [3, 2.9]]; // [menu index, time]
+const tl = $('#tlines'), rl = $('#rlines');
+TAPS.forEach(([i]) => { const m = MENU[i]; const e = document.createElement('div'); e.className = 'line'; e.innerHTML = `<span>${m[0]} ${m[1]}</span><span class="mono" style="color:#cbd5e1">${m[2]}</span>`; tl.append(e);
+  const r = document.createElement('div'); r.style.cssText = 'display:flex;justify-content:space-between;padding:3px 0'; r.innerHTML = `<span>${m[1]}</span><span class="mono">${m[2]}</span>`; rl.append(r); });
+const tlines = [...tl.children]; const TOTAL = TAPS.reduce((s, [i]) => s + MENU[i][2], 0); $('#rtot').textContent = TOTAL + ' DH';
+// chips
+const CHIPS = [['🛒', 'متاجر إلكترونية'], ['📱', 'تطبيقات موبايل'], ['📅', 'حجز المواعيد'], ['💳', 'الدفع أونلاين'], ['🚀', 'SEO'], ['🏨', 'سيتات الفنادق'], ['📊', 'ERP / CRM'], ['🎨', 'UI / UX']];
+const chipsEl = $('#chips'); const CC = ['34,211,238', '139,92,246', '236,72,153', '52,211,153'];
+CHIPS.forEach((c, i) => { const e = document.createElement('div'); e.className = 'chip glass'; const col = CC[i % 4]; e.style.borderColor = `rgba(${col},.7)`; e.style.boxShadow = `0 0 40px rgba(${col},.35)`; e.style.borderRadius = '999px'; e.innerHTML = `<span>${c[0]}</span><span>${c[1]}</span>`; chipsEl.append(e); });
+const chips = [...chipsEl.children];
+
+/* ---------- scene updaters (lt = local time) ---------- */
+const U = {
+  s1(lt) {
+    pop($('#s1k'), lt, .1, .6, { y: -30 });
+    s1aW.forEach((w, i) => pop(w, lt, .3 + i * .22, .6, { y: 90, s: .6, b: 20 }));
+    s1bW.forEach((w, i) => pop(w, lt, 1.7 + i * .2, .6, { y: 90, s: .6, b: 20 }));
+    const k = eio(P(lt, 2.6, .8)); $('#s1line').style.transform = `scaleX(${k})`; $('#s1line').style.opacity = k;
+    // glitch bursts
+    const gl = (lt > .35 && lt < .6) || (lt > 1.75 && lt < 2.0) || (lt > 3.4 && lt < 3.55);
+    const r = rng(Math.floor(lt * 30) + 5);
+    [$('#s1a'), $('#s1b')].forEach(el => {
+      if (gl) { const dx = (r() - .5) * 26; el.style.textShadow = `${dx}px 0 rgba(236,72,153,.9), ${-dx}px 0 rgba(34,211,238,.9)`; el.style.clipPath = r() > .5 ? `inset(${r() * 40}% 0 ${r() * 40}% 0)` : ''; el.style.translate = `${(r() - .5) * 30}px 0`; }
+      else { el.style.textShadow = '0 0 40px rgba(139,92,246,.45)'; el.style.clipPath = ''; el.style.translate = '0 0'; }
+    });
+    // slow push-in
+    $('#s1').style.scale = 1 + lt * .02;
+  },
+  s2(lt) {
+    pop($('#s2t'), lt, .05, .7, { y: -60 });
+    pop($('#s2b'), lt, .25, .8, { y: 160, s: .85, b: 20 });
+    const u = CONFIG.url; $('#s2url').textContent = u.slice(0, Math.floor(cl((lt - .6) / .9) * u.length)) + (lt % .6 < .3 ? '|' : '');
+    pop($('#b_nav'), lt, .9, .5, { y: -40 });
+    pop($('#b_hero'), lt, 1.15, .6, { y: 60, s: .9 });
+    pop($('#b_h1'), lt, 1.45, .5, { x: 60 }); pop($('#b_h2'), lt, 1.6, .5, { x: 60 });
+    pop($('#b_btn'), lt, 1.8, .5, { s: .5 });
+    pop($('#b_orb'), lt, 1.5, .8, { s: .2, y: 0 }); $('#b_orb').style.translate = `0 ${Math.sin(lt * 2) * 12}px`;
+    document.querySelectorAll('.card3').forEach((c, i) => pop(c, lt, 2.0 + i * .15, .55, { y: 100 }));
+    // code panel
+    pop($('#s2code'), lt, 1.0, .6, { x: -120, s: .9 });
+    const n = Math.floor(cl((lt - 1.2) / 2.6) * code.length);
+    $('#s2code').innerHTML = esc(code.slice(0, n)).replace(/(&lt;\/?[a-z0-9]+)/g, '<span style="color:#f472b6">$1</span>').replace(/(class|fast|true)/g, '<span style="color:#22d3ee">$1</span>') + '<span style="background:#22d3ee;color:#22d3ee">_</span>';
+    pop($('#s2p'), lt, 2.6, .8, { x: 260, r: 12, s: .8 });
+    document.querySelectorAll('#s2p .pc').forEach((c, i) => pop(c, lt, 3.0 + i * .15, .5, { y: 40 }));
+    $('#s2p').style.translate = `0 ${Math.sin(lt * 1.6) * 10}px`;
+    // cursor path -> click hero button (browser left 70, top 520; btn ~ right side)
+    const cx0 = 300, cy0 = 1500, cx1 = 800, cy1 = 1015; const k = eio(P(lt, 3.0, 1.0));
+    const cx = lerp(cx0, cx1, k) + Math.sin(k * 3.14) * -80, cy = lerp(cy0, cy1, k);
+    const click = P(lt, 4.05, .15), cs = 1 - .25 * Math.sin(click * 3.14);
+    tf($('#s2cur'), { x: cx, y: cy, s: cs, o: P(lt, 2.9, .3) });
+    const rp = P(lt, 4.1, .6); tf($('#s2rip'), { x: cx1 - 52, y: cy1 - 52, s: .3 + rp * 1.6, o: rp > 0 && rp < 1 ? 1 - rp : 0 });
+    if (lt > 4.1) $('#b_btn').style.boxShadow = `0 0 ${60 * (1 - P(lt, 4.1, .8))}px rgba(34,211,238,1)`;
+  },
+  s3(lt) {
+    pop($('#s3t'), lt, .05, .7, { y: -60 });
+    const e = eo(P(lt, .2, 1));
+    tf($('#s3d'), { y: 200 * (1 - e), o: e, extra: `rotateX(${lerp(35, 8, e) + Math.sin(lt * .8) * 2}deg) rotateY(${Math.sin(lt * .6) * 6}deg)` });
+    ['#k1', '#k2', '#k3'].forEach((s, i) => pop($(s), lt, .7 + i * .15, .5, { y: 40 }));
+    const kc = eo(P(lt, .9, 2.2));
+    $('#k1v').textContent = Math.round(128 * kc) + 'K'; $('#k2v').textContent = Math.round(4920 * kc).toLocaleString('en'); $('#k3v').textContent = '+' + Math.round(860 * kc);
+    pop($('#ch1'), lt, 1.0, .6, { y: 60 });
+    bars.forEach((b, i) => { const k = eb(P(lt, 1.3 + i * .08, .6)); b.style.height = Math.max(0, b.dataset.h * k) + 'px'; });
+    pop($('#ch2'), lt, 1.5, .6, { y: 60 }); pop($('#ch3'), lt, 1.65, .6, { y: 60 });
+    const lk = eio(P(lt, 1.8, 1.6)); lpath.style.strokeDashoffset = L * (1 - lk); $('#lfill').style.opacity = lk;
+    const pt = lpath.getPointAtLength(L * lk); $('#ldot').setAttribute('cx', pt.x); $('#ldot').setAttribute('cy', pt.y); $('#ldot').style.opacity = lk > 0 ? 1 : 0;
+    const dk = eo(P(lt, 2.0, 1.6)); $('#donut').style.strokeDashoffset = 597 * (1 - .87 * dk); $('#dtx').textContent = Math.round(87 * dk) + '%';
+    pop($('#s3n'), lt, 3.3, .6, { x: 300, s: .8 });
+  },
+  s4(lt) {
+    pop($('#s4t'), lt, .05, .7, { y: -60 });
+    pop($('#s4c'), lt, .2, .8, { y: 160, s: .88 });
+    const ck = eo(P(lt, .5, 1.3)); const cx = 900 * (1 - ck);
+    $('#car').style.transform = `translateX(${cx}px) skewX(${-10 * (1 - ck)}deg)`; $('#car').style.filter = `blur(${(1 - ck) * 6}px) drop-shadow(0 0 40px rgba(139,92,246,.5))`;
+    const rot = (lt * 360 * (1.8 - ck * 1.6)); $('#w1').setAttribute('transform', `translate(165 210) rotate(${-rot})`); $('#w2').setAttribute('transform', `translate(488 210) rotate(${-rot})`);
+    $('#car').style.translate = `0 ${ck >= 1 ? Math.sin(lt * 6) * 2 : 0}px`;
+    speeds.forEach(d => { const v = ((lt * 1400 * d.dataset.sp + d.dataset.o * 1400) % 1500) - 300; d.style.width = d.dataset.w + 'px'; d.style.left = (960 - v) + 'px'; d.style.opacity = (1 - ck * .85); });
+    pop($('#carinfo'), lt, 1.4, .6, { y: 40 });
+    days.forEach((d, i) => { pop(d, lt, 1.6 + i * .018, .4, { y: 20, s: .6, b: 0 }); });
+    const sel = cl((lt - 2.4) / 1.0); const a = 11, b = a + Math.round(sel * 4);
+    days.forEach((d, i) => { const on = sel > 0 && i >= a && i <= b; const edge = on && (i === a || i === b);
+      d.style.background = edge ? 'linear-gradient(135deg,#22d3ee,#8b5cf6)' : on ? 'rgba(139,92,246,.35)' : 'rgba(255,255,255,.04)'; d.style.color = on ? '#fff' : '#cbd5e1'; d.style.boxShadow = edge ? '0 0 24px rgba(34,211,238,.6)' : ''; });
+    pop($('#s4btn'), lt, 2.2, .6, { y: 40 });
+    const pr = P(lt, 3.6, .3); $('#s4btn').style.scale = 1 + .04 * Math.sin(lt * 7) * (lt > 2.8 && lt < 3.6 ? 1 : 0) - .06 * Math.sin(pr * 3.14);
+    pop($('#s4toast'), lt, 3.9, .6, { y: 120, s: .7 });
+  },
+  s5(lt) {
+    pop($('#s5t'), lt, .05, .7, { y: -60 });
+    const e = eo(P(lt, .2, .9)); tf($('#s5tab'), { y: 200 * (1 - e), s: lerp(.85, 1, e), o: e, extra: `perspective(2400px) rotateY(${lerp(-25, 0, e) + Math.sin(lt * .7) * 3}deg)` });
+    tiles.forEach((tt, i) => pop(tt, lt, .6 + i * .05, .45, { y: 30, s: .7, b: 0 }));
+    let tot = 0; let rp = -1, rpx = 0, rpy = 0;
+    TAPS.forEach(([mi, at], j) => {
+      const tile = tiles[mi], k = P(lt, at, .35);
+      tile.style.background = k > 0 && k < 1 ? `rgba(236,72,153,${.35 * (1 - k)})` : 'rgba(255,255,255,.05)';
+      tile.style.scale = 1 - .08 * Math.sin(k * 3.14);
+      pop(tlines[j], lt, at + .05, .4, { x: -60, s: 1, b: 0 });
+      if (lt >= at) tot += MENU[mi][2];
+      if (lt >= at && lt < at + .5) { rp = (lt - at) / .5; const c = mi % 3, r = Math.floor(mi / 3); rpx = 1000 - 28 - (30 + c * 206) - 93 - 60; rpy = 60 + r * 206 + 93 - 60; }
+    });
+    tf($('#s5rip'), { x: rpx, y: rpy, s: .3 + rp * 1.4, o: rp >= 0 ? 1 - rp : 0 });
+    $('#ttot').textContent = tot + ' DH';
+    const pay = P(lt, 3.5, .3); $('#paybtn').style.scale = 1 - .07 * Math.sin(pay * 3.14); $('#paybtn').style.boxShadow = lt > 3.5 ? `0 0 ${50 * (1 - P(lt, 3.6, .8))}px rgba(236,72,153,1)` : '';
+    const rk = eo(P(lt, 3.75, 1.0)); $('#s5rec').style.clipPath = `inset(0 0 ${100 * (1 - rk)}% 0)`; $('#s5rec').style.opacity = rk > 0 ? 1 : 0; $('#s5rec').style.transform = `translateY(${-40 * (1 - rk)}px) rotate(${-3 * rk}deg)`;
+  },
+  s6(lt) {
+    pop($('#s6k'), lt, .05, .6, { y: -40 });
+    const ce = eb(P(lt, .1, .8)); tf($('#core'), { s: ce * (1 + .04 * Math.sin(lt * 4)), o: cl(ce) });
+    [['#r1', 1], ['#r2', -1]].forEach(([s, d], i) => { const k = eo(P(lt, .2 + i * .15, 1)); tf($(s), { s: lerp(.3, 1, k) + .03 * Math.sin(lt * 2 + i), o: k, extra: `rotateX(65deg) rotateZ(${d * lt * 30}deg)` }); });
+    chips.forEach((c, i) => {
+      const ang = i / chips.length * 6.283 + lt * .55, k = eb(P(lt, .4 + i * .12, .7));
+      const rx = 420 * k, ry = 470 * k, x = 540 + Math.cos(ang) * rx, y = 850 + Math.sin(ang) * ry * .9;
+      const depth = (Math.sin(ang) + 1) / 2; const w = c.offsetWidth, h = c.offsetHeight;
+      c.style.transform = `translate(${x - w / 2}px,${y - h / 2}px) scale(${(.75 + depth * .35) * cl(k * 1.2)})`;
+      c.style.opacity = cl(P(lt, .4 + i * .12, .4)) * (.55 + depth * .45); c.style.zIndex = Math.round(depth * 10);
+    });
+    pop($('#s6a'), lt, 2.0, .6, { y: 60 });
+    pop($('#s6b'), lt, 2.6, .7, { y: 60, s: .7, b: 20 });
+  },
+  s7(lt) {
+    const le = eb(P(lt, .1, .9)); tf($('#logo'), { s: le, r: (1 - cl(le)) * -90, o: cl(le * 1.5) });
+    $('#logo').style.translate = `0 ${Math.sin(lt * 2) * 8}px`;
+    [['#c1', 0], ['#c2', .35]].forEach(([s, d]) => { const k = ((lt - .5 - d) % 1.6) / 1.6; tf($(s), { s: .6 + Math.max(0, k) * 1.4, o: lt > .5 + d ? (1 - k) * .9 : 0 }); });
+    pop($('#brand'), lt, .6, .8, { y: 60, s: .8, b: 20 }); $('#brand').style.backgroundPosition = `${100 - (lt * 40 % 200)}% 0`;
+    pop($('#tag'), lt, 1.1, .6, { y: 30 });
+    pop($('#cta'), lt, 1.5, .7, { y: 60 });
+    pop($('#wa'), lt, 2.0, .7, { y: 80, s: .7 }); if (lt > 2.7) $('#wa').style.scale = 1 + .03 * Math.sin((lt - 2.7) * 5);
+    pop($('#cta2'), lt, 2.6, .7, { y: 40 });
+  },
+};
+function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+/* ---------- master seek ---------- */
+window.seek = function (t, frame = 0) {
+  drawBG(t); drawGrain(frame);
+  SC.forEach((s, i) => {
+    const el = document.getElementById(s.id);
+    const last = i === SC.length - 1;
+    if (t < s.a || t > s.b + TR || (last && t > s.b)) { el.style.opacity = 0; el.style.display = 'none'; return; }
+    el.style.display = 'block';
+    U[s.id](t - s.a);
+    // enter / exit camera moves
+    const enter = eo(P(t, s.a, .55)), exit = last ? 0 : eio(P(t, s.b, TR));
+    const sc = lerp(i === 0 ? 1 : 1.12, 1, enter) * lerp(1, .82, exit);
+    el.style.transform = `scale(${sc}) translateY(${-exit * 120}px)`;
+    el.style.opacity = (i === 0 ? 1 : enter) * (1 - exit);
+    el.style.filter = (exit > .02 || (enter < .98 && i > 0)) ? `blur(${exit * 22 + (i > 0 ? (1 - enter) * 16 : 0)}px)` : '';
+  });
+  // transitions: streak + flash
+  let st = 0, fl = 0, sx = 0;
+  window.CUTS.forEach(c => { const k = (t - (c - .3)) / .7; if (k > 0 && k < 1) { st = Math.sin(k * 3.14); sx = lerp(-1300, 1300, k); } const f = 1 - Math.abs(t - c) / .18; if (f > 0) fl = Math.max(fl, f * .16); });
+  const sk = $('#streak'); sk.style.opacity = st; sk.style.transform = `translateX(${sx}px)`;
+  $('#flash').style.opacity = fl + (t < .25 ? 1 - t / .25 : 0) * 0 + (t > DUR - .6 ? P(t, DUR - .6, .6) * 0 : 0);
+  // fade from black at start, to black at end
+  $('#vig').style.background = `radial-gradient(ellipse at center,rgba(0,0,0,${cl(1 - t / .4) + P(t, DUR - .5, .5)}) 0%,rgba(0,0,0,${.75 + .25 * (cl(1 - t / .4) + P(t, DUR - .5, .5))}) 100%)`;
+};
+window.DUR = DUR;
+document.fonts.ready.then(() => { window.READY = true; seek(0); });
+</script>
+</body>
+</html>
