@@ -8,6 +8,10 @@
 - `app.js`: الكود ديال الفورمولير والتتبع
 - `img/`: الصور
 - `google-apps-script.gs`: الكود اللي كيسجل التسجيلات فـ Google Sheet
+- `privacy.html`: صفحة الخصوصية (كمل فيها السمية ديال الشركة ورقم CNDP)
+- `ads/`: 6 ديال التصاور للإعلانات (3 زوايا × 4:5 و 9:16)
+- `docs/plan-ads.md`: **الخطة الكاملة ديال الاختبار** (النصوص، الإعدادات، كيفاش تقرر)
+- `docs/brief-laboratoire.md`: الـ brief بالفرنسية للمختبرات
 
 ---
 
@@ -39,7 +43,11 @@
 
 ## 3. طلع الصفحة فالأنترنيت (فابور)
 
-**أسهل طريقة: Netlify Drop**
+**GitHub Pages:** الريبو ديالك عام (public) و GitHub Pages مفعل فيه. ملي تدمج الفرع `claude/confident-johnson-h216g0` فـ `main`، الصفحة غادي تبان غالباً فـ:
+`https://domix777.github.io/liteshoppe.com/naqiva/`
+(تأكد من Settings › Pages باش تشوف الرابط بالضبط.)
+
+**ولا Netlify Drop:**
 1. دخل لـ https://app.netlify.com/drop
 2. جر الدوسي `naqiva` كامل وطيحو تما.
 3. غادي تاخد رابط بحال `https://xxx.netlify.app`. من بعد تقدر تربط بيه `naqiva.com`.

@@ -3,7 +3,7 @@
  * الطريقة: شوف README.md (الخطوة 2).
  */
 var HEADERS = ["date", "name", "phone", "city", "concern", "variant",
-  "utm_source", "utm_medium", "utm_campaign", "utm_content", "page"];
+  "utm_source", "utm_medium", "utm_campaign", "utm_content", "quiz_score", "page"];
 
 function doPost(e) {
   var lock = LockService.getScriptLock();

@@ -170,6 +170,29 @@ footer a{color:#fff}
 .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 
+
+/* quiz */
+.quiz{max-width:760px;margin-inline:auto;background:var(--white);border:1px solid var(--line);border-radius:28px;padding:28px 22px;box-shadow:var(--shadow)}
+.q{padding:16px 0;border-bottom:1px solid var(--line)}
+.q:last-of-type{border-bottom:0}
+.q p{margin:0 0 10px;font-weight:700;font-size:18px}
+.yn{display:flex;gap:10px}
+.yn .chip span{min-width:92px;justify-content:center}
+.quiz-result{display:none;margin-top:18px;border-radius:20px;padding:22px;background:var(--teal-soft);text-align:center}
+.quiz-result h3{margin:0 0 6px;font-size:22px;color:var(--teal)}
+.quiz-result p{margin:0 0 16px;color:var(--muted)}
+.meter{height:10px;border-radius:99px;background:#fff;overflow:hidden;margin:4px auto 16px;max-width:320px}
+.meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,#9FC7B8,var(--teal));transition:width .6s ease}
+/* compare */
+.compare{width:100%;border-collapse:separate;border-spacing:0;background:var(--white);border:1px solid var(--line);border-radius:22px;overflow:hidden;font-size:17px}
+.compare th,.compare td{padding:16px 14px;text-align:center;border-bottom:1px solid var(--line)}
+.compare tr:last-child td{border-bottom:0}
+.compare th{background:var(--sand);font-size:16px}
+.compare th.us{background:var(--teal);color:#fff}
+.compare td:first-child,.compare th:first-child{text-align:start;font-weight:700}
+.compare td.us{background:rgba(14,77,92,.05)}
+.yes{color:var(--teal);font-weight:800}.no{color:#8A9DA0}
+
 @media (min-width:700px){
   .cards{grid-template-columns:repeat(3,minmax(0,1fr))}
   .ingr{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -261,6 +284,31 @@ footer a{color:#fff}
     </div>
   </section>
 
+  <!-- QUIZ -->
+  <section id="quiz" aria-labelledby="quiz-title">
+    <div class="wrap">
+      <div class="center">
+        <p class="kicker">Test rapide</p>
+        <h2 id="quiz-title">واش الما ديالك فيه الكالكير؟</h2>
+        <p class="lead">جاوب على 3 ديال الأسئلة فـ 20 ثانية.</p>
+      </div>
+      <div class="quiz" id="quiz-box">
+        <div class="q"><p>واش كيبانو ليك بقع بيضاء على الروبيني، المقراج ولا الزاج ديال الدوش؟</p>
+          <div class="yn"><label class="chip"><input type="radio" name="q1" value="1"><span>إيه</span></label><label class="chip"><input type="radio" name="q1" value="0"><span>لا</span></label></div></div>
+        <div class="q"><p>واش الشامبو ولا الصابون كيدير رغوة قليلة، وكتحتاج تزيد منو؟</p>
+          <div class="yn"><label class="chip"><input type="radio" name="q2" value="1"><span>إيه</span></label><label class="chip"><input type="radio" name="q2" value="0"><span>لا</span></label></div></div>
+        <div class="q"><p>واش شعرك تبدل (ولا ناشف ولا عيان) ملي بدلتي الدار ولا المدينة؟</p>
+          <div class="yn"><label class="chip"><input type="radio" name="q3" value="1"><span>إيه</span></label><label class="chip"><input type="radio" name="q3" value="0"><span>لا</span></label></div></div>
+        <div class="quiz-result" id="quiz-result" role="status">
+          <h3 id="quiz-title-r"></h3>
+          <div class="meter" aria-hidden="true"><i id="quiz-meter"></i></div>
+          <p id="quiz-text"></p>
+          <a class="btn btn-primary" href="#reserve" data-cta="quiz">حجز Naqiva ديالك</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- HOW -->
   <section id="how" aria-labelledby="how-title">
     <div class="wrap split">
@@ -275,6 +323,27 @@ footer a{color:#fff}
           <li class="reveal"><div><h3>كيرجع النعومة واللمعة</h3><p>pH حامضي خفيف (5) كيسد الشعرة، وكتولي أنعم وأسهل فالمشطة.</p></div></li>
         </ol>
       </div>
+    </div>
+  </section>
+
+  <!-- COMPARE -->
+  <section aria-labelledby="cmp-title" style="background:#fff">
+    <div class="wrap" style="max-width:860px">
+      <div class="center">
+        <p class="kicker">La différence</p>
+        <h2 id="cmp-title">علاش ماشي غير شامبو عادي؟</h2>
+        <p class="lead">الشامبو العادي كينقي الدهون والوسخ. Naqiva كيزيد خطوة: كيحيد الكالكير.</p>
+      </div>
+      <table class="compare">
+        <thead><tr><th scope="col"><span class="sr-only">الميزة</span></th><th scope="col">شامبو عادي</th><th scope="col" class="us lat">naqiva</th></tr></thead>
+        <tbody>
+          <tr><td>كينقي الدهون والوسخ</td><td><span class="yes">✓</span></td><td class="us"><span class="yes">✓</span></td></tr>
+          <tr><td>مصمم باش يحيد بقايا الكالكير</td><td><span class="no">✗</span></td><td class="us"><span class="yes">✓</span></td></tr>
+          <tr><td>مكون chélatant نباتي</td><td><span class="no">نادراً</span></td><td class="us"><span class="yes">✓</span></td></tr>
+          <tr><td>pH حامضي خفيف (5)</td><td><span class="no">ماشي ديما</span></td><td class="us"><span class="yes">✓</span></td></tr>
+          <tr><td>مصنوع للما ديال المغرب</td><td><span class="no">✗</span></td><td class="us"><span class="yes">✓</span></td></tr>
+        </tbody>
+      </table>
     </div>
   </section>
 
@@ -374,7 +443,7 @@ footer a{color:#fff}
               </div>
             </fieldset>
             <button class="btn btn-primary" type="submit" id="f-submit"><span>سجلني وخود <bdi dir="ltr">-<span data-discount>20</span>%</bdi></span></button>
-            <p class="form-foot">المعلومات ديالك غادي تستعمل غير باش نتاصلو بيك على Naqiva. ما كنعطيوهاش لحتى واحد.</p>
+            <p class="form-foot">المعلومات ديالك غادي تستعمل غير باش نتاصلو بيك على Naqiva. ما كنعطيوهاش لحتى واحد. <a href="privacy.html">الخصوصية</a></p>
           </form>
 
           <div class="success" id="success" role="status" tabindex="-1">
@@ -418,6 +487,7 @@ footer a{color:#fff}
       <a href="#" id="l-ig" hidden>Instagram</a>
       <a href="#" id="l-tt" hidden>TikTok</a>
       <a href="#" id="l-wa" hidden>WhatsApp</a>
+      <a href="privacy.html">الخصوصية</a>
     </div>
     <p class="legal">© <span id="year"></span> Naqiva · صنع فالمغرب. المنتوج فمرحلة التطوير، والصور كتوضح الشكل المتوقع ديالو. المعلومات ديال التسجيل كتستعمل غير باش نتاصلو بيك على الإطلاق، وتقدر تطلب تمسحها فأي وقت.</p>
   </div>

@@ -121,6 +121,7 @@
       variant: tracking.variant,
       utm_source: tracking.utm_source, utm_medium: tracking.utm_medium,
       utm_campaign: tracking.utm_campaign, utm_content: tracking.utm_content,
+      quiz_score: window.NAQIVA_QUIZ_SCORE == null ? "" : String(window.NAQIVA_QUIZ_SCORE),
       page: location.href.split("?")[0]
     };
 
@@ -154,5 +155,33 @@
       console.warn("Naqiva: SHEET_ENDPOINT and WHATSAPP are both empty in config.js. Lead not stored:", data);
       done();
     }
+  });
+})();
+
+/* ---------- water quiz ---------- */
+(function () {
+  var box = document.getElementById("quiz-box");
+  if (!box) return;
+  box.addEventListener("change", function () {
+    var vals = ["q1", "q2", "q3"].map(function (n) {
+      var el = box.querySelector("input[name=" + n + "]:checked");
+      return el ? Number(el.value) : null;
+    });
+    if (vals.indexOf(null) !== -1) return;
+    var score = vals[0] + vals[1] + vals[2];
+    var res = [
+      ["الما ديالك غالباً خفيف", "مزيان! ولكن الكالكير كيتجمع مع الوقت، خصوصاً إلا كتسافر ولا كتبدل المدينة. Naqiva مرة فالسيمانة كيحافظ على شعرك نقي.", 25],
+      ["ممكن يكون فيه شوية ديال الكالكير", "كاينين علامات صغار. إلا كان شعرك ناشف ولا ما فيهش اللمعة، جرب Detox مرة فالسيمانة وشوف الفرق.", 55],
+      ["الما ديالك غالباً فيه الكالكير", "العلامات كاملين كيبينو أن الما قاصح. هادشي كيقدر يخلي الشعر ناشف وخشين. Naqiva مصنوع بالضبط لهاد الحالة.", 80],
+      ["الما ديالك غالباً فيه الكالكير بزاف", "العلامات كاملين كيبينو أن الما قاصح بزاف. هادشي كيقدر يخلي الشعر ناشف وخشين. Naqiva مصنوع بالضبط لهاد الحالة.", 95]
+    ][score];
+    document.getElementById("quiz-title-r").textContent = res[0];
+    document.getElementById("quiz-text").textContent = res[1];
+    var r = document.getElementById("quiz-result");
+    r.style.display = "block";
+    setTimeout(function () { document.getElementById("quiz-meter").style.width = res[2] + "%"; }, 50);
+    try { if (window.fbq) window.fbq("trackCustom", "QuizDone", { score: score }); } catch (e) {}
+    try { if (window.ttq) window.ttq.track("ClickButton", { content_name: "quiz", value: score }); } catch (e) {}
+    window.NAQIVA_QUIZ_SCORE = score;
   });
 })();
