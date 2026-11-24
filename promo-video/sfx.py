@@ -1,6 +1,6 @@
 # Generates out/sfx.wav: ambient pad + whooshes at scene cuts + bass impacts + UI clicks
 import numpy as np, wave
-SR=44100; DUR=39.0; n=int(SR*DUR); t=np.arange(n)/SR
+SR=44100; DUR=40.0; n=int(SR*DUR); t=np.arange(n)/SR
 rng=np.random.default_rng(1); out=np.zeros((n,2))
 def add(sig,at,gain=1.0,pan=0.0):
     i=int(at*SR); j=min(n,i+len(sig)); s=sig[:j-i]*gain
@@ -19,7 +19,7 @@ out[:,0]+=pad; out[:,1]+=pad
 def kick(L=0.35,f0=120,f1=40):
     tt=np.arange(int(SR*L))/SR; f=f1+(f0-f1)*np.exp(-tt*25); ph=2*np.pi*np.cumsum(f)/SR
     return np.sin(ph)*np.exp(-tt*9)
-for b in np.arange(4.0,33.5,0.5): add(kick(),b,0.22)
+for b in np.arange(4.0,36.0,0.5): add(kick(),b,0.22)
 # whoosh
 def whoosh(L=0.9):
     m=int(SR*L); x=rng.standard_normal(m); tt=np.arange(m)/SR
@@ -34,8 +34,9 @@ def impact(L=1.6):
     tt=np.arange(int(SR*L))/SR; return np.sin(2*np.pi*(45+60*np.exp(-tt*8))*tt)*np.exp(-tt*3)+0.3*rng.standard_normal(len(tt))*np.exp(-tt*30)
 def click(f=1800):
     tt=np.arange(int(SR*0.06))/SR; return np.sin(2*np.pi*f*tt)*np.exp(-tt*80)
-for i,c in enumerate([4,9,14,19,24,29,33.5]): add(W,c-0.55,0.45,(-1)**i*0.4); add(impact(),c,0.35)
-add(impact(),0.3,0.45); add(impact(2.5),33.6,0.55)
+for i,c in enumerate([4,9,14,19,24,28.5,32.5,36]): add(W,c-0.55,0.45,(-1)**i*0.4); add(impact(),c,0.35)
+add(impact(),0.3,0.45); add(impact(2.5),36.1,0.55)
+for c in [32.95,33.45,33.95,34.45]: add(click(2600),c,0.3)
 for c in [8.05, 17.6]: add(click(1500),c,0.35)            # cursor click, booking btn
 for c in [20.1,20.55,21.0,21.45,21.9]: add(click(2200),c,0.25)  # POS taps
 add(click(1200),22.5,0.3)

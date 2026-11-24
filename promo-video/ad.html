@@ -74,6 +74,11 @@ canvas{position:absolute;inset:0}
 .apill.on{background:linear-gradient(90deg,var(--cy),var(--vi))}
 .acard{flex:1;height:150px;border-radius:22px;background:rgba(255,255,255,.05);padding:12px}
 .store{height:100px;width:370px;border-radius:28px;display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:800;font-family:'JetBrains Mono',monospace;direction:ltr}
+.step{position:absolute;width:420px;height:170px;display:flex;align-items:center;gap:20px;padding:0 26px;border-radius:30px}
+.step .em{font-size:60px;width:96px;height:96px;border-radius:26px;display:flex;align-items:center;justify-content:center;background:rgba(56,189,248,.12);flex:none}
+.step .nm{font-size:38px;font-weight:900;line-height:1.2}.step .ds{font-size:24px;color:#cbd5e1}
+.node{position:absolute;width:34px;height:34px;border-radius:50%;left:523px;background:#0b0e1e;border:5px solid #38bdf8}
+#flare{position:absolute;width:900px;height:900px;border-radius:50%;pointer-events:none;mix-blend-mode:screen;opacity:0;background:radial-gradient(circle,rgba(255,255,255,.55),rgba(56,189,248,.35) 25%,rgba(139,92,246,.15) 50%,transparent 70%)}
 /* scene 6 */
 .chip{position:absolute;left:0;top:0;padding:16px 30px;border-radius:999px;font-size:31px;font-weight:800;white-space:nowrap;display:flex;align-items:center;gap:14px}
 .core{width:300px;height:300px;left:390px;top:700px;border-radius:50%;
@@ -258,6 +263,15 @@ canvas{position:absolute;inset:0}
     <div class="abs kicker" id="s6k" style="top:230px;left:0;right:0;text-align:center">06 — & much more</div>
   </div>
 
+
+  <!-- ============ SCENE 9 : PROCESS ============ -->
+  <div class="scene" id="s9">
+    <div class="titleblk" id="s9t"><div class="kicker">07 — How we work</div><div class="h2">من الفكرة <span class="grad">حتى للإطلاق</span></div></div>
+    <svg class="abs" width="1080" height="1920" style="left:0;top:0"><line id="pline" x1="540" y1="560" x2="540" y2="1420" stroke="url(#pg)" stroke-width="6" stroke-linecap="round"/>
+      <defs><linearGradient id="pg" gradientUnits="userSpaceOnUse" x1="0" y1="560" x2="0" y2="1420"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs></svg>
+    <div id="steps"></div>
+    <div class="abs sub" id="s9s" style="top:1560px;left:0;right:0;font-size:44px;font-weight:800">معاك <span class="grad">خطوة بخطوة</span> ✓</div>
+  </div>
   <!-- ============ SCENE 7 : CTA ============ -->
   <div class="scene" id="s7">
     <div class="ring" id="c1" style="left:240px;top:445px;width:600px;height:500px;border-width:3px;border-color:rgba(56,189,248,.6)"></div>
@@ -275,6 +289,7 @@ canvas{position:absolute;inset:0}
 
   <img id="wm" src="logo.png" style="position:absolute;left:50%;top:70px;width:190px;margin-left:-95px;opacity:0">
   <div id="streak"></div>
+  <div id="flare"></div>
   <div id="flash"></div>
   <canvas id="grain" width="270" height="480"></canvas>
   <div id="vig"></div>
@@ -288,7 +303,7 @@ const CONFIG = {
   url:   "www.ovyra.ma",   // الدومين ديالك
 };
 /* ====================================================== */
-const DUR = 39;
+const DUR = 40;
 const $ = s => document.querySelector(s);
 const cl = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const P = (t, a, d) => cl((t - a) / d);
@@ -322,9 +337,10 @@ const SC = [
   { id: 's3', a: 9.0,  b: 14.0 },
   { id: 's4', a: 14.0, b: 19.0 },
   { id: 's5', a: 19.0, b: 24.0 },
-  { id: 's8', a: 24.0, b: 29.0 },
-  { id: 's6', a: 29.0, b: 33.5 },
-  { id: 's7', a: 33.5, b: 40.0 },
+  { id: 's8', a: 24.0, b: 28.5 },
+  { id: 's6', a: 28.5, b: 32.5 },
+  { id: 's9', a: 32.5, b: 36.0 },
+  { id: 's7', a: 36.0, b: 40.5 },
 ];
 const TR = .5;
 window.CUTS = SC.slice(1).map(s => s.a);
@@ -402,6 +418,12 @@ const chipsEl = $('#chips'); const CC = ['56,189,248', '139,92,246', '139,92,246
 CHIPS.forEach((c, i) => { const e = document.createElement('div'); e.className = 'chip glass'; const col = CC[i % 4]; e.style.borderColor = `rgba(${col},.7)`; e.style.boxShadow = `0 0 40px rgba(${col},.35)`; e.style.borderRadius = '999px'; e.innerHTML = `<span>${c[0]}</span><span>${c[1]}</span>`; chipsEl.append(e); });
 const chips = [...chipsEl.children];
 
+// process steps
+const STEPS = [['💡', 'الفكرة', 'كنفهمو المشروع ديالك'], ['🎨', 'التصميم', 'UI/UX عصري ومميز'], ['💻', 'البرمجة', 'كود نقي وسريع'], ['🚀', 'الإطلاق', 'ومتابعة ودعم من بعد']];
+const stepsEl = $('#steps'); const stepEls = [], nodeEls = [];
+STEPS.forEach((st, i) => { const y = 600 + i * 270; const e = document.createElement('div'); e.className = 'step glass'; e.style.top = (y - 85 + 20) + 'px'; e.style.left = (i % 2 ? 60 : 600) + 'px';
+  e.innerHTML = `<div class="em">${st[0]}</div><div><div class="nm"><span class="mono" style="font-size:24px;color:var(--cy)">0${i + 1}</span> ${st[1]}</div><div class="ds">${st[2]}</div></div>`; stepsEl.append(e); stepEls.push(e);
+  const n = document.createElement('div'); n.className = 'node'; n.style.top = (y + 20 - 17) + 'px'; stepsEl.append(n); nodeEls.push(n); });
 /* ---------- scene updaters (lt = local time) ---------- */
 const U = {
   s1(lt) {
@@ -509,6 +531,13 @@ const U = {
     pop($('#st1'), lt, 2.2, .6, { y: 60, s: .7 }); pop($('#st2'), lt, 2.35, .6, { y: 60, s: .7 });
     pop($('#apn'), lt, 3.2, .6, { y: -80, s: .8 });
   },
+  s9(lt) {
+    pop($('#s9t'), lt, .05, .6, { y: -60 });
+    const lk = eio(P(lt, .3, 2.2)); const pl = $('#pline'); pl.setAttribute('y2', 560 + 860 * lk);
+    STEPS.forEach((st, i) => { pop(stepEls[i], lt, .45 + i * .5, .55, { x: (i % 2 ? -1 : 1) * 160, s: .85 });
+      const on = P(lt, .45 + i * .5, .25); nodeEls[i].style.background = on > 0 ? '#38bdf8' : '#0b0e1e'; nodeEls[i].style.boxShadow = on > 0 ? `0 0 ${40 * (1 - P(lt, .45 + i * .5, .8)) + 15}px #38bdf8` : ''; nodeEls[i].style.scale = 1 + .5 * Math.sin(on * 3.14); });
+    pop($('#s9s'), lt, 2.5, .6, { y: 40 });
+  },
   s6(lt) {
     pop($('#s6k'), lt, .05, .6, { y: -40 });
     const ce = eb(P(lt, .1, .8)); tf($('#core'), { s: ce * (1 + .04 * Math.sin(lt * 4)), o: cl(ce) });
@@ -556,13 +585,16 @@ window.seek = function (t, frame = 0) {
   // transitions: streak + flash
   let st = 0, fl = 0, sx = 0;
   window.CUTS.forEach(c => { const k = (t - (c - .3)) / .7; if (k > 0 && k < 1) { st = Math.sin(k * 3.14); sx = lerp(-1300, 1300, k); } const f = 1 - Math.abs(t - c) / .18; if (f > 0) fl = Math.max(fl, f * .16); });
+  let shk = 0; window.CUTS.forEach(c => { const d = t - c; if (d >= 0 && d < .4) shk = Math.max(shk, (1 - d / .4)); });
+  const rs = rng(Math.floor(t * 30) + 99); $('#stage').style.transform = shk > 0 ? `translate(${(rs() - .5) * 22 * shk}px,${(rs() - .5) * 22 * shk}px)` : '';
+  const fl2 = $('#flare'); fl2.style.opacity = st * .9; fl2.style.left = (90 + sx * .6) + 'px'; fl2.style.top = (510 - sx * .5) + 'px';
   const sk = $('#streak'); sk.style.opacity = st; sk.style.transform = `translateX(${sx}px)`;
   $('#flash').style.opacity = fl + (t < .25 ? 1 - t / .25 : 0) * 0 + (t > DUR - .6 ? P(t, DUR - .6, .6) * 0 : 0);
   // fade from black at start, to black at end
   const fk = cl(cl(1 - t / .4) + P(t, DUR - .5, .5)); $('#vig').style.background = `radial-gradient(ellipse at center,rgba(0,0,0,${fk}) 0%,rgba(0,0,0,${fk}) 55%,rgba(0,0,0,${.7 + .3 * fk}) 100%)`;
 };
 window.DUR = DUR;
-const _seek = window.seek; window.seek = (t, f = 0) => { _seek(t, f); $('#wm').style.opacity = .85 * P(t, 4.1, .6) * (1 - P(t, 33.1, .4)); };
+const _seek = window.seek; window.seek = (t, f = 0) => { _seek(t, f); $('#wm').style.opacity = .85 * P(t, 4.1, .6) * (1 - P(t, 35.6, .4)); };
 document.fonts.ready.then(() => { window.READY = true; seek(0); });
 </script>
 </body>
