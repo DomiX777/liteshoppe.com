@@ -6,7 +6,7 @@
 <style>
 @font-face{font-family:Cairo;src:url(fonts/Cairo.ttf);font-weight:200 1000}
 :root{
-  --bg:#04050d; --cy:#22d3ee; --vi:#8b5cf6; --mg:#ec4899; --gr:#34d399; --am:#fbbf24;
+  --bg:#04050d; --cy:#38bdf8; --vi:#5b8cff; --mg:#8b5cf6; --gr:#34d399; --am:#fbbf24;
   --glass:rgba(255,255,255,.06); --line:rgba(255,255,255,.12); --tx:#eef2ff; --mut:#94a3b8;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -26,10 +26,10 @@ canvas{position:absolute;inset:0}
 .word{display:inline-block;margin:0 .12em}
 .titleblk{position:absolute;top:150px;left:0;right:0;text-align:center}
 .titleblk .kicker{margin-bottom:18px}
-.glow{filter:drop-shadow(0 0 30px rgba(34,211,238,.45))}
+.glow{filter:drop-shadow(0 0 30px rgba(56,189,248,.45))}
 /* overlays */
 #streak{position:absolute;left:-50%;top:-50%;width:200%;height:200%;pointer-events:none;mix-blend-mode:screen;opacity:0;
-  background:linear-gradient(105deg,transparent 42%,rgba(139,92,246,.25) 46%,rgba(255,255,255,.95) 50%,rgba(34,211,238,.25) 54%,transparent 58%)}
+  background:linear-gradient(105deg,transparent 42%,rgba(139,92,246,.25) 46%,rgba(255,255,255,.95) 50%,rgba(56,189,248,.25) 54%,transparent 58%)}
 #flash{position:absolute;inset:0;background:#fff;opacity:0;mix-blend-mode:screen}
 #vig{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.75) 100%);pointer-events:none}
 #grain{position:absolute;inset:0;width:1080px;height:1920px;opacity:.09;mix-blend-mode:overlay;image-rendering:pixelated}
@@ -41,7 +41,7 @@ canvas{position:absolute;inset:0}
 .dot{width:18px;height:18px;border-radius:50%}
 .url{flex:1;height:42px;border-radius:21px;background:rgba(255,255,255,.07);margin-left:20px;font-size:22px;color:#cbd5e1;display:flex;align-items:center;padding:0 22px}
 .blk{position:absolute;border-radius:18px}
-.codep{width:560px;height:400px;left:40px;top:1290px;background:rgba(8,10,24,.92);border:1.5px solid rgba(34,211,238,.35);border-radius:28px;padding:30px 34px;font-size:23px;line-height:1.75;color:#a5b4fc;white-space:pre;overflow:hidden;box-shadow:0 0 60px rgba(34,211,238,.25)}
+.codep{width:560px;height:400px;left:40px;top:1290px;background:rgba(8,10,24,.92);border:1.5px solid rgba(56,189,248,.35);border-radius:28px;padding:30px 34px;font-size:23px;line-height:1.75;color:#a5b4fc;white-space:pre;overflow:hidden;box-shadow:0 0 60px rgba(56,189,248,.25)}
 .phone{width:300px;height:610px;left:720px;top:1170px;border-radius:54px;background:#0b0e1e;border:10px solid #1e2440;box-shadow:0 30px 90px rgba(0,0,0,.6),0 0 50px rgba(139,92,246,.4);overflow:hidden}
 .cursor{width:56px;height:56px;left:0;top:0}
 .ripple{width:120px;height:120px;border-radius:50%;border:5px solid var(--cy);left:0;top:0}
@@ -61,7 +61,7 @@ canvas{position:absolute;inset:0}
 .btn{border-radius:26px;display:flex;align-items:center;justify-content:center;font-weight:900}
 .toast{border-radius:28px;display:flex;align-items:center;gap:20px;padding:0 34px;font-size:36px;font-weight:800;background:rgba(16,40,32,.92);border:1.5px solid rgba(52,211,153,.6);box-shadow:0 0 60px rgba(52,211,153,.35)}
 /* scene 5 */
-.tablet{width:1000px;height:900px;left:40px;top:560px;border-radius:50px;background:#0a0d1d;border:14px solid #1b2140;box-shadow:0 40px 120px rgba(0,0,0,.6),0 0 70px rgba(236,72,153,.25);overflow:hidden}
+.tablet{width:1000px;height:900px;left:40px;top:560px;border-radius:50px;background:#0a0d1d;border:14px solid #1b2140;box-shadow:0 40px 120px rgba(0,0,0,.6),0 0 70px rgba(139,92,246,.25);overflow:hidden}
 .tile{position:absolute;width:186px;height:186px;border-radius:26px;background:rgba(255,255,255,.05);border:1.5px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center}
 .tile .e{font-size:66px;line-height:1}
 .tile .n{font-size:24px;font-weight:800;margin-top:8px}
@@ -72,7 +72,7 @@ canvas{position:absolute;inset:0}
 /* scene 6 */
 .chip{position:absolute;left:0;top:0;padding:22px 38px;border-radius:999px;font-size:38px;font-weight:800;white-space:nowrap;display:flex;align-items:center;gap:14px}
 .core{width:300px;height:300px;left:390px;top:700px;border-radius:50%;
-  background:radial-gradient(circle at 35% 30%,#fff,var(--cy) 20%,var(--vi) 55%,#1e1b4b 80%);box-shadow:0 0 120px rgba(139,92,246,.8),0 0 240px rgba(34,211,238,.4);
+  background:radial-gradient(circle at 35% 30%,#fff,var(--cy) 20%,var(--vi) 55%,#1e1b4b 80%);box-shadow:0 0 120px rgba(91,140,255,.8),0 0 240px rgba(56,189,248,.4);
   display:flex;align-items:center;justify-content:center;font-size:110px;font-weight:900;color:#fff;font-family:'JetBrains Mono',monospace;direction:ltr}
 .ring{position:absolute;border-radius:50%;border:2px solid rgba(139,92,246,.5)}
 /* scene 7 */
@@ -106,7 +106,7 @@ canvas{position:absolute;inset:0}
         <div id="b_h1" style="position:absolute;right:40px;top:60px;font-size:54px;font-weight:900">البيزنس ديالك</div>
         <div id="b_h2" style="position:absolute;right:40px;top:132px;font-size:54px;font-weight:900" class="grad">ولا عالمي</div>
         <div id="b_btn" class="btn" style="position:absolute;right:40px;top:230px;width:240px;height:66px;font-size:28px;background:linear-gradient(90deg,var(--cy),var(--vi))">ابدأ دابا</div>
-        <div id="b_orb" style="position:absolute;left:60px;top:40px;width:250px;height:250px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,var(--mg) 30%,var(--vi) 70%);box-shadow:0 0 90px rgba(236,72,153,.7)"></div>
+        <div id="b_orb" style="position:absolute;left:60px;top:40px;width:250px;height:250px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,var(--mg) 30%,var(--vi) 70%);box-shadow:0 0 90px rgba(139,92,246,.7)"></div>
       </div>
       <div class="blk card3" style="left:30px;top:560px;width:280px;height:260px;background:rgba(255,255,255,.05)"><div style="margin:24px;height:120px;border-radius:14px;background:linear-gradient(135deg,var(--vi),var(--cy))"></div><i style="display:block;margin:0 24px;height:16px;width:160px;border-radius:8px;background:#64748b"></i><i style="display:block;margin:14px 24px;height:14px;width:110px;border-radius:7px;background:#334155"></i></div>
       <div class="blk card3" style="left:330px;top:560px;width:280px;height:260px;background:rgba(255,255,255,.05)"><div style="margin:24px;height:120px;border-radius:14px;background:linear-gradient(135deg,var(--mg),var(--vi))"></div><i style="display:block;margin:0 24px;height:16px;width:160px;border-radius:8px;background:#64748b"></i><i style="display:block;margin:14px 24px;height:14px;width:110px;border-radius:7px;background:#334155"></i></div>
@@ -138,11 +138,11 @@ canvas{position:absolute;inset:0}
       </div>
       <div class="chart" id="ch2" style="left:36px;top:650px;width:560px;height:340px">
         <svg width="560" height="340" style="position:absolute;inset:0">
-          <defs><linearGradient id="lg" x1="0" x2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#ec4899"/></linearGradient>
+          <defs><linearGradient id="lg" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient>
           <linearGradient id="lf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8b5cf6" stop-opacity=".45"/><stop offset="1" stop-color="#8b5cf6" stop-opacity="0"/></linearGradient></defs>
           <path id="lfill" d="M30 290 L30 250 C90 240 110 200 170 205 S260 150 310 160 S400 90 450 95 S520 50 535 45 L535 290 Z" fill="url(#lf)"/>
           <path id="lpath" d="M30 250 C90 240 110 200 170 205 S260 150 310 160 S400 90 450 95 S520 50 535 45" fill="none" stroke="url(#lg)" stroke-width="8" stroke-linecap="round"/>
-          <circle id="ldot" r="14" fill="#fff" stroke="#ec4899" stroke-width="6" cx="535" cy="45"/>
+          <circle id="ldot" r="14" fill="#fff" stroke="#8b5cf6" stroke-width="6" cx="535" cy="45"/>
         </svg>
       </div>
       <div class="chart" id="ch3" style="left:624px;top:650px;width:300px;height:340px">
@@ -211,7 +211,7 @@ canvas{position:absolute;inset:0}
   <!-- ============ SCENE 6 : EVERYTHING ============ -->
   <div class="scene" id="s6">
     <div class="ring" id="r1" style="left:240px;top:550px;width:600px;height:600px"></div>
-    <div class="ring" id="r2" style="left:140px;top:450px;width:800px;height:800px;border-color:rgba(34,211,238,.35)"></div>
+    <div class="ring" id="r2" style="left:140px;top:450px;width:800px;height:800px;border-color:rgba(56,189,248,.35)"></div>
     <div class="abs core" id="core">&lt;/&gt;</div>
     <div id="chips"></div>
     <div class="abs" id="s6t" style="top:1430px;left:0;right:0;text-align:center">
@@ -223,16 +223,20 @@ canvas{position:absolute;inset:0}
 
   <!-- ============ SCENE 7 : CTA ============ -->
   <div class="scene" id="s7">
-    <div class="ring" id="c1" style="left:290px;top:430px;width:500px;height:500px;border-width:3px;border-color:rgba(34,211,238,.6)"></div>
-    <div class="ring" id="c2" style="left:290px;top:430px;width:500px;height:500px;border-width:3px;border-color:rgba(236,72,153,.6)"></div>
-    <div class="abs" id="logo" style="left:390px;top:530px;width:300px;height:300px;border-radius:80px;background:linear-gradient(135deg,var(--cy),var(--vi) 55%,var(--mg));box-shadow:0 0 140px rgba(139,92,246,.8);display:flex;align-items:center;justify-content:center;font-size:120px;font-weight:900;font-family:'JetBrains Mono',monospace;direction:ltr;color:#fff">&lt;/&gt;</div>
-    <div class="abs brand" id="brand" style="top:900px;left:0;right:0"></div>
+    <div class="ring" id="c1" style="left:240px;top:445px;width:600px;height:500px;border-width:3px;border-color:rgba(56,189,248,.6)"></div>
+    <div class="ring" id="c2" style="left:240px;top:445px;width:600px;height:500px;border-width:3px;border-color:rgba(139,92,246,.6)"></div>
+    <div class="abs" id="logo" style="left:110px;top:560px;width:860px;height:269px">
+      <img src="logo.png" style="width:100%;height:100%;filter:drop-shadow(0 0 50px rgba(56,189,248,.55))">
+      <div id="lsweep" style="position:absolute;inset:0;-webkit-mask:url(logo.png) center/100% 100% no-repeat;mask:url(logo.png) center/100% 100% no-repeat;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.95) 50%,transparent 65%);background-size:300% 100%"></div>
+    </div>
+    <div class="abs" id="brand" style="display:none"></div>
     <div class="abs kicker" id="tag" style="top:1080px;left:0;right:0;text-align:center;color:#cbd5e1">Websites · Platforms · POS</div>
     <div class="abs h2" id="cta" style="top:1170px;left:0;right:0">تواصل معايا <span class="grad">دابا</span></div>
     <div class="abs wa" id="wa"><svg width="64" height="64" viewBox="0 0 24 24"><path fill="#fff" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.6-.1 1.2z"/></svg><span class="mono" id="phone"></span></div>
     <div class="abs sub" id="cta2" style="top:1560px;left:0;right:0">خلّي المشروع ديالك يبان كيف خاصو ✨</div>
   </div>
 
+  <img id="wm" src="logo.png" style="position:absolute;left:50%;top:70px;width:190px;margin-left:-95px;opacity:0">
   <div id="streak"></div>
   <div id="flash"></div>
   <canvas id="grain" width="270" height="480"></canvas>
@@ -242,9 +246,9 @@ canvas{position:absolute;inset:0}
 <script>
 /* ================= CONFIG (بدّل هادو) ================= */
 const CONFIG = {
-  brand: "YOUR BRAND",          // سمية البراند ديالك
+  brand: "ovyra",          // سمية البراند ديالك
   phone: "06 00 00 00 00",      // نمرة الواتساب
-  url:   "www.your-brand.ma",   // الدومين ديالك
+  url:   "www.ovyra.ma",   // الدومين ديالك
 };
 /* ====================================================== */
 const DUR = 37;
@@ -320,7 +324,7 @@ function drawBG(t) {
     const y = ((p.y - t * 60 * p.z) % 1920 + 1920) % 1920;
     const x = p.x + Math.sin(t * .8 + p.ph) * 20 * p.z;
     const a = (.35 + .65 * Math.abs(Math.sin(t * 1.7 + p.ph))) * p.z;
-    g.fillStyle = p.h < .5 ? `rgba(34,211,238,${a})` : (p.h < .8 ? `rgba(196,181,253,${a})` : `rgba(244,114,182,${a})`);
+    g.fillStyle = p.h < .5 ? `rgba(56,189,248,${a})` : (p.h < .8 ? `rgba(196,181,253,${a})` : `rgba(244,114,182,${a})`);
     g.beginPath(); g.arc(x, y, 1.2 + p.z * 2.6, 0, 6.28); g.fill();
   });
 }
@@ -338,7 +342,7 @@ barH.forEach((h, i) => { const b = document.createElement('div'); b.className = 
 const bars = [...ch1.querySelectorAll('.bar')];
 const lpath = $('#lpath'), L = lpath.getTotalLength(); lpath.style.strokeDasharray = L;
 // speed lines
-const sp = $('#speed'); const RS = rng(3); for (let i = 0; i < 16; i++) { const d = document.createElement('div'); d.style.cssText = `position:absolute;height:${2 + RS() * 4}px;border-radius:3px;top:${RS() * 280}px;background:linear-gradient(90deg,transparent,rgba(34,211,238,.9),transparent)`; d.dataset.w = 120 + RS() * 300; d.dataset.sp = 1 + RS() * 1.5; d.dataset.o = RS(); sp.append(d); }
+const sp = $('#speed'); const RS = rng(3); for (let i = 0; i < 16; i++) { const d = document.createElement('div'); d.style.cssText = `position:absolute;height:${2 + RS() * 4}px;border-radius:3px;top:${RS() * 280}px;background:linear-gradient(90deg,transparent,rgba(56,189,248,.9),transparent)`; d.dataset.w = 120 + RS() * 300; d.dataset.sp = 1 + RS() * 1.5; d.dataset.o = RS(); sp.append(d); }
 const speeds = [...sp.children];
 // calendar
 const cal = $('#cal'); ['L', 'M', 'M', 'J', 'V', 'S', 'D'].forEach(d => { const e = document.createElement('div'); e.textContent = d; e.style.background = 'transparent'; e.style.color = '#64748b'; e.style.height = '40px'; cal.append(e); });
@@ -356,7 +360,7 @@ TAPS.forEach(([i]) => { const m = MENU[i]; const e = document.createElement('div
 const tlines = [...tl.children]; const TOTAL = TAPS.reduce((s, [i]) => s + MENU[i][2], 0); $('#rtot').textContent = TOTAL + ' DH';
 // chips
 const CHIPS = [['🛒', 'متاجر إلكترونية'], ['📱', 'تطبيقات موبايل'], ['📅', 'حجز المواعيد'], ['💳', 'الدفع أونلاين'], ['🚀', 'SEO'], ['🏨', 'سيتات الفنادق'], ['📊', 'ERP / CRM'], ['🎨', 'UI / UX']];
-const chipsEl = $('#chips'); const CC = ['34,211,238', '139,92,246', '236,72,153', '52,211,153'];
+const chipsEl = $('#chips'); const CC = ['56,189,248', '139,92,246', '139,92,246', '52,211,153'];
 CHIPS.forEach((c, i) => { const e = document.createElement('div'); e.className = 'chip glass'; const col = CC[i % 4]; e.style.borderColor = `rgba(${col},.7)`; e.style.boxShadow = `0 0 40px rgba(${col},.35)`; e.style.borderRadius = '999px'; e.innerHTML = `<span>${c[0]}</span><span>${c[1]}</span>`; chipsEl.append(e); });
 const chips = [...chipsEl.children];
 
@@ -371,7 +375,7 @@ const U = {
     const gl = (lt > .35 && lt < .6) || (lt > 1.75 && lt < 2.0) || (lt > 3.4 && lt < 3.55);
     const r = rng(Math.floor(lt * 30) + 5);
     [$('#s1a'), $('#s1b')].forEach(el => {
-      if (gl) { const dx = (r() - .5) * 26; el.style.textShadow = `${dx}px 0 rgba(236,72,153,.9), ${-dx}px 0 rgba(34,211,238,.9)`; el.style.clipPath = r() > .5 ? `inset(${r() * 40}% 0 ${r() * 40}% 0)` : ''; el.style.translate = `${(r() - .5) * 30}px 0`; }
+      if (gl) { const dx = (r() - .5) * 26; el.style.textShadow = `${dx}px 0 rgba(139,92,246,.9), ${-dx}px 0 rgba(56,189,248,.9)`; el.style.clipPath = r() > .5 ? `inset(${r() * 40}% 0 ${r() * 40}% 0)` : ''; el.style.translate = `${(r() - .5) * 30}px 0`; }
       else { el.style.textShadow = '0 0 40px rgba(139,92,246,.45)'; el.style.clipPath = ''; el.style.translate = '0 0'; }
     });
     // slow push-in
@@ -390,7 +394,7 @@ const U = {
     // code panel
     pop($('#s2code'), lt, 1.0, .6, { x: -120, s: .9 });
     const n = Math.floor(cl((lt - 1.2) / 2.6) * code.length);
-    $('#s2code').innerHTML = esc(code.slice(0, n)).replace(/(&lt;\/?[a-z0-9]+)/g, '<span style="color:#f472b6">$1</span>').replace(/(class|fast|true)/g, '<span style="color:#22d3ee">$1</span>') + '<span style="background:#22d3ee;color:#22d3ee">_</span>';
+    $('#s2code').innerHTML = esc(code.slice(0, n)).replace(/(&lt;\/?[a-z0-9]+)/g, '<span style="color:#7dd3fc">$1</span>').replace(/(class|fast|true)/g, '<span style="color:#38bdf8">$1</span>') + '<span style="background:#38bdf8;color:#38bdf8">_</span>';
     pop($('#s2p'), lt, 2.6, .8, { x: 260, r: 12, s: .8 });
     document.querySelectorAll('#s2p .pc').forEach((c, i) => pop(c, lt, 3.0 + i * .15, .5, { y: 40 }));
     $('#s2p').style.translate = `0 ${Math.sin(lt * 1.6) * 10}px`;
@@ -400,7 +404,7 @@ const U = {
     const click = P(lt, 4.05, .15), cs = 1 - .25 * Math.sin(click * 3.14);
     tf($('#s2cur'), { x: cx, y: cy, s: cs, o: P(lt, 2.9, .3) });
     const rp = P(lt, 4.1, .6); tf($('#s2rip'), { x: cx1 - 52, y: cy1 - 52, s: .3 + rp * 1.6, o: rp > 0 && rp < 1 ? 1 - rp : 0 });
-    if (lt > 4.1) $('#b_btn').style.boxShadow = `0 0 ${60 * (1 - P(lt, 4.1, .8))}px rgba(34,211,238,1)`;
+    if (lt > 4.1) $('#b_btn').style.boxShadow = `0 0 ${60 * (1 - P(lt, 4.1, .8))}px rgba(56,189,248,1)`;
   },
   s3(lt) {
     pop($('#s3t'), lt, .05, .7, { y: -60 });
@@ -429,7 +433,7 @@ const U = {
     days.forEach((d, i) => { pop(d, lt, 1.6 + i * .018, .4, { y: 20, s: .6, b: 0 }); });
     const sel = cl((lt - 2.4) / 1.0); const a = 11, b = a + Math.round(sel * 4);
     days.forEach((d, i) => { const on = sel > 0 && i >= a && i <= b; const edge = on && (i === a || i === b);
-      d.style.background = edge ? 'linear-gradient(135deg,#22d3ee,#8b5cf6)' : on ? 'rgba(139,92,246,.35)' : 'rgba(255,255,255,.04)'; d.style.color = on ? '#fff' : '#cbd5e1'; d.style.boxShadow = edge ? '0 0 24px rgba(34,211,238,.6)' : ''; });
+      d.style.background = edge ? 'linear-gradient(135deg,#38bdf8,#8b5cf6)' : on ? 'rgba(139,92,246,.35)' : 'rgba(255,255,255,.04)'; d.style.color = on ? '#fff' : '#cbd5e1'; d.style.boxShadow = edge ? '0 0 24px rgba(56,189,248,.6)' : ''; });
     pop($('#s4btn'), lt, 2.2, .6, { y: 40 });
     const pr = P(lt, 3.6, .3); $('#s4btn').style.scale = 1 + .04 * Math.sin(lt * 7) * (lt > 2.8 && lt < 3.6 ? 1 : 0) - .06 * Math.sin(pr * 3.14);
     pop($('#s4toast'), lt, 3.9, .6, { y: 120, s: .7 });
@@ -441,7 +445,7 @@ const U = {
     let tot = 0; let rp = -1, rpx = 0, rpy = 0;
     TAPS.forEach(([mi, at], j) => {
       const tile = tiles[mi], k = P(lt, at, .35);
-      tile.style.background = k > 0 && k < 1 ? `rgba(236,72,153,${.35 * (1 - k)})` : 'rgba(255,255,255,.05)';
+      tile.style.background = k > 0 && k < 1 ? `rgba(139,92,246,${.35 * (1 - k)})` : 'rgba(255,255,255,.05)';
       tile.style.scale = 1 - .08 * Math.sin(k * 3.14);
       pop(tlines[j], lt, at + .05, .4, { x: -60, s: 1, b: 0 });
       if (lt >= at) tot += MENU[mi][2];
@@ -449,7 +453,7 @@ const U = {
     });
     tf($('#s5rip'), { x: rpx, y: rpy, s: .3 + rp * 1.4, o: rp >= 0 ? 1 - rp : 0 });
     $('#ttot').textContent = tot + ' DH';
-    const pay = P(lt, 3.5, .3); $('#paybtn').style.scale = 1 - .07 * Math.sin(pay * 3.14); $('#paybtn').style.boxShadow = lt > 3.5 ? `0 0 ${50 * (1 - P(lt, 3.6, .8))}px rgba(236,72,153,1)` : '';
+    const pay = P(lt, 3.5, .3); $('#paybtn').style.scale = 1 - .07 * Math.sin(pay * 3.14); $('#paybtn').style.boxShadow = lt > 3.5 ? `0 0 ${50 * (1 - P(lt, 3.6, .8))}px rgba(139,92,246,1)` : '';
     const rk = eo(P(lt, 3.75, 1.0)); $('#s5rec').style.clipPath = `inset(0 0 ${100 * (1 - rk)}% 0)`; $('#s5rec').style.opacity = rk > 0 ? 1 : 0; $('#s5rec').style.transform = `translateY(${-40 * (1 - rk)}px) rotate(${-3 * rk}deg)`;
   },
   s6(lt) {
@@ -467,7 +471,8 @@ const U = {
     pop($('#s6b'), lt, 2.6, .7, { y: 60, s: .7, b: 20 });
   },
   s7(lt) {
-    const le = eb(P(lt, .1, .9)); tf($('#logo'), { s: le, r: (1 - cl(le)) * -90, o: cl(le * 1.5) });
+    const le = eb(P(lt, .1, .9)); tf($('#logo'), { s: lerp(.6, 1, le), o: cl(le * 1.5), b: (1 - cl(le)) * 25 });
+    $('#lsweep').style.backgroundPosition = `${lerp(100, -50, P(lt, .9, 1.1))}% 0`; $('#lsweep').style.opacity = lt > .9 && lt < 2.1 ? 1 : 0;
     $('#logo').style.translate = `0 ${Math.sin(lt * 2) * 8}px`;
     [['#c1', 0], ['#c2', .35]].forEach(([s, d]) => { const k = ((lt - .5 - d) % 1.6) / 1.6; tf($(s), { s: .6 + Math.max(0, k) * 1.4, o: lt > .5 + d ? (1 - k) * .9 : 0 }); });
     pop($('#brand'), lt, .6, .8, { y: 60, s: .8, b: 20 }); $('#brand').style.backgroundPosition = `${100 - (lt * 40 % 200)}% 0`;
@@ -501,9 +506,10 @@ window.seek = function (t, frame = 0) {
   const sk = $('#streak'); sk.style.opacity = st; sk.style.transform = `translateX(${sx}px)`;
   $('#flash').style.opacity = fl + (t < .25 ? 1 - t / .25 : 0) * 0 + (t > DUR - .6 ? P(t, DUR - .6, .6) * 0 : 0);
   // fade from black at start, to black at end
-  $('#vig').style.background = `radial-gradient(ellipse at center,rgba(0,0,0,${cl(1 - t / .4) + P(t, DUR - .5, .5)}) 0%,rgba(0,0,0,${.75 + .25 * (cl(1 - t / .4) + P(t, DUR - .5, .5))}) 100%)`;
+  const fk = cl(cl(1 - t / .4) + P(t, DUR - .5, .5)); $('#vig').style.background = `radial-gradient(ellipse at center,rgba(0,0,0,${fk}) 0%,rgba(0,0,0,${fk}) 55%,rgba(0,0,0,${.7 + .3 * fk}) 100%)`;
 };
 window.DUR = DUR;
+const _seek = window.seek; window.seek = (t, f = 0) => { _seek(t, f); $('#wm').style.opacity = .85 * P(t, 4.6, .6) * (1 - P(t, 30.6, .4)); };
 document.fonts.ready.then(() => { window.READY = true; seek(0); });
 </script>
 </body>
