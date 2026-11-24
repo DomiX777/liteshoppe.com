@@ -24,7 +24,7 @@ Femmes et hommes de 20 à 45 ans, au Maroc. Cheveux secs, ternes ou cassants. To
 | **Tensioactifs** | **Sans sulfates (SLS/SLES).** Base douce : Sodium Cocoyl Isethionate ou Sodium Lauroyl Methyl Isethionate, Cocamidopropyl Betaine, Decyl / Coco-Glucoside |
 | **Soin** | Panthénol (B5), glycérine, protéines hydrolysées, Guar Hydroxypropyltrimonium Chloride |
 | **Actifs « signature »** | Extrait ou hydrolat de **romarin**, **eau de fleur d'oranger**. Option : vinaigre de cidre |
-| **À exclure** | Sulfates, silicones non hydrosolubles, ghassoul ou argiles (apport minéral), substances CMR, TPO |
+| **À exclure** | Sulfates, silicones, colorants, ghassoul ou argiles (apport minéral), substances CMR, TPO |
 | **Parfum** | Note fleur d'oranger légère. Allergènes déclarés selon la réglementation |
 | **Texture** | Gel fluide, mousse moyenne, rinçage facile |
 | **Conservation** | Système doux, compatible avec le pH. Challenge test requis |

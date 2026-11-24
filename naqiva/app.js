@@ -22,24 +22,52 @@
     utm_content: params.get("utm_content") || ""
   };
 
-  /* ---------- discount + price ---------- */
-  var disc = Number(C.EARLY_DISCOUNT) || 0;
-  var price = Number(C.PRICE) || 0;
-  var extra = Number(C.PACK2_EXTRA_DISCOUNT) || 0;
-  var unit = Math.round(price * (1 - disc / 100));
-  var pack2 = Math.round(unit * 2 * (1 - extra / 100));
-  var totals = { "1": unit, "2": pack2 };
+  /* ---------- prices ---------- */
+  var P = { "1": Number(C.PRICE_1) || 149, "2": Number(C.PRICE_2) || 249 };
+  var OLD = { "1": Number(C.PRICE_1_OLD) || 0, "2": Number(C.PRICE_2_OLD) || 0 };
+  var totals = P;
+  var disc = OLD["1"] > P["1"] ? Math.round((1 - P["1"] / OLD["1"]) * 100) : 0;
   $$("[data-discount]").forEach(function (el) { el.textContent = disc; });
-  $("[data-price-now]").textContent = unit + " DH";
+  $("[data-price-now]").textContent = P["1"] + " DH";
   var old = $("[data-price-old]");
-  if (disc > 0) { old.textContent = price + " DH"; old.hidden = false; }
+  if (OLD["1"] > P["1"]) { old.textContent = OLD["1"] + " DH"; old.hidden = false; }
+  var strike = function (q) { return OLD[q] > P[q] ? '<span class="strike">' + OLD[q] + "</span>" : ""; };
   var p1 = $("[data-pack1]"), p2 = $("[data-pack2]");
-  if (p1) p1.innerHTML = unit + " DH" + (disc > 0 ? '<span class="strike">' + price + "</span>" : "");
-  if (p2) p2.innerHTML = pack2 + " DH" + '<span class="strike">' + price * 2 + "</span>";
+  if (p1) p1.innerHTML = P["1"] + " DH" + strike("1");
+  if (p2) p2.innerHTML = P["2"] + " DH" + strike("2");
   var currentQty = function () { var q = $("input[name=qty]:checked"); return q ? q.value : "1"; };
   var updateTotal = function () { $$("[data-total]").forEach(function (el) { el.textContent = totals[currentQty()] + " DH"; }); };
   $$("input[name=qty]").forEach(function (r) { r.addEventListener("change", updateTotal); });
   updateTotal();
+
+  /* ---------- cities ---------- */
+  var CITIES = ["الدار البيضاء","الرباط","سلا","تمارة","الصخيرات","المحمدية","بوزنيقة","برشيد","سطات","بن سليمان","الجديدة","أزمور","سيدي بنور","آسفي","اليوسفية","الصويرة","مراكش","قلعة السراغنة","ابن جرير","شيشاوة","الحوز","تحناوت","أيت أورير","القنيطرة","سيدي قاسم","سيدي سليمان","سيدي يحيى الغرب","مشرع بلقصيري","سوق الأربعاء","الخميسات","تيفلت","الرماني","فاس","مكناس","إفران","أزرو","الحاجب","صفرو","المنزل","بولمان","ميسور","تازة","تاونات","قرية با محمد","مولاي يعقوب","طنجة","تطوان","المضيق","الفنيدق","مرتيل","أصيلة","العرائش","القصر الكبير","شفشاون","وزان","الحسيمة","إمزورن","وجدة","بركان","أحفير","السعيدية","تاوريرت","العيون الشرقية","جرادة","فجيج","بوعرفة","الناظور","زايو","العروي","الدريوش","ميدار","كرسيف","بني ملال","الفقيه بن صالح","سوق السبت","قصبة تادلة","أزيلال","خنيفرة","مريرت","خريبكة","وادي زم","أبي الجعد","الراشيدية","أرفود","الريصاني","الريش","ميدلت","ورزازات","زاكورة","تنغير","قلعة مكونة","بومالن دادس","أكادير","إنزكان","أيت ملول","الدشيرة","تارودانت","أولاد تايمة","تزنيت","سيدي إفني","بيوكرى","اشتوكة أيت باها","طاطا","كلميم","طانطان","أسا","العيون","بوجدور","السمارة","طرفاية","الداخلة","أوسرد"];
+  var dl = $("#cities");
+  if (dl) CITIES.forEach(function (c) { var o = document.createElement("option"); o.value = c; dl.appendChild(o); });
+
+  /* ---------- reviews (real ones only, from config) ---------- */
+  var revs = (C.REVIEWS || []).filter(function (r) { return r && r.text; });
+  if (revs.length) {
+    var list = $("#reviews-list");
+    revs.forEach(function (r) {
+      var card = document.createElement("figure");
+      card.className = "review";
+      var st = document.createElement("div"); st.className = "stars";
+      var n = Math.max(1, Math.min(5, Number(r.stars) || 5));
+      st.textContent = "★★★★★".slice(0, n) + "☆☆☆☆☆".slice(0, 5 - n);
+      st.setAttribute("aria-label", n + " / 5");
+      var q = document.createElement("blockquote"); q.style.margin = "0";
+      var t = document.createElement("p"); t.textContent = r.text; q.appendChild(t);
+      var who = document.createElement("figcaption"); who.className = "who";
+      var av = document.createElement("span"); av.className = "av"; av.textContent = String(r.name || "?").charAt(0);
+      var nm = document.createElement("span"); nm.textContent = (r.name || "") + (r.city ? " · " + r.city : "");
+      who.appendChild(av); who.appendChild(nm);
+      card.appendChild(st); card.appendChild(q); card.appendChild(who);
+      list.appendChild(card);
+    });
+    list.hidden = false;
+    $("#reviews-empty").hidden = true;
+  }
 
   /* ---------- links ---------- */
   var wa = String(C.WHATSAPP || "").replace(/\D/g, "");
@@ -141,7 +169,7 @@
       var s = $("#success");
       s.style.display = "block";
       s.focus();
-      var share = "شفت هاد الشامبو المغربي الجديد ضد الكالكير، Naqiva. عندهم -" + disc + "% فالإطلاق: " + location.href.split("?")[0];
+      var share = "شفت هاد الشامبو المغربي الجديد ضد الكالكير، Naqiva. عندهم عرض الإطلاق: " + location.href.split("?")[0];
       $("#success-share").href = "https://wa.me/?text=" + encodeURIComponent(share);
       $("#success-share").target = "_blank";
     };

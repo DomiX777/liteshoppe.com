@@ -46,6 +46,8 @@ a{color:var(--teal)}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--teal)}
 .logo span{font:500 26px/1 var(--font-lat);letter-spacing:3px}
+.nav{display:none;gap:26px;font-size:16px;font-weight:700}.nav a{text-decoration:none;color:var(--ink)}.nav a:hover{color:var(--teal)}
+@media (min-width:900px){.nav{display:flex}}
 .top .btn{min-height:44px;padding:0 20px;font-size:16px}
 
 /* announcement */
@@ -206,6 +208,57 @@ footer a{color:#fff}
 .pack small{text-align:right}
 .strike{text-decoration:line-through;opacity:.55;font-weight:500;margin-inline-start:6px;font-size:14px}
 
+/* trust strip */
+.trust{background:#fff;border-block:1px solid var(--line);padding:0}
+.trust .wrap{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0}
+.t-item{display:flex;align-items:center;gap:12px;padding:18px 8px}
+.t-item .ic{width:44px;height:44px;border-radius:14px;background:var(--teal-soft);color:var(--teal);display:grid;place-items:center;flex:none}
+.t-item b{display:block;font-size:16px;line-height:1.3}.t-item span{display:block;font-size:13.5px;color:var(--muted);line-height:1.3}
+/* science diagram */
+.sci{display:grid;grid-template-columns:1fr;gap:14px;margin-top:40px}
+.sci-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:20px;text-align:center}
+.sci-card svg{width:100%;max-width:220px;height:auto;margin:0 auto 10px;display:block}
+.sci-card h3{margin:0 0 4px;font-size:19px}.sci-card p{margin:0;color:var(--muted);font-size:16px}
+.sci-step{display:inline-block;font:600 13px/1 var(--font-lat);letter-spacing:2px;color:var(--gold);margin-bottom:8px}
+/* formula */
+.formula{display:grid;grid-template-columns:1fr;gap:28px;margin-top:8px}
+.f-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.f-list li{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;border-bottom:1px solid rgba(255,255,255,.14);padding:12px 0}
+.f-list b{font-size:17px}.f-list small{display:block;font:500 13px/1.4 var(--font-lat);color:var(--gold-soft);letter-spacing:.5px}
+.f-list .role{font-size:14px;color:#CFE3E0;text-align:left;max-width:170px}
+.free{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.free div{border:1px dashed rgba(255,255,255,.3);border-radius:16px;padding:14px;display:flex;gap:10px;align-items:center;font-size:16px}
+.free svg{flex:none}
+.note{font-size:13.5px;color:#BFD6D2;margin-top:16px}
+/* reviews */
+.reviews{display:grid;grid-template-columns:1fr;gap:16px}
+.review{background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px;display:flex;flex-direction:column;gap:10px}
+.stars{color:var(--gold);letter-spacing:2px;font-size:18px}
+.review p{margin:0;font-size:17px}
+.review .who{display:flex;align-items:center;gap:10px;font-size:15px;color:var(--muted)}
+.review .av{width:38px;height:38px;border-radius:50%;background:var(--teal-soft);color:var(--teal);display:grid;place-items:center;font-weight:800}
+.empty-rev{background:#fff;border:1.5px dashed var(--line);border-radius:24px;padding:34px 24px;text-align:center;max-width:720px;margin:0 auto}
+.empty-rev h3{margin:0 0 6px;font-size:22px}.empty-rev p{margin:0 0 18px;color:var(--muted)}
+/* delivery */
+.deliv{display:grid;grid-template-columns:1fr;gap:14px;counter-reset:d}
+.deliv .card{position:relative;padding-top:30px}
+.deliv .num{position:absolute;top:-14px;inset-inline-start:22px;background:var(--gold);color:var(--teal-dark);font:700 15px/1 var(--font-lat);padding:7px 12px;border-radius:99px}
+/* hero decoration */
+.hero{position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset-inline-end:-180px;top:-160px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(159,199,184,.35),rgba(159,199,184,0) 70%);pointer-events:none}
+.hero .wrap{position:relative}
+.rating-line{display:flex;align-items:center;gap:10px;margin-top:18px;font-size:15px;color:var(--muted)}
+.dots{display:flex}
+.dots i{width:30px;height:30px;border-radius:50%;border:2px solid var(--sand);margin-inline-start:-8px;background:var(--teal-soft);display:inline-block}
+.dots i:nth-child(2){background:#D9E9E5}.dots i:nth-child(3){background:var(--gold-soft)}
+@media (min-width:700px){
+  .trust .wrap{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .sci{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .reviews{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .deliv{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (min-width:900px){.formula{grid-template-columns:1.1fr 1fr;gap:56px;align-items:start}}
+
 @media (min-width:700px){
   .cards{grid-template-columns:repeat(3,minmax(0,1fr))}
   .ingr{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -238,6 +291,7 @@ footer a{color:#fff}
       <svg width="24" height="31" viewBox="0 0 34 44" aria-hidden="true"><path d="M17 2C17 2 4 18 4 28a13 13 0 0 0 26 0C30 18 17 2 17 2Z" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M11 29a6 6 0 0 0 6 6" fill="none" stroke="#C9A04F" stroke-width="2.6" stroke-linecap="round"/></svg>
       <span>naqiva</span>
     </a>
+    <nav class="nav" aria-label="القائمة"><a href="#how">كيفاش كيخدم</a><a href="#formula">المكونات</a><a href="#reviews">الآراء</a><a href="#faq">الأسئلة</a></nav>
     <a class="btn btn-primary" href="#reserve" data-cta="header">اطلب دابا</a>
   </div>
 </header>
@@ -268,6 +322,16 @@ footer a{color:#fff}
           <img src="img/hero-square.webp" alt="بوطة شامبو Naqiva Détox Anti-Calcaire فالدوش" width="720" height="720" fetchpriority="high">
         </picture>
       </div>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section class="trust" aria-label="الضمانات">
+    <div class="wrap">
+      <div class="t-item"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/></svg></div><div><b>الخلاص عند الاستلام</b><span>ما كتخلص حتى يوصلك</span></div></div>
+      <div class="t-item"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h11v10H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg></div><div><b>التوصيل فابور</b><span>لجميع مدن المغرب</span></div></div>
+      <div class="t-item"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 4l2.3 5.2 5.7.5-4.3 3.8 1.3 5.5L12 16.2 7 19l1.3-5.5L4 9.7l5.7-.5z"/></svg></div><div><b>صنع فالمغرب</b><span>مصنوع للما ديالنا</span></div></div>
+      <div class="t-item"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 19c0-8 6-13 14-14-1 8-6 14-14 14z"/><path d="M5 19l7-7"/></svg></div><div><b>بلا sulfate</b><span>لطيف على الشعر</span></div></div>
     </div>
   </section>
 
@@ -337,6 +401,14 @@ footer a{color:#fff}
         </ol>
       </div>
     </div>
+    <div class="wrap">
+      <div class="sci">
+        <div class="sci-card reveal"><span class="sci-step">01</span><svg viewBox="0 0 220 120" aria-hidden="true"><rect x="10" y="46" width="200" height="28" rx="14" fill="#E9D9B8"/><path d="M24 52h172M24 60h172M24 68h172" stroke="#D8C49C" stroke-width="1.5"/><circle cx="30" cy="44" r="6" fill="#B9C3C4" stroke="#8FA0A2" stroke-width="1"/><circle cx="52" cy="78" r="5" fill="#B9C3C4" stroke="#8FA0A2" stroke-width="1"/><circle cx="70" cy="42" r="7" fill="#B9C3C4" stroke="#8FA0A2" stroke-width="1"/><circle cx="96" cy="80" r="6" fill="#B9C3C4" stroke="#8FA0A2" stroke-width="1"/><circle cx="118" cy="44" r="5" fill="#B9C3C4" stroke="#8FA0A2" stroke-width="1"/><circle cx="140" cy="78" r="7" fill="#B9C3C4" stroke="#8FA0A2" stroke-width="1"/><circle cx="160" cy="42" r="6" fill="#B9C3C4" stroke="#8FA0A2" stroke-width="1"/><circle cx="184" cy="80" r="5" fill="#B9C3C4" stroke="#8FA0A2" stroke-width="1"/><circle cx="200" cy="46" r="5" fill="#B9C3C4" stroke="#8FA0A2" stroke-width="1"/></svg><h3>شعرة فيها الكالكير</h3><p>المعادن ديال الما كيلصقو فالشعرة وكيخليوها خشينة.</p></div>
+        <div class="sci-card reveal"><span class="sci-step">02</span><svg viewBox="0 0 220 120" aria-hidden="true"><rect x="10" y="46" width="200" height="28" rx="14" fill="#E9D9B8"/><path d="M24 52h172M24 60h172M24 68h172" stroke="#D8C49C" stroke-width="1.5"/><g><circle cx="40" cy="30" r="6" fill="#B9C3C4"/><path d="M36 22 q10 -14 20 -2" stroke="#0E4D5C" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="56" cy="18" r="4" fill="#0E4D5C"/></g><g><circle cx="100" cy="28" r="6" fill="#B9C3C4"/><path d="M96 20 q10 -14 20 -2" stroke="#0E4D5C" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="116" cy="16" r="4" fill="#0E4D5C"/></g><g><circle cx="160" cy="30" r="6" fill="#B9C3C4"/><path d="M156 22 q10 -14 20 -2" stroke="#0E4D5C" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="176" cy="18" r="4" fill="#0E4D5C"/></g><circle cx="70" cy="80" r="5" fill="#B9C3C4" stroke="#8FA0A2"/><circle cx="130" cy="82" r="5" fill="#B9C3C4" stroke="#8FA0A2"/><circle cx="190" cy="80" r="5" fill="#B9C3C4" stroke="#8FA0A2"/></svg><h3>Naqiva كيشد فيهم</h3><p>الـ chélatant كيشد فالكالسيوم والمانيزيوم وكيحيدهم من الشعرة.</p></div>
+        <div class="sci-card reveal"><span class="sci-step">03</span><svg viewBox="0 0 220 120" aria-hidden="true"><rect x="10" y="46" width="200" height="28" rx="14" fill="#E9D9B8"/><path d="M24 52h172M24 60h172M24 68h172" stroke="#D8C49C" stroke-width="1.5"/><path d="M30 54h150" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".9"/><path d="M190 24l4 8 8 4-8 4-4 8-4-8-8-4 8-4z" fill="#C9A04F"/><path d="M40 92l3 6 6 3-6 3-3 6-3-6-6-3 6-3z" fill="#C9A04F" opacity=".7"/></svg><h3>شعرة نقية ولامعة</h3><p>كيمشيو مع الما، والشعرة كترجع ناعمة وفيها اللمعة.</p></div>
+      </div>
+      <p class="center" style="font-size:13.5px;color:var(--muted);margin:14px 0 0">رسم توضيحي مبسط.</p>
+    </div>
   </section>
 
   <!-- COMPARE -->
@@ -361,22 +433,36 @@ footer a{color:#fff}
   </section>
 
   <!-- INGREDIENTS -->
-  <section class="dark" aria-labelledby="ing-title">
+  <section class="dark" id="formula" aria-labelledby="ing-title">
     <div class="wrap">
       <p class="kicker">Formule</p>
-      <h2 id="ing-title">مكونات مختارين بعناية</h2>
-      <p class="lead">العلم والمكونات ديال بلادنا فبوطة وحدة.</p>
-      <div class="ingr">
-        <div class="ing reveal"><div class="name">Agent chélatant végétal</div><h3>ضد الكالكير</h3><p>من أصل نباتي، هو اللي كيحيد بقايا الكالكير والمعادن.</p></div>
-        <div class="ing reveal"><div class="name">Romarin</div><h3>أكليل الجبل</h3><p>معروف عندنا بالعناية بالشعر وبجلدة الراس.</p></div>
-        <div class="ing reveal"><div class="name">Fleur d'oranger</div><h3>ما الزهر</h3><p>ريحة مغربية خفيفة كتبقى فالشعر.</p></div>
-        <div class="ing reveal"><div class="name">Panthénol (B5)</div><h3>ترطيب</h3><p>كيرجع الترطيب للشعر من بعد التنقية.</p></div>
-      </div>
-      <div class="badges">
-        <span class="badge lat">pH 5</span>
-        <span class="badge">بلا sulfate</span>
-        <span class="badge">صنع فالمغرب</span>
-        <span class="badge">لجميع أنواع الشعر</span>
+      <h2 id="ing-title">شنو كاين فالبوطة؟</h2>
+      <p class="lead">العلم والمكونات ديال بلادنا فبوطة وحدة. كل مكون عندو دور واضح.</p>
+      <div class="formula">
+        <ul class="f-list">
+          <li><div><b>مكون chélatant نباتي</b><small>Tetrasodium Glutamate Diacetate</small></div><span class="role">كيشد فالكالكير والمعادن ويحيدهم</span></li>
+          <li><div><b>فيتات نباتي</b><small>Sodium Phytate</small></div><span class="role">كيكمل الخدمة ديال الـ chélatant</span></li>
+          <li><div><b>حمض الليمون</b><small>Citric Acid</small></div><span class="role">كيضبط الـ pH فـ 5 وكيعاون يذوب الكالكير</span></li>
+          <li><div><b>أكليل الجبل</b><small>Rosmarinus Officinalis</small></div><span class="role">معروف بالعناية بجلدة الراس</span></li>
+          <li><div><b>ما الزهر</b><small>Citrus Aurantium Flower Water</small></div><span class="role">ريحة مغربية خفيفة</span></li>
+          <li><div><b>بانثينول B5 وغليسيرين</b><small>Panthenol · Glycerin</small></div><span class="role">كيرجعو الترطيب من بعد التنقية</span></li>
+          <li><div><b>منظفات لطاف</b><small>Sodium Cocoyl Isethionate · Coco-Betaine</small></div><span class="role">رغوة خفيفة بلا sulfate</span></li>
+        </ul>
+        <div>
+          <h3 style="margin:0 0 14px;font-size:21px">اللي ما فيهش</h3>
+          <div class="free">
+            <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F3E7CC" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M6 18L18 6"/></svg> بلا sulfate</div>
+            <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F3E7CC" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M6 18L18 6"/></svg> بلا silicone</div>
+            <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F3E7CC" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M6 18L18 6"/></svg> بلا غاسول ولا طين</div>
+            <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F3E7CC" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M6 18L18 6"/></svg> بلا ملونات</div>
+          </div>
+          <div class="badges">
+            <span class="badge lat">pH 5</span>
+            <span class="badge">صنع فالمغرب</span>
+            <span class="badge">لجميع أنواع الشعر</span>
+          </div>
+          <p class="note">التركيبة النهائية كاملة (INCI) كتكون مكتوبة على البوطة.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -397,6 +483,23 @@ footer a{color:#fff}
     </div>
   </section>
 
+  <!-- REVIEWS -->
+  <section id="reviews" aria-labelledby="rev-title" style="background:var(--sand)">
+    <div class="wrap">
+      <div class="center">
+        <p class="kicker">Avis</p>
+        <h2 id="rev-title">آراء الناس</h2>
+      </div>
+      <div class="reviews" id="reviews-list" hidden></div>
+      <div class="empty-rev" id="reviews-empty">
+        <div class="stars" aria-hidden="true">★ ★ ★ ★ ★</div>
+        <h3>كون من الأوائل اللي يجربو Naqiva</h3>
+        <p>Naqiva جديد. الآراء ديال الناس اللي جربوه غادي تبان هنا، وغادي تكون آراء حقيقية من زبناء حقيقيين.</p>
+        <a class="btn btn-primary" href="#reserve" data-cta="reviews">اطلب ديالك</a>
+      </div>
+    </div>
+  </section>
+
   <!-- OFFER + FORM -->
   <section class="offer" id="reserve" aria-labelledby="offer-title">
     <div class="wrap">
@@ -411,8 +514,8 @@ footer a{color:#fff}
           </div>
           <ul class="perks">
             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F3E7CC" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg> <span><b><bdi dir="ltr">-<span data-discount>20</span>%</bdi></b> على الطلب ديالك، غير فترة الإطلاق</span></li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F3E7CC" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg> <span>جوج بوطات بثمن أحسن</span></li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F3E7CC" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg> <span>الخلاص عند الاستلام، فالمغرب كامل</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F3E7CC" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg> <span>التوصيل فابور لجميع المدن</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F3E7CC" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg> <span>الخلاص عند الاستلام</span></li>
             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F3E7CC" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg> <span>كنعيطو ليك نأكدو الطلب قبل التوصيل</span></li>
           </ul>
           <div class="offer-img"><img src="img/pump-wide.webp" alt="بوطة Naqiva فالحمام" width="1280" height="720" loading="lazy"></div>
@@ -443,13 +546,8 @@ footer a{color:#fff}
             </div>
             <div class="field">
               <label for="f-city">المدينة</label>
-              <select id="f-city" name="city" required>
-                <option value="">اختار المدينة</option>
-                <option>الدار البيضاء</option><option>الرباط</option><option>سلا</option><option>تمارة</option><option>القنيطرة</option><option>المحمدية</option>
-                <option>مراكش</option><option>فاس</option><option>مكناس</option><option>طنجة</option><option>تطوان</option><option>أكادير</option>
-                <option>وجدة</option><option>الجديدة</option><option>آسفي</option><option>بني ملال</option><option>خريبكة</option><option>الناظور</option>
-                <option>العيون</option><option>مدينة أخرى</option>
-              </select>
+              <input id="f-city" name="city" type="text" list="cities" autocomplete="address-level2" placeholder="كتب المدينة ديالك" required>
+              <datalist id="cities"></datalist>
               <div class="err" id="e-city" role="alert"></div>
             </div>
             <div class="field">
@@ -482,8 +580,24 @@ footer a{color:#fff}
     </div>
   </section>
 
+  <!-- DELIVERY -->
+  <section aria-labelledby="del-title" style="background:#fff">
+    <div class="wrap">
+      <div class="center">
+        <p class="kicker">Livraison</p>
+        <h2 id="del-title">كيفاش كيوصلك الطلب؟</h2>
+        <p class="lead">ساهل وبلا خطر: ما كتخلص والو حتى تشد المنتوج فيدك.</p>
+      </div>
+      <div class="deliv">
+        <div class="card reveal"><span class="num">01</span><h3>كتطلب</h3><p>كتعمر السمية، التيليفون والعنوان. كياخد ليك 30 ثانية.</p></div>
+        <div class="card reveal"><span class="num">02</span><h3>كنعيطو ليك</h3><p>كنأكدو معاك الطلب والوقت ديال التوصيل.</p></div>
+        <div class="card reveal"><span class="num">03</span><h3>كتوصلك وكتخلص</h3><p>التوصيل فابور، والخلاص نقداً للموزع ملي يوصلك.</p></div>
+      </div>
+    </div>
+  </section>
+
   <!-- FAQ -->
-  <section aria-labelledby="faq-title" style="background:#fff">
+  <section id="faq" aria-labelledby="faq-title" style="background:#fff">
     <div class="wrap">
       <div class="center">
         <p class="kicker">FAQ</p>
@@ -491,8 +605,10 @@ footer a{color:#fff}
       </div>
       <div class="faq">
         <details><summary>إمتى يوصلني الطلب؟</summary><p>من بعد ما تطلب، كنعيطو ليك باش نأكدو الطلب ونقولو ليك الوقت ديال التوصيل بالضبط. ما كتخلص والو حتى يوصلك.</p></details>
+        <details><summary>شحال كيخلص التوصيل؟ واش كتوصلو لمدينتي؟</summary><p>التوصيل فابور، وكنوصلو لجميع المدن والقرى فالمغرب.</p></details>
         <details><summary>واش خاصني نخلص دابا؟</summary><p>لا. الخلاص كيكون عند الاستلام، نقداً للموزع. وإلا بدلتي رايك قبل التوصيل، غير قولها لينا فالمكالمة.</p></details>
         <details><summary>كيفاش نعرف واش الما عندي فيه الكالكير؟</summary><p>إلا كان كيبان ليك بياض على الروبيني، فالمقراج ولا فالدوش، راه الما فيه الكالكير. فبزاف ديال المدن المغربية الما كيكون قاصح.</p></details>
+        <details><summary>شحال كتكفيني البوطة؟</summary><p>إلا استعملتيه مرة ولا جوج فالسيمانة، البوطة ديال 300 ml كتكفي تقريباً من 2 حتى 3 شهور، على حسب الطول ديال الشعر.</p></details>
         <details><summary>شحال من مرة نستعملو؟</summary><p>مرة ولا جوج فالسيمانة كتكفي. فالأيام الأخرى استعمل الشامبو العادي ديالك.</p></details>
         <details><summary>واش كيصلح للشعر المصبوغ ولا المديفريزي؟</summary><p>التركيبة بلا sulfate ومصممة تكون خفيفة على الشعر. ولكن إلا كان شعرك مصبوغ جديد، سول الكوافور ديالك قبل.</p></details>
         <details><summary>واش كيداوي طيحان الشعر؟</summary><p>Naqiva ماشي دوا. هو شامبو كيحيد بقايا الكالكير اللي كتخلي الشعر ناشف وكيتكسر. إلا كان الشعر كيطيح بزاف، شوف طبيب الجلد.</p></details>
