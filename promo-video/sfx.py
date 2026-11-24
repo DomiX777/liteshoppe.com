@@ -1,6 +1,8 @@
 # Generates out/sfx.wav: ambient pad + whooshes at scene cuts + bass impacts + UI clicks
 import numpy as np, wave
 SR=44100; DUR=40.0; n=int(SR*DUR); t=np.arange(n)/SR
+import os,sys
+FX_ONLY=os.environ.get('FX_ONLY')=='1'
 rng=np.random.default_rng(1); out=np.zeros((n,2))
 def add(sig,at,gain=1.0,pan=0.0):
     i=int(at*SR); j=min(n,i+len(sig)); s=sig[:j-i]*gain
@@ -14,12 +16,12 @@ for k,ch in enumerate(chords*3):
     for f in ch: pad[m]+=env*(np.sin(2*np.pi*f*t[m])+0.3*np.sin(2*np.pi*f*2.003*t[m]))
 pad*= (0.7+0.3*np.sin(2*np.pi*0.25*t)); pad/=np.abs(pad).max(); pad*=0.10
 pad*=np.minimum(1,t/1.5)*np.minimum(1,(DUR-t)/1.5)
-out[:,0]+=pad; out[:,1]+=pad
+if not FX_ONLY: out[:,0]+=pad; out[:,1]+=pad
 # pulse beat (soft kick each 0.5s from 4.5s to 31)
 def kick(L=0.35,f0=120,f1=40):
     tt=np.arange(int(SR*L))/SR; f=f1+(f0-f1)*np.exp(-tt*25); ph=2*np.pi*np.cumsum(f)/SR
     return np.sin(ph)*np.exp(-tt*9)
-for b in np.arange(4.0,36.0,0.5): add(kick(),b,0.22)
+for b in (np.arange(4.0,36.0,0.5) if not FX_ONLY else []): add(kick(),b,0.22)
 # whoosh
 def whoosh(L=0.9):
     m=int(SR*L); x=rng.standard_normal(m); tt=np.arange(m)/SR
@@ -43,5 +45,5 @@ add(click(1200),22.5,0.3)
 for c in [17.9,22.75,27.2]:  # success chime
     tt=np.arange(int(SR*0.8))/SR; add((np.sin(2*np.pi*880*tt)+np.sin(2*np.pi*1320*tt))*np.exp(-tt*5)*0.5,c,0.25)
 out/=max(1,np.abs(out).max()/0.9)
-w=wave.open('out/sfx.wav','wb'); w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)
+w=wave.open('out/sfx_fx.wav' if FX_ONLY else 'out/sfx.wav','wb'); w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)
 w.writeframes((out*32767).astype('<i2').tobytes()); w.close(); print('ok')
