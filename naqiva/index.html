@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Naqiva – Shampoing Détox Anti-Calcaire | شامبو ضد الكالكير</title>
-<meta name="description" content="Naqiva: أول شامبو مغربي كيحيد الكالكير اللي كيخلي الشعر ناشف وما فيهش اللمعة. سجل دابا وخود -20% ملي يخرج.">
+<meta name="description" content="Naqiva: أول شامبو مغربي كيحيد الكالكير اللي كيخلي الشعر ناشف وما فيهش اللمعة. اطلب دابا بـ -20%، والخلاص عند الاستلام.">
 <meta name="theme-color" content="#0E4D5C">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Naqiva – الما ديالك كيخسر ليك شعرك">
-<meta property="og:description" content="أول شامبو مغربي ضد الكالكير. سجل دابا وخود -20% ملي يخرج.">
+<meta property="og:description" content="أول شامبو مغربي ضد الكالكير. اطلب دابا بـ -20%، والخلاص عند الاستلام.">
 <meta property="og:image" content="img/og.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 44'%3E%3Cpath d='M17 2C17 2 4 18 4 28a13 13 0 0 0 26 0C30 18 17 2 17 2Z' fill='%230E4D5C'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -193,6 +193,19 @@ footer a{color:#fff}
 .compare td.us{background:rgba(14,77,92,.05)}
 .yes{color:var(--teal);font-weight:800}.no{color:#8A9DA0}
 
+/* packs */
+.packs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.pack{position:relative;display:block}
+.pack input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer;z-index:1}
+.pack>span{display:flex;flex-direction:column;gap:2px;min-height:84px;justify-content:center;padding:12px 14px;border:1.5px solid var(--line);border-radius:16px;background:#fff;transition:all .15s;position:relative}
+.pack b{font-size:17px}.pack small{display:block;font:600 16px/1.3 var(--font-lat);color:var(--teal)}
+.pack input:checked+span{border-color:var(--teal);background:var(--teal-soft);box-shadow:0 0 0 1px var(--teal) inset}
+.pack input:focus-visible+span{outline:3px solid var(--gold);outline-offset:2px}
+.best{position:absolute;top:-11px;inset-inline-start:12px;background:var(--gold);color:var(--teal-dark);font:800 12px/1 var(--font-ar);font-style:normal;padding:5px 9px;border-radius:99px}
+[data-price-now],[data-price-old],[data-pack1],[data-pack2],[data-total]{direction:ltr;unicode-bidi:isolate}
+.pack small{text-align:right}
+.strike{text-decoration:line-through;opacity:.55;font-weight:500;margin-inline-start:6px;font-size:14px}
+
 @media (min-width:700px){
   .cards{grid-template-columns:repeat(3,minmax(0,1fr))}
   .ingr{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -217,7 +230,7 @@ footer a{color:#fff}
 </head>
 <body>
 
-<div class="bar" id="bar">🎁 للناس اللي كيسجلو الأولين: <b><bdi dir="ltr"><span data-discount>20</span>%</bdi> تخفيض</b> ملي يخرج Naqiva</div>
+<div class="bar" id="bar">🎁 عرض الإطلاق: <b><bdi dir="ltr"><span data-discount>20</span>%</bdi> تخفيض</b> · الخلاص عند الاستلام</div>
 
 <header class="top">
   <div class="wrap">
@@ -225,7 +238,7 @@ footer a{color:#fff}
       <svg width="24" height="31" viewBox="0 0 34 44" aria-hidden="true"><path d="M17 2C17 2 4 18 4 28a13 13 0 0 0 26 0C30 18 17 2 17 2Z" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M11 29a6 6 0 0 0 6 6" fill="none" stroke="#C9A04F" stroke-width="2.6" stroke-linecap="round"/></svg>
       <span>naqiva</span>
     </a>
-    <a class="btn btn-primary" href="#reserve" data-cta="header">حجز ديالك</a>
+    <a class="btn btn-primary" href="#reserve" data-cta="header">اطلب دابا</a>
   </div>
 </header>
 
@@ -234,17 +247,17 @@ footer a{color:#fff}
   <section class="hero" aria-labelledby="hero-title" style="padding-top:0">
     <div class="wrap" style="padding-top:28px">
       <div>
-        <span class="eyebrow"><i></i> قريب فالمغرب · <span class="lat">Détox Anti-Calcaire</span></span>
+        <span class="eyebrow"><i></i> جديد فالمغرب · <span class="lat">Détox Anti-Calcaire</span></span>
         <h1 id="hero-title" data-v-title>الما ديالك كيخسر ليك شعرك.</h1>
         <p class="sub" data-v-sub>الكالكير اللي فالما ديال الروبيني كيلصق فالشعر ويخليه ناشف، خشين وكيتكسر. Naqiva هو أول شامبو مغربي مصنوع باش يحيدو.</p>
         <div class="hero-cta">
-          <a class="btn btn-primary" href="#reserve" data-cta="hero"><span>حجز ديالك بـ <bdi dir="ltr">-<span data-discount>20</span>%</bdi></span>
+          <a class="btn btn-primary" href="#reserve" data-cta="hero"><span>اطلب دابا بـ <bdi dir="ltr">-<span data-discount>20</span>%</bdi></span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
           </a>
           <a class="btn btn-ghost" href="#how">كيفاش كيخدم؟</a>
         </div>
         <div class="hero-note">
-          <span><svg class="check" viewBox="0 0 24 24" fill="none" stroke="#0E4D5C" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg> بلا خلاص دابا</span>
+          <span><svg class="check" viewBox="0 0 24 24" fill="none" stroke="#0E4D5C" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg> الخلاص عند الاستلام</span>
           <span><svg class="check" viewBox="0 0 24 24" fill="none" stroke="#0E4D5C" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg> صنع فالمغرب</span>
           <span><svg class="check" viewBox="0 0 24 24" fill="none" stroke="#0E4D5C" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg> بلا sulfate</span>
         </div>
@@ -303,7 +316,7 @@ footer a{color:#fff}
           <h3 id="quiz-title-r"></h3>
           <div class="meter" aria-hidden="true"><i id="quiz-meter"></i></div>
           <p id="quiz-text"></p>
-          <a class="btn btn-primary" href="#reserve" data-cta="quiz">حجز Naqiva ديالك</a>
+          <a class="btn btn-primary" href="#reserve" data-cta="quiz">اطلب Naqiva ديالك</a>
         </div>
       </div>
     </div>
@@ -389,18 +402,18 @@ footer a{color:#fff}
     <div class="wrap">
       <div class="offer-box">
         <div class="offer-info">
-          <p class="kicker">Lancement</p>
-          <h2 id="offer-title">كون من الأوائل</h2>
+          <p class="kicker">Offre de lancement</p>
+          <h2 id="offer-title">عرض الإطلاق</h2>
           <div class="price" aria-live="polite">
-            <span class="now" data-price-now>قريب</span>
+            <span class="now" data-price-now></span>
             <span class="old" data-price-old hidden></span>
             <span class="tag"><bdi dir="ltr">-<span data-discount>20</span>%</bdi></span>
           </div>
           <ul class="perks">
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F3E7CC" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg> <span><b><bdi dir="ltr">-<span data-discount>20</span>%</bdi></b> على أول طلب ديالك ملي يخرج Naqiva</span></li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F3E7CC" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg> <span>كتكون الأول اللي كنتاصلو بيه</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F3E7CC" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg> <span><b><bdi dir="ltr">-<span data-discount>20</span>%</bdi></b> على الطلب ديالك، غير فترة الإطلاق</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F3E7CC" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg> <span>جوج بوطات بثمن أحسن</span></li>
             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F3E7CC" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg> <span>الخلاص عند الاستلام، فالمغرب كامل</span></li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F3E7CC" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg> <span>التسجيل بلا خلاص وبلا حتى التزام</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F3E7CC" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg> <span>كنعيطو ليك نأكدو الطلب قبل التوصيل</span></li>
           </ul>
           <div class="offer-img"><img src="img/pump-wide.webp" alt="بوطة Naqiva فالحمام" width="1280" height="720" loading="lazy"></div>
         </div>
@@ -408,9 +421,16 @@ footer a{color:#fff}
         <div>
           <form id="lead-form" novalidate>
             <div>
-              <h3 style="margin:0 0 4px;font-size:24px">حجز ديالك</h3>
-              <p style="margin:0;color:var(--muted);font-size:16px">عمر هاد المعلومات، وغادي نتاصلو بيك ملي يخرج المنتوج.</p>
+              <h3 style="margin:0 0 4px;font-size:24px">اطلب دابا</h3>
+              <p style="margin:0;color:var(--muted);font-size:16px">عمر المعلومات ديالك. الخلاص عند الاستلام.</p>
             </div>
+            <fieldset class="field">
+              <legend class="legend">اختار العرض</legend>
+              <div class="packs">
+                <label class="pack"><input type="radio" name="qty" value="1" checked><span><b>بوطة وحدة</b><small data-pack1></small></span></label>
+                <label class="pack"><input type="radio" name="qty" value="2"><span><em class="best">الأكثر توفيراً</em><b>جوج بوطات</b><small data-pack2></small></span></label>
+              </div>
+            </fieldset>
             <div class="field">
               <label for="f-name">السمية الكاملة</label>
               <input id="f-name" name="name" type="text" autocomplete="name" required>
@@ -432,6 +452,11 @@ footer a{color:#fff}
               </select>
               <div class="err" id="e-city" role="alert"></div>
             </div>
+            <div class="field">
+              <label for="f-address">العنوان</label>
+              <input id="f-address" name="address" type="text" autocomplete="street-address" placeholder="الحي، الزنقة، الرقم" required>
+              <div class="err" id="e-address" role="alert"></div>
+            </div>
             <fieldset class="field">
               <legend class="legend">شنو أكبر مشكل فشعرك؟ <span class="opt">(اختياري)</span></legend>
               <div class="chips">
@@ -442,14 +467,14 @@ footer a{color:#fff}
                 <label class="chip"><input type="radio" name="concern" value="جلدة الراس"><span>جلدة الراس</span></label>
               </div>
             </fieldset>
-            <button class="btn btn-primary" type="submit" id="f-submit"><span>سجلني وخود <bdi dir="ltr">-<span data-discount>20</span>%</bdi></span></button>
-            <p class="form-foot">المعلومات ديالك غادي تستعمل غير باش نتاصلو بيك على Naqiva. ما كنعطيوهاش لحتى واحد. <a href="privacy.html">الخصوصية</a></p>
+            <button class="btn btn-primary" type="submit" id="f-submit"><span>أكد الطلب · <span data-total></span></span></button>
+            <p class="form-foot">الخلاص عند الاستلام. غادي نعيطو ليك نأكدو الطلب. المعلومات ديالك ما كنعطيوهاش لحتى واحد. <a href="privacy.html">الخصوصية</a></p>
           </form>
 
           <div class="success" id="success" role="status" tabindex="-1">
             <div class="ic"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></div>
-            <h3>مبروك، نتا من الأوائل! 🎉</h3>
-            <p>تسجلتي بنجاح. غادي نتاصلو بيك ملي يخرج Naqiva، والتخفيض ديالك محجوز.</p>
+            <h3>شكراً، الطلب ديالك توصلنا! 🎉</h3>
+            <p id="success-text">غادي نعيطو ليك باش نأكدو الطلب ونقولو ليك الوقت ديال التوصيل. الخلاص عند الاستلام.</p>
             <a class="btn btn-ghost" id="success-share" href="#">شارك مع صحابك</a>
           </div>
         </div>
@@ -465,8 +490,8 @@ footer a{color:#fff}
         <h2 id="faq-title">الأسئلة اللي كتتعاود</h2>
       </div>
       <div class="faq">
-        <details><summary>واش Naqiva متوفر دابا؟</summary><p>باقي. Naqiva فمرحلة الإطلاق. ملي تسجل، كنتاصلو بيك أول واحد ملي يكون واجد، وكتاخد التخفيض ديال الأوائل.</p></details>
-        <details><summary>واش خاصني نخلص دابا؟</summary><p>لا. التسجيل فابور وبلا حتى التزام. ملي يخرج المنتوج، كتختار واش تطلب، والخلاص كيكون عند الاستلام.</p></details>
+        <details><summary>إمتى يوصلني الطلب؟</summary><p>من بعد ما تطلب، كنعيطو ليك باش نأكدو الطلب ونقولو ليك الوقت ديال التوصيل بالضبط. ما كتخلص والو حتى يوصلك.</p></details>
+        <details><summary>واش خاصني نخلص دابا؟</summary><p>لا. الخلاص كيكون عند الاستلام، نقداً للموزع. وإلا بدلتي رايك قبل التوصيل، غير قولها لينا فالمكالمة.</p></details>
         <details><summary>كيفاش نعرف واش الما عندي فيه الكالكير؟</summary><p>إلا كان كيبان ليك بياض على الروبيني، فالمقراج ولا فالدوش، راه الما فيه الكالكير. فبزاف ديال المدن المغربية الما كيكون قاصح.</p></details>
         <details><summary>شحال من مرة نستعملو؟</summary><p>مرة ولا جوج فالسيمانة كتكفي. فالأيام الأخرى استعمل الشامبو العادي ديالك.</p></details>
         <details><summary>واش كيصلح للشعر المصبوغ ولا المديفريزي؟</summary><p>التركيبة بلا sulfate ومصممة تكون خفيفة على الشعر. ولكن إلا كان شعرك مصبوغ جديد، سول الكوافور ديالك قبل.</p></details>
@@ -489,7 +514,7 @@ footer a{color:#fff}
       <a href="#" id="l-wa" hidden>WhatsApp</a>
       <a href="privacy.html">الخصوصية</a>
     </div>
-    <p class="legal">© <span id="year"></span> Naqiva · صنع فالمغرب. المنتوج فمرحلة التطوير، والصور كتوضح الشكل المتوقع ديالو. المعلومات ديال التسجيل كتستعمل غير باش نتاصلو بيك على الإطلاق، وتقدر تطلب تمسحها فأي وقت.</p>
+    <p class="legal">© <span id="year"></span> Naqiva · صنع فالمغرب. الصور توضيحية. المعلومات ديال الطلب كتستعمل غير باش نوصلو ليك الطلب ونتاصلو بيك، وتقدر تطلب تمسحها فأي وقت.</p>
   </div>
 </footer>
 
@@ -498,8 +523,8 @@ footer a{color:#fff}
 </a>
 
 <div class="mobile-cta" id="mobile-cta">
-  <div class="mini"><b><bdi dir="ltr">-<span data-discount>20</span>%</bdi> للأوائل</b>بلا خلاص دابا</div>
-  <a class="btn btn-primary" href="#reserve" data-cta="sticky">حجز ديالك</a>
+  <div class="mini"><b><bdi dir="ltr">-<span data-discount>20</span>%</bdi> عرض الإطلاق</b>الخلاص عند الاستلام</div>
+  <a class="btn btn-primary" href="#reserve" data-cta="sticky">اطلب دابا</a>
 </div>
 
 <script src="config.js"></script>

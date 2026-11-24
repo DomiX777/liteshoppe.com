@@ -23,20 +23,23 @@
   };
 
   /* ---------- discount + price ---------- */
-  var disc = Number(C.EARLY_DISCOUNT) || 20;
+  var disc = Number(C.EARLY_DISCOUNT) || 0;
+  var price = Number(C.PRICE) || 0;
+  var extra = Number(C.PACK2_EXTRA_DISCOUNT) || 0;
+  var unit = Math.round(price * (1 - disc / 100));
+  var pack2 = Math.round(unit * 2 * (1 - extra / 100));
+  var totals = { "1": unit, "2": pack2 };
   $$("[data-discount]").forEach(function (el) { el.textContent = disc; });
-  var price = Number(C.PRICE);
-  if (price > 0) {
-    var now = Math.round(price * (1 - disc / 100));
-    $("[data-price-now]").textContent = now + " DH";
-    var old = $("[data-price-old]");
-    old.textContent = price + " DH";
-    old.hidden = false;
-  } else {
-    $("[data-price-now]").textContent = "الثمن قريب";
-    $("[data-price-now]").style.fontFamily = "var(--font-ar)";
-    $("[data-price-now]").style.fontSize = "34px";
-  }
+  $("[data-price-now]").textContent = unit + " DH";
+  var old = $("[data-price-old]");
+  if (disc > 0) { old.textContent = price + " DH"; old.hidden = false; }
+  var p1 = $("[data-pack1]"), p2 = $("[data-pack2]");
+  if (p1) p1.innerHTML = unit + " DH" + (disc > 0 ? '<span class="strike">' + price + "</span>" : "");
+  if (p2) p2.innerHTML = pack2 + " DH" + '<span class="strike">' + price * 2 + "</span>";
+  var currentQty = function () { var q = $("input[name=qty]:checked"); return q ? q.value : "1"; };
+  var updateTotal = function () { $$("[data-total]").forEach(function (el) { el.textContent = totals[currentQty()] + " DH"; }); };
+  $$("input[name=qty]").forEach(function (r) { r.addEventListener("change", updateTotal); });
+  updateTotal();
 
   /* ---------- links ---------- */
   var wa = String(C.WHATSAPP || "").replace(/\D/g, "");
@@ -106,17 +109,21 @@
     var name = $("#f-name").value.trim();
     var phone = normalizePhone($("#f-phone").value);
     var city = $("#f-city").value;
+    var address = $("#f-address").value.trim();
+    var qty = currentQty();
     var concernEl = $("input[name=concern]:checked");
     var ok = true;
-    setErr("name"); setErr("phone"); setErr("city");
+    setErr("name"); setErr("phone"); setErr("city"); setErr("address");
     if (name.length < 2) { setErr("name", "كتب السمية ديالك عافاك"); ok = false; }
     if (!/^0[5-7]\d{8}$/.test(phone)) { setErr("phone", "الرقم ماشي صحيح. مثال: 0612345678"); ok = false; }
     if (!city) { setErr("city", "اختار المدينة ديالك"); ok = false; }
+    if (address.length < 5) { setErr("address", "كتب العنوان ديالك باش يوصلك الطلب"); ok = false; }
     if (!ok) { var first = $("[aria-invalid=true]"); if (first) first.focus(); return; }
 
     var data = {
       date: new Date().toISOString(),
-      name: name, phone: phone, city: city,
+      name: name, phone: phone, city: city, address: address,
+      qty: qty, total: String(totals[qty]),
       concern: concernEl ? concernEl.value : "",
       variant: tracking.variant,
       utm_source: tracking.utm_source, utm_medium: tracking.utm_medium,
@@ -126,15 +133,15 @@
     };
 
     btn.disabled = true;
-    btn.textContent = "كنسجلو…";
+    btn.textContent = "كنسجلو الطلب…";
 
     var done = function () {
-      trackEvent("Lead", "SubmitForm", { content_name: "Naqiva Detox", variant: tracking.variant });
+      trackEvent("Lead", "SubmitForm", { content_name: "Naqiva Detox", variant: tracking.variant, value: totals[qty], currency: "MAD", num_items: Number(qty) });
       form.style.display = "none";
       var s = $("#success");
       s.style.display = "block";
       s.focus();
-      var share = "شفت هاد الشامبو المغربي الجديد ضد الكالكير، Naqiva. سجل وخود -" + disc + "%: " + location.href.split("?")[0];
+      var share = "شفت هاد الشامبو المغربي الجديد ضد الكالكير، Naqiva. عندهم -" + disc + "% فالإطلاق: " + location.href.split("?")[0];
       $("#success-share").href = "https://wa.me/?text=" + encodeURIComponent(share);
       $("#success-share").target = "_blank";
     };
@@ -148,7 +155,7 @@
           setErr("phone", "وقع مشكل فالاتصال. عاود جرب من بعد شوية.");
         });
     } else if (wa) {
-      var msg = "السلام، بغيت نسجل فـ Naqiva\nالسمية: " + name + "\nالتيليفون: " + phone + "\nالمدينة: " + city + (data.concern ? "\nالمشكل: " + data.concern : "");
+      var msg = "السلام، بغيت نطلب Naqiva Détox\nالعدد: " + qty + " (" + totals[qty] + " DH)\nالسمية: " + name + "\nالتيليفون: " + phone + "\nالمدينة: " + city + "\nالعنوان: " + address + (data.concern ? "\nالمشكل: " + data.concern : "");
       window.open(waLink(msg), "_blank");
       done();
     } else {

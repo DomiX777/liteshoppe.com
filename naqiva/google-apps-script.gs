@@ -2,7 +2,7 @@
  * Naqiva – كيسجل الناس اللي عمرو الفورمولير فـ Google Sheet.
  * الطريقة: شوف README.md (الخطوة 2).
  */
-var HEADERS = ["date", "name", "phone", "city", "concern", "variant",
+var HEADERS = ["date", "name", "phone", "city", "address", "qty", "total", "concern", "variant",
   "utm_source", "utm_medium", "utm_campaign", "utm_content", "quiz_score", "page"];
 
 function doPost(e) {
