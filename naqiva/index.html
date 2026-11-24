@@ -24,6 +24,7 @@
   --font-ar:"Tajawal",system-ui,sans-serif; --font-lat:"Outfit",system-ui,sans-serif;
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--sand);color:var(--ink);font-family:var(--font-ar);font-size:18px;line-height:1.7;overflow-x:hidden}
 img{max-width:100%;display:block}
@@ -278,6 +279,44 @@ footer a{color:#fff}
   .hero-media{aspect-ratio:auto;height:520px}
 }
 
+/* v5: polish */
+.kicker{display:inline-flex;align-items:center;gap:10px}
+.kicker::before{content:"";width:26px;height:2px;background:currentColor;opacity:.7}
+.center .kicker::after{content:"";width:26px;height:2px;background:currentColor;opacity:.7}
+.dark{position:relative;margin-block:40px}
+.dark::before,.dark::after{content:"";position:absolute;inset-inline:0;height:40px;background-size:100% 100%;pointer-events:none}
+.dark::before{top:-39px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'%3E%3Cpath d='M0 60V30C240 0 480 0 720 22s480 38 720 8V60z' fill='%230E4D5C'/%3E%3C/svg%3E")}
+.dark::after{bottom:-39px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'%3E%3Cpath d='M0 0v30c240 30 480 30 720 8S1200 0 1440 30V0z' fill='%230E4D5C'/%3E%3C/svg%3E")}
+.pb{display:grid;grid-template-columns:1fr;gap:24px;align-items:stretch}
+.pb-media{border-radius:28px;overflow:hidden;box-shadow:var(--shadow);position:relative;min-height:280px}
+.pb-media img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.pb-media figcaption{position:absolute;bottom:14px;inset-inline-start:14px;background:rgba(255,255,255,.92);border-radius:999px;padding:8px 14px;font-size:14px;font-weight:700;color:var(--teal)}
+.pb .cards{grid-template-columns:1fr;align-content:center}
+.pb .card{display:grid;grid-template-columns:52px 1fr;column-gap:16px;align-items:start;padding:22px}
+.pb .card .ic{grid-row:span 2;margin:0}
+.ing-photos{display:flex;gap:14px;margin-bottom:22px}
+.ing-photo{flex:1;border-radius:20px;overflow:hidden;position:relative;aspect-ratio:1/1;max-width:200px}
+.ing-photo img{width:100%;height:100%;object-fit:cover}
+.ing-photo span{position:absolute;bottom:10px;inset-inline-start:10px;background:rgba(10,56,66,.82);color:#fff;border-radius:999px;padding:5px 12px;font-size:14px;font-weight:700}
+.life{display:grid;grid-template-columns:1fr;gap:32px;align-items:center}
+.life-media{border-radius:32px;overflow:hidden;box-shadow:var(--shadow);aspect-ratio:1/1}
+.life-media img{width:100%;height:100%;object-fit:cover}
+.benefits{list-style:none;margin:0 0 26px;padding:0;display:grid;gap:14px}
+.benefits li{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 18px}
+.benefits .ic{width:44px;height:44px;border-radius:14px;background:var(--gold-soft);color:var(--teal-dark);display:grid;place-items:center;flex:none}
+.benefits h3{margin:0;font-size:18px}.benefits p{margin:2px 0 0;color:var(--muted);font-size:16px}
+.foot-grid{display:grid;grid-template-columns:1fr;gap:28px}
+.foot-col h4{margin:0 0 10px;color:#fff;font-size:16px}
+.foot-col a{display:block;color:#CFE3E0;text-decoration:none;padding:3px 0}
+.foot-col a:hover{color:#fff}
+.pay{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.pay span{border:1px solid rgba(255,255,255,.25);border-radius:10px;padding:6px 10px;font-size:13.5px}
+@media (min-width:900px){
+  .pb{grid-template-columns:1fr 1.1fr}
+  .life{grid-template-columns:1fr 1fr;gap:64px}
+  .foot-grid{grid-template-columns:1.4fr 1fr 1fr}
+}
+
 @media (min-width:700px){
   .trust .wrap{grid-template-columns:repeat(4,minmax(0,1fr))}
   .sci{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -378,7 +417,9 @@ footer a{color:#fff}
       <p class="kicker">Le problème</p>
       <h2 id="pb-title">واش لاحظتي هاد الحوايج فشعرك؟</h2>
       <p class="lead">فبزاف ديال المدن فالمغرب، الما ديال الروبيني فيه الكالكير. مع كل دوش، كيبقى شوية منو لاصق فالشعر وفجلدة الراس، والشامبو العادي ما كيحيدوش.</p>
-      <div class="cards" style="text-align:start">
+      <div class="pb" style="text-align:start">
+        <figure class="pb-media reveal" style="margin:0"><img src="img/p-limescale.webp" alt="الكالكير الأبيض على راس الدوش" width="720" height="720" loading="lazy"><figcaption>هادا هو الكالكير… وكيلصق حتى فشعرك</figcaption></figure>
+      <div class="cards">
         <div class="card reveal">
           <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 3c-3 4-6 7.5-6 11a6 6 0 0 0 12 0c0-3.5-3-7-6-11z"/><path d="M4 4l16 16"/></svg></div>
           <h3>ناشف وخشين</h3>
@@ -394,6 +435,7 @@ footer a{color:#fff}
           <h3>كيتكسر بالساهل</h3>
           <p>الأطراف كيتشقو، والشعر كيبقى فالمشطة أكثر من العادة.</p>
         </div>
+      </div>
       </div>
     </div>
   </section>
@@ -498,6 +540,10 @@ footer a{color:#fff}
           <li><div><b>منظفات لطاف</b><small>Sodium Cocoyl Isethionate · Coco-Betaine</small></div><span class="role">رغوة خفيفة بلا sulfate</span></li>
         </ul>
         <div>
+          <div class="ing-photos">
+            <div class="ing-photo"><img src="img/i-rosemary.webp" alt="أكليل الجبل" width="320" height="320" loading="lazy"><span>أكليل الجبل</span></div>
+            <div class="ing-photo"><img src="img/i-flower.webp" alt="زهر الليمون" width="320" height="320" loading="lazy"><span>ما الزهر</span></div>
+          </div>
           <h3 style="margin:0 0 14px;font-size:21px">اللي ما فيهش</h3>
           <div class="free">
             <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F3E7CC" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M6 18L18 6"/></svg> بلا sulfate</div>
@@ -512,6 +558,24 @@ footer a{color:#fff}
           </div>
           <p class="note">التركيبة النهائية كاملة (INCI) كتكون مكتوبة على البوطة.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIFESTYLE -->
+  <section aria-labelledby="life-title">
+    <div class="wrap life">
+      <div class="life-media reveal"><img src="img/l-woman.webp" alt="شعر لامع وصحي مع بوطة Naqiva" width="720" height="720" loading="lazy"></div>
+      <div>
+        <p class="kicker">Le résultat</p>
+        <h2 id="life-title">رجع لشعرك الخفة واللمعة ديالو</h2>
+        <p class="lead">ملي كيتحيد الكالكير، الشعر كيقدر يرجع يتنفس، والماسك والزيت ديالك كيخدمو مزيان.</p>
+        <ul class="benefits">
+          <li class="reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c-3 4-6 7.5-6 11a6 6 0 0 0 12 0c0-3.5-3-7-6-11z"/></svg></div><div><h3>شعر نقي من الكالكير</h3><p>بلا بقايا المعادن اللي كتخليه تقيل وخشين.</p></div></li>
+          <li class="reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/></svg></div><div><h3>أنعم وفيه اللمعة</h3><p>الـ pH الحامضي كيسد الشعرة وكيرجع ليها اللمعة.</p></div></li>
+          <li class="reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c0-8 6-13 14-14-1 8-6 14-14 14z"/><path d="M5 19l7-7"/></svg></div><div><h3>ريحة ما الزهر</h3><p>ريحة مغربية خفيفة كتبقى معاك النهار كامل.</p></div></li>
+        </ul>
+        <a class="btn btn-primary" href="#reserve" data-cta="life">اطلب Naqiva ديالك</a>
       </div>
     </div>
   </section>
@@ -659,18 +723,31 @@ footer a{color:#fff}
 
 <footer>
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="Naqiva">
-      <svg width="22" height="28" viewBox="0 0 34 44" aria-hidden="true"><path d="M17 2C17 2 4 18 4 28a13 13 0 0 0 26 0C30 18 17 2 17 2Z" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M11 29a6 6 0 0 0 6 6" fill="none" stroke="#C9A04F" stroke-width="2.6" stroke-linecap="round"/></svg>
-      <span>naqiva</span>
-    </a>
-    <p style="margin:0">العناية بالشعر، مصنوعة للما ديال المغرب.</p>
-    <div class="foot-links">
-      <a href="#" id="l-ig" hidden>Instagram</a>
-      <a href="#" id="l-tt" hidden>TikTok</a>
-      <a href="#" id="l-wa" hidden>WhatsApp</a>
-      <a href="privacy.html">الخصوصية</a>
+    <div class="foot-grid">
+      <div class="foot-col">
+        <a class="logo" href="#top" aria-label="Naqiva" style="padding:0">
+          <svg width="22" height="28" viewBox="0 0 34 44" aria-hidden="true"><path d="M17 2C17 2 4 18 4 28a13 13 0 0 0 26 0C30 18 17 2 17 2Z" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M11 29a6 6 0 0 0 6 6" fill="none" stroke="#C9A04F" stroke-width="2.6" stroke-linecap="round"/></svg>
+          <span>naqiva</span>
+        </a>
+        <p style="margin:12px 0 0">العناية بالشعر، مصنوعة للما ديال المغرب.</p>
+        <div class="pay"><span>الخلاص عند الاستلام</span><span>التوصيل فابور</span><span>صنع فالمغرب</span></div>
+      </div>
+      <div class="foot-col">
+        <h4>المنتوج</h4>
+        <a href="#how">كيفاش كيخدم</a>
+        <a href="#formula">المكونات</a>
+        <a href="#reviews">الآراء</a>
+        <a href="#faq">الأسئلة</a>
+      </div>
+      <div class="foot-col">
+        <h4>تواصل معانا</h4>
+        <a href="#" id="l-wa" hidden>WhatsApp</a>
+        <a href="#" id="l-ig" hidden>Instagram</a>
+        <a href="#" id="l-tt" hidden>TikTok</a>
+        <a href="privacy.html">سياسة الخصوصية</a>
+      </div>
     </div>
-    <p class="legal">© <span id="year"></span> Naqiva · صنع فالمغرب. الصور توضيحية. المعلومات ديال الطلب كتستعمل غير باش نوصلو ليك الطلب ونتاصلو بيك، وتقدر تطلب تمسحها فأي وقت.</p>
+    <p class="legal" style="border-top:1px solid rgba(255,255,255,.12);padding-top:18px;margin:8px 0 0">© <span id="year"></span> Naqiva · صنع فالمغرب. الصور توضيحية. المعلومات ديال الطلب كتستعمل غير باش نوصلو ليك الطلب ونتاصلو بيك، وتقدر تطلب تمسحها فأي وقت.</p>
   </div>
 </footer>
 
