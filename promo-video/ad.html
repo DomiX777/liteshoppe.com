@@ -69,8 +69,13 @@ canvas{position:absolute;inset:0}
 .ticket{position:absolute;left:24px;top:24px;width:330px;bottom:24px;border-radius:28px;background:rgba(255,255,255,.04);border:1.5px solid var(--line);padding:24px}
 .line{display:flex;justify-content:space-between;font-size:25px;font-weight:700;padding:10px 0;border-bottom:1px dashed rgba(255,255,255,.12)}
 .receipt{width:360px;left:110px;top:1400px;background:#f8fafc;color:#0f172a;border-radius:6px;padding:24px 28px;font-size:24px;font-weight:700;box-shadow:0 30px 60px rgba(0,0,0,.5)}
+.aphone{width:400px;height:820px;border-radius:64px;background:#0b0e1e;border:12px solid #1e2440;overflow:hidden;box-shadow:0 40px 110px rgba(0,0,0,.6),0 0 60px rgba(91,140,255,.35)}
+.apill{padding:8px 22px;border-radius:999px;background:rgba(255,255,255,.07);font-size:22px;font-weight:700}
+.apill.on{background:linear-gradient(90deg,var(--cy),var(--vi))}
+.acard{flex:1;height:150px;border-radius:22px;background:rgba(255,255,255,.05);padding:12px}
+.store{height:100px;width:370px;border-radius:28px;display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:800;font-family:'JetBrains Mono',monospace;direction:ltr}
 /* scene 6 */
-.chip{position:absolute;left:0;top:0;padding:22px 38px;border-radius:999px;font-size:38px;font-weight:800;white-space:nowrap;display:flex;align-items:center;gap:14px}
+.chip{position:absolute;left:0;top:0;padding:16px 30px;border-radius:999px;font-size:31px;font-weight:800;white-space:nowrap;display:flex;align-items:center;gap:14px}
 .core{width:300px;height:300px;left:390px;top:700px;border-radius:50%;
   background:radial-gradient(circle at 35% 30%,#fff,var(--cy) 20%,var(--vi) 55%,#1e1b4b 80%);box-shadow:0 0 120px rgba(91,140,255,.8),0 0 240px rgba(56,189,248,.4);
   display:flex;align-items:center;justify-content:center;font-size:110px;font-weight:900;color:#fff;font-family:'JetBrains Mono',monospace;direction:ltr}
@@ -87,7 +92,7 @@ canvas{position:absolute;inset:0}
 
   <!-- ============ SCENE 1 : HOOK ============ -->
   <div class="scene" id="s1">
-    <div class="abs kicker" id="s1k" style="top:640px;left:0;right:0;text-align:center">WEB · PLATFORMS · POS</div>
+    <div class="abs kicker" id="s1k" style="top:640px;left:0;right:0;text-align:center">WEB · APPS · PLATFORMS · POS</div>
     <div class="abs h1" id="s1a" style="top:740px;left:0;right:0;font-size:110px">عندك مشروع؟</div>
     <div class="abs h1" id="s1b" style="top:900px;left:0;right:0;font-size:88px">خلّيه يولّي ديجيتال</div>
     <div class="abs" id="s1line" style="top:1110px;left:240px;width:600px;height:6px;border-radius:3px;background:linear-gradient(90deg,var(--cy),var(--vi),var(--mg))"></div>
@@ -208,17 +213,49 @@ canvas{position:absolute;inset:0}
     </div>
   </div>
 
+
+  <!-- ============ SCENE 8 : MOBILE APPS ============ -->
+  <div class="scene" id="s8" style="perspective:2400px">
+    <div class="titleblk" id="s8t"><div class="kicker">05 — Mobile Apps</div><div class="h2">تطبيقات <span class="grad">موبايل</span></div><div class="sub">Android · iOS · تطبيقات ديال البيزنس</div></div>
+    <div class="abs aphone" id="ap1" style="left:90px;top:560px">
+      <div class="ai" style="display:flex;justify-content:space-between;align-items:center;margin:54px 26px 0"><div style="font-size:34px;font-weight:900">مرحبا 👋</div><div style="width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,var(--cy),var(--vi))"></div></div>
+      <div class="ai" style="margin:22px 26px 0;height:62px;border-radius:20px;background:rgba(255,255,255,.07);display:flex;align-items:center;padding:0 20px;color:var(--mut);font-size:24px">🔍 قلّب على أي حاجة...</div>
+      <div class="ai" style="display:flex;gap:12px;margin:22px 26px 0"><span class="apill on">الكل</span><span class="apill">جديد</span><span class="apill">عروض</span></div>
+      <div class="ai" style="margin:22px 26px 0;height:200px;border-radius:26px;background:linear-gradient(130deg,#1e3a8a,#5b8cff 55%,#38bdf8);position:relative;overflow:hidden"><div style="position:absolute;right:22px;top:28px;font-size:34px;font-weight:900">-30%</div><div style="position:absolute;right:22px;top:84px;font-size:24px">عرض ديال الأسبوع</div><div style="position:absolute;left:-30px;bottom:-40px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.18)"></div></div>
+      <div style="display:flex;gap:16px;margin:20px 26px 0"><div class="ai acard"><div style="height:110px;border-radius:18px;background:linear-gradient(135deg,var(--vi),var(--mg))"></div></div><div class="ai acard"><div style="height:110px;border-radius:18px;background:linear-gradient(135deg,var(--cy),var(--gr))"></div></div></div>
+      <div class="ai" style="position:absolute;left:0;right:0;bottom:0;height:96px;background:rgba(255,255,255,.05);display:flex;justify-content:space-around;align-items:center;font-size:36px">🏠<span style="opacity:.5">🛍️</span><span style="opacity:.5">❤️</span><span style="opacity:.5">👤</span></div>
+    </div>
+    <div class="abs aphone" id="ap2" style="left:590px;top:640px">
+      <svg width="376" height="500" style="position:absolute;left:0;top:0">
+        <rect width="376" height="500" fill="#0d1226"/>
+        <g stroke="rgba(91,140,255,.18)" stroke-width="10" fill="none"><path d="M0 120 H376 M0 300 H376 M0 420 H376 M90 0 V500 M240 0 V500 M320 0 V500"/></g>
+        <path id="route" d="M70 440 C70 330 150 330 160 300 S250 220 240 160 S300 90 300 80" fill="none" stroke="url(#lg)" stroke-width="9" stroke-linecap="round"/>
+        <circle cx="70" cy="440" r="12" fill="#38bdf8"/>
+      </svg>
+      <div id="pin" style="position:absolute;left:276px;top:28px;font-size:48px">📍</div>
+      <div id="scoot" style="position:absolute;left:0;top:0;font-size:46px">🛵</div>
+      <div class="ai" style="position:absolute;left:0;right:0;bottom:0;height:296px;border-radius:36px 36px 0 0;background:#141a33;padding:28px">
+        <div style="font-size:30px;font-weight:900">الكوموند ديالك فالطريق</div>
+        <div style="font-size:24px;color:var(--mut);margin-top:4px">كتوصل فـ <span class="mono" id="eta" style="color:var(--cy)">12</span> دقيقة</div>
+        <div style="height:14px;border-radius:7px;background:rgba(255,255,255,.08);margin-top:24px;overflow:hidden;direction:ltr"><div id="prog" style="height:100%;width:0;border-radius:7px;background:linear-gradient(90deg,var(--cy),var(--vi))"></div></div>
+        <div style="display:flex;align-items:center;gap:16px;margin-top:26px"><div style="width:62px;height:62px;border-radius:50%;background:linear-gradient(135deg,var(--mg),var(--vi));display:flex;align-items:center;justify-content:center;font-size:32px">🧑</div><div style="font-size:26px;font-weight:800">يوسف · ⭐ 4.9</div></div>
+      </div>
+    </div>
+    <div class="abs glass store" id="st1" style="left:150px;top:1560px">▶&nbsp; Google Play</div>
+    <div class="abs glass store" id="st2" style="left:560px;top:1560px">&nbsp;App Store&nbsp;</div>
+    <div class="abs glass notif" id="apn" style="top:1700px;right:auto;left:160px;width:760px"><div class="ico" style="background:rgba(56,189,248,.18)">🔔</div><div>كوموند جديدة وصلات!</div></div>
+  </div>
   <!-- ============ SCENE 6 : EVERYTHING ============ -->
   <div class="scene" id="s6">
     <div class="ring" id="r1" style="left:240px;top:550px;width:600px;height:600px"></div>
     <div class="ring" id="r2" style="left:140px;top:450px;width:800px;height:800px;border-color:rgba(56,189,248,.35)"></div>
     <div class="abs core" id="core">&lt;/&gt;</div>
     <div id="chips"></div>
-    <div class="abs" id="s6t" style="top:1430px;left:0;right:0;text-align:center">
-      <div class="h2" id="s6a">وأي حاجة فبالك...</div>
+    <div class="abs" id="s6t" style="top:1390px;left:0;right:0;text-align:center">
+      <div class="h2" id="s6a" style="font-size:56px;line-height:1.35;padding:0 60px">جميع أنواع السيتات، البلاتفورمات والتطبيقات</div>
       <div class="h1 grad" id="s6b" style="margin-top:10px">كنصاوبوها ليك</div>
     </div>
-    <div class="abs kicker" id="s6k" style="top:230px;left:0;right:0;text-align:center">05 — & much more</div>
+    <div class="abs kicker" id="s6k" style="top:230px;left:0;right:0;text-align:center">06 — & much more</div>
   </div>
 
   <!-- ============ SCENE 7 : CTA ============ -->
@@ -230,7 +267,7 @@ canvas{position:absolute;inset:0}
       <div id="lsweep" style="position:absolute;inset:0;-webkit-mask:url(logo.png) center/100% 100% no-repeat;mask:url(logo.png) center/100% 100% no-repeat;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.95) 50%,transparent 65%);background-size:300% 100%"></div>
     </div>
     <div class="abs" id="brand" style="display:none"></div>
-    <div class="abs kicker" id="tag" style="top:1080px;left:0;right:0;text-align:center;color:#cbd5e1">Websites · Platforms · POS</div>
+    <div class="abs kicker" id="tag" style="top:1080px;left:0;right:0;text-align:center;color:#cbd5e1">Websites · Apps · Platforms · POS</div>
     <div class="abs h2" id="cta" style="top:1170px;left:0;right:0">تواصل معايا <span class="grad">دابا</span></div>
     <div class="abs wa" id="wa"><svg width="64" height="64" viewBox="0 0 24 24"><path fill="#fff" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.6-.1 1.2z"/></svg><span class="mono" id="phone"></span></div>
     <div class="abs sub" id="cta2" style="top:1560px;left:0;right:0">خلّي المشروع ديالك يبان كيف خاصو ✨</div>
@@ -251,7 +288,7 @@ const CONFIG = {
   url:   "www.ovyra.ma",   // الدومين ديالك
 };
 /* ====================================================== */
-const DUR = 37;
+const DUR = 39;
 const $ = s => document.querySelector(s);
 const cl = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const P = (t, a, d) => cl((t - a) / d);
@@ -280,13 +317,14 @@ function words(el) { // split into word spans (keeps Arabic ligatures)
 
 /* ---------- scenes timing ---------- */
 const SC = [
-  { id: 's1', a: 0,    b: 4.5 },
-  { id: 's2', a: 4.5,  b: 10.0 },
-  { id: 's3', a: 10.0, b: 15.5 },
-  { id: 's4', a: 15.5, b: 21.0 },
-  { id: 's5', a: 21.0, b: 26.5 },
-  { id: 's6', a: 26.5, b: 31.0 },
-  { id: 's7', a: 31.0, b: 37.5 },
+  { id: 's1', a: 0,    b: 4.0 },
+  { id: 's2', a: 4.0,  b: 9.0 },
+  { id: 's3', a: 9.0,  b: 14.0 },
+  { id: 's4', a: 14.0, b: 19.0 },
+  { id: 's5', a: 19.0, b: 24.0 },
+  { id: 's8', a: 24.0, b: 29.0 },
+  { id: 's6', a: 29.0, b: 33.5 },
+  { id: 's7', a: 33.5, b: 40.0 },
 ];
 const TR = .5;
 window.CUTS = SC.slice(1).map(s => s.a);
@@ -359,7 +397,7 @@ TAPS.forEach(([i]) => { const m = MENU[i]; const e = document.createElement('div
   const r = document.createElement('div'); r.style.cssText = 'display:flex;justify-content:space-between;padding:3px 0'; r.innerHTML = `<span>${m[1]}</span><span class="mono">${m[2]}</span>`; rl.append(r); });
 const tlines = [...tl.children]; const TOTAL = TAPS.reduce((s, [i]) => s + MENU[i][2], 0); $('#rtot').textContent = TOTAL + ' DH';
 // chips
-const CHIPS = [['🛒', 'متاجر إلكترونية'], ['📱', 'تطبيقات موبايل'], ['📅', 'حجز المواعيد'], ['💳', 'الدفع أونلاين'], ['🚀', 'SEO'], ['🏨', 'سيتات الفنادق'], ['📊', 'ERP / CRM'], ['🎨', 'UI / UX']];
+const CHIPS = [['🛒', 'متاجر إلكترونية'], ['📱', 'تطبيقات موبايل'], ['📅', 'حجز المواعيد'], ['💳', 'الدفع أونلاين'], ['🚀', 'SEO'], ['🏨', 'سيتات الفنادق'], ['📊', 'ERP / CRM'], ['🎨', 'UI / UX'], ['🏫', 'منصات التعليم'], ['🏥', 'سيتات العيادات']];
 const chipsEl = $('#chips'); const CC = ['56,189,248', '139,92,246', '139,92,246', '52,211,153'];
 CHIPS.forEach((c, i) => { const e = document.createElement('div'); e.className = 'chip glass'; const col = CC[i % 4]; e.style.borderColor = `rgba(${col},.7)`; e.style.boxShadow = `0 0 40px rgba(${col},.35)`; e.style.borderRadius = '999px'; e.innerHTML = `<span>${c[0]}</span><span>${c[1]}</span>`; chipsEl.append(e); });
 const chips = [...chipsEl.children];
@@ -456,16 +494,31 @@ const U = {
     const pay = P(lt, 3.5, .3); $('#paybtn').style.scale = 1 - .07 * Math.sin(pay * 3.14); $('#paybtn').style.boxShadow = lt > 3.5 ? `0 0 ${50 * (1 - P(lt, 3.6, .8))}px rgba(139,92,246,1)` : '';
     const rk = eo(P(lt, 3.75, 1.0)); $('#s5rec').style.clipPath = `inset(0 0 ${100 * (1 - rk)}% 0)`; $('#s5rec').style.opacity = rk > 0 ? 1 : 0; $('#s5rec').style.transform = `translateY(${-40 * (1 - rk)}px) rotate(${-3 * rk}deg)`;
   },
+  s8(lt) {
+    pop($('#s8t'), lt, .05, .7, { y: -60 });
+    const e1 = eo(P(lt, .2, .9)), e2 = eo(P(lt, .4, .9));
+    tf($('#ap1'), { x: -300 * (1 - e1), y: Math.sin(lt * 1.6) * 10, o: e1, extra: `rotateY(${lerp(40, 14, e1)}deg) rotateZ(${-3 * e1}deg)` });
+    tf($('#ap2'), { x: 300 * (1 - e2), y: Math.sin(lt * 1.6 + 1.5) * 10, o: e2, extra: `rotateY(${lerp(-40, -14, e2)}deg) rotateZ(${3 * e2}deg)` });
+    document.querySelectorAll('#ap1 .ai').forEach((el, i) => pop(el, lt, .8 + i * .12, .45, { y: 40, b: 0 }));
+    document.querySelectorAll('#ap2 .ai').forEach((el, i) => pop(el, lt, 1.0 + i * .12, .5, { y: 160, b: 0, s: 1 }));
+    const rt = $('#route'), RL = rt.getTotalLength(), rk = eio(P(lt, 1.2, 2.6));
+    rt.style.strokeDasharray = RL; rt.style.strokeDashoffset = RL * (1 - rk);
+    const pt = rt.getPointAtLength(RL * rk); tf($('#scoot'), { x: pt.x - 24, y: pt.y - 30, o: P(lt, 1.1, .3) });
+    pop($('#pin'), lt, 1.0, .5, { y: -60, s: .4 }); $('#pin').style.translate = `0 ${-Math.abs(Math.sin(lt * 4)) * 8}px`;
+    $('#prog').style.width = (rk * 100) + '%'; $('#eta').textContent = Math.max(1, Math.round(12 - 11 * rk));
+    pop($('#st1'), lt, 2.2, .6, { y: 60, s: .7 }); pop($('#st2'), lt, 2.35, .6, { y: 60, s: .7 });
+    pop($('#apn'), lt, 3.2, .6, { y: -80, s: .8 });
+  },
   s6(lt) {
     pop($('#s6k'), lt, .05, .6, { y: -40 });
     const ce = eb(P(lt, .1, .8)); tf($('#core'), { s: ce * (1 + .04 * Math.sin(lt * 4)), o: cl(ce) });
     [['#r1', 1], ['#r2', -1]].forEach(([s, d], i) => { const k = eo(P(lt, .2 + i * .15, 1)); tf($(s), { s: lerp(.3, 1, k) + .03 * Math.sin(lt * 2 + i), o: k, extra: `rotateX(65deg) rotateZ(${d * lt * 30}deg)` }); });
+    const SLOTS = [[310, 330], [770, 330], [215, 500], [865, 500], [175, 690], [905, 690], [175, 900], [905, 900], [300, 1100], [780, 1100]];
     chips.forEach((c, i) => {
-      const ang = i / chips.length * 6.283 + lt * .55, k = eb(P(lt, .4 + i * .12, .7));
-      const rx = 420 * k, ry = 470 * k, x = 540 + Math.cos(ang) * rx, y = 850 + Math.sin(ang) * ry * .9;
-      const depth = (Math.sin(ang) + 1) / 2; const w = c.offsetWidth, h = c.offsetHeight;
-      c.style.transform = `translate(${x - w / 2}px,${y - h / 2}px) scale(${(.75 + depth * .35) * cl(k * 1.2)})`;
-      c.style.opacity = cl(P(lt, .4 + i * .12, .4)) * (.55 + depth * .45); c.style.zIndex = Math.round(depth * 10);
+      const [sx, sy] = SLOTS[i % SLOTS.length]; const k = eb(P(lt, .4 + i * .1, .7)), ko = cl(P(lt, .4 + i * .1, .35));
+      const x = lerp(540, sx, k) + Math.sin(lt * 1.3 + i) * 10, y = lerp(850, sy, k) + Math.cos(lt * 1.1 + i * 2) * 12;
+      const w = c.offsetWidth, h = c.offsetHeight;
+      c.style.transform = `translate(${x - w / 2}px,${y - h / 2}px) scale(${lerp(.3, 1, cl(k))})`; c.style.opacity = ko;
     });
     pop($('#s6a'), lt, 2.0, .6, { y: 60 });
     pop($('#s6b'), lt, 2.6, .7, { y: 60, s: .7, b: 20 });
@@ -509,7 +562,7 @@ window.seek = function (t, frame = 0) {
   const fk = cl(cl(1 - t / .4) + P(t, DUR - .5, .5)); $('#vig').style.background = `radial-gradient(ellipse at center,rgba(0,0,0,${fk}) 0%,rgba(0,0,0,${fk}) 55%,rgba(0,0,0,${.7 + .3 * fk}) 100%)`;
 };
 window.DUR = DUR;
-const _seek = window.seek; window.seek = (t, f = 0) => { _seek(t, f); $('#wm').style.opacity = .85 * P(t, 4.6, .6) * (1 - P(t, 30.6, .4)); };
+const _seek = window.seek; window.seek = (t, f = 0) => { _seek(t, f); $('#wm').style.opacity = .85 * P(t, 4.1, .6) * (1 - P(t, 33.1, .4)); };
 document.fonts.ready.then(() => { window.READY = true; seek(0); });
 </script>
 </body>
