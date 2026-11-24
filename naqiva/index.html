@@ -14,8 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="img/hero-square.webp" media="(max-width: 899px)">
-<link rel="preload" as="image" href="img/hero-wide.webp" media="(min-width: 900px)">
+<link rel="preload" as="image" href="img/hero-square.webp">
 <style>
 :root{
   --teal:#0E4D5C; --teal-dark:#0A3842; --teal-soft:#E3F0EE; --aqua:#EAF4F2;
@@ -57,7 +56,7 @@ a{color:var(--teal)}
 /* hero */
 .hero{padding:36px 0 56px}
 .hero .wrap{display:grid;grid-template-columns:1fr;gap:28px;align-items:center}
-.hero-media{border-radius:28px;overflow:hidden;box-shadow:var(--shadow);aspect-ratio:1/1;background:var(--aqua)}
+.hero-media{border-radius:28px;overflow:hidden;box-shadow:var(--shadow);background:var(--aqua)}
 .hero-media img{width:100%;height:100%;object-fit:cover}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--line);color:var(--teal);border-radius:999px;padding:6px 14px;font-size:15px;font-weight:700}
 .eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--gold);display:inline-block}
@@ -251,6 +250,34 @@ footer a{color:#fff}
 .dots{display:flex}
 .dots i{width:30px;height:30px;border-radius:50%;border:2px solid var(--sand);margin-inline-start:-8px;background:var(--teal-soft);display:inline-block}
 .dots i:nth-child(2){background:#D9E9E5}.dots i:nth-child(3){background:var(--gold-soft)}
+/* v4: hero gallery + price */
+.hero-media{aspect-ratio:1/1;height:auto}
+.gallery{display:flex;flex-direction:column;gap:10px}
+.thumbs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.thumb{padding:0;border:2px solid transparent;border-radius:14px;overflow:hidden;cursor:pointer;background:var(--aqua);aspect-ratio:1/1;transition:border-color .15s}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb[aria-current="true"]{border-color:var(--teal)}
+.hero-price{display:flex;align-items:center;flex-wrap:wrap;gap:10px 14px;margin:0 0 22px}
+.hero-price .now{font:600 34px/1 var(--font-lat);color:var(--teal);direction:ltr;unicode-bidi:isolate}
+.hero-price .old{font:500 19px/1 var(--font-lat);color:var(--muted);text-decoration:line-through;direction:ltr;unicode-bidi:isolate}
+.hero-price .tag{background:var(--gold);color:var(--teal-dark);font-weight:800;border-radius:999px;padding:6px 12px;font-size:14px}
+.hero-price .ship{font-size:15px;color:var(--muted)}
+.hero-copy{order:2}.gallery{order:1}
+/* mid CTA band */
+.band{background:var(--gold-soft);padding:44px 0}
+.band .wrap{display:flex;flex-direction:column;gap:18px;align-items:center;text-align:center}
+.band h2{margin:0;font-size:clamp(26px,4.4vw,36px)}
+.band p{margin:0;color:var(--muted)}
+.band-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:center}
+/* order summary */
+.summary{background:var(--sand);border-radius:16px;padding:14px 18px;text-align:start;margin:0 auto 20px;max-width:360px;font-size:16px}
+.summary div{display:flex;justify-content:space-between;gap:12px;padding:4px 0}
+.summary b{direction:ltr;unicode-bidi:isolate}
+@media (min-width:900px){
+  .hero-copy{order:1}.gallery{order:2}
+  .hero-media{aspect-ratio:auto;height:520px}
+}
+
 @media (min-width:700px){
   .trust .wrap{grid-template-columns:repeat(4,minmax(0,1fr))}
   .sci{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -269,7 +296,6 @@ footer a{color:#fff}
   body{font-size:18.5px}
   .hero{padding:56px 0 80px}
   .hero .wrap{grid-template-columns:1.05fr 1fr;gap:56px}
-  .hero-media{aspect-ratio:auto;height:560px}
   section{padding:96px 0}
   .split{grid-template-columns:1fr 1fr;gap:64px}
   .ingr{grid-template-columns:repeat(4,minmax(0,1fr))}
@@ -300,12 +326,18 @@ footer a{color:#fff}
   <!-- HERO -->
   <section class="hero" aria-labelledby="hero-title" style="padding-top:0">
     <div class="wrap" style="padding-top:28px">
-      <div>
+      <div class="hero-copy">
         <span class="eyebrow"><i></i> جديد فالمغرب · <span class="lat">Détox Anti-Calcaire</span></span>
         <h1 id="hero-title" data-v-title>الما ديالك كيخسر ليك شعرك.</h1>
         <p class="sub" data-v-sub>الكالكير اللي فالما ديال الروبيني كيلصق فالشعر ويخليه ناشف، خشين وكيتكسر. Naqiva هو أول شامبو مغربي مصنوع باش يحيدو.</p>
+        <div class="hero-price">
+          <span class="now" data-hero-price></span>
+          <span class="old" data-hero-old></span>
+          <span class="tag"><bdi dir="ltr">-<span data-discount>25</span>%</bdi></span>
+          <span class="ship">التوصيل فابور · الخلاص عند الاستلام</span>
+        </div>
         <div class="hero-cta">
-          <a class="btn btn-primary" href="#reserve" data-cta="hero"><span>اطلب دابا بـ <bdi dir="ltr">-<span data-discount>20</span>%</bdi></span>
+          <a class="btn btn-primary" href="#reserve" data-cta="hero"><span>اطلب دابا</span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
           </a>
           <a class="btn btn-ghost" href="#how">كيفاش كيخدم؟</a>
@@ -316,11 +348,16 @@ footer a{color:#fff}
           <span><svg class="check" viewBox="0 0 24 24" fill="none" stroke="#0E4D5C" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg> بلا sulfate</span>
         </div>
       </div>
-      <div class="hero-media">
-        <picture>
-          <source media="(min-width: 900px)" srcset="img/hero-wide.webp">
-          <img src="img/hero-square.webp" alt="بوطة شامبو Naqiva Détox Anti-Calcaire فالدوش" width="720" height="720" fetchpriority="high">
-        </picture>
+      <div class="gallery">
+        <div class="hero-media">
+          <img id="main-img" src="img/hero-square.webp" alt="بوطة شامبو Naqiva Détox Anti-Calcaire فالدوش" width="720" height="720" fetchpriority="high">
+        </div>
+        <div class="thumbs" role="group" aria-label="صور المنتوج">
+          <button type="button" class="thumb" aria-current="true" data-src="img/hero-square.webp" aria-label="الصورة 1"><img src="img/t-hero-square.webp" alt="" width="160" height="160"></button>
+          <button type="button" class="thumb" data-src="img/bottle-shower.webp" aria-label="الصورة 2"><img src="img/t-bottle-shower.webp" alt="" width="160" height="160" loading="lazy"></button>
+          <button type="button" class="thumb" data-src="img/g-pump.webp" aria-label="الصورة 3"><img src="img/t-g-pump.webp" alt="" width="160" height="160" loading="lazy"></button>
+          <button type="button" class="thumb" data-src="img/g-pump2.webp" aria-label="الصورة 4"><img src="img/t-g-pump2.webp" alt="" width="160" height="160" loading="lazy"></button>
+        </div>
       </div>
     </div>
   </section>
@@ -432,6 +469,18 @@ footer a{color:#fff}
     </div>
   </section>
 
+  <!-- CTA BAND -->
+  <section class="band" aria-label="العرض">
+    <div class="wrap">
+      <h2>جرب Naqiva وشوف الفرق فشعرك</h2>
+      <div class="band-row">
+        <span class="hero-price" style="margin:0"><span class="now" data-hero-price></span><span class="old" data-hero-old></span></span>
+        <a class="btn btn-primary" href="#reserve" data-cta="band">اطلب دابا</a>
+      </div>
+      <p>التوصيل فابور · الخلاص عند الاستلام</p>
+    </div>
+  </section>
+
   <!-- INGREDIENTS -->
   <section class="dark" id="formula" aria-labelledby="ing-title">
     <div class="wrap">
@@ -540,7 +589,7 @@ footer a{color:#fff}
               <div class="err" id="e-name" role="alert"></div>
             </div>
             <div class="field">
-              <label for="f-phone">رقم التيليفون</label>
+              <label for="f-phone">رقم التيليفون <span class="opt">(كنعيطو عليه نأكدو الطلب)</span></label>
               <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="06 00 00 00 00" required>
               <div class="err" id="e-phone" role="alert"></div>
             </div>
@@ -555,16 +604,6 @@ footer a{color:#fff}
               <input id="f-address" name="address" type="text" autocomplete="street-address" placeholder="الحي، الزنقة، الرقم" required>
               <div class="err" id="e-address" role="alert"></div>
             </div>
-            <fieldset class="field">
-              <legend class="legend">شنو أكبر مشكل فشعرك؟ <span class="opt">(اختياري)</span></legend>
-              <div class="chips">
-                <label class="chip"><input type="radio" name="concern" value="ناشف"><span>ناشف وخشين</span></label>
-                <label class="chip"><input type="radio" name="concern" value="كيطيح"><span>كيطيح</span></label>
-                <label class="chip"><input type="radio" name="concern" value="بلا لمعة"><span>بلا لمعة</span></label>
-                <label class="chip"><input type="radio" name="concern" value="كيتكسر"><span>كيتكسر</span></label>
-                <label class="chip"><input type="radio" name="concern" value="جلدة الراس"><span>جلدة الراس</span></label>
-              </div>
-            </fieldset>
             <button class="btn btn-primary" type="submit" id="f-submit"><span>أكد الطلب · <span data-total></span></span></button>
             <p class="form-foot">الخلاص عند الاستلام. غادي نعيطو ليك نأكدو الطلب. المعلومات ديالك ما كنعطيوهاش لحتى واحد. <a href="privacy.html">الخصوصية</a></p>
           </form>
@@ -572,6 +611,7 @@ footer a{color:#fff}
           <div class="success" id="success" role="status" tabindex="-1">
             <div class="ic"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></div>
             <h3>شكراً، الطلب ديالك توصلنا! 🎉</h3>
+            <div class="summary" id="order-summary"></div>
             <p id="success-text">غادي نعيطو ليك باش نأكدو الطلب ونقولو ليك الوقت ديال التوصيل. الخلاص عند الاستلام.</p>
             <a class="btn btn-ghost" id="success-share" href="#">شارك مع صحابك</a>
           </div>
@@ -639,7 +679,7 @@ footer a{color:#fff}
 </a>
 
 <div class="mobile-cta" id="mobile-cta">
-  <div class="mini"><b><bdi dir="ltr">-<span data-discount>20</span>%</bdi> عرض الإطلاق</b>الخلاص عند الاستلام</div>
+  <div class="mini"><b data-hero-price></b>التوصيل فابور · الدفع عند الاستلام</div>
   <a class="btn btn-primary" href="#reserve" data-cta="sticky">اطلب دابا</a>
 </div>
 

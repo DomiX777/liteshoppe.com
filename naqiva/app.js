@@ -35,6 +35,16 @@
   var p1 = $("[data-pack1]"), p2 = $("[data-pack2]");
   if (p1) p1.innerHTML = P["1"] + " DH" + strike("1");
   if (p2) p2.innerHTML = P["2"] + " DH" + strike("2");
+  $$("[data-hero-price]").forEach(function (el) { el.textContent = P["1"] + " DH"; });
+  $$("[data-hero-old]").forEach(function (el) { if (OLD["1"] > P["1"]) el.textContent = OLD["1"] + " DH"; else el.hidden = true; });
+  var mainImg = $("#main-img");
+  $$(".thumb").forEach(function (t) {
+    t.addEventListener("click", function () {
+      if (mainImg) mainImg.src = t.getAttribute("data-src");
+      $$(".thumb").forEach(function (x) { x.removeAttribute("aria-current"); });
+      t.setAttribute("aria-current", "true");
+    });
+  });
   var currentQty = function () { var q = $("input[name=qty]:checked"); return q ? q.value : "1"; };
   var updateTotal = function () { $$("[data-total]").forEach(function (el) { el.textContent = totals[currentQty()] + " DH"; }); };
   $$("input[name=qty]").forEach(function (r) { r.addEventListener("change", updateTotal); });
@@ -160,6 +170,16 @@
       page: location.href.split("?")[0]
     };
 
+    var sum = $("#order-summary");
+    if (sum) {
+      sum.innerHTML = "";
+      [["المنتوج", "Naqiva Détox × " + qty], ["المجموع", totals[qty] + " DH"], ["التوصيل", "فابور"], ["المدينة", city]].forEach(function (r) {
+        var row = document.createElement("div");
+        var k = document.createElement("span"); k.textContent = r[0];
+        var v = document.createElement("b"); v.textContent = r[1];
+        row.appendChild(k); row.appendChild(v); sum.appendChild(row);
+      });
+    }
     btn.disabled = true;
     btn.textContent = "كنسجلو الطلب…";
 
