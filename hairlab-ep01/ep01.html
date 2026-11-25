@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>HairLab EP01</title>
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Outfit:wght@600;800&family=Tajawal:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--p1:#3B1A70;--p2:#1F0B44;--y:#FFD23F;--y2:#FFB627;--w:#FFFFFF;--blue:#4FC3F7;--blue2:#1E88E5;--ink:#2A1056;--teal:#1E8C8C}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#12062A}
+body{font-family:"Tajawal",sans-serif;color:#fff}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--p2)}
+.layer{position:absolute;inset:0;transform-origin:50% 50%}
+svg{display:block}
+.abs{position:absolute}
+.bubble{position:absolute;background:#fff;color:var(--ink);font-weight:900;font-size:56px;line-height:1.38;padding:30px 40px;border-radius:46px;box-shadow:0 24px 50px -20px rgba(10,0,30,.6);text-align:center;transform-origin:var(--ox,50%) var(--oy,100%)}
+.bubble .tail{position:absolute;width:60px;height:60px;background:#fff;border-radius:8px;transform:rotate(45deg)}
+.bubble .k{background:var(--y);border-radius:12px;padding:0 10px}
+.wd{display:inline-block;margin:0 6px;transform-origin:50% 80%}
+#cap{position:absolute;left:50px;right:50px;top:1590px;text-align:center;font-weight:900;font-size:70px;line-height:1.3;color:#fff;-webkit-text-stroke:12px #1A0838;paint-order:stroke fill;text-shadow:0 8px 24px rgba(0,0,0,.45)}
+#cap .k{color:var(--y)}
+.chip{position:absolute;display:inline-flex;align-items:center;gap:12px;background:rgba(20,6,48,.82);border:3px solid var(--y);color:#fff;font-weight:900;font-size:40px;padding:10px 28px;border-radius:999px;white-space:nowrap}
+.title{font-family:"Lalezar",sans-serif;color:var(--y);font-size:118px;line-height:1.05;text-align:center;-webkit-text-stroke:10px #1A0838;paint-order:stroke fill;text-shadow:0 10px 30px rgba(0,0,0,.4)}
+.card{position:absolute;background:#FFF9EE;border-radius:48px;box-shadow:0 30px 60px -24px rgba(5,0,20,.7);color:var(--ink);overflow:hidden}
+.pill{display:inline-block;background:var(--y);color:#1A0838;font-weight:900;border-radius:999px;padding:6px 26px}
+.lbl{position:absolute;font-weight:900;color:#1A0838;background:#fff;border-radius:999px;padding:8px 24px;font-size:38px;white-space:nowrap;box-shadow:0 10px 24px -10px rgba(0,0,0,.5)}
+#wipe{position:absolute;left:50%;top:50%;width:2600px;height:2600px;margin:-1300px 0 0 -1300px;border-radius:50%;background:radial-gradient(circle,#7FD8FF 0%,#2E9BEA 45%,#1565C0 70%,#3B1A70 72%);transform:scale(0)}
+.check{display:flex;align-items:center;gap:26px;font-weight:900;font-size:46px;line-height:1.3;padding:22px 34px;background:#fff;border-radius:32px;margin:0 40px 26px;box-shadow:0 10px 24px -14px rgba(40,10,90,.5)}
+.check .ic{flex:none;width:76px;height:76px;border-radius:50%;background:#2BB673;display:flex;align-items:center;justify-content:center}
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- ROOM BACKGROUND -->
+  <div class="layer" id="room">
+  <svg width="1080" height="1920" viewBox="0 0 1080 1920">
+    <defs>
+      <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#43207C"/><stop offset=".65" stop-color="#2C1260"/><stop offset="1" stop-color="#1C0A40"/></linearGradient>
+      <linearGradient id="win" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE29A"/><stop offset="1" stop-color="#F7A94B"/></linearGradient>
+      <radialGradient id="glow"><stop offset="0" stop-color="#FFD978" stop-opacity=".55"/><stop offset="1" stop-color="#FFD978" stop-opacity="0"/></radialGradient>
+      <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#47B884"/><stop offset="1" stop-color="#1F7A55"/></linearGradient>
+    </defs>
+    <rect width="1080" height="1920" fill="url(#wall)"/>
+    <g opacity=".07" stroke="#fff" stroke-width="3">
+      <line x1="120" y1="0" x2="120" y2="1560"/><line x1="360" y1="0" x2="360" y2="1560"/><line x1="600" y1="0" x2="600" y2="1560"/><line x1="840" y1="0" x2="840" y2="1560"/>
+    </g>
+    <!-- window -->
+    <ellipse cx="850" cy="560" rx="380" ry="420" fill="url(#glow)"/>
+    <path d="M700 980 V420 A150 150 0 0 1 1000 420 V980 Z" fill="url(#win)" opacity=".42"/>
+    <path d="M700 980 V420 A150 150 0 0 1 1000 420 V980 Z" fill="none" stroke="#1A0838" stroke-width="18"/>
+    <line x1="850" y1="272" x2="850" y2="980" stroke="#1A0838" stroke-width="12"/>
+    <line x1="700" y1="620" x2="1000" y2="620" stroke="#1A0838" stroke-width="12"/>
+    <rect x="680" y="975" width="340" height="26" rx="10" fill="#1A0838"/>
+    <!-- pendant lamp -->
+    <ellipse cx="240" cy="300" rx="260" ry="240" fill="url(#glow)"/>
+    <line x1="240" y1="0" x2="240" y2="190" stroke="#1A0838" stroke-width="6"/>
+    <path d="M180 250 L205 186 H275 L300 250 Z" fill="#FFC93C"/><ellipse cx="240" cy="252" rx="60" ry="10" fill="#FFF1B8"/>
+    <!-- shelf -->
+    <rect x="0" y="760" width="330" height="22" rx="6" fill="#5B2F8E"/>
+    <rect x="40" y="652" width="34" height="108" rx="5" fill="#FFD23F"/><rect x="80" y="672" width="30" height="88" rx="5" fill="#4FC3F7"/><rect x="114" y="640" width="36" height="120" rx="5" fill="#E86A92"/><rect x="154" y="690" width="70" height="26" rx="5" fill="#fff" transform="rotate(-8 190 700)"/>
+    <path d="M250 760 h56 l-8 -54 h-40 z" fill="#E86A92"/>
+    <g fill="url(#leaf)"><path d="M278 708 C 240 690 236 640 262 620 C 276 650 282 680 278 708Z"/><path d="M280 708 C 300 660 330 650 344 664 C 330 690 306 704 280 708Z"/><path d="M279 706 C 270 650 290 610 300 600 C 312 630 300 680 279 706Z"/></g>
+    <!-- baseboard -->
+    <rect x="0" y="1560" width="1080" height="360" fill="#170735"/>
+    <rect x="0" y="1548" width="1080" height="16" fill="#5B2F8E"/>
+    <!-- big plant left -->
+    <g fill="url(#leaf)">
+      <path d="M110 1500 C 20 1420 -10 1300 30 1200 C 90 1260 130 1380 110 1500Z"/>
+      <path d="M120 1500 C 120 1360 200 1260 270 1240 C 270 1340 210 1440 120 1500Z"/>
+      <path d="M115 1500 C 60 1380 70 1220 140 1130 C 180 1240 160 1400 115 1500Z"/>
+      <path d="M100 1500 C 0 1480 -40 1420 -30 1370 C 40 1380 80 1430 100 1500Z"/>
+    </g>
+    <path d="M40 1490 h160 l-20 140 h-120 z" fill="#F3B13C"/><rect x="34" y="1478" width="172" height="26" rx="8" fill="#FFD23F"/>
+    <!-- right plant -->
+    <g fill="url(#leaf)">
+      <path d="M980 1520 C 1000 1400 1060 1330 1110 1320 C 1110 1420 1050 1490 980 1520Z"/>
+      <path d="M975 1520 C 920 1420 930 1310 980 1250 C 1010 1330 1005 1440 975 1520Z"/>
+      <path d="M970 1520 C 900 1480 880 1420 890 1380 C 940 1400 960 1450 970 1520Z"/>
+    </g>
+    <path d="M910 1510 h140 l-16 120 h-108 z" fill="#4FC3F7"/><rect x="904" y="1498" width="152" height="24" rx="8" fill="#81D4FA"/>
+    <g id="dust" fill="#FFE7A3"></g>
+  </svg>
+  </div>
+
+  <!-- SCENE 2 · GEOLOGY -->
+  <div class="layer" id="geoWrap" style="opacity:0">
+    <svg id="geo" width="1080" height="2600" viewBox="0 0 1080 2600" style="position:absolute;left:0;top:0">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#24104F"/><stop offset="1" stop-color="#6A4BB0"/></linearGradient>
+        <linearGradient id="soil1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8A5530"/><stop offset="1" stop-color="#6E4024"/></linearGradient>
+        <linearGradient id="soil2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A06A3E"/><stop offset="1" stop-color="#835330"/></linearGradient>
+        <linearGradient id="lime" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E6DBC4"/><stop offset="1" stop-color="#C9B994"/></linearGradient>
+        <linearGradient id="deep" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5E4C78"/><stop offset="1" stop-color="#2E1E4C"/></linearGradient>
+        <radialGradient id="caG" cx=".35" cy=".3"><stop offset="0" stop-color="#FFF3B0"/><stop offset=".5" stop-color="#FFC83A"/><stop offset="1" stop-color="#E89A12"/></radialGradient>
+        <radialGradient id="mgG" cx=".35" cy=".3"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".5" stop-color="#C9D4E8"/><stop offset="1" stop-color="#8592B0"/></radialGradient>
+      </defs>
+      <rect width="1080" height="740" fill="url(#sky)"/>
+      <g id="rain" stroke="#9FDCFF" stroke-width="5" stroke-linecap="round" opacity=".8"></g>
+      <g fill="#EDE6FF">
+        <g id="cloud1"><ellipse cx="300" cy="200" rx="150" ry="70"/><ellipse cx="220" cy="225" rx="100" ry="55"/><ellipse cx="390" cy="225" rx="110" ry="55"/><ellipse cx="300" cy="150" rx="90" ry="70"/></g>
+        <g id="cloud2" opacity=".9"><ellipse cx="760" cy="160" rx="140" ry="62"/><ellipse cx="690" cy="185" rx="90" ry="50"/><ellipse cx="840" cy="185" rx="100" ry="50"/><ellipse cx="770" cy="115" rx="80" ry="60"/></g>
+      </g>
+      <path d="M-20 740 L180 470 L300 600 L470 380 L640 620 L780 500 L1100 740 Z" fill="#5A3F9C"/>
+      <path d="M180 470 L232 540 L205 560 L170 530 L140 524 Z M470 380 L530 466 L495 480 L460 456 L420 448 Z M780 500 L840 548 L800 560 L770 540 L740 540Z" fill="#fff"/>
+      <path d="M-20 740 L120 620 L260 700 L420 560 L600 700 L760 640 L900 700 L1100 620 V740Z" fill="#7458B8"/>
+      <rect x="0" y="720" width="1080" height="34" fill="#3E9B5C"/>
+      <g fill="#2E7D4F"><circle cx="110" cy="700" r="34"/><rect x="104" y="700" width="12" height="30" fill="#5B3A22"/><circle cx="930" cy="694" r="40"/><rect x="924" y="696" width="12" height="34" fill="#5B3A22"/><circle cx="300" cy="706" r="26"/></g>
+      <rect x="0" y="754" width="1080" height="300" fill="url(#soil1)"/>
+      <rect x="0" y="1054" width="1080" height="400" fill="url(#soil2)"/>
+      <g fill="#5E3A20" opacity=".55"><ellipse cx="160" cy="860" rx="30" ry="16"/><ellipse cx="840" cy="910" rx="38" ry="18"/><ellipse cx="380" cy="980" rx="22" ry="12"/><ellipse cx="980" cy="1180" rx="34" ry="16"/><ellipse cx="120" cy="1260" rx="40" ry="18"/><ellipse cx="760" cy="1340" rx="26" ry="14"/></g>
+      <rect x="0" y="1454" width="1080" height="620" fill="url(#lime)"/>
+      <g id="blocks" stroke="#A8976F" stroke-width="5" fill="none"></g>
+      <rect x="0" y="2074" width="1080" height="526" fill="url(#deep)"/>
+      <path id="flow" d="M520 740 C 470 860 650 930 610 1060 C 570 1190 370 1230 410 1390 C 450 1550 730 1570 690 1730 C 650 1890 400 1910 450 2080 C 500 2250 760 2260 830 2440" fill="none" stroke="#4FC3F7" stroke-opacity=".55" stroke-width="60" stroke-linecap="round"/>
+      <path id="flowDash" d="M520 740 C 470 860 650 930 610 1060 C 570 1190 370 1230 410 1390 C 450 1550 730 1570 690 1730 C 650 1890 400 1910 450 2080 C 500 2250 760 2260 830 2440" fill="none" stroke="#E1F5FE" stroke-width="10" stroke-linecap="round" stroke-dasharray="26 40"/>
+      <g id="ions2"></g>
+    </svg>
+    <div class="lbl" id="lSoil" style="right:40px;top:0">التربة</div>
+    <div class="lbl" id="lRock" style="right:40px;top:0">الصخور الجيرية</div>
+    <div class="lbl" id="lCa" style="left:40px;top:0;background:#FFD23F">كالسيوم (Ca)</div>
+    <div class="lbl" id="lMg" style="left:40px;top:0;background:#DCE3F2">مانيزيوم (Mg)</div>
+  </div>
+
+  <!-- SCENE 3 · HARD WATER -->
+  <div class="layer" id="s3" style="opacity:0">
+    <svg width="1080" height="1920" viewBox="0 0 1080 1920" style="position:absolute;inset:0">
+      <defs>
+        <radialGradient id="water" cx=".5" cy=".35" r=".8"><stop offset="0" stop-color="#3FA9F5"/><stop offset=".55" stop-color="#1767C9"/><stop offset="1" stop-color="#2A1366"/></radialGradient>
+        <linearGradient id="ray" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+        <linearGradient id="gauge" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4FC3F7"/><stop offset=".5" stop-color="#FFD23F"/><stop offset="1" stop-color="#FF7A45"/></linearGradient>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#water)"/>
+      <g id="rays" fill="url(#ray)"><path d="M200 0 L300 0 L420 1200 L240 1200Z"/><path d="M560 0 L640 0 L760 1100 L600 1100Z"/><path d="M860 0 L920 0 L1040 1000 L900 1000Z"/></g>
+      <g id="bub3" fill="none" stroke="#BDE8FF" stroke-width="4" opacity=".7"></g>
+      <g id="ions3"></g>
+    </svg>
+    <div class="card" id="gaugeCard" style="left:70px;top:190px;width:940px;height:250px;padding:26px 44px">
+      <div style="display:flex;justify-content:space-between;font-weight:900;font-size:44px"><span>💧 قساوة الما</span><span id="gaugeTxt" style="color:#E2551F">قاصح</span></div>
+      <div style="position:relative;margin-top:24px;height:44px;border-radius:22px;background:linear-gradient(270deg,#4FC3F7,#FFD23F,#FF7A45)">
+        <div id="needle" style="position:absolute;top:-16px;width:20px;height:76px;margin-right:-10px;border-radius:10px;background:#2A1056;border:4px solid #fff;right:10%"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-weight:800;font-size:34px;margin-top:16px;color:#5A3E8E"><span>خفيف</span><span>متوسط</span><span>قاصح</span></div>
+    </div>
+    <div class="title abs" id="hardStamp" style="left:0;right:0;top:500px;font-size:132px">الما القاصح</div>
+    <div id="cities" class="abs" style="left:40px;right:40px;top:520px;display:flex;justify-content:space-between"></div>
+    <div class="abs" id="cityTxt" style="left:0;right:0;top:1300px;text-align:center"><span class="pill" style="font-size:52px">📍 كتختالف من مدينة لمدينة</span></div>
+  </div>
+
+  <!-- SCENE 4 · HAIR UNDER MICROSCOPE -->
+  <div class="layer" id="s4" style="opacity:0">
+    <svg width="1080" height="1920" viewBox="0 0 1080 1920" style="position:absolute;inset:0">
+      <defs>
+        <radialGradient id="bg4" cx=".5" cy=".4"><stop offset="0" stop-color="#4B2590"/><stop offset="1" stop-color="#1B0940"/></radialGradient>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#bg4)"/>
+      <g id="pdots" fill="#fff" opacity=".18"></g>
+    </svg>
+    <div class="abs" id="lens" style="left:120px;top:440px;width:840px;height:840px;transform-origin:50% 50%">
+      <svg width="840" height="840" viewBox="0 0 840 840">
+        <defs>
+          <clipPath id="lensClip"><circle cx="420" cy="420" r="380"/></clipPath>
+          <radialGradient id="lensBg" cx=".45" cy=".4"><stop offset="0" stop-color="#E9F4FF"/><stop offset="1" stop-color="#9DB8E8"/></radialGradient>
+          <linearGradient id="hairG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8C5A35"/><stop offset=".45" stop-color="#6B3F22"/><stop offset="1" stop-color="#3E2312"/></linearGradient>
+          <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE38A"/><stop offset=".5" stop-color="#E0A526"/><stop offset="1" stop-color="#9C6B0A"/></linearGradient>
+        </defs>
+        <g clip-path="url(#lensClip)">
+          <rect width="840" height="840" fill="url(#lensBg)"/>
+          <g id="hairStrand" transform="rotate(-24 420 420)">
+            <rect x="-200" y="300" width="1240" height="250" rx="40" fill="url(#hairG)"/>
+            <g id="cuticle" fill="none" stroke="#B07A4E" stroke-width="5" opacity=".8"></g>
+            <rect x="-200" y="318" width="1240" height="26" fill="#fff" opacity=".18"/>
+            <g id="deposits"></g>
+          </g>
+          <g id="ions4"></g>
+        </g>
+        <circle cx="420" cy="420" r="392" fill="none" stroke="url(#ring)" stroke-width="30"/>
+        <circle cx="420" cy="420" r="374" fill="none" stroke="#1A0838" stroke-width="6" opacity=".35"/>
+      </svg>
+    </div>
+    <div class="chip" id="micChip" style="left:50%;top:330px;transform:translateX(-50%)">🔬 سطح الشعرة تحت الميكروسكوب</div>
+    <div class="chip" id="washChip" style="left:50%;top:1310px;transform:translateX(-50%);font-size:44px">🚿 غسلة <span id="washN" style="color:var(--y);font-family:Outfit;margin:0 6px">×1</span></div>
+    <div class="lbl" id="lCut" style="left:600px;top:1000px">سطح الشعرة</div>
+    <div class="abs" id="cmp" style="left:60px;right:60px;top:880px;display:flex;gap:40px"></div>
+    <div class="abs" id="varRow" style="left:0;right:0;top:1440px;display:flex;justify-content:center;gap:24px"></div>
+  </div>
+
+  <!-- ROOM CARDS (S1, S5, S6, S7) -->
+  <div class="title abs" id="bigTitle" style="left:0;right:0;top:96px">سرّ الكالكير</div>
+  <div class="abs" id="magni" style="left:730px;top:600px;width:330px;height:330px"></div>
+  <div class="card" id="card5" style="left:60px;top:200px;width:960px;height:760px"></div>
+  <div class="card" id="card6" style="left:60px;top:200px;width:960px;height:700px"></div>
+  <div class="card" id="card7" style="left:60px;top:190px;width:960px;height:700px"></div>
+
+  <!-- PRESENTER -->
+  <div class="abs" id="pres" style="left:90px;top:640px;width:900px;height:1350px;transform-origin:50% 100%">
+    <svg width="900" height="1350" viewBox="0 0 600 900" style="overflow:visible">
+      <defs>
+        <linearGradient id="shirt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23A0A0"/><stop offset="1" stop-color="#15706F"/></linearGradient>
+        <linearGradient id="skinG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6C29C"/><stop offset="1" stop-color="#EBAA80"/></linearGradient>
+        <clipPath id="mClip"><path id="mClipPath" d=""/></clipPath>
+      </defs>
+      <g id="body">
+        <!-- torso -->
+        <path d="M262 520 h76 v120 h-76z" fill="#E09C72"/>
+        <path d="M40 900 C 50 720 120 628 228 606 L 372 606 C 480 628 550 720 560 900 Z" fill="url(#shirt)"/>
+        <path d="M232 606 C 260 640 340 640 368 606 L 372 606 L 352 900 L 248 900 L 228 606 Z" fill="#F5F3F8"/>
+        <path d="M244 608 C 268 650 332 650 356 608" fill="none" stroke="#D9D4E4" stroke-width="10"/>
+        <path d="M228 604 L 292 668 L 262 704 L 206 626 Z" fill="#1B8686"/>
+        <path d="M372 604 L 308 668 L 338 704 L 394 626 Z" fill="#1B8686"/>
+        <path d="M262 704 L 248 900" stroke="#136767" stroke-width="6"/>
+        <path d="M338 704 L 352 900" stroke="#136767" stroke-width="6"/>
+        <circle cx="356" cy="760" r="6" fill="#0F5A5A"/><circle cx="360" cy="840" r="6" fill="#0F5A5A"/>
+        <path d="M120 900 C 128 800 150 740 176 712" fill="none" stroke="#136767" stroke-width="6" opacity=".6"/>
+        <path d="M480 900 C 472 800 450 740 424 712" fill="none" stroke="#136767" stroke-width="6" opacity=".6"/>
+        <!-- neck -->
+        <path d="M266 500 h68 v100 c -20 30 -48 30 -68 0z" fill="url(#skinG)"/>
+        <path d="M266 516 c 20 26 48 26 68 0 v-16 h-68z" fill="#D9936A" opacity=".7"/>
+      </g>
+      <g id="head">
+        <path d="M160 310 C 130 190 200 92 300 90 C 410 88 474 180 446 312 C 450 250 420 200 300 196 C 180 200 152 250 160 310Z" fill="#2B1A12"/>
+        <ellipse cx="174" cy="312" rx="26" ry="38" fill="#EDAE85"/><ellipse cx="178" cy="314" rx="12" ry="20" fill="#D99470"/>
+        <ellipse cx="426" cy="312" rx="26" ry="38" fill="#EDAE85"/><ellipse cx="422" cy="314" rx="12" ry="20" fill="#D99470"/>
+        <path d="M300 140 C 398 140 428 212 426 300 C 424 400 372 474 300 474 C 228 474 176 400 174 300 C 172 212 202 140 300 140Z" fill="url(#skinG)"/>
+        <ellipse cx="226" cy="376" rx="28" ry="16" fill="#F28B82" opacity=".35"/><ellipse cx="374" cy="376" rx="28" ry="16" fill="#F28B82" opacity=".35"/>
+        <!-- hair front -->
+        <g transform="translate(0 -30) scale(1 0.96)"><path d="M168 288 C 150 180 222 104 312 108 C 398 112 452 174 434 282 C 424 238 400 214 376 206 C 386 226 380 246 366 254 C 356 222 326 204 292 206 C 302 226 296 244 280 252 C 268 228 244 216 222 222 C 228 244 214 262 196 266 C 190 246 178 256 168 288Z" fill="#2B1A12"/>
+        <path d="M206 140 C 226 96 286 74 330 84 C 300 92 284 104 276 120 C 300 100 352 96 384 118 C 350 116 330 124 318 140 Z" fill="#2B1A12"/>
+        <path d="M238 150 C 262 128 300 120 332 126" fill="none" stroke="#5A3826" stroke-width="7" stroke-linecap="round"/>
+        <path d="M352 152 C 380 160 402 184 412 214" fill="none" stroke="#5A3826" stroke-width="6" stroke-linecap="round"/>
+        <path d="M300 206 C 318 226 316 246 304 258" fill="none" stroke="#2B1A12" stroke-width="12" stroke-linecap="round"/></g>
+        <!-- brows -->
+        <path id="browL" d="M216 250 Q 246 232 280 244" fill="none" stroke="#2B1A12" stroke-width="11" stroke-linecap="round"/>
+        <path id="browR" d="M320 244 Q 354 232 384 250" fill="none" stroke="#2B1A12" stroke-width="11" stroke-linecap="round"/>
+        <!-- eyes -->
+        <g id="eyeL"><ellipse cx="250" cy="304" rx="33" ry="39" fill="#fff" stroke="#2B1A12" stroke-width="4"/><g class="pup"><circle cx="250" cy="308" r="22" fill="#7A4A26"/><circle cx="250" cy="308" r="12" fill="#1A0E08"/><circle cx="242" cy="299" r="7" fill="#fff"/><circle cx="257" cy="315" r="3" fill="#fff"/></g><path d="M220 284 Q 250 262 280 282" fill="none" stroke="#2B1A12" stroke-width="5" stroke-linecap="round"/></g>
+        <g id="eyeR"><ellipse cx="350" cy="304" rx="33" ry="39" fill="#fff" stroke="#2B1A12" stroke-width="4"/><g class="pup"><circle cx="350" cy="308" r="22" fill="#7A4A26"/><circle cx="350" cy="308" r="12" fill="#1A0E08"/><circle cx="342" cy="299" r="7" fill="#fff"/><circle cx="357" cy="315" r="3" fill="#fff"/></g><path d="M320 282 Q 350 262 380 284" fill="none" stroke="#2B1A12" stroke-width="5" stroke-linecap="round"/></g>
+        <!-- nose -->
+        <path d="M302 332 Q 288 362 300 372 Q 312 378 320 368" fill="none" stroke="#C97E58" stroke-width="6" stroke-linecap="round"/>
+        <!-- mouth -->
+        <g id="mouth">
+          <path id="mOpen" d="" fill="#5B1621"/>
+          <g clip-path="url(#mClip)"><rect id="teeth" x="240" y="380" width="120" height="16" fill="#fff"/><ellipse id="tongue" cx="300" cy="460" rx="34" ry="18" fill="#E0606E"/></g>
+          <path id="mLine" d="" fill="none" stroke="#7A2E22" stroke-width="6" stroke-linecap="round"/>
+        </g>
+      </g>
+      <!-- arms (drawn in front) -->
+      <g id="armR" transform="translate(98 884)"><g class="fa"></g></g>
+      <g transform="translate(600 0) scale(-1 1)"><g id="armL" transform="translate(98 884)"><g class="fa"></g></g></g>
+    </svg>
+  </div>
+
+  <!-- DROP CHARACTER -->
+  <div class="abs" id="drop" style="left:0;top:0;width:220px;height:264px;transform-origin:50% 100%">
+    <svg width="220" height="264" viewBox="0 0 200 240" style="overflow:visible">
+      <defs>
+        <radialGradient id="dropG" cx=".4" cy=".55" r=".7"><stop offset="0" stop-color="#9BE3FF"/><stop offset=".6" stop-color="#3DAEF5"/><stop offset="1" stop-color="#1A78D6"/></radialGradient>
+        <clipPath id="dmClip"><path id="dmClipPath" d=""/></clipPath>
+      </defs>
+      <g id="dArmL"><path d="M28 168 Q 6 160 -6 140" fill="none" stroke="#1A78D6" stroke-width="9" stroke-linecap="round"/><circle cx="-8" cy="134" r="15" fill="#fff" stroke="#9AA6C4" stroke-width="3"/></g>
+      <g id="dArmR"><path d="M172 168 Q 196 156 206 132" fill="none" stroke="#1A78D6" stroke-width="9" stroke-linecap="round"/><rect x="198" y="96" width="13" height="30" rx="6.5" fill="#fff" stroke="#9AA6C4" stroke-width="3"/><circle cx="207" cy="128" r="15" fill="#fff" stroke="#9AA6C4" stroke-width="3"/></g>
+      <path d="M100 6 C 122 52 182 100 182 152 C 182 202 146 234 100 234 C 54 234 18 202 18 152 C 18 100 78 52 100 6 Z" fill="url(#dropG)" stroke="#1565C0" stroke-width="4"/>
+      <ellipse cx="62" cy="120" rx="14" ry="30" fill="#fff" opacity=".55" transform="rotate(24 62 120)"/>
+      <circle cx="74" cy="82" r="6" fill="#fff" opacity=".7"/>
+      <g id="dEyeL"><ellipse cx="76" cy="146" rx="17" ry="21" fill="#fff" stroke="#0D47A1" stroke-width="3"/><g class="pup"><circle cx="78" cy="149" r="10" fill="#0B1E4A"/><circle cx="74" cy="144" r="4" fill="#fff"/></g></g>
+      <g id="dEyeR"><ellipse cx="124" cy="146" rx="17" ry="21" fill="#fff" stroke="#0D47A1" stroke-width="3"/><g class="pup"><circle cx="126" cy="149" r="10" fill="#0B1E4A"/><circle cx="122" cy="144" r="4" fill="#fff"/></g></g>
+      <path id="dBrowL" d="M60 118 Q 76 108 90 116" fill="none" stroke="#0D47A1" stroke-width="6" stroke-linecap="round"/>
+      <path id="dBrowR" d="M110 116 Q 124 108 140 118" fill="none" stroke="#0D47A1" stroke-width="6" stroke-linecap="round"/>
+      <ellipse cx="56" cy="178" rx="12" ry="7" fill="#FF8FB1" opacity=".6"/><ellipse cx="144" cy="178" rx="12" ry="7" fill="#FF8FB1" opacity=".6"/>
+      <path id="dmOpen" d="" fill="#7A1630"/>
+      <g clip-path="url(#dmClip)"><ellipse cx="100" cy="206" rx="16" ry="9" fill="#FF6F8A"/></g>
+      <path id="dmLine" d="" fill="none" stroke="#0D3A7A" stroke-width="5" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <!-- BUBBLES -->
+  <div class="bubble" id="bubP" style="left:70px;top:250px;width:760px;--ox:70%;--oy:100%"><div class="txt"></div><div class="tail" style="bottom:-22px;right:200px"></div></div>
+  <div class="bubble" id="bubD" style="left:60px;top:330px;width:640px;--ox:100%;--oy:60%"><div class="txt"></div><div class="tail" id="bubDtail" style="top:40%;left:auto;right:-22px"></div></div>
+
+  <!-- TEASER -->
+  <div class="layer" id="dim" style="background:#08021A;opacity:0"></div>
+  <div class="layer" id="teaser" style="opacity:0">
+    <svg width="1080" height="1920" viewBox="0 0 1080 1920" style="position:absolute;inset:0">
+      <defs><linearGradient id="cone" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE9A8" stop-opacity=".7"/><stop offset="1" stop-color="#FFE9A8" stop-opacity="0"/></linearGradient>
+      <radialGradient id="pool"><stop offset="0" stop-color="#FFE9A8" stop-opacity=".55"/><stop offset="1" stop-color="#FFE9A8" stop-opacity="0"/></radialGradient></defs>
+      <path d="M470 0 H610 L860 1060 H220 Z" fill="url(#cone)"/>
+      <ellipse cx="540" cy="1050" rx="340" ry="70" fill="url(#pool)"/>
+      <ellipse cx="540" cy="1040" rx="200" ry="34" fill="#2A1056" stroke="#FFD23F" stroke-width="5"/>
+    </svg>
+    <div class="title abs" id="nextTxt" style="left:0;right:0;top:120px;font-size:110px">فالحلقة الجاية…</div>
+    <img id="mBottle" src="../naqiva-ad/a/bottle-cut.png" style="position:absolute;left:418px;top:520px;width:244px;filter:brightness(0) drop-shadow(0 0 3px #FFD23F) drop-shadow(0 0 26px rgba(255,210,63,.7))">
+    <div class="abs" id="qMark" style="left:0;right:0;top:600px;text-align:center;font-family:Lalezar;font-size:260px;color:var(--y);-webkit-text-stroke:10px #1A0838;paint-order:stroke fill">؟</div>
+    <div class="abs" id="sparks"></div>
+  </div>
+
+  <!-- TOP CHIP + CAPTION -->
+  <div class="chip" id="epChip" style="left:50%;top:84px;transform:translateX(-50%)">🧪 الحلقة 01 · سرّ الكالكير</div>
+  <div id="cap"></div>
+  <div class="abs" id="wm" style="left:0;right:0;bottom:44px;text-align:center;font-family:Outfit;font-weight:800;font-size:34px;letter-spacing:2px;color:#fff;opacity:.75">Hair<span style="color:var(--y)">Lab</span></div>
+
+  <!-- END CARD -->
+  <div class="layer" id="endc" style="opacity:0;background:radial-gradient(circle at 50% 40%,#5A2CA8,#1F0B44 70%)">
+    <div class="abs" id="logoBox" style="left:0;right:0;top:560px;text-align:center">
+      <svg width="300" height="300" viewBox="0 0 300 300" style="margin:0 auto">
+        <defs><linearGradient id="lg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE38A"/><stop offset="1" stop-color="#E0A526"/></linearGradient></defs>
+        <circle cx="150" cy="150" r="138" fill="#2A1060" stroke="url(#lg1)" stroke-width="10"/>
+        <path d="M150 52 C 120 100 120 140 140 175 C 160 210 150 240 128 258" fill="none" stroke="url(#lg1)" stroke-width="16" stroke-linecap="round"/>
+        <path d="M168 60 C 190 110 186 150 168 182" fill="none" stroke="#FFE38A" stroke-width="7" stroke-linecap="round" opacity=".7"/>
+        <path d="M196 150 C 206 168 222 182 222 198 C 222 214 210 224 196 224 C 182 224 170 214 170 198 C 170 182 186 168 196 150Z" fill="#4FC3F7"/>
+      </svg>
+      <div style="font-family:Outfit;font-weight:800;font-size:150px;line-height:1;margin-top:30px;direction:ltr">Hair<span style="color:var(--y)">Lab</span></div>
+      <div style="font-weight:900;font-size:58px;color:var(--y);margin-top:18px">عالم العناية بالشعر</div>
+      <div id="endIcons" style="display:flex;justify-content:center;gap:30px;margin-top:70px"></div>
+      <div style="font-weight:800;font-size:44px;margin-top:50px;opacity:.9">الحلقة 02 قريبا… 🔔</div>
+    </div>
+  </div>
+
+  <div id="wipe"></div>
+</div>
+
+<script src="timeline.js"></script>
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const NS='http://www.w3.org/2000/svg';
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const lerp=(a,b,p)=>a+(b-a)*p;
+const E={lin:p=>p,out:p=>1-Math.pow(1-p,3),io:p=>p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2,back:p=>{const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(p-1,3)+c1*Math.pow(p-1,2)},sine:p=>-(Math.cos(Math.PI*p)-1)/2};
+const tw=(t,t0,d,e='out')=>E[e](clamp((t-t0)/d));
+function kf(t,arr,e='io'){ if(t<=arr[0][0])return arr[0][1]; for(let i=1;i<arr.length;i++){ if(t<=arr[i][0]){const a=arr[i-1],b=arr[i];const p=E[e]((t-a[0])/(b[0]-a[0]||1));return typeof a[1]==='number'?lerp(a[1],b[1],p):(p<1?a[1]:b[1]);} } return arr[arr.length-1][1]; }
+function step(t,arr){let v=arr[0][1];for(const a of arr){if(t>=a[0])v=a[1];}return v;}
+function win(t,a,b,fi=.35,fo=.35){return Math.min(tw(t,a,fi,'out'),1-tw(t,b-fo,fo,'io'))}
+function hash(n){const x=Math.sin(n*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+function tf(el,{x=0,y=0,s=1,r=0,o=1,sx=1,sy=1}){el.style.transform=`translate(${x}px,${y}px) rotate(${r}deg) scale(${s*sx},${s*sy})`;el.style.opacity=o;}
+function mk(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+const L={};TL.lines.forEach(l=>L[l.id]=l);
+const W=(id,i)=>L[id].words[i<0?L[id].words.length+i:i].s;       // word start time
+const WF=(id,txt)=>{const w=L[id].words.find(w=>w.w.includes(txt));return w?w.s:L[id].t0};
+const S=TL.scenes;
+
+/* ---------- presenter arms ---------- */
+const SKIN='#F2B48C',SKS='#C47F5E';
+function buildArm(g){
+  const fa=g.querySelector('.fa');
+  fa.innerHTML=`
+   <path d="M-36 30 L36 30 L32 -96 L-32 -96 Z" fill="url(#shirt)"/>
+   <rect x="-36" y="-118" width="72" height="30" rx="12" fill="#167A7A"/>
+   <path d="M-25 -110 L25 -110 L21 -238 L-21 -238 Z" fill="${SKIN}" stroke="${SKS}" stroke-width="3"/>
+   <g class="hand" transform="translate(0 -244)">
+     <g class="hOpen">
+       <g fill="${SKIN}" stroke="${SKS}" stroke-width="3">
+         <rect x="-9" y="-44" width="18" height="44" rx="9" transform="translate(-21 -40) rotate(-16)"/>
+         <rect x="-9" y="-52" width="18" height="52" rx="9" transform="translate(-7 -46) rotate(-5)"/>
+         <rect x="-9" y="-50" width="18" height="50" rx="9" transform="translate(8 -46) rotate(5)"/>
+         <rect x="-9" y="-40" width="18" height="40" rx="9" transform="translate(22 -38) rotate(17)"/>
+         <rect x="-10" y="-40" width="20" height="40" rx="10" transform="translate(-26 -10) rotate(-58)"/>
+         <path d="M-31 4 C -33 -26 -30 -50 0 -52 C 30 -50 33 -26 31 4 C 26 18 -26 18 -31 4 Z"/>
+       </g>
+       <path d="M-12 -14 Q 0 -6 12 -14" fill="none" stroke="${SKS}" stroke-width="3" stroke-linecap="round" opacity=".7"/>
+     </g>
+     <g class="hPoint" style="display:none">
+       <g fill="${SKIN}" stroke="${SKS}" stroke-width="3">
+         <rect x="-9" y="-62" width="19" height="62" rx="9.5" transform="translate(-14 -36)"/>
+         <path d="M-30 6 C -32 -20 -28 -44 0 -46 C 28 -44 32 -20 30 6 C 26 18 -26 18 -30 6 Z"/>
+         <rect x="-10" y="-34" width="20" height="34" rx="10" transform="translate(-22 -4) rotate(-80)"/>
+       </g>
+       <path d="M4 -44 Q 10 -36 4 -30 M18 -40 Q 24 -32 18 -26" fill="none" stroke="${SKS}" stroke-width="3" stroke-linecap="round"/>
+     </g>
+   </g>`;
+}
+buildArm($('armR'));buildArm($('armL'));
+function setArm(id,ang,hand,wrist){
+  const g=$(id);const fa=g.querySelector('.fa');fa.setAttribute('transform',`rotate(${ang})`);
+  g.querySelector('.hand').setAttribute('transform',`translate(0 -244) rotate(${wrist})`);
+  g.querySelector('.hOpen').style.display=hand==='open'?'':'none';
+  g.querySelector('.hPoint').style.display=hand==='point'?'':'none';
+}
+
+/* ---------- mouths ---------- */
+function mouthPaths(cx,cy,o,wv,scale,smile){
+  const w=(34+14*o)*wv*scale, h=(4+50*o)*scale;
+  const up=cy-(2+smile*4)*scale;
+  if(o<0.06){
+    return {open:'',line:`M${cx-30*scale} ${cy-6*scale} Q ${cx} ${cy+(10+smile*10)*scale} ${cx+30*scale} ${cy-6*scale}`};
+  }
+  const d=`M${cx-w} ${up} Q ${cx} ${up-h*0.18} ${cx+w} ${up} Q ${cx+w*0.9} ${up+h*1.05} ${cx} ${up+h*1.1} Q ${cx-w*0.9} ${up+h*1.05} ${cx-w} ${up} Z`;
+  return {open:d,line:''};
+}
+/* ---------- captions / bubbles ---------- */
+function fmt(w){return w.replace(/\.\.\./g,'…')}
+function chunkLine(l){const out=[];let cur=[];l.words.forEach(w=>{cur.push(w);if(/[،,:]$/.test(w.w)||/\.\.\.$/.test(w.w)||cur.length>=4){out.push(cur);cur=[]}});if(cur.length){if(cur.length===1&&out.length&&out[out.length-1].length<=4)out[out.length-1].push(...cur);else out.push(cur)}return out}
+const BUB={P1:'bubP',D1:'bubD',D3:'bubD',D4:'bubD'};
+const CH=[];TL.lines.forEach(l=>{if(BUB[l.id])return;const cs=chunkLine(l);cs.forEach((c,i)=>{const t0=c[0].s-0.12;const t1=i<cs.length-1?cs[i+1][0].s-0.12:l.t1+0.35;CH.push({t0,t1,words:c})})});
+let capCur=null;
+function renderCap(t){
+  const cap=$('cap');const c=CH.find(c=>t>=c.t0&&t<c.t1);
+  if(c!==capCur){capCur=c;cap.innerHTML=c?c.words.map(w=>`<span class="wd${w.k?' k':''}">${fmt(w.w)}</span>`).join(' '):'';}
+  if(!c)return;
+  const sp=cap.querySelectorAll('.wd');
+  c.words.forEach((w,i)=>{const p=tw(t,w.s-0.08,0.22,'back');sp[i].style.opacity=clamp((t-(w.s-0.08))/0.1);sp[i].style.transform=`translateY(${(1-p)*26}px) scale(${0.7+0.3*p})`;});
+}
+const bubState={};
+function renderBubble(id,t,l,vis){
+  const b=$(id);const txt=b.querySelector('.txt');
+  if(bubState[id]!==l.id){bubState[id]=l.id;txt.innerHTML=l.words.map(w=>`<span class="wd${w.k?' k':''}">${fmt(w.w)}</span>`).join(' ');}
+  const sp=txt.querySelectorAll('.wd');
+  l.words.forEach((w,i)=>{const p=tw(t,w.s-0.06,0.2,'back');sp[i].style.opacity=clamp((t-(w.s-0.06))/0.08);sp[i].style.transform=`scale(${0.6+0.4*p})`;});
+  const p=tw(t,vis[0],0.35,'back'),q=tw(t,vis[1]-0.25,0.25,'io');
+  b.style.opacity=t<vis[0]||t>vis[1]?0:Math.min(clamp((t-vis[0])/0.12),1-q);
+  b.style.transform=`scale(${(0.5+0.5*p)*(1-0.1*q)})`;
+}
+
+/* ---------- room dust ---------- */
+const dust=[];for(let i=0;i<26;i++){dust.push(mk('circle',{r:2+hash(i)*4,opacity:.15+hash(i+9)*.35},$('dust')))}
+
+/* ---------- geology ---------- */
+const geoSvg=$('geo'),flow=$('flow');const FL=flow.getTotalLength();
+(function(){const g=$('blocks');for(let r=0;r<6;r++){const y=1454+r*104;let x=-(r%2)*90;while(x<1080){const w=150+hash(r*13+x)*90;mk('rect',{x:x+6,y:y+6,width:w-12,height:92,rx:16},g);x+=w;}}})();
+const rain=[];for(let i=0;i<46;i++){rain.push(mk('line',{x1:0,y1:0,x2:-8,y2:34},$('rain')))}
+const ions2=[];
+[[0.30,'Ca'],[0.36,'Mg'],[0.44,'Ca'],[0.50,'Ca'],[0.55,'Mg'],[0.62,'Ca'],[0.68,'Mg'],[0.74,'Ca']].forEach(([f,k],i)=>{
+  const g=mk('g',{},$('ions2'));mk('circle',{r:k==='Ca'?24:21,fill:`url(#${k==='Ca'?'caG':'mgG'})`,stroke:k==='Ca'?'#B87400':'#5C6888','stroke-width':3},g);
+  const tx=mk('text',{'text-anchor':'middle',y:8,'font-family':'Outfit','font-weight':800,'font-size':20,fill:'#3A2400'},g);tx.textContent=k;
+  const p=flow.getPointAtLength(f*FL);ions2.push({g,f,k,home:{x:p.x+(i%2?70:-70),y:p.y+(hash(i)*30-15)},rel:0});
+});
+/* ---------- scene 3 ---------- */
+const bub3=[];for(let i=0;i<34;i++){bub3.push(mk('circle',{r:4+hash(i+40)*12},$('bub3')))}
+const ions3=[];
+for(let i=0;i<18;i++){const k=i%3===2?'Mg':'Ca';const g=mk('g',{},$('ions3'));const r=k==='Ca'?46:40;
+  mk('circle',{r:r+16,fill:k==='Ca'?'#FFD23F':'#DCE3F2',opacity:.18},g);
+  mk('circle',{r,fill:`url(#${k==='Ca'?'caG':'mgG'})`,stroke:k==='Ca'?'#B87400':'#5C6888','stroke-width':4},g);
+  const tx=mk('text',{'text-anchor':'middle',y:12,'font-family':'Outfit','font-weight':800,'font-size':32,fill:'#2A1800',direction:'ltr'},g);tx.textContent=k+'²⁺';
+  ions3.push({g,x:120+hash(i*3)*840,y:620+hash(i*7+1)*820,ph:hash(i)*6,born:i<4?0:1+i});
+}
+const cities=$('cities');
+[['خفيف',2,'#4FC3F7'],['متوسط',5,'#FFD23F'],['قاصح',10,'#FF7A45']].forEach(([n,c,col],i)=>{
+  const d=document.createElement('div');d.className='card cityc';d.style.cssText='position:relative;width:300px;height:640px;padding-top:30px;text-align:center';
+  let dots='';for(let j=0;j<c;j++){dots+=`<circle cx="${50+hash(j*5+i)*100}" cy="${110+hash(j*11+i*3)*150}" r="12" fill="${j%3===2?'#C9D4E8':'#FFC83A'}" stroke="#8A6A10" stroke-width="2"/>`}
+  d.innerHTML=`<div style="font-size:70px">📍</div><svg width="200" height="300" viewBox="0 0 200 300" style="margin:10px auto 0"><path d="M30 40 L170 40 L155 285 Q 100 300 45 285 Z" fill="#E3F4FF" stroke="#2A1056" stroke-width="6"/><path d="M36 90 L164 90 L155 280 Q 100 294 45 280 Z" fill="#8FD3FF" opacity=".8"/>${dots}</svg><div class="pill" style="font-size:44px;margin-top:22px;background:${col}">${n}</div>`;
+  cities.appendChild(d);
+});
+/* ---------- scene 4 ---------- */
+(function(){const g=$('cuticle');for(let x=-160;x<1040;x+=70){mk('path',{d:`M${x} 302 q 30 120 0 246`},g);} const p=$('pdots');for(let i=0;i<40;i++)mk('circle',{cx:hash(i)*1080,cy:hash(i+3)*1920,r:2+hash(i+7)*5},p)})();
+const deps=[];
+[[120,300],[260,548],[380,302],[470,546],[560,300],[650,548],[740,304],[330,546],[200,304],[600,547],[420,304],[520,548],[700,302],[150,546]].forEach(([x,y],i)=>{
+  const g=mk('g',{transform:`translate(${x} ${y})`},$('deposits'));
+  const s=10+hash(i)*9;const pts=[];for(let k=0;k<6;k++){const a=k/6*Math.PI*2+hash(i+k);const r=s*(0.7+hash(i*7+k)*0.6);pts.push(`${Math.cos(a)*r},${Math.sin(a)*r}`)}
+  mk('polygon',{points:pts.join(' '),fill:'#FFFDF5',stroke:'#C9B994','stroke-width':3},g);
+  mk('polygon',{points:pts.slice(0,3).join(' ')+' 0,0',fill:'#FFFFFF',opacity:.8},g);
+  deps.push(g);
+});
+const ions4=[];for(let i=0;i<16;i++){const k=i%3===2?'Mg':'Ca';ions4.push({c:mk('circle',{r:11,fill:`url(#${k==='Ca'?'caG':'mgG'})`,stroke:'#8A6A10','stroke-width':2},$('ions4')),x0:hash(i*9)*840,ph:hash(i+2)*7,sp:40+hash(i+5)*50})}
+$('cmp').innerHTML=['<div class="card" id="cmpA" style="position:relative;flex:1;height:440px;padding:24px;text-align:center"><svg width="380" height="200" viewBox="0 0 380 200"><rect x="0" y="70" width="380" height="70" rx="30" fill="url(#hairG)"/><rect x="0" y="80" width="380" height="12" fill="#fff" opacity=".5"/><text x="300" y="50" font-size="46">✨</text><text x="40" y="190" font-size="40">✨</text></svg><div style="font-weight:900;font-size:44px;margin-top:20px">شعرة نقية</div><div class="pill" style="font-size:38px;margin-top:14px">ناعمة · فيها اللمعة</div></div>',
+ '<div class="card" id="cmpB" style="position:relative;flex:1;height:440px;padding:24px;text-align:center"><svg width="380" height="200" viewBox="0 0 380 200"><rect x="0" y="70" width="380" height="70" rx="30" fill="url(#hairG)" opacity=".85"/>'+[40,110,170,250,320,80,210,290].map((x,i)=>`<polygon points="${x},${i<5?72:138} ${x+10},${i<5?60:150} ${x+20},${i<5?72:138} ${x+10},${i<5?82:128}" fill="#FFFDF5" stroke="#C9B994" stroke-width="2"/>`).join('')+'</svg><div style="font-weight:900;font-size:44px;margin-top:20px">مع الترسبات</div><div class="pill" style="font-size:38px;margin-top:14px;background:#FFB3A0">خشينة · بلا لمعة</div></div>'].join('');
+$('varRow').innerHTML='<span class="pill" style="font-size:42px;background:#fff">💇 حالة الشعر</span><span class="pill" style="font-size:42px;background:#fff">💧 نوع الما</span><span class="pill" style="font-size:42px">= النتيجة كتختالف</span>';
+/* ---------- cards ---------- */
+$('magni').innerHTML=`<svg width="330" height="330" viewBox="0 0 330 330"><defs><clipPath id="mgc"><circle cx="150" cy="150" r="128"/></clipPath></defs><circle cx="150" cy="150" r="140" fill="#E9F4FF"/><g clip-path="url(#mgc)"><g transform="rotate(-28 150 150)"><rect x="-40" y="110" width="400" height="84" rx="20" fill="url(#hairG)"/>${[30,90,150,210,250,60,180].map((x,i)=>`<polygon points="${x},${i<4?108:196} ${x+12},${i<4?94:208} ${x+24},${i<4?108:196} ${x+12},${i<4?120:184}" fill="#FFFDF5" stroke="#C9B994" stroke-width="3"/>`).join('')}</g></g><circle cx="150" cy="150" r="138" fill="none" stroke="url(#ring)" stroke-width="18"/><rect x="236" y="246" width="40" height="110" rx="18" fill="#5B2F8E" transform="rotate(-45 256 300)"/></svg>`;
+$('card5').innerHTML=`
+ <div id="c5a" style="position:absolute;inset:0;padding:40px;text-align:center">
+   <span class="pill" style="font-size:54px">⚠️ رد البال</span>
+   <div style="display:flex;align-items:center;justify-content:space-around;margin-top:46px">
+     <div><svg width="280" height="280" viewBox="0 0 280 280"><circle cx="140" cy="140" r="130" fill="#FCE3D3"/><path d="M20 190 Q 140 120 260 190 L260 280 L20 280Z" fill="#F2B48C"/>${[[80,170],[120,150],[170,152],[210,172],[140,180],[100,196],[190,196]].map(([x,y],i)=>`<path d="M${x} ${y} l${10+i%3*4} -6 l6 ${8+i%2*5} l-14 4z" fill="#fff" stroke="#D8CFC6" stroke-width="2"/>`).join('')}<path d="M70 60 Q 90 110 80 160 M110 40 Q 130 100 120 150 M160 40 Q 170 100 160 150 M200 60 Q 210 110 200 160" stroke="#2B1A12" stroke-width="8" fill="none" stroke-linecap="round"/></svg><div class="pill" style="font-size:42px;margin-top:10px;background:#fff;border:3px solid #2A1056">قشرة / جفاف</div></div>
+     <div style="font-family:Outfit;font-weight:800;font-size:150px;color:#E2551F">≠</div>
+     <div><svg width="280" height="280" viewBox="0 0 280 280"><circle cx="140" cy="140" r="130" fill="#E3F2FF"/><g transform="rotate(-25 140 140)"><rect x="-20" y="110" width="320" height="64" rx="24" fill="url(#hairG)"/>${[40,90,150,200,240,70,180].map((x,i)=>`<polygon points="${x},${i<5?110:174} ${x+10},${i<5?96:188} ${x+20},${i<5?110:174} ${x+10},${i<5?122:162}" fill="#FFFDF5" stroke="#C9B994" stroke-width="3"/>`).join('')}</g></svg><div class="pill" style="font-size:42px;margin-top:10px">كالكير</div></div>
+   </div>
+   <div style="font-weight:900;font-size:44px;margin-top:40px;color:#5A3E8E">ماشي ديما نفس السبب</div>
+ </div>
+ <div id="c5b" style="position:absolute;inset:0;padding:40px;text-align:center;opacity:0">
+   <span class="pill" style="font-size:54px">🧪 اختبار قساوة الما</span>
+   <svg width="860" height="520" viewBox="0 0 860 520" style="margin-top:20px">
+     <path d="M260 120 L480 120 L462 470 Q 370 500 278 470 Z" fill="#E3F4FF" stroke="#2A1056" stroke-width="7"/>
+     <path d="M266 220 L474 220 L462 466 Q 370 494 278 466 Z" fill="#8FD3FF" opacity=".85"/>
+     <g id="strip"><rect x="-26" y="-300" width="52" height="420" rx="10" fill="#fff" stroke="#2A1056" stroke-width="5"/>
+       <rect class="pad" x="-18" y="-280" width="36" height="34" rx="6" fill="#EEE"/><rect class="pad" x="-18" y="-230" width="36" height="34" rx="6" fill="#EEE"/><rect class="pad" x="-18" y="-180" width="36" height="34" rx="6" fill="#EEE"/><rect class="pad" x="-18" y="-130" width="36" height="34" rx="6" fill="#EEE"/></g>
+     <g transform="translate(560 120)"><rect width="250" height="300" rx="24" fill="#fff" stroke="#2A1056" stroke-width="5"/>
+       <text x="125" y="54" text-anchor="middle" font-weight="900" font-size="34" fill="#2A1056" font-family="Tajawal">النتيجة</text>
+       <rect x="40" y="80" width="170" height="40" rx="10" fill="#8FD3FF"/><rect x="40" y="134" width="170" height="40" rx="10" fill="#A5E3A0"/><rect x="40" y="188" width="170" height="40" rx="10" fill="#FFD23F"/><rect x="40" y="242" width="170" height="40" rx="10" fill="#FF9A6B"/>
+       <path id="arrowRes" d="M-10 0 l-30 -18 v36z" fill="#E2551F" transform="translate(240 260)"/></g>
+   </svg>
+ </div>`;
+$('card6').innerHTML=`<div style="padding:40px 0 0;text-align:center"><span class="pill" style="font-size:54px">💡 شنو ندير؟</span></div>
+ <div style="margin-top:44px">
+  <div class="check" id="ck1"><div class="ic"><svg width="44" height="44" viewBox="0 0 44 44"><path d="M8 23 L18 33 L36 12" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div>اختار منتوجات العناية <span style="background:var(--y);border-radius:10px;padding:0 8px">حسب شعرك</span> وحسب الما ديالك</div></div>
+  <div class="check" id="ck2"><div class="ic"><svg width="44" height="44" viewBox="0 0 44 44"><path d="M8 23 L18 33 L36 12" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div>كمل الدوش بشوية ديال <span style="background:#8FD3FF;border-radius:10px;padding:0 8px">الما بارد</span> ❄️</div></div>
+ </div>`;
+const ICONS=`
+ <svg width="120" height="120" viewBox="0 0 120 120"><defs><linearGradient id="igG" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FDCB52"/><stop offset=".5" stop-color="#E1306C"/><stop offset="1" stop-color="#833AB4"/></linearGradient></defs><rect width="120" height="120" rx="32" fill="url(#igG)"/><rect x="28" y="28" width="64" height="64" rx="20" fill="none" stroke="#fff" stroke-width="8"/><circle cx="60" cy="60" r="15" fill="none" stroke="#fff" stroke-width="8"/><circle cx="83" cy="37" r="5" fill="#fff"/></svg>
+ <svg width="120" height="120" viewBox="0 0 120 120"><rect width="120" height="120" rx="32" fill="#111"/><path d="M66 26 v50 a14 14 0 1 1 -14 -14" fill="none" stroke="#25F4EE" stroke-width="10" transform="translate(-3 -2)"/><path d="M66 26 v50 a14 14 0 1 1 -14 -14" fill="none" stroke="#FE2C55" stroke-width="10" transform="translate(3 2)"/><path d="M66 26 v50 a14 14 0 1 1 -14 -14 M66 26 q4 16 22 18" fill="none" stroke="#fff" stroke-width="10"/></svg>
+ <svg width="120" height="120" viewBox="0 0 120 120"><rect width="120" height="120" rx="32" fill="#FF0033"/><path d="M48 38 L84 60 L48 82Z" fill="#fff"/></svg>
+ <svg width="120" height="120" viewBox="0 0 120 120"><rect width="120" height="120" rx="32" fill="#1877F2"/><path d="M66 104 V66 h13 l2 -15 H66 v-9 c0 -5 2 -8 8 -8 h8 V21 c-3 0 -9 -1 -14 -1 c-13 0 -20 8 -20 21 v10 H35 v15 h13 v38z" fill="#fff"/></svg>`;
+$('card7').innerHTML=`<div style="padding:44px 50px 0;text-align:center">
+  <div style="font-family:Lalezar;font-size:84px;line-height:1.15;color:#2A1056">تابعنا باش تكتشف<br><span style="color:#7B3FE4">أسرار الشعر</span> 💜</div>
+  <div style="font-weight:800;font-size:42px;color:#5A3E8E;margin-top:16px">وخليك ديما عارف شنو كتستعمل!</div>
+  <div id="followBtn" style="display:inline-flex;align-items:center;gap:16px;margin-top:34px;background:var(--y);color:#1A0838;font-weight:900;font-size:58px;padding:16px 60px;border-radius:999px;box-shadow:0 12px 0 #C98A00">🔔 <span id="followTxt">تابعنا</span></div>
+  <div id="icons7" style="display:flex;justify-content:center;gap:26px;margin-top:40px">${ICONS}</div>
+ </div>
+ <div id="tapHand" class="abs" style="left:0;top:0;font-size:100px">👆</div>`;
+$('endIcons').innerHTML=ICONS;
+const sparks=[];for(let i=0;i<16;i++){const s=document.createElement('div');s.className='abs';s.textContent='✦';s.style.cssText=`color:#FFD23F;font-size:${30+hash(i)*40}px`;$('sparks').appendChild(s);sparks.push(s)}
+
+/* ---------- presenter performance keyframes ---------- */
+const sc5=S[4][0],sc6=S[5][0],sc7=S[6][0];
+const armR=[[0,200],[0.55,200],[1.0,30],[4.5,30],[5.0,200],
+  [sc5,200],[41.3,200],[41.7,10],[43.9,10],[44.3,30],[45.6,30],[46.0,-10],[49.4,-10],[49.9,200],
+  [52.5,200],[52.9,30],[55.4,30],[55.8,200],
+  [sc7,200],[64.9,-4],[67.2,-4],[67.6,30],[69.3,30],[69.7,200],[75,200]];
+const handR=[[0,'open'],[41.5,'point'],[44.1,'open'],[45.8,'point'],[49.6,'open']];
+const armL=[[0,200],[5.5,200],[5.95,22],[7.8,22],[8.2,200],
+  [sc5,200],[42.0,200],[42.5,34],[43.8,34],[44.2,200],
+  [55.3,200],[55.7,30],[58.3,30],[58.7,200],[75,200]];
+const handL=[[0,'open'],[5.5,'point'],[8.3,'open']];
+const brow=[[0,1],[0.6,1],[2.6,.55],[4.6,.9],[5.6,1],[8.2,.3],[sc5,.2],[41.3,-.7],[43.9,-.7],[44.4,.25],[49.6,.25],[50.6,.85],[52.4,.3],[58.8,.4],[59.4,.9],[63.4,.9],[64.4,.5],[75,.5]];
+const gaze=[[0,[0,0]],[5.55,[0,0]],[5.8,[7,-5]],[8.3,[7,-5]],[sc5,[0,0]],[45.9,[0,0]],[46.2,[-6,-7]],[49.5,[-6,-7]],[49.8,[0,0]],[50.7,[6,-6]],[52.4,[6,-6]],[52.6,[0,0]],[59.2,[0,0]],[59.5,[0,-8]],[63.6,[0,-8]],[64.2,[0,0]],[69.5,[0,0]],[69.7,[7,-2]],[71.2,[7,-2]],[71.4,[0,0]]];
+const blinks=[];for(let t=1.6;t<75;t+=2.4+hash(t)*2.2)blinks.push(t);
+function blinkAmt(t,off=0){for(const b of blinks){const d=t-(b+off);if(d>=0&&d<0.18)return Math.sin(Math.PI*d/0.18)}return 0}
+
+/* ---------- master seek ---------- */
+function vecKf(t,arr){if(t<=arr[0][0])return arr[0][1];for(let i=1;i<arr.length;i++){if(t<=arr[i][0]){const a=arr[i-1],b=arr[i];const p=E.io((t-a[0])/(b[0]-a[0]||1));return [lerp(a[1][0],b[1][0],p),lerp(a[1][1],b[1][1],p)]}}return arr[arr.length-1][1]}
+function scene(t){for(let i=0;i<S.length;i++)if(t>=S[i][0]&&t<S[i][1])return i;return 6}
+
+window.seek=function(t){
+  const f=Math.min(TL.mouthP.length-1,Math.round(t*30));
+  const si=scene(t);
+  const inRoom=si===0||si>=4;
+  /* room */
+  $('room').style.opacity=inRoom?1:0;
+  tf($('room'),{s:si===0?1.04+0.03*tw(t,0,8,'sine'):1.02+0.02*Math.sin(t*.2),o:inRoom?1:0});
+  dust.forEach((d,i)=>{d.setAttribute('cx',(hash(i)*1080+t*(8+hash(i+1)*14))%1080);d.setAttribute('cy',200+((hash(i+2)*1300-t*(10+hash(i+3)*12))%1300+1300)%1300)});
+  /* title */
+  const bt=$('bigTitle');const pT=tw(t,0.05,0.5,'back');bt.style.opacity=si===0?Math.min(clamp(t/0.15),1-tw(t,7.9,0.3)):0;bt.style.transform=`scale(${0.6+0.4*pT}) rotate(${(1-pT)*-4}deg)`;
+  const ec=$('epChip');ec.style.opacity=(si>=1&&t<71.2&&!(t>58.8&&t<64.2))?1:0;
+  /* presenter */
+  const pres=$('pres');
+  let pk=1,px=0,py=0,po=inRoom?1:0;
+  if(si===0){pk=1+0.05*tw(t,0,5,'sine');}
+  if(si>=4){pk=0.8;py=0;}
+  const breathe=Math.sin(t*2.1)*0.006;
+  pres.style.opacity=po;
+  pres.style.transform=`translate(${px}px,${py}px) scale(${pk},${pk*(1+breathe)}) rotate(${Math.sin(t*0.9)*0.6}deg)`;
+  const mo=TL.mouthP[f]||0;
+  const head=$('head');
+  const tilt=Math.sin(t*1.25)*2.2+(si===0&&t>5.6?3:0);
+  head.setAttribute('transform',`rotate(${tilt} 300 520) translate(0 ${44-mo*5+Math.sin(t*2.1)*1.5})`);
+  const bv=kf(t,brow);
+  const angry=bv<0?-bv:0;
+  $('browL').setAttribute('transform',`translate(0 ${-bv*10}) rotate(${angry*10} 280 244)`);
+  $('browR').setAttribute('transform',`translate(0 ${-bv*10}) rotate(${-angry*10} 320 244)`);
+  const bl=1-0.92*blinkAmt(t);const [gx,gy]=vecKf(t,gaze);
+  ['eyeL','eyeR'].forEach((id,i)=>{const cx=i?350:250;$(id).setAttribute('transform',`translate(${cx} 304) scale(1 ${bl}) translate(${-cx} -304)`);$(id).querySelector('.pup').setAttribute('transform',`translate(${gx} ${gy})`)});
+  const wv=0.82+0.3*hash(Math.floor(t*7.5));
+  const mp=mouthPaths(300,408,mo,wv,1,0.6);
+  $('mOpen').setAttribute('d',mp.open);$('mClipPath').setAttribute('d',mp.open||'M0 0');$('mLine').setAttribute('d',mp.line);
+  $('teeth').setAttribute('y',404-2-2.4-12);$('tongue').setAttribute('cy',408+ (4+50*mo)*1.0);
+  const wave=(t>64.9&&t<67.3)?Math.sin((t-64.9)*10)*20:0;
+  setArm('armR',kf(t,armR)+Math.sin(t*1.7)*1.5,step(t,handR),wave+(step(t,handR)==='point'?-10:0));
+  setArm('armL',kf(t,armL)+Math.sin(t*1.5+1)*1.5,step(t,handL),step(t,handL)==='point'?-14:0);
+
+  /* drop */
+  const drop=$('drop');let dx=-400,dy=0,ds=1,dop=0,dr=0;
+  const dmo=TL.mouthD[f]||0;
+  const bob=Math.sin(t*3.2)*10;
+  if(si===0&&t>5.35){const p=tw(t,5.35,0.6,'back');dx=lerp(1160,770,p);dy=lerp(120,330,p)+bob;ds=1;dop=1;dr=lerp(30,0,p);}
+  if(si===1){
+    const pan=geoPan(t);
+    if(t<10.9){const p=tw(t,9.0,1.6,'io');const y=lerp(240,700,p);dx=410;dy=y+pan-200;ds=0.62;dop=clamp((t-9)/0.2);dr=Math.sin(t*6)*4;}
+    else{const g=lerp(0.02,0.86,E.io(clamp((t-11.0)/6.6)));const pt=flow.getPointAtLength(g*FL);dx=pt.x-110;dy=pt.y+pan-230;ds=0.72;dop=1;dr=Math.sin(t*5)*6;}
+  }
+  if(si===2){dx=60;dy=1250+bob;ds=0.72;dop=tw(t,18.4,0.4);}
+  if(si===3){dx=820;dy=1330+bob;ds=0.62;dop=tw(t,28.8,0.4)*(1-tw(t,33.8,0.3));}
+  if(si===5&&t<58.9){const p=tw(t,50.45,0.55,'back');dx=lerp(1160,790,p);dy=lerp(500,560,p)+bob;dop=1;ds=1;
+    if(t>52.4){const q=tw(t,52.4,0.6,'io');dx=lerp(790,870,q);dy=lerp(560,1080,q)+bob;ds=lerp(1,0.6,q);} dop=1-tw(t,58.5,0.4);}
+  if(si===6&&t<71.3){const p=tw(t,64.7,0.6,'back');dx=lerp(1160,830,p);dy=lerp(1300,1180,p)+bob;ds=0.85;dop=1;}
+  const sq=1+dmo*0.06;
+  drop.style.opacity=dop;drop.style.transform=`translate(${dx}px,${dy}px) rotate(${dr}deg) scale(${ds/Math.sqrt(sq)},${ds*sq})`;
+  const dbl=1-0.92*blinkAmt(t,0.7);
+  ['dEyeL','dEyeR'].forEach((id,i)=>{const cx=i?124:76;$(id).setAttribute('transform',`translate(${cx} 146) scale(1 ${dbl}) translate(${-cx} -146)`)});
+  const dg=si===0||si===5?[-4,1]:si===6?[-4,0]:si===2?[4,-3]:si===3?[-4,-4]:[0,2];
+  document.querySelectorAll('#drop .pup').forEach(p=>p.setAttribute('transform',`translate(${dg[0]} ${dg[1]})`));
+  const dconf=(t>50.7&&t<52.5)?1:0;
+  $('dBrowL').setAttribute('transform',`translate(0 ${-6-dmo*4}) rotate(${dconf*-12} 76 112)`);$('dBrowR').setAttribute('transform',`translate(0 ${-6-dmo*4+dconf*6}) rotate(${dconf*8} 124 112)`);
+  const dmp=mouthPaths(100,194,dmo,0.85+0.3*hash(Math.floor(t*8)+5),0.45,1);
+  $('dmOpen').setAttribute('d',dmp.open);$('dmClipPath').setAttribute('d',dmp.open||'M0 0');$('dmLine').setAttribute('d',dmp.line);
+  $('dArmR').setAttribute('transform',`rotate(${(dmo>0.05?Math.sin(t*8)*10:0)+((si===6&&t>69.4)?Math.sin(t*12)*16:0)} 172 168)`);
+  $('dArmL').setAttribute('transform',`rotate(${Math.sin(t*2.5)*8} 28 168)`);
+
+  /* bubbles */
+  renderBubble('bubP',t,L.P1,[0.3,5.5]);
+  let dl=t<20?L.D1:t<60?L.D3:L.D4;
+  const bd=$('bubD');
+  if(dl.id==='D1'){bd.style.left='60px';bd.style.top='330px';bd.style.width='680px';$('bubDtail').style.cssText='top:40%;right:-22px';renderBubble('bubD',t,dl,[5.45,8.15]);}
+  else if(dl.id==='D3'){bd.style.left='120px';bd.style.top='480px';bd.style.width='600px';$('bubDtail').style.cssText='top:40%;right:-22px';renderBubble('bubD',t,dl,[50.6,52.55]);}
+  else{bd.style.left='130px';bd.style.top='915px';bd.style.width='660px';$('bubDtail').style.cssText='top:40%;right:-22px';renderBubble('bubD',t,dl,[69.45,71.2]);}
+  /* magnifier S1 */
+  const mg=$('magni');const pm=tw(t,W('P1',-2)-0.05,0.5,'back');mg.style.opacity=si===0?Math.min(clamp((t-(W('P1',-2)-0.05))/0.15),1-tw(t,5.2,0.3)):0;mg.style.transform=`scale(${0.3+0.7*pm}) rotate(${(1-pm)*30}deg)`;
+  bd.style.zIndex=5;
+
+  /* S2 geology */
+  const geoW=$('geoWrap');geoW.style.opacity=si===1?1:0;
+  if(si===1){
+    const pan=geoPan(t);geoSvg.style.transform=`translateY(${pan}px)`;
+    rain.forEach((r,i)=>{const x=150+hash(i)*780;const yy=260+((t*900+hash(i+3)*520)%460);r.setAttribute('x1',x);r.setAttribute('y1',yy);r.setAttribute('x2',x-8);r.setAttribute('y2',yy+34);r.setAttribute('opacity',yy<700?1:0)});
+    $('cloud1').setAttribute('transform',`translate(${Math.sin(t*.6)*20} 0)`);$('cloud2').setAttribute('transform',`translate(${Math.sin(t*.5+1)*-20} 0)`);
+    $('flowDash').setAttribute('stroke-dashoffset',-t*120);
+    const tSoil=WF('D2','التربة'),tRock=WF('D2','والصخور'),tCa=WF('D2','الكالسيوم'),tMg=WF('D2','والمانيزيوم'),tTake=WF('D2','وكنهز');
+    ions2.forEach((io,i)=>{const tr=tTake+i*0.35;let x=io.home.x,y=io.home.y;
+      if(t>tr){const pp=clamp(io.f+(t-tr)*0.05,0,0.99);const pt=flow.getPointAtLength(pp*FL);const q=tw(t,tr,0.5,'io');x=lerp(io.home.x,pt.x,q);y=lerp(io.home.y,pt.y,q)}
+      const hi=(io.k==='Ca'&&t>tCa&&t<tCa+0.9)||(io.k==='Mg'&&t>tMg&&t<tMg+0.9);
+      io.g.setAttribute('transform',`translate(${x} ${y}) scale(${hi?1.35:1})`)});
+    placeLbl('lSoil',t,tSoil,880,pan);placeLbl('lRock',t,tRock,1520,pan);placeLbl('lCa',t,tCa,1600,pan);placeLbl('lMg',t,tMg,1700,pan);
+  }
+  /* S3 hard water */
+  const s3=$('s3');s3.style.opacity=si===2?1:0;
+  if(si===2){
+    tf(s3,{s:1+0.04*tw(t,18,10,'sine')});
+    bub3.forEach((b,i)=>{b.setAttribute('cx',hash(i)*1080+Math.sin(t*2+i)*10);b.setAttribute('cy',1920-((t*(60+hash(i+1)*90)+hash(i+2)*1920)%1920))});
+    const tConc=WF('P3','تركيز'),tHard=WF('P3','القاصح'),tP4=L.P4.t0;
+    ions3.forEach((io,i)=>{const born=i<5?18.2+i*0.15:tConc+(i-5)*0.09;const p=tw(t,born,0.45,'back');const fade=1-tw(t,tP4-0.2,0.4);
+      io.g.setAttribute('transform',`translate(${io.x+Math.sin(t*0.8+io.ph)*30} ${io.y+Math.cos(t*0.7+io.ph)*26}) scale(${p*(t>tP4?0.6+0.4*fade:1)})`);io.g.setAttribute('opacity',fade)});
+    const gp=kf(t,[[18,0.15],[tConc,0.15],[tHard,0.88]],'io');$('needle').style.right=(gp*100)+'%';
+    $('gaugeTxt').textContent=gp<0.4?'خفيف':gp<0.7?'متوسط':'قاصح';$('gaugeTxt').style.color=gp<0.4?'#1E88E5':gp<0.7?'#C98A00':'#E2551F';
+    const gc=$('gaugeCard');const pg=tw(t,18.15,0.5,'back');gc.style.opacity=clamp((t-18.15)/0.15)*(1-tw(t,tP4-0.1,0.3));gc.style.transform=`translateY(${(1-pg)*-60}px)`;
+    const hs=$('hardStamp');const ph=tw(t,tHard-0.05,0.45,'back');hs.style.opacity=t<tHard-0.05?0:1-tw(t,tP4-0.2,0.3);hs.style.transform=`scale(${2-ph}) rotate(${-6*ph}deg)`;
+    const cs=cities.children;const tCity=WF('P4','مدينة');
+    for(let i=0;i<3;i++){const pc=tw(t,tP4+0.1+i*0.25,0.55,'back');cs[i].style.opacity=clamp((t-(tP4+0.1+i*0.25))/0.15);cs[i].style.transform=`translateY(${(1-pc)*120}px)`}
+    const ct=$('cityTxt');const pct=tw(t,tCity-0.1,0.4,'back');ct.style.opacity=clamp((t-(tCity-0.1))/0.12);ct.style.transform=`scale(${0.6+0.4*pct})`;
+  }
+  /* S4 microscope */
+  const s4=$('s4');s4.style.opacity=si===3?1:0;
+  if(si===3){
+    const tP6=L.P6.t0,tHair=WF('P5','الشعرة'),tRough=WF('P6','خشين'),tVar=WF('P6','كيختالف');
+    const shrink=tw(t,tP6-0.1,0.8,'io');
+    const lens=$('lens');lens.style.transform=`translateY(${-shrink*230}px) scale(${(0.85+0.15*tw(t,28.4,0.7,'back'))*(1-0.42*shrink)})`;
+    $('hairStrand').setAttribute('transform',`rotate(-24 420 420) translate(${-(t-28.4)*8} 0)`);
+    ions4.forEach((io,i)=>{const y=((t-28.4)*io.sp+hash(i)*840)%900-30;io.c.setAttribute('cx',io.x0+Math.sin(t+io.ph)*20);io.c.setAttribute('cy',y);io.c.setAttribute('opacity',shrink>0.5?0:1)});
+    deps.forEach((d,i)=>{const tb=29.4+i*0.27;const p=tw(t,tb,0.35,'back');const base=d.getAttribute('data-b')||d.getAttribute('transform');if(!d.getAttribute('data-b'))d.setAttribute('data-b',base);d.setAttribute('transform',base+` scale(${p})`)});
+    const n=Math.max(1,Math.min(30,Math.floor(1+(t-29.0)*7)));$('washN').textContent='×'+n;
+    const wc=$('washChip');wc.style.opacity=clamp((t-29.0)/0.2)*(1-shrink);
+    const mc=$('micChip');mc.style.opacity=clamp((t-28.6)/0.2)*(1-shrink);
+    const lc=$('lCut');const pl=tw(t,tHair-0.1,0.4,'back');lc.style.opacity=clamp((t-(tHair-0.1))/0.12)*(1-shrink);lc.style.transform=`scale(${0.5+0.5*pl})`;
+    const A=$('cmpA'),B=$('cmpB');const pa=tw(t,tP6+0.3,0.5,'back'),pb=tw(t,tRough-0.1,0.5,'back');
+    A.style.opacity=clamp((t-(tP6+0.3))/0.15);A.style.transform=`translateY(${(1-pa)*140}px)`;B.style.opacity=clamp((t-(tRough-0.1))/0.15);B.style.transform=`translateY(${(1-pb)*140}px)`;
+    const vr=$('varRow');const pv=tw(t,tVar-0.1,0.45,'back');vr.style.opacity=clamp((t-(tVar-0.1))/0.15);vr.style.transform=`scale(${0.6+0.4*pv})`;
+  }
+  /* S5 cards */
+  const c5=$('card5');
+  if(si===4){const p=tw(t,41.1,0.55,'back');c5.style.opacity=clamp((t-41.1)/0.15)*(1-tw(t,50.0,0.35));c5.style.transform=`translateY(${(1-p)*-80}px) scale(${0.85+0.15*p})`;
+    const swap=tw(t,L.P8.t0-0.2,0.4,'io');$('c5a').style.opacity=1-swap;$('c5b').style.opacity=swap;
+    const tDip=L.P8.t0+0.5;const dip=kf(t,[[tDip,0],[tDip+0.7,1],[tDip+1.6,1],[tDip+2.3,0.15]],'io');
+    const strip=c5.querySelector('#strip');strip.setAttribute('transform',`translate(370 ${170+dip*270})`);
+    const cols=['#8FD3FF','#A5E3A0','#FFD23F','#FF9A6B'];const wet=tw(t,tDip+0.9,0.8,'io');
+    strip.querySelectorAll('.pad').forEach((p,i)=>p.setAttribute('fill',wet>0?`color-mix(in srgb, ${cols[i]} ${Math.round(wet*100)}%, #EEEEEE)`:'#EEE'));
+    c5.querySelector('#arrowRes').setAttribute('opacity',tw(t,tDip+2.0,0.3));
+  } else c5.style.opacity=0;
+  /* S6 */
+  const c6=$('card6');
+  if(si===5){const t0=L.P9.t0-0.1;const p=tw(t,t0,0.55,'back');c6.style.opacity=clamp((t-t0)/0.15)*(1-tw(t,58.7,0.3));c6.style.transform=`translateY(${(1-p)*-80}px) scale(${0.85+0.15*p})`;
+    [[ 'ck1',WF('P9','اختار')],['ck2',WF('P9','وكمل')]].forEach(([id,tt])=>{const q=tw(t,tt-0.1,0.5,'back');const el=$(id);el.style.opacity=clamp((t-(tt-0.1))/0.15);el.style.transform=`translateX(${(1-q)*-160}px)`;el.querySelector('.ic').style.transform=`scale(${tw(t,tt+0.2,0.4,'back')})`});
+  } else c6.style.opacity=0;
+  /* teaser */
+  const dimV=si===5?Math.min(tw(t,58.8,0.6,'io')*0.78,0.78*(1-tw(t,64.0,0.4))):0;$('dim').style.opacity=dimV;
+  const ts=$('teaser');ts.style.opacity=si===5?clamp((t-58.9)/0.4)*(1-tw(t,64.0,0.4)):0;
+  if(si===5&&t>58.8){
+    const rise=tw(t,59.6,1.0,'out');$('mBottle').style.transform=`translateY(${(1-rise)*300}px)`;$('mBottle').style.opacity=rise;
+    const tSol=WF('P10','الحل');const q=tw(t,tSol-0.1,0.5,'back');$('qMark').style.opacity=clamp((t-(tSol-0.1))/0.1);$('qMark').style.transform=`translateY(${Math.sin(t*4)*10}px) scale(${q})`;
+    const nt=$('nextTxt');const pn=tw(t,59.0,0.5,'back');nt.style.transform=`scale(${0.6+0.4*pn})`;nt.style.opacity=clamp((t-59)/0.15);
+    sparks.forEach((s,i)=>{const a=hash(i)*6.28+t*0.4;const r=240+hash(i+1)*120;s.style.left=(540+Math.cos(a)*r-15)+'px';s.style.top=(820+Math.sin(a)*r*0.8)+'px';s.style.opacity=(0.4+0.6*Math.abs(Math.sin(t*3+i)))*tw(t,60,0.6)})
+  }
+  /* S7 */
+  const c7=$('card7');
+  if(si===6){const p=tw(t,64.6,0.6,'back');c7.style.opacity=clamp((t-64.6)/0.15)*(1-tw(t,71.0,0.3));c7.style.transform=`translateY(${(1-p)*-80}px) scale(${0.85+0.15*p})`;
+    const tTap=67.4;const th=$('tapHand');const hp=kf(t,[[66.6,0],[67.2,1],[tTap,1.08],[tTap+0.2,1],[68.4,1],[68.9,0]],'io');
+    th.style.left=(470+(1-hp)*240)+'px';th.style.top=(392+(1-hp)*220)+'px';th.style.opacity=hp>0.02?1:0;th.style.transform=`scale(${t>tTap&&t<tTap+0.2?0.85:1})`;
+    const fb=$('followBtn');const pressed=t>tTap;fb.style.transform=`translateY(${t>tTap&&t<tTap+0.18?10:0}px) scale(${1+0.04*Math.sin(t*6)*(pressed?0:1)})`;
+    fb.style.boxShadow=t>tTap&&t<tTap+0.18?'0 2px 0 #C98A00':'0 12px 0 #C98A00';$('followTxt').textContent=pressed?'متابع ✓':'تابعنا';fb.style.background=pressed?'#2BB673':'var(--y)';fb.style.color=pressed?'#fff':'#1A0838';
+    c7.querySelectorAll('#icons7 svg').forEach((s,i)=>{const q=tw(t,65.3+i*0.15,0.45,'back');s.style.transform=`scale(${q})`});
+  } else c7.style.opacity=0;
+  /* end card */
+  const en=$('endc');const pe=tw(t,71.25,0.6,'out');en.style.opacity=pe;$('logoBox').style.transform=`scale(${0.8+0.2*tw(t,71.3,0.8,'back')})`;
+  $('endIcons').querySelectorAll('svg').forEach((s,i)=>{s.style.transform=`scale(${tw(t,72.0+i*0.12,0.45,'back')})`});
+  $('wm').style.opacity=t>71.2?0:0.75;
+  /* captions */
+  renderCap(t);$('cap').style.opacity=t>71.2?0:1;
+  /* wipe */
+  const wp=$('wipe');let ws=0,wo=0;
+  for(const T of [S[1][0],S[2][0],S[3][0],S[4][0]]){if(t>T-0.32&&t<T+0.5){if(t<T){ws=E.io((t-(T-0.32))/0.32);wo=1}else{ws=1+0.3*((t-T)/0.5);wo=1-E.out((t-T)/0.5)}}}
+  if(t>63.95&&t<64.75){ /* lights back flash */ }
+  wp.style.transform=`scale(${ws})`;wp.style.opacity=wo;
+};
+function geoPan(t){return kf(t,[[8.3,0],[10.2,0],[11.8,-560],[18,-700]],'io')}
+function placeLbl(id,t,t0,y,pan){const el=$(id);const p=tw(t,t0-0.05,0.45,'back');el.style.opacity=t<t0-0.05?0:1;el.style.top=(y+pan)+'px';el.style.transform=`scale(${0.4+0.6*p})`}
+
+const q=new URLSearchParams(location.search);window.seek(parseFloat(q.get('t')||'0'));
+window.__ready=true;
+})();
+</script>
+</body>
+</html>
