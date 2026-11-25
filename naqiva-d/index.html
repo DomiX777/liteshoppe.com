@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Naqiva – Shampoing Détox Anti-Calcaire | شامبو ضد الكالكير</title>
+<meta name="description" content="Naqiva: شامبو مغربي كيحيد الكالكير اللي كيخلي الشعر ناشف وبلا لمعة. التوصيل فابور، والخلاص عند الاستلام.">
+<meta name="theme-color" content="#061F25">
+<meta property="og:title" content="Naqiva – شعر نقي، بلا كالكير">
+<meta property="og:image" content="img/og.jpg">
+<link rel="icon" href="img/symbol.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;600;700&family=Outfit:wght@300;400;500;600&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/d-bottle.webp">
+<style>
+:root{
+  --bg:#061F25; --bg2:#0A2A31; --card:#0E333B; --line:rgba(255,255,255,.09);
+  --ink:#F4EFE5; --muted:#9FB8B5; --gold:#D6B36A; --gold2:#F0D9A0; --gold3:#B8893A;
+  --goldgrad:linear-gradient(115deg,#B8893A 0%,#F0D9A0 48%,#C9A04F 62%,#B8893A 100%);
+  --r:22px; --disp:"El Messiri","Tajawal",serif; --body:"Tajawal",system-ui,sans-serif; --lat:"Outfit",system-ui,sans-serif;
+  /* tokens used by the shared form/popup code */
+  --sand:#0A2A31; --white:#0E333B; --teal:#D6B36A; --teal-dark:#04171B; --teal-soft:rgba(214,179,106,.12); --aqua:#0E333B; --gold-soft:rgba(214,179,106,.16); --danger:#F2A49C;
+}
+*{box-sizing:border-box}[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.75 var(--body);overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:var(--gold)}
+.wrap{width:100%;max-width:1220px;margin-inline:auto;padding-inline:20px}
+.lat{font-family:var(--lat)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.gold{background:var(--goldgrad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 30px;border-radius:999px;border:0;font:700 18px/1 var(--body);cursor:pointer;text-decoration:none;transition:transform .2s,box-shadow .2s,background .2s}
+.btn-primary{background:var(--goldgrad);background-size:200% 100%;color:#1A1307;box-shadow:0 16px 40px -18px rgba(214,179,106,.8);animation:gshift 7s ease-in-out infinite}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 20px 44px -16px rgba(214,179,106,.95)}
+@keyframes gshift{0%,100%{background-position:0 0}50%{background-position:100% 0}}
+.btn-ghost{background:transparent;color:var(--gold);border:1.5px solid rgba(214,179,106,.55)}
+.btn-ghost:hover{background:rgba(214,179,106,.08)}
+.btn:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible,button:focus-visible{outline:3px solid var(--gold2);outline-offset:3px}
+.eyebrow{font:500 13px/1 var(--lat);letter-spacing:5px;text-transform:uppercase;color:var(--gold);display:inline-flex;align-items:center;gap:12px}
+.eyebrow::before{content:"";width:34px;height:1px;background:currentColor}
+h1,h2,h3{font-family:var(--disp);font-weight:700;line-height:1.2;margin:0}
+h2{font-size:clamp(32px,5.6vw,58px)}
+section{padding:90px 0;position:relative;scroll-margin-top:70px}
+.lead{color:var(--muted);font-size:19px;max-width:38em}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+/* topbar + header */
+.topbar{background:#04171B;color:var(--gold2);text-align:center;font-size:14px;padding:8px 16px;letter-spacing:.3px}
+.top{position:sticky;top:0;z-index:30;background:rgba(6,31,37,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.top .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:70px}
+.top nav{display:none;gap:26px;font-size:16px}
+.top nav a{color:var(--ink);text-decoration:none;opacity:.85}.top nav a:hover{opacity:1;color:var(--gold2)}
+.logo{justify-self:center}.logo img{height:32px;width:auto}
+.top .btn{justify-self:end;min-height:42px;padding:0 20px;font-size:15px}
+
+/* hero */
+.hero{padding:40px 0 70px;overflow:hidden}
+.hero::before{content:"";position:absolute;width:900px;height:900px;left:50%;top:48%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(214,179,106,.18),rgba(214,179,106,0) 62%);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:26px;align-items:center;position:relative}
+.hero h1{font-size:clamp(42px,8.4vw,84px);line-height:1.08;letter-spacing:-.5px}
+.hero .sub{color:var(--muted);font-size:19px;margin:18px 0 0;max-width:30em}
+.stage{position:relative;width:min(88vw,460px);aspect-ratio:1/1;margin:0 auto}
+.stage .ring{position:absolute;inset:0;animation:spin 38s linear infinite}
+.stage .ring text{font:500 15px var(--lat);letter-spacing:5.2px;fill:var(--gold);direction:ltr;unicode-bidi:normal}
+.stage .orb{position:absolute;inset:12%;border-radius:50%;background:radial-gradient(circle at 50% 40%,#123C45,#061F25 70%);border:1px solid rgba(214,179,106,.25);box-shadow:inset 0 0 80px rgba(214,179,106,.12)}
+.stage .bottle{position:absolute;inset:6% 18% 4%;object-fit:contain;filter:drop-shadow(0 40px 40px rgba(0,0,0,.45));animation:float 6s ease-in-out infinite}
+.stage .bottle-img{width:100%;height:100%;object-fit:cover;border-radius:50%;mask-image:radial-gradient(circle,#000 58%,transparent 71%);-webkit-mask-image:radial-gradient(circle,#000 58%,transparent 71%)}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.pricecard{background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid var(--line);border-radius:26px;padding:24px;display:grid;gap:14px;backdrop-filter:blur(6px)}
+.pricecard .row{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.pricecard .now{font:600 46px/1 var(--lat);direction:ltr;unicode-bidi:isolate}
+.pricecard .old{font:400 20px/1 var(--lat);color:var(--muted);text-decoration:line-through;direction:ltr;unicode-bidi:isolate}
+.pricecard .off{background:var(--goldgrad);color:#1A1307;font-weight:800;font-size:14px;border-radius:99px;padding:5px 12px}
+.ticks{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:16px;color:var(--muted)}
+.ticks li{display:flex;gap:10px;align-items:center}
+.ticks svg{color:var(--gold);flex:none}
+.rise{opacity:0;transform:translateY(30px);animation:rise 1s cubic-bezier(.2,.7,.2,1) forwards}
+.rise.r2{animation-delay:.15s}.rise.r3{animation-delay:.3s}.rise.r4{animation-delay:.45s}
+@keyframes rise{to{opacity:1;transform:none}}
+
+/* story (sticky) */
+.story{background:var(--bg2)}
+.story-grid{display:grid;grid-template-columns:1fr;gap:40px}
+.story-media{display:none}
+.chapter{padding:26px 0;border-top:1px solid var(--line)}
+.chapter .n{font:300 64px/1 var(--lat);color:var(--gold);opacity:.9}
+.chapter h3{font-size:30px;margin:10px 0 8px}
+.chapter p{color:var(--muted);margin:0 0 16px}
+.chapter img{border-radius:var(--r);aspect-ratio:4/3;object-fit:cover;width:100%}
+@media (min-width:960px){
+  .story-grid{grid-template-columns:1fr 1fr;gap:80px}
+  .story-media{display:block;position:sticky;top:110px;height:calc(100vh - 150px);max-height:640px;border-radius:30px;overflow:hidden}
+  .story-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity .8s,transform 1.4s cubic-bezier(.2,.7,.2,1)}
+  .story-media img.on{opacity:1;transform:none}
+  .story-media .cap{position:absolute;bottom:18px;inset-inline-start:18px;background:rgba(4,23,27,.8);border:1px solid var(--line);border-radius:99px;padding:8px 16px;font-size:14px;color:var(--gold2)}
+  .chapter{min-height:72vh;display:flex;flex-direction:column;justify-content:center;opacity:.35;transition:opacity .5s}
+  .chapter.on{opacity:1}
+  .chapter img{display:none}
+}
+
+/* bento */
+.bento{display:grid;grid-template-columns:1fr;gap:14px;margin-top:40px}
+.tile{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:26px;overflow:hidden;min-height:200px;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;transition:transform .4s,border-color .4s}
+.tile:hover{transform:translateY(-4px);border-color:rgba(214,179,106,.4)}
+.tile h3{font-size:24px}.tile p{margin:0;color:var(--muted);font-size:16.5px}
+.tile .tag{position:absolute;top:20px;inset-inline-start:22px;font:500 12px/1 var(--lat);letter-spacing:3px;color:var(--gold)}
+.tile.img{min-height:340px;padding:0}
+.tile.img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.tile.img:hover img{transform:scale(1.06)}
+.tile.img .txt{position:relative;padding:26px;background:linear-gradient(0deg,rgba(4,23,27,.95),rgba(4,23,27,0));padding-top:80px}
+.tile.goldbg{background:var(--goldgrad);color:#1A1307;border:0}
+.tile.goldbg p{color:#3B2E14}.tile.goldbg .tag{color:#3B2E14}
+.tile .big{font:300 76px/1 var(--lat)}
+@media (min-width:760px){.bento{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1060px){
+  .bento{grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:230px}
+  .tile{min-height:0}.t-a{grid-column:span 2;grid-row:span 2}.t-b{grid-column:span 2}.t-f{grid-column:span 2}
+  .tile.img{min-height:0}
+}
+
+/* botanicals */
+.bot{display:grid;grid-template-columns:1fr;gap:44px;align-items:center}
+.bot-media{border-radius:50% 50% 30px 30px;overflow:hidden;aspect-ratio:4/5;border:1px solid rgba(214,179,106,.25)}
+.bot-media img{width:100%;height:100%;object-fit:cover}
+.pills{display:grid;gap:12px;margin-top:30px}
+.pill{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;padding:16px 18px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.02);transition:background .3s,border-color .3s}
+.pill:hover{background:rgba(214,179,106,.07);border-color:rgba(214,179,106,.35)}
+.pill .dot{width:46px;height:46px;border-radius:50%;background:var(--goldgrad);color:#1A1307;display:grid;place-items:center;font:600 15px var(--lat)}
+.pill b{font-size:18px;display:block}.pill small{font:400 13px var(--lat);color:var(--gold);letter-spacing:.4px}
+.pill span{display:block;color:var(--muted);font-size:15.5px}
+.free{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.free span{border:1px dashed rgba(214,179,106,.45);border-radius:99px;padding:8px 14px;font-size:15px;color:var(--gold2)}
+@media (min-width:960px){.bot{grid-template-columns:.9fr 1.1fr;gap:80px}}
+
+/* ritual */
+.ritual{background:var(--bg2);text-align:center}
+.steps3{display:grid;grid-template-columns:1fr;gap:34px;margin-top:50px;position:relative}
+.step{position:relative}
+.step .circle{width:96px;height:96px;margin:0 auto 18px;border-radius:50%;border:1px solid rgba(214,179,106,.5);display:grid;place-items:center;font:300 34px var(--lat);color:var(--gold);background:var(--bg)}
+.step h3{font-size:24px}.step p{color:var(--muted);margin:6px auto 0;max-width:22em}
+@media (min-width:860px){
+  .steps3{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .steps3::before{content:"";position:absolute;top:48px;inset-inline:16%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform 1.6s cubic-bezier(.2,.7,.2,1)}
+  .steps3.in::before{transform:scaleX(1)}
+}
+
+/* offer */
+.offer-wrap{display:grid;grid-template-columns:1fr;gap:30px;align-items:center}
+.offer-media{position:relative;border-radius:32px;overflow:hidden;aspect-ratio:1/1;border:1px solid var(--line)}
+.offer-media img{width:100%;height:100%;object-fit:cover}
+.packs-d{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:26px 0 18px}
+.pk{position:relative;text-align:start;background:var(--card);border:1.5px solid var(--line);border-radius:22px;padding:22px 18px;cursor:pointer;color:var(--ink);font-family:var(--body);transition:border-color .25s,transform .25s}
+.pk:hover{transform:translateY(-3px);border-color:rgba(214,179,106,.55)}
+.pk.pkbest{border-color:var(--gold)}
+.pk .badge{position:absolute;top:-12px;inset-inline-start:16px;background:var(--goldgrad);color:#1A1307;font-weight:800;font-size:12.5px;border-radius:99px;padding:4px 10px}
+.pk b{display:block;font-size:19px}
+.pk .p{font:600 30px/1.2 var(--lat);color:var(--gold2);direction:ltr;unicode-bidi:isolate;display:block;text-align:right}
+.pk s{font:400 15px var(--lat);color:var(--muted);direction:ltr;unicode-bidi:isolate;display:block;text-align:right}
+.offer-slot{background:var(--card);border:1px solid var(--line);border-radius:22px}
+.offer-cta{padding:22px;display:grid;gap:10px}
+.offer-cta h3{font-size:22px}.offer-cta p{margin:0;color:var(--muted);font-size:16px}
+.offer-cta .btn{width:100%}.offer-cta small{color:var(--muted)}
+@media (min-width:960px){.offer-wrap{grid-template-columns:1fr 1fr;gap:70px}}
+
+/* reviews + faq */
+.empty-rev{border:1px dashed rgba(214,179,106,.35);border-radius:26px;padding:34px 24px;text-align:center;max-width:760px;margin:30px auto 0}
+.empty-rev .stars{color:var(--gold);letter-spacing:6px}
+.empty-rev h3{font-size:24px;margin:8px 0}.empty-rev p{color:var(--muted);margin:0 0 18px}
+.reviews{display:grid;gap:14px;margin-top:30px}
+.review{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;margin:0}
+.review .stars{color:var(--gold)}.review .who{color:var(--muted);font-size:15px;display:flex;gap:8px;align-items:center}
+.review .av{width:32px;height:32px;border-radius:50%;background:rgba(214,179,106,.15);display:grid;place-items:center;color:var(--gold)}
+@media (min-width:860px){.reviews{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.faq-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:34px}
+details{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:0 20px}
+summary{cursor:pointer;list-style:none;padding:18px 0;font-weight:700;display:flex;justify-content:space-between;gap:14px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font:300 28px/1 var(--lat);color:var(--gold);transition:transform .25s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{color:var(--muted);margin:0 0 18px;font-size:16.5px}
+@media (min-width:860px){.faq-grid{grid-template-columns:1fr 1fr}}
+
+/* footer */
+footer{background:#04171B;padding:70px 0 120px;overflow:hidden}
+.bigword{font:600 clamp(80px,22vw,300px)/.9 var(--lat);letter-spacing:-4px;color:transparent;-webkit-text-stroke:1px rgba(214,179,106,.35);text-align:center;direction:ltr;user-select:none;margin-bottom:40px}
+.foot{display:grid;gap:24px;grid-template-columns:1fr;color:var(--muted);font-size:15px}
+.foot a{color:var(--ink);text-decoration:none;display:block;padding:3px 0;opacity:.85}.foot a:hover{color:var(--gold2)}
+.foot h4{color:var(--ink);margin:0 0 8px;font-size:16px}
+.legal{border-top:1px solid var(--line);margin-top:30px;padding-top:18px;font-size:13.5px;color:#7F9895}
+@media (min-width:860px){.foot{grid-template-columns:1.5fr 1fr 1fr}footer{padding-bottom:60px}}
+
+/* sticky mobile + whatsapp */
+.mobile-cta{position:fixed;bottom:0;inset-inline:0;z-index:35;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:rgba(6,31,37,.96);border-top:1px solid var(--line);display:flex;gap:12px;align-items:center;transform:translateY(110%);transition:transform .3s}
+.mobile-cta.show{transform:none}
+.mobile-cta .btn{flex:1;min-height:52px}
+.mobile-cta .mini{font-size:13.5px;color:var(--muted);line-height:1.35}
+.mobile-cta .mini b{color:var(--gold2);font:600 18px var(--lat);display:block;direction:ltr;unicode-bidi:isolate;text-align:right}
+.wa{position:fixed;bottom:18px;left:18px;z-index:40;width:58px;height:58px;border-radius:50%;background:#1F9D55;display:none;place-items:center}
+
+/* shared form + popup (dark) */
+form{display:grid;gap:14px;padding:22px}
+.field{display:grid;gap:6px}
+label,.legend{font-weight:700;font-size:16px}
+.opt{font-weight:400;color:var(--muted);font-size:13.5px}
+input[type=text],input[type=tel]{width:100%;min-height:54px;border:1.5px solid rgba(255,255,255,.14);border-radius:14px;padding:0 16px;font:500 17px var(--body);color:var(--ink);background:#082329}
+input[type=tel]{direction:ltr;text-align:right;font-family:var(--lat)}
+input::placeholder{color:#6F8C89}
+input:focus{border-color:var(--gold);outline:none}
+fieldset{border:0;padding:0;margin:0}
+.err{color:var(--danger);font-size:14px}
+.form-foot{font-size:13px;color:var(--muted);text-align:center;margin:0}
+form .btn{width:100%;min-height:58px;font-size:19px}
+.packs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.pack{position:relative;display:block}
+.pack input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer;z-index:1}
+.pack>span{display:flex;flex-direction:column;gap:2px;min-height:80px;justify-content:center;padding:12px 14px;border:1.5px solid rgba(255,255,255,.14);border-radius:16px;background:#082329;position:relative}
+.pack b{font-size:16.5px}.pack small{display:block;font:600 16px/1.3 var(--lat);color:var(--gold2);text-align:right}
+.pack input:checked+span{border-color:var(--gold);background:rgba(214,179,106,.1);box-shadow:0 0 0 1px var(--gold) inset}
+.best{position:absolute;top:-11px;inset-inline-start:12px;background:var(--goldgrad);color:#1A1307;font:800 12px/1 var(--body);font-style:normal;padding:5px 9px;border-radius:99px}
+.strike{text-decoration:line-through;opacity:.55;font-weight:400;margin-inline-start:6px;font-size:13.5px}
+[data-price-now],[data-price-old],[data-pack1],[data-pack2],[data-total],[data-hero-price],[data-hero-old]{direction:ltr;unicode-bidi:isolate}
+.success{display:none;padding:34px 22px;text-align:center}
+.success .ic{width:72px;height:72px;border-radius:50%;background:rgba(214,179,106,.14);color:var(--gold);display:grid;place-items:center;margin:0 auto 14px}
+.success h3{font-size:26px;margin:0 0 10px}.success p{color:var(--muted)}
+.summary{background:#082329;border-radius:16px;padding:14px 18px;text-align:start;margin:0 auto 18px;max-width:360px;font-size:16px}
+.summary div{display:flex;justify-content:space-between;gap:12px;padding:4px 0}
+.modal{border:0;padding:0;width:min(560px,calc(100% - 24px));max-height:calc(100dvh - 24px);border-radius:26px;background:var(--bg2);color:var(--ink);box-shadow:0 30px 80px -20px rgba(0,0,0,.6);overflow:hidden;display:none;flex-direction:column}
+.modal[open]{display:flex}
+.modal::backdrop{background:rgba(2,10,12,.7);backdrop-filter:blur(4px)}
+.modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line);background:var(--bg)}
+.modal-prod{display:flex;align-items:center;gap:12px}
+.modal-prod img{width:56px;height:56px;border-radius:14px;object-fit:cover}
+.modal-prod b{display:block;font-size:16px}.modal-prod span{display:block;font-size:13.5px;color:var(--muted)}
+.modal-x{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);display:grid;place-items:center;cursor:pointer}
+.modal-body{overflow-y:auto}
+html.modal-open{overflow:hidden}
+@media (max-width:640px){.modal{width:100%;max-width:100%;max-height:92dvh;margin:auto 0 0;border-radius:24px 24px 0 0}}
+
+@media (min-width:960px){
+  .top nav{display:flex}
+  .hero{padding:60px 0 90px}
+  .hero-grid{grid-template-columns:1.05fr 1fr .8fr;gap:40px}
+  .stage{width:100%}
+  .hero h1{font-size:clamp(44px,4.6vw,68px)}
+  section{padding:120px 0}
+  .mobile-cta{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal,.rise{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div class="topbar">عرض الإطلاق: <b><bdi dir="ltr">-<span data-discount>25</span>%</bdi></b> · التوصيل فابور · الخلاص عند الاستلام</div>
+
+<header class="top">
+  <div class="wrap">
+    <nav aria-label="القائمة"><a href="#story">القصة</a><a href="#why">علاش Naqiva</a><a href="#formula">المكونات</a><a href="#faq">الأسئلة</a></nav>
+    <a class="logo" href="#top" aria-label="naqiva"><img src="img/logo.svg" alt="naqiva" height="32"></a>
+    <a class="btn btn-primary" href="#reserve" data-cta="header">اطلب دابا</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow rise">Détox Anti-Calcaire</p>
+        <h1 id="hero-title" class="rise r2"><span data-v-title>الما ديالك كيخسر ليك شعرك.</span></h1>
+        <p class="sub rise r3" data-v-sub>الكالكير اللي فالما ديال الروبيني كيلصق فالشعر ويخليه ناشف، خشين وكيتكسر. Naqiva شامبو مغربي مصنوع باش يحيدو.</p>
+      </div>
+      <div class="stage rise r2" aria-hidden="true">
+        <svg class="ring" viewBox="0 0 400 400" direction="ltr" style="direction:ltr"><defs><path id="circ" d="M200,200 m-182,0 a182,182 0 1,1 364,0 a182,182 0 1,1 -364,0"/></defs>
+          <text direction="ltr" text-anchor="start"><textPath href="#circ" startOffset="0">NAQIVA · DÉTOX ANTI-CALCAIRE · SANS SULFATE · PH 5 · MADE IN MOROCCO ·</textPath></text></svg>
+        <div class="orb"></div>
+        <div class="bottle"><img class="bottle-img" src="img/d-bottle.webp" alt="" width="720" height="720"></div>
+      </div>
+      <div class="pricecard rise r4">
+        <div class="row"><span class="now" data-price-now>149 DH</span><span class="old" data-price-old hidden></span><span class="off"><bdi dir="ltr">-<span data-discount>25</span>%</bdi></span></div>
+        <ul class="ticks">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>التوصيل فابور لجميع المدن</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>الخلاص عند الاستلام</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>بلا sulfate · pH 5 · 300 ml</li>
+        </ul>
+        <a class="btn btn-primary" href="#reserve" data-cta="hero">اطلب دابا</a>
+        <a class="btn btn-ghost" href="#story">علاش الكالكير؟</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="story" id="story" aria-labelledby="story-title">
+    <div class="wrap">
+      <p class="eyebrow reveal">L'histoire</p>
+      <h2 id="story-title" class="reveal d1">القصة ديال <span class="gold">الكالكير</span> وشعرك</h2>
+      <div class="story-grid">
+        <div class="story-media" aria-hidden="true">
+          <img class="on" src="img/p-limescale.webp" alt="" data-step="0">
+          <img src="img/d-macro.webp" alt="" data-step="1">
+          <img src="img/c-hero.webp" alt="" data-step="2">
+          <span class="cap" id="story-cap">الكالكير على راس الدوش</span>
+        </div>
+        <div>
+          <article class="chapter on" data-step="0" data-cap="الكالكير على راس الدوش">
+            <div class="n">01</div><h3>الما ديال الروبيني فيه الكالكير</h3>
+            <p>فبزاف ديال المدن فالمغرب الما قاصح. داك البياض اللي كتشوف على الروبيني والدوش، هو نيت اللي كيبقى فشعرك مع كل غسلة.</p>
+            <img src="img/p-limescale.webp" alt="الكالكير على راس الدوش" loading="lazy">
+          </article>
+          <article class="chapter" data-step="1" data-cap="الكالكير كيلصق فالشعرة">
+            <div class="n">02</div><h3>كيلصق فالشعرة وكيخنقها</h3>
+            <p>الكالكير كيدير طبقة على الشعر: كيولي خشين، ناشف، بلا لمعة، والماسكات والزيوت ما بقاوش كيوصلو ليه.</p>
+            <img src="img/d-macro.webp" alt="شعر فيه قطرات الما" loading="lazy">
+          </article>
+          <article class="chapter" data-step="2" data-cap="Naqiva Détox Anti-Calcaire">
+            <div class="n">03</div><h3>Naqiva كيحيدو بلطف</h3>
+            <p>مكون chélatant نباتي كيشد فالكالكير والمعادن وكيخليهم يمشيو مع الما، بـ pH 5 وبلا sulfate. الشعر كيرجع ناعم وفيه اللمعة.</p>
+            <img src="img/c-hero.webp" alt="بوطة Naqiva مع الما" loading="lazy">
+            <p><a class="btn btn-primary" href="#reserve" data-cta="story">جرب Naqiva</a></p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENTO -->
+  <section id="why" aria-labelledby="why-title">
+    <div class="wrap">
+      <p class="eyebrow reveal">Pourquoi Naqiva</p>
+      <h2 id="why-title" class="reveal d1">مشاكل كتعيشها كل نهار،<br><span class="gold">وحل واحد.</span></h2>
+      <div class="bento">
+        <div class="tile img t-a reveal"><img src="img/d-macro.webp" alt="شعر لامع" loading="lazy"><div class="txt"><span class="tag">01</span><h3>الماسك والزيت يرجعو يخدمو</h3><p>ملي كتتحيد طبقة الكالكير، المنتوجات اللي عندك كيوصلو للشعر وكيبان الفرق ديالهم.</p></div></div>
+        <div class="tile t-b reveal d1"><span class="tag">02</span><h3>الصباغة كتبقى مزيانة</h3><p>المعادن ديال الما كيطفيو اللون وكيطلعو الأصفر. التنقية كتعاون اللون يبقى نقي مدة أطول.</p></div>
+        <div class="tile goldbg reveal d2"><span class="tag">03</span><div class="big lat">pH 5</div><p>حامضي خفيف كيسد الشعرة ويرجع ليها اللمعة.</p></div>
+        <div class="tile reveal d3"><span class="tag">04</span><h3>المشطة كتدوز بالساهل</h3><p>شعر أنعم، كيتعقد أقل، وكيتقطع أقل.</p></div>
+        <div class="tile reveal d1"><span class="tag">05</span><h3>جلدة راس خفيفة</h3><p>تنقية لطيفة بلا sulfate كتحيد البقايا.</p></div>
+        <div class="tile img t-f reveal d2"><img src="img/l-woman.webp" alt="شعر طويل ولامع" loading="lazy"><div class="txt"><span class="tag">06</span><h3>من نهار بدلتي المدينة؟</h3><p>إلا تبدل شعرك ملي بدلتي الدار ولا المدينة، السبب غالباً هو الما.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTANICALS -->
+  <section id="formula" style="background:var(--bg2)" aria-labelledby="f-title">
+    <div class="wrap bot">
+      <div class="bot-media reveal"><img src="img/d-botanic.webp" alt="أكليل الجبل وزهر الليمون فالما" loading="lazy"></div>
+      <div>
+        <p class="eyebrow reveal">Formule</p>
+        <h2 id="f-title" class="reveal d1">العلم <span class="gold">ومكونات بلادنا</span></h2>
+        <div class="pills">
+          <div class="pill reveal"><span class="dot">01</span><div><b>مكون chélatant نباتي</b><small>Tetrasodium Glutamate Diacetate</small><span>كيشد فالكالكير والمعادن ويحيدهم</span></div></div>
+          <div class="pill reveal d1"><span class="dot">02</span><div><b>أكليل الجبل</b><small>Rosmarinus Officinalis</small><span>معروف بالعناية بجلدة الراس</span></div></div>
+          <div class="pill reveal d2"><span class="dot">03</span><div><b>ما الزهر</b><small>Citrus Aurantium Flower Water</small><span>ريحة مغربية خفيفة</span></div></div>
+          <div class="pill reveal d3"><span class="dot">04</span><div><b>بانثينول B5</b><small>Panthenol · Glycerin</small><span>كيرجع الترطيب من بعد التنقية</span></div></div>
+        </div>
+        <div class="free reveal"><span>بلا sulfate</span><span>بلا silicone</span><span>بلا ملونات</span><span>بلا غاسول</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RITUAL -->
+  <section class="ritual" aria-labelledby="r-title">
+    <div class="wrap">
+      <p class="eyebrow reveal">Le rituel</p>
+      <h2 id="r-title" class="reveal d1">مرة ولا جوج <span class="gold">فالسيمانة</span></h2>
+      <div class="steps3" id="steps3">
+        <div class="step reveal"><div class="circle">1</div><h3>فزك شعرك</h3><p>بالما سخون شوية، باش يتحلو الشعرات.</p></div>
+        <div class="step reveal d1"><div class="circle">2</div><h3>دلك 2 دقايق</h3><p>على جلدة الراس والشعر كامل، باش يخدم المكون.</p></div>
+        <div class="step reveal d2"><div class="circle">3</div><h3>شلل وكمل</h3><p>شلل مزيان، وكمل بالبلسم ولا الماسك ديالك.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFFER -->
+  <section id="reserve" aria-labelledby="o-title">
+    <div class="wrap offer-wrap">
+      <div class="offer-media reveal"><img src="img/c-hero.webp" alt="Naqiva Détox Anti-Calcaire" loading="lazy" style="object-position:75% center"></div>
+      <div>
+        <p class="eyebrow reveal">Offre de lancement</p>
+        <h2 id="o-title" class="reveal d1">اختار <span class="gold">العرض ديالك</span></h2>
+        <div class="packs-d reveal d2">
+          <button type="button" class="pk" data-pick="1"><b>بوطة وحدة</b><span class="p" data-d1></span><s data-d1o></s></button>
+          <button type="button" class="pk pkbest" data-pick="2"><span class="badge">الأكثر توفيراً</span><b>جوج بوطات</b><span class="p" data-d2></span><s data-d2o></s></button>
+        </div>
+        <div class="offer-slot reveal d3">
+          <div>
+            <form id="lead-form" novalidate>
+            <div>
+              <h3 style="margin:0 0 4px;font-size:24px">اطلب دابا</h3>
+              <p style="margin:0;color:var(--muted);font-size:16px">عمر المعلومات ديالك. الخلاص عند الاستلام.</p>
+            </div>
+            <fieldset class="field">
+              <legend class="legend">اختار العرض</legend>
+              <div class="packs">
+                <label class="pack"><input type="radio" name="qty" value="1" checked><span><b>بوطة وحدة</b><small data-pack1></small></span></label>
+                <label class="pack"><input type="radio" name="qty" value="2"><span><em class="best">الأكثر توفيراً</em><b>جوج بوطات</b><small data-pack2></small></span></label>
+              </div>
+            </fieldset>
+            <div class="field">
+              <label for="f-name">السمية الكاملة</label>
+              <input id="f-name" name="name" type="text" autocomplete="name" required>
+              <div class="err" id="e-name" role="alert"></div>
+            </div>
+            <div class="field">
+              <label for="f-phone">رقم التيليفون <span class="opt">(كنعيطو عليه نأكدو الطلب)</span></label>
+              <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="06 00 00 00 00" required>
+              <div class="err" id="e-phone" role="alert"></div>
+            </div>
+            <div class="field">
+              <label for="f-city">المدينة</label>
+              <input id="f-city" name="city" type="text" list="cities" autocomplete="address-level2" placeholder="كتب المدينة ديالك" required>
+              <datalist id="cities"></datalist>
+              <div class="err" id="e-city" role="alert"></div>
+            </div>
+            <div class="field">
+              <label for="f-address">العنوان</label>
+              <input id="f-address" name="address" type="text" autocomplete="street-address" placeholder="الحي، الزنقة، الرقم" required>
+              <div class="err" id="e-address" role="alert"></div>
+            </div>
+            <button class="btn btn-primary" type="submit" id="f-submit"><span>أكد الطلب · <span data-total></span></span></button>
+            <p class="form-foot">الخلاص عند الاستلام. غادي نعيطو ليك نأكدو الطلب. المعلومات ديالك ما كنعطيوهاش لحتى واحد. <a href="privacy.html">الخصوصية</a></p>
+          </form>
+
+          <div class="success" id="success" role="status" tabindex="-1">
+            <div class="ic"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></div>
+            <h3>شكراً، الطلب ديالك توصلنا! 🎉</h3>
+            <div class="summary" id="order-summary"></div>
+            <p id="success-text">غادي نعيطو ليك باش نأكدو الطلب ونقولو ليك الوقت ديال التوصيل. الخلاص عند الاستلام.</p>
+            <a class="btn btn-ghost" id="success-share" href="#">شارك مع صحابك</a>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="reviews" style="background:var(--bg2);text-align:center" aria-labelledby="rv-title">
+    <div class="wrap">
+      <p class="eyebrow">Avis</p>
+      <h2 id="rv-title">آراء الناس</h2>
+      <div class="reviews" id="reviews-list" hidden></div>
+      <div class="empty-rev" id="reviews-empty">
+        <div class="stars" aria-hidden="true">★★★★★</div>
+        <h3>كون من الأوائل اللي يجربو Naqiva</h3>
+        <p>Naqiva جديد. الآراء ديال الناس اللي جربوه غادي تبان هنا، وغادي تكون آراء حقيقية.</p>
+        <a class="btn btn-ghost" href="#reserve" data-cta="reviews">اطلب ديالك</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" aria-labelledby="faq-title">
+    <div class="wrap">
+      <p class="eyebrow">FAQ</p>
+      <h2 id="faq-title">الأسئلة اللي كتتعاود</h2>
+      <div class="faq-grid">
+        <details><summary>إمتى يوصلني الطلب؟</summary><p>من بعد ما تطلب، كنعيطو ليك باش نأكدو الطلب ونقولو ليك الوقت ديال التوصيل بالضبط. ما كتخلص والو حتى يوصلك.</p></details>
+        <details><summary>شحال كيخلص التوصيل؟</summary><p>التوصيل فابور، وكنوصلو لجميع المدن فالمغرب.</p></details>
+        <details><summary>واش خاصني نخلص دابا؟</summary><p>لا. الخلاص كيكون عند الاستلام، نقداً للموزع.</p></details>
+        <details><summary>كيفاش نعرف واش الما عندي فيه الكالكير؟</summary><p>إلا كان كيبان ليك بياض على الروبيني ولا فالدوش، راه الما فيه الكالكير.</p></details>
+        <details><summary>شحال كتكفيني البوطة؟</summary><p>مرة ولا جوج فالسيمانة، البوطة ديال 300 ml كتكفي تقريباً من 2 حتى 3 شهور.</p></details>
+        <details><summary>واش كيصلح للشعر المصبوغ؟</summary><p>التركيبة بلا sulfate ومصممة تكون خفيفة. إلا كان شعرك مصبوغ جديد، سول الكوافور ديالك قبل.</p></details>
+        <details><summary>واش كيداوي طيحان الشعر؟</summary><p>Naqiva ماشي دوا. هو شامبو كيحيد بقايا الكالكير. إلا كان الشعر كيطيح بزاف، شوف طبيب الجلد.</p></details>
+        <details><summary>واش كيصلح للرجال؟</summary><p>إيه، للرجال والعيالات، ولكل أنواع الشعر.</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="bigword" aria-hidden="true">naqiva</div>
+  <div class="wrap">
+    <div class="foot">
+      <div><img src="img/logo.svg" alt="naqiva" style="height:32px;width:auto;margin-bottom:12px"><p style="margin:0">العناية بالشعر، مصنوعة للما ديال المغرب.</p></div>
+      <div><h4>المنتوج</h4><a href="#story">القصة</a><a href="#why">علاش Naqiva</a><a href="#formula">المكونات</a><a href="#faq">الأسئلة</a></div>
+      <div><h4>تواصل معانا</h4><a href="#" id="l-wa" hidden>WhatsApp</a><a href="#" id="l-ig" hidden>Instagram</a><a href="#" id="l-tt" hidden>TikTok</a><a href="privacy.html">سياسة الخصوصية</a></div>
+    </div>
+    <p class="legal">© <span id="year"></span> Naqiva · صنع فالمغرب. الصور توضيحية. المعلومات ديال الطلب كتستعمل غير باش نوصلو ليك الطلب ونتاصلو بيك.</p>
+  </div>
+</footer>
+
+<a class="wa" id="wa-float" href="#" target="_blank" rel="noopener" aria-label="تواصل معانا فالواتساب"><svg width="30" height="30" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg></a>
+<div class="mobile-cta" id="mobile-cta"><div class="mini"><b data-hero-price></b>التوصيل فابور · الدفع عند الاستلام</div><a class="btn btn-primary" href="#reserve" data-cta="sticky">اطلب دابا</a></div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>
+(function () {
+  var C = window.NAQIVA_CONFIG || {};
+  var set = function (sel, v) { var e = document.querySelector(sel); if (e) e.textContent = v; };
+  set("[data-d1]", (C.PRICE_1 || 149) + " DH"); set("[data-d2]", (C.PRICE_2 || 249) + " DH");
+  if (C.PRICE_1_OLD) set("[data-d1o]", C.PRICE_1_OLD + " DH");
+  if (C.PRICE_2_OLD) set("[data-d2o]", C.PRICE_2_OLD + " DH");
+  document.querySelectorAll("[data-pick]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var r = document.querySelector('input[name=qty][value="' + b.getAttribute("data-pick") + '"]');
+      if (r) { r.checked = true; r.dispatchEvent(new Event("change", { bubbles: true })); }
+      var a = document.createElement("a"); a.href = "#reserve"; a.style.display = "none"; document.body.appendChild(a); a.click(); a.remove();
+    });
+  });
+  // story: swap sticky image as chapters scroll into view
+  var imgs = document.querySelectorAll(".story-media img"), cap = document.getElementById("story-cap");
+  var chs = document.querySelectorAll(".chapter");
+  var steps = document.getElementById("steps3");
+  if (!("IntersectionObserver" in window)) return;
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      var k = e.target.getAttribute("data-step");
+      chs.forEach(function (c) { c.classList.toggle("on", c === e.target); });
+      imgs.forEach(function (i) { i.classList.toggle("on", i.getAttribute("data-step") === k); });
+      if (cap) cap.textContent = e.target.getAttribute("data-cap");
+    });
+  }, { rootMargin: "-45% 0px -45% 0px" });
+  chs.forEach(function (c) { io.observe(c); });
+  if (steps) new IntersectionObserver(function (es, o) { if (es[0].isIntersecting) { steps.classList.add("in"); o.disconnect(); } }, { threshold: .4 }).observe(steps);
+})();
+</script>
+</body>
+</html>
