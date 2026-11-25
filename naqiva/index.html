@@ -317,6 +317,28 @@ footer a{color:#fff}
   .foot-grid{grid-template-columns:1.4fr 1fr 1fr}
 }
 
+/* v7: why section */
+.why{display:grid;grid-template-columns:1fr;gap:16px}
+.why-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden}
+.why-card .ic{width:50px;height:50px;border-radius:16px;background:var(--teal-soft);color:var(--teal);display:grid;place-items:center}
+.why-card h3{margin:0;font-size:20px;line-height:1.4}
+.why-row{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;font-size:16px;line-height:1.6}
+.why-row .lbl{font-weight:800;font-size:12.5px;border-radius:99px;padding:3px 10px;white-space:nowrap;margin-top:2px}
+.why-row.bad .lbl{background:#F6E3E1;color:#8C2A22}
+.why-row.good .lbl{background:var(--teal-soft);color:var(--teal)}
+.why-row p{margin:0;color:var(--muted)}
+.why-row.good p{color:var(--ink)}
+.money{margin-top:28px;background:var(--teal);color:#fff;border-radius:26px;padding:28px 24px;display:grid;gap:14px}
+.money h3{margin:0;font-size:24px}
+.money p{margin:0;color:#D6E7E4}
+.for{margin-top:34px;text-align:center}
+.for h3{margin:0 0 14px;font-size:22px}
+.for-list{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.for-list span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:10px 16px;font-size:16px;display:inline-flex;gap:8px;align-items:center}
+.for-list svg{color:var(--teal);flex:none}
+@media (min-width:700px){.why{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1000px){.why{grid-template-columns:repeat(3,minmax(0,1fr))}.money{grid-template-columns:1.3fr 1fr;align-items:center;padding:34px 40px}}
+
 @media (min-width:700px){
   .trust .wrap{grid-template-columns:repeat(4,minmax(0,1fr))}
   .sci{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -356,7 +378,7 @@ footer a{color:#fff}
       <svg width="24" height="31" viewBox="0 0 34 44" aria-hidden="true"><path d="M17 2C17 2 4 18 4 28a13 13 0 0 0 26 0C30 18 17 2 17 2Z" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M11 29a6 6 0 0 0 6 6" fill="none" stroke="#C9A04F" stroke-width="2.6" stroke-linecap="round"/></svg>
       <span>naqiva</span>
     </a>
-    <nav class="nav" aria-label="القائمة"><a href="#how">كيفاش كيخدم</a><a href="#formula">المكونات</a><a href="#reviews">الآراء</a><a href="#faq">الأسئلة</a></nav>
+    <nav class="nav" aria-label="القائمة"><a href="#why">علاش Naqiva</a><a href="#how">كيفاش كيخدم</a><a href="#formula">المكونات</a><a href="#reviews">الآراء</a><a href="#faq">الأسئلة</a></nav>
     <a class="btn btn-primary" href="#reserve" data-cta="header">اطلب دابا</a>
   </div>
 </header>
@@ -436,6 +458,46 @@ footer a{color:#fff}
           <p>الأطراف كيتشقو، والشعر كيبقى فالمشطة أكثر من العادة.</p>
         </div>
       </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section id="why" aria-labelledby="why-title" style="background:var(--sand)">
+    <div class="wrap">
+      <div class="center">
+        <p class="kicker">Pourquoi Naqiva</p>
+        <h2 id="why-title">علاش Naqiva ماشي غير شامبو آخر؟</h2>
+        <p class="lead">الكالكير ماشي غير كينشف الشعر. كيخلق مشاكل يومية كتصرف عليها الفلوس والوقت، وكتحسابي السبب حاجة أخرى.</p>
+      </div>
+      <div class="why">
+        <div class="why-card reveal"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="10" height="18" rx="2"/><path d="M15 8h3v8h-3"/><path d="M8 8h4"/></svg></div><h3>الماسك والزيت ما بقاوش كيخدمو</h3><div class="why-row bad"><span class="lbl">المشكل</span><p>كتشري ماسكات وزيوت وسيرومات غاليين، وكتحس بحال إلا ما دارو والو. الكالكير كيدير بحال طبقة على الشعر، والمنتوجات كتبقى فوقها.</p></div><div class="why-row good"><span class="lbl">مع Naqiva</span><p>ملي كتتحيد هاد الطبقة، المنتوجات اللي عندك كيوصلو للشعر وكيبان الفرق ديالهم.</p></div></div>
+        <div class="why-card reveal"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16"/></svg></div><h3>الصباغة كتطفا بالزربة</h3><div class="why-row bad"><span class="lbl">المشكل</span><p>كتصبغي عند الكوافور، ومن بعد شي غسلات اللون كيولي باهت، ولا كيطلع فيه الأصفر ولا البرتقالي.</p></div><div class="why-row good"><span class="lbl">مع Naqiva</span><p>تنقية المعادن اللي فالما كتعاون اللون يبقى نقي ومزيان مدة أطول.</p></div></div>
+        <div class="why-card reveal"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h10M4 17h6"/><path d="M17 14l3 3-3 3"/></svg></div><h3>كيتعقد وكيتقطع فالمشطة</h3><div class="why-row bad"><span class="lbl">المشكل</span><p>الشعر خشين وكيتشد، وملي كتمشطيه كيتقطع وكيبقى بزاف فالمشطة. كتحسابي راه كيطيح.</p></div><div class="why-row good"><span class="lbl">مع Naqiva</span><p>الشعرة كترجع ناعمة، المشطة كتدوز بالساهل، وكيتقطع أقل.</p></div></div>
+        <div class="why-card reveal"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c-3 4-6 7.5-6 11a6 6 0 0 0 12 0c0-3.5-3-7-6-11z"/><path d="M9 14h6"/></svg></div><h3>الشامبو كيكمل بالزربة</h3><div class="why-row bad"><span class="lbl">المشكل</span><p>فالما القاصح الشامبو كيدير رغوة قليلة، وكتزيد منو بزاف باش تحسي الشعر نقي.</p></div><div class="why-row good"><span class="lbl">مع Naqiva</span><p>مرة ولا جوج فالسيمانة كتكفي باش تبقى البقايا ديما محيدة، والبوطة كتطول.</p></div></div>
+        <div class="why-card reveal"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg></div><h3>من نهار بدلتي المدينة ولا الدار</h3><div class="why-row bad"><span class="lbl">المشكل</span><p>كثير ديال الناس كيلاحظو أن الشعر تبدل ملي مشاو لمدينة أخرى، وما كيعرفوش السبب.</p></div><div class="why-row good"><span class="lbl">مع Naqiva</span><p>السبب غالباً هو الما. Naqiva مصنوع بالضبط لهاد الحالة.</p></div></div>
+        <div class="why-card reveal"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21c-4-2-7-5-7-10V5l7-2 7 2v6c0 5-3 8-7 10z"/></svg></div><h3>جلدة الراس كتحس بيها تقيلة</h3><div class="why-row bad"><span class="lbl">المشكل</span><p>البقايا ديال الما والمنتوجات كيتجمعو على جلدة الراس، وكتحس بيها مخنوقة وتقيلة.</p></div><div class="why-row good"><span class="lbl">مع Naqiva</span><p>تنقية لطيفة بلا sulfate كتخلي جلدة الراس خفيفة ونقية.</p></div></div>
+      </div>
+      <div class="money reveal">
+        <div>
+          <h3>شحال صرفتي هاد العام على الشعر؟</h3>
+          <p>ماسكات، زيوت، سيرومات، كوافور، صباغة… إلا كان الكالكير هو اللي مخبي النتيجة ديالهم، بوطة وحدة ديال Naqiva مرة فالسيمانة يقدر يخلي داكشي كامل يخدم مزيان.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start">
+          <span class="hero-price" style="margin:0"><span class="now" data-hero-price style="color:#fff"></span><span class="old" data-hero-old style="color:#BFD6D2"></span></span>
+          <a class="btn" href="#reserve" data-cta="why" style="background:var(--gold);color:var(--teal-dark)">اطلب دابا</a>
+        </div>
+      </div>
+      <div class="for">
+        <h3>Naqiva مصنوع ليك إلا…</h3>
+        <div class="for-list">
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>كتسكن فمدينة الما فيها قاصح</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>شعرك مصبوغ ولا ميش</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>كتستعمل بزاف ديال الماسكات والزيوت</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>بدلتي المدينة وشعرك تبدل</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>شعرك خشين وكيتعقد</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>رجل ولا مرا، كل أنواع الشعر</span>
+        </div>
       </div>
     </div>
   </section>
