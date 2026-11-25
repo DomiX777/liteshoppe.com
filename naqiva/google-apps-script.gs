@@ -16,6 +16,8 @@ function doPost(e) {
     sheet.appendRow(HEADERS.map(function (h) {
       var v = String(p[h] || "").slice(0, 300);
       // يمنع Google Sheets يقرا القيمة كـ formule
+      // phone: always text, so the leading 0 (06…) is kept
+      if (h === "phone") return "'" + v;
       return /^[=+\-@]/.test(v) ? "'" + v : v;
     }));
     return ContentService.createTextOutput("ok");
