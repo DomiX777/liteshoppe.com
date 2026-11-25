@@ -8,7 +8,7 @@ import numpy as np
 
 SR = 44100
 FPS = 30
-TOTAL = 75.0
+TOTAL = 77.0
 HERE = __file__.rsplit('/', 1)[0]
 
 # Placement of every line on the video timeline (seconds)
@@ -18,14 +18,14 @@ ORDER = [
     ('P3', 18.5), ('P4', 23.4),
     ('P5', 28.9), ('P6', 34.0),
     ('P7', 41.4), ('P8', 45.9),
-    ('D3', 50.8), ('P9', 52.6), ('P10', 59.0),
-    ('P11', 65.1), ('D4', 69.6),
+    ('D3', 50.8), ('P9', 52.6), ('P10', 58.9),
+    ('P11', 66.5), ('D4', 71.1),
 ]
-SCENES = [[0, 8.3], [8.3, 18], [18, 28.4], [28.4, 41], [41, 50.4], [50.4, 64.4], [64.4, 75]]
+SCENES = [[0, 8.3], [8.3, 18], [18, 28.4], [28.4, 41], [41, 50.4], [50.4, 66.2], [66.2, 77]]
 
 KEY = ['ترسبات', 'معدنية', 'السبب', 'الجبال', 'الأرض', 'التربة', 'والصخور', 'الكالسيوم', 'والمانيزيوم',
        'تركيز', 'القاصح', 'والقساوة', 'مدينة', 'لمدينة', 'يترسبو', 'يتشبثو', 'الشعرة', 'خشين', 'لمعة',
-       'قشرة', 'جفاف', 'الكالكير', 'اختبار', 'قساوة', 'شعرك', 'بارد', 'الحل', 'تابعنا', 'أسرار', 'ندير', 'الجاية']
+       'قشرة', 'جفاف', 'الكالكير', 'اختبار', 'قساوة', 'شعرك', 'بارد', 'الحل', 'تابعنا', 'أسرار', 'ندير', 'الجاية', 'الخلاصة', 'معادن', 'الصخور']
 
 
 def read(path):
@@ -69,6 +69,14 @@ src = {'P': read(f'{HERE}/audio/host.wav'), 'D': read(f'{HERE}/audio/drop.wav')}
 segs = {}
 for i, l in enumerate(H): segs[f'P{i+1}'] = l
 for i, l in enumerate(D): segs[f'D{i+1}'] = l
+# P10 = recap line (separate generation, replaces the old product teaser)
+recap_w = [w for w in json.load(open(f'{HERE}/audio/recap_words.json'))['words'] if not w['text'].startswith('[')]
+segs['P10'] = recap_w
+srcR = read(f'{HERE}/audio/recap.wav')
+def _rms(x):
+    x = x[np.abs(x) > 0.02]
+    return float(np.sqrt(np.mean(x ** 2))) if len(x) else 1.0
+srcR = srcR * (_rms(src['P']) / _rms(srcR))
 
 
 def quiet_point(sig, a, b):
@@ -86,12 +94,14 @@ def quiet_point(sig, a, b):
 
 
 def clip_bounds(key):
+    if key == 'P10':
+        return 0.0, min(len(srcR) / SR, recap_w[-1]['end'] + 0.45)
     spk, idx = key[0], int(key[1:])
     group = H if spk == 'P' else D
     sig = src[spk]
     l = group[idx - 1]
     if idx > 1:
-        s = quiet_point(sig, group[idx - 2][-1]['end'] - 0.05, l[0]['start'] + 0.02)
+        s = quiet_point(sig, group[idx - 2][-1]['end'] - 0.05, l[0]['start'] + 0.02) if not (spk == 'P' and idx == 11) else quiet_point(sig, group[idx - 2][-1]['end'] - 0.05, l[0]['start'] + 0.02)
     else:
         s = 0.0
     if idx < len(group):
@@ -105,7 +115,7 @@ voice = {'P': np.zeros(int(TOTAL * SR), np.float32), 'D': np.zeros(int(TOTAL * S
 lines_out = []
 for key, T in ORDER:
     s, e = clip_bounds(key)
-    a = src[key[0]][int(s * SR):int(e * SR)].copy()
+    a = (srcR if key == 'P10' else src[key[0]])[int(s * SR):int(e * SR)].copy()
     f = int(0.008 * SR); g = int(0.05 * SR)
     a[:f] *= np.linspace(0, 1, f); a[-g:] *= np.linspace(1, 0, g)
     i0 = int(T * SR)

@@ -182,13 +182,17 @@ put(L['P8']['t0'] + 2.5, ding(1568), 0.3)
 put(50.45, whoosh(0.35, 0.2, 0.7), 0.35); put(50.8, boing(), 0.45)
 put(L['P9']['t0'] - 0.1, pop(), 0.5)
 put(WF('P9', 'اختار') + 0.2, ding(1318.5), 0.35); put(WF('P9', 'وكمل') + 0.2, ding(1568), 0.35)
-put(58.8, riser(1.0), 0.5); put(59.6, shimmer(1.6, 783.99), 0.6); put(WF('P10', 'الحل') - 0.1, thump(), 0.5)
+put(L['P10']['t0'] - 0.3, whoosh(0.45, 0.15, 0.6), 0.35); put(L['P10']['t0'] - 0.1, pop(), 0.5)
+for k, f in [('الكالكير', 1046.5), ('الكالسيوم', 1174.7), ('الصخور', 1318.5), ('القاصح', 1568)]:
+    put(WF('P10', k) - 0.1, pop(), 0.4); put(WF('P10', k) + 0.1, ding(f), 0.28)
+put(1.0, bubbles(6.0, 5), 0.35)
 # S7
-put(64.05, whoosh(0.5, 0.15, 0.6), 0.45); put(64.6, pop(), 0.5)
-for i in range(4): put(65.3 + i * 0.15, pop(), 0.35)
-put(67.4, click(), 0.8); put(67.45, ding(1568), 0.4); put(67.6, ding(2093), 0.3)
-put(69.45, boing(), 0.35)
-put(71.2, whoosh(0.7, 0.08, 0.4), 0.45); put(71.3, shimmer(2.2, 1046.5), 0.55)
+SC7 = scenes[6][0]; END0 = L['D4']['t1'] + 0.25
+put(SC7 - 0.2, whoosh(0.5, 0.15, 0.6), 0.45); put(SC7 + 0.2, pop(), 0.5)
+for i in range(4): put(SC7 + 0.9 + i * 0.15, pop(), 0.35)
+put(SC7 + 3.0, click(), 0.8); put(SC7 + 3.05, ding(1568), 0.4); put(SC7 + 3.2, ding(2093), 0.3)
+put(L['D4']['t0'] - 0.15, boing(), 0.35)
+put(END0 - 0.05, whoosh(0.7, 0.08, 0.4), 0.45); put(END0 + 0.05, shimmer(2.2, 1046.5), 0.55)
 
 # ---------- music (lo-fi, 96 bpm, Am–F–C–G) ----------
 BPM = 96; beat = 60 / BPM
@@ -230,7 +234,7 @@ def mput(t, a, g=1.0):
     a = a[:N - i]; mus[i:i + len(a)] += a * g
 
 
-TEASE0, TEASE1 = 58.8, 64.4
+TEASE0, TEASE1 = 999, 999
 for b in range(nb):
     t0 = b * bar; ch = prog[b % 4]
     mput(t0, pad([note(m) for m in ch], bar + 0.3))
@@ -246,7 +250,9 @@ for b in range(nb):
         if TEASE0 <= tk < TEASE1 or tk < 0.2: continue
         mput(tk, kick())
 # teaser: darker filtered drone instead
-d = TEASE1 - TEASE0
+d = max(0.01, min(TOTAL, TEASE1) - min(TOTAL, TEASE0)) if TEASE0 < TOTAL else 0
+if d:
+  pass
 t = tt(d); drone = (np.sin(2 * np.pi * 55 * t) + 0.5 * np.sin(2 * np.pi * 82.4 * t) + 0.3 * np.sin(2 * np.pi * 110 * t * (1 + 0.002 * np.sin(t)))) * 0.1
 drone *= np.minimum(1, t / 0.5) * np.minimum(1, (d - t) / 0.3)
 i0 = int(TEASE0 * SR); mus[i0:i0 + len(drone)] = mus[i0:i0 + len(drone)] * 0.25 + drone
