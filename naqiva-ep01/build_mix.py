@@ -63,9 +63,9 @@ def splash(d=0.5):
     n = rng.standard_normal(int(d * SR)).astype(np.float32)
     y = n - lp(n, 0.25)
     out = y * env(d, 0.002, 0.09) * 0.5
-    for k in range(6):  # little droplets
+    for k in range(2):  # little droplets
         st = int((0.04 + k * 0.05 + rng.random() * 0.03) * SR)
-        b = blip(0.07, 900 + rng.random() * 900, 2200 + rng.random() * 800) * 0.35
+        b = blip(0.07, 900 + rng.random() * 900, 2200 + rng.random() * 800) * 0.12
         out[st:st + len(b)] += b[:len(out) - st]
     return out
 
@@ -158,12 +158,10 @@ for T in [scenes[1][0], scenes[2][0], scenes[3][0], scenes[4][0]]:
 put(8.3, rain(3.6), 1.0)
 put(10.4, splash(0.4), 0.4)
 put(10.2, rumble(2.2), 0.8)
-put(11.0, bubbles(6.6, 5), 0.6)
 for k in ['التربة', 'والصخور', 'الكالسيوم', 'والمانيزيوم']:
     put(WF('D2', k) - 0.05, pop(), 0.45)
 # S3
-put(18.15, pop(), 0.4); put(18.3, bubbles(9.5, 6), 0.55)
-put(WF('P3', 'تركيز'), bubbles(1.2, 14), 0.6)
+put(18.15, pop(), 0.4)
 put(WF('P3', 'القاصح') - 0.05, thump(), 0.6); put(WF('P3', 'القاصح'), ding(1046.5), 0.3)
 for i in range(3): put(L['P4']['t0'] + 0.1 + i * 0.25, pop(), 0.45)
 put(WF('P4', 'مدينة') - 0.1, ding(1318.5), 0.25)
@@ -176,7 +174,6 @@ put(WF('P6', 'كيختالف') - 0.1, ding(1174.7), 0.3)
 # S5
 put(41.1, pop(), 0.5); put(41.45, ding(880), 0.25)
 put(L['P8']['t0'] - 0.2, whoosh(0.4, 0.2, 0.6), 0.3)
-put(L['P8']['t0'] + 0.5, bubbles(0.8, 12), 0.5)
 put(L['P8']['t0'] + 2.5, ding(1568), 0.3)
 # S6
 put(50.45, whoosh(0.35, 0.2, 0.7), 0.35); put(50.8, boing(), 0.45)
@@ -185,7 +182,6 @@ put(WF('P9', 'اختار') + 0.2, ding(1318.5), 0.35); put(WF('P9', 'وكمل') 
 put(L['P10']['t0'] - 0.3, whoosh(0.45, 0.15, 0.6), 0.35); put(L['P10']['t0'] - 0.1, pop(), 0.5)
 for k, f in [('الكالكير', 1046.5), ('الكالسيوم', 1174.7), ('الصخور', 1318.5), ('القاصح', 1568)]:
     put(WF('P10', k) - 0.1, pop(), 0.4); put(WF('P10', k) + 0.1, ding(f), 0.28)
-put(1.0, bubbles(6.0, 5), 0.35)
 # S7
 SC7 = scenes[6][0]; END0 = L['D4']['t1'] + 0.25
 put(SC7 - 0.2, whoosh(0.5, 0.15, 0.6), 0.45); put(SC7 + 0.2, pop(), 0.5)
