@@ -307,12 +307,12 @@ function man(o) {
 }
 
 /* talk windows (seconds) and arm choreography */
-var T = [[0.4, 4.4], [5.3, 4.3], [10.3, 6.3], [17.3, 6.2], [24.3, 5.3], [30.3, 5.3], [36.3, 6.3], [43.3, 6.3], [50.3, 5.3], [56.3, 6.3], [63.3, 6.8]];
+var T = [[0.2, 4.7], [5.3, 4.3], [10.3, 6.3], [17.3, 6.2], [24.3, 5.3], [30.3, 5.3], [36.3, 6.3], [43.3, 6.3], [50.3, 5.3], [56.3, 6.3], [63.3, 6.8]];
 var REST_L = [5, -6], REST_R = [-5, 6], UP_L = [10, 132], UP_R = [-10, -132], UP_L2 = [16, 118], UP_R2 = [-18, -112], MID_L = [30, -125], MID_R = [-30, 125], PT_L = [148, -14];
 var Ls = [[0].concat(REST_L)], Rs = [[0].concat(REST_R)];
 // wave hello with right hand (viewer right)
-Rs.push([0.4, -150, -20], [0.75, -150, 20], [1.1, -150, -20], [1.45, -150, 15], [1.9, -150, -10], [2.6].concat(REST_R));
-Ls.push([2.4].concat(REST_L), [3.1].concat(UP_L), [4.3].concat(REST_L));
+Rs.push([3.2].concat(REST_R), [3.4, -150, -20], [3.7, -150, 20], [4.0, -150, -20], [4.3, -150, 12], [4.8].concat(REST_R));
+Ls.push([3.3].concat(REST_L), [4.9].concat(REST_L));
 var scenes = [5, 10, 17, 24, 30, 36, 43, 50, 56, 63];
 var gL = [UP_L, REST_L, MID_L, REST_L, UP_L2, REST_L], gR = [REST_R, UP_R, REST_R, MID_R, REST_R, UP_R2];
 scenes.forEach(function (s, i) {
@@ -332,21 +332,47 @@ host.innerHTML = man({ x: 340, y: 590, scale: .86, L: armTrack(Ls), R: armTrack(
 var BG = '<div class="arch" style="left:60px;opacity:.55"></div><div class="arch" style="right:60px;opacity:.55"></div>' + LAMPS + '<div class="band"></div><div class="floor"></div>';
 frame.insertBefore(el('<div style="position:absolute;inset:0">' + BG + '</div>'), frame.firstChild);
 frame.appendChild(host);
-frame.appendChild(el('<div class="chip pop title" style="--d:.2s;font-size:44px">🧐 سؤال اليوم: الكالكير</div>'));
-frame.appendChild(el('<div class="chip pop" style="left:60px;top:1250px;--d:.6s;font-size:36px;padding:6px 20px">ياسين · خبير الشعر</div>'));
+frame.appendChild(el('<div class="chip pop title" style="--d:3.3s;font-size:44px">🧐 سؤال اليوم: الكالكير</div>'));
+frame.appendChild(el('<div class="chip pop" style="left:60px;top:1250px;--d:3.6s;font-size:36px;padding:6px 20px">ياسين · خبير الشعر</div>'));
 function sc(s, x, inner) { scene(s, x, '<div class="card2" style="--d:' + (s + .1) + 's">' + inner + '</div>'); }
 
+// 0 · HOOK 0–3.2 (full screen, text visible from frame 0)
+var hk = el('<div class="hook"></div>');
+hk.innerHTML =
+  '<div class="hk-zoom">' +
+  '<div class="hk-l1">راك كتغسل شعرك</div>' +
+  '<div class="hk-l2"><span class="gold-t">بالحجر</span> 🪨</div>' +
+  '<div class="hk-strand">' + STRAND("hk", false) + '</div>' +
+  '<div class="hk-l3">كل نهار… <span style="color:#F5DC9C">وما عارفش</span> 😳</div>' +
+  '</div><div class="hk-flash"></div>';
+frame.appendChild(hk);
+var hcss = document.createElement("style");
+hcss.textContent =
+  ".hook{position:absolute;inset:0;z-index:45;background:radial-gradient(circle at 50% 40%,#11505C 0%,#061F25 70%);animation:fout .25s ease 3.1s forwards}" +
+  ".hk-zoom{position:absolute;inset:0;animation:hkz 3.2s linear 0s both}@keyframes hkz{from{transform:scale(1)}to{transform:scale(1.08)}}" +
+  ".hk-l1{position:absolute;inset-inline:0;top:250px;text-align:center;font-weight:900;font-size:104px;color:#fff;animation:hkin .35s cubic-bezier(.22,1,.36,1) -0.2s both}" +
+  ".hk-l2{position:absolute;inset-inline:0;top:380px;text-align:center;font-weight:900;font-size:190px;line-height:1.1;animation:hkslam .45s cubic-bezier(.22,1,.36,1) .3s both,shake .5s linear .75s 1}" +
+  ".gold-t{background:linear-gradient(115deg,#B8893A,#F5DC9C 50%,#C9A04F);-webkit-background-clip:text;background-clip:text;color:transparent}" +
+  ".hk-strand{position:absolute;left:0;right:0;top:700px;height:560px;animation:shake .5s linear .75s 1}" +
+  ".hk-strand svg{width:100%;height:100%}" +
+  ".hk-l3{position:absolute;inset-inline:0;top:1330px;text-align:center;font-weight:900;font-size:84px;color:#fff;opacity:0;animation:hkin .5s cubic-bezier(.22,1,.36,1) 1.9s both}" +
+  ".hk-flash{position:absolute;inset:0;background:#fff;opacity:0;animation:flash .35s ease 2.95s both}" +
+  "@keyframes hkin{from{opacity:0;transform:translateY(40px);filter:blur(10px)}to{opacity:1;transform:none;filter:none}}" +
+  "@keyframes hkslam{from{opacity:0;transform:scale(2.6);filter:blur(16px)}to{opacity:1;transform:none;filter:none}}" +
+  "@keyframes shake{0%,100%{transform:translate(0,0)}20%{transform:translate(-14px,6px)}40%{transform:translate(12px,-8px)}60%{transform:translate(-8px,4px)}80%{transform:translate(6px,-2px)}}" +
+  "@keyframes flash{0%{opacity:0}40%{opacity:.85}100%{opacity:0}}";
+document.head.appendChild(hcss);
+
 // 1 · 0–5 tap with white crust
-sc(0, 5.1, '<svg viewBox="0 0 1000 520"><rect x="320" y="400" width="360" height="40" rx="14" fill="#B9C3C4"/><path d="M430 400V250a70 70 0 0 1 140 0v20" fill="none" stroke="#B9C3C4" stroke-width="44" stroke-linecap="round"/><rect x="545" y="262" width="60" height="38" rx="10" fill="#B9C3C4"/><circle cx="500" cy="150" r="22" fill="#B9C3C4"/>' +
-  '<g class="grow" style="--d:1.2s" fill="#F4F1EA" stroke="#C9C2B4" stroke-width="3"><circle cx="565" cy="305" r="16"/><circle cx="590" cy="312" r="12"/><circle cx="440" cy="330" r="15"/><circle cx="425" cy="370" r="17"/><circle cx="455" cy="388" r="12"/><circle cx="360" cy="418" r="15"/><circle cx="640" cy="414" r="17"/><circle cx="600" cy="420" r="12"/></g>' +
-  '<text x="500" y="80" text-anchor="middle" font-family="Tajawal" font-weight="900" font-size="80" fill="#0E4D5C" class="pop" style="--d:2.6s;transform-box:fill-box;transform-origin:center">؟</text></svg>');
-cap(.3, 2.8, 'داك *البياض* اللي فالروبيني…');
-cap(2.8, 5.1, 'واش عرفتي *شنو* *هو*؟ 🤔');
+sc(3.1, 5.1, '<svg viewBox="0 0 1000 520"><rect x="320" y="400" width="360" height="40" rx="14" fill="#B9C3C4"/><path d="M430 400V250a70 70 0 0 1 140 0v20" fill="none" stroke="#B9C3C4" stroke-width="44" stroke-linecap="round"/><rect x="545" y="262" width="60" height="38" rx="10" fill="#B9C3C4"/><circle cx="500" cy="150" r="22" fill="#B9C3C4"/>' +
+  '<g class="grow" style="--d:3.6s" fill="#F4F1EA" stroke="#C9C2B4" stroke-width="3"><circle cx="565" cy="305" r="16"/><circle cx="590" cy="312" r="12"/><circle cx="440" cy="330" r="15"/><circle cx="425" cy="370" r="17"/><circle cx="455" cy="388" r="12"/><circle cx="360" cy="418" r="15"/><circle cx="640" cy="414" r="17"/><circle cx="600" cy="420" r="12"/></g>' +
+  '<text x="500" y="80" text-anchor="middle" font-family="Tajawal" font-weight="900" font-size="80" fill="#0E4D5C" class="pop" style="--d:4.2s;transform-box:fill-box;transform-origin:center">؟</text></svg>');
+cap(3.3, 5.1, 'خليني *نوريك* علاش… و*كيفاش* تحيدو 👀');
 
 // 2 · 5–10 title
 sc(5, 10.1, '<div style="position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#12343B"><div><div class="pop" style="--d:5.4s;font-weight:900;font-size:120px;color:#0E4D5C">الكالكير</div><div class="up" style="--d:6.2s;font:600 46px Outfit;letter-spacing:10px;color:#C9A04F">CALCAIRE</div>' +
   '<div style="display:flex;gap:18px;justify-content:center;margin-top:30px"><span class="lbl" style="position:static;--d:7s">من فين كيجي؟</span><span class="lbl" style="position:static;--d:7.5s">شنو كيدير؟</span></div></div></div>');
-cap(5.2, 7.6, 'سميتو *الكالكير*');
+cap(5.2, 7.6, 'هاد الحجر سميتو *الكالكير*');
 cap(7.6, 10.1, 'وغادي نشرح ليك *من* *فين* *كيجي*');
 
 // 3 · 10–17 rain in mountains
@@ -428,6 +454,8 @@ for (var i = 0; i < 28; i++) { var l = document.createElementNS(NS, "line"), x =
 var rk = []; for (var j = 0; j < 34; j++) rk.push([30 + rnd() * 940, 20 + rnd() * 480, 10 + rnd() * 12]); hexes(document.getElementById("rocksT"), rk);
 var pk = []; for (var k = 0; k < 7; k++) pk.push([-18 + rnd() * 36, 8 + rnd() * 36, 9 + rnd() * 5]); hexes(document.getElementById("pickedT"), pk, { pick: 19, step: .5 });
 hexes(document.getElementById("t7"), SPTS, { stick: 36.8, step: .12 });
+document.getElementById("hk").setAttribute("viewBox","0 330 740 300");
+hexes(document.getElementById("hk"), SPTS.concat([[150,455,22],[290,500,20],[440,445,22],[580,430,20],[700,430,18]]), { stick: 0.1, step: .06 });
 </script>
 </body>
 </html>
