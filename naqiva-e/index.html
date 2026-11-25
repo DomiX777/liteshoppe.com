@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Naqiva – مسح الكالكير من شعرك</title>
+<meta name="description" content="Naqiva Détox Anti-Calcaire: شامبو مغربي كيحيد الكالكير من الشعر. التوصيل فابور، والخلاص عند الاستلام.">
+<meta name="theme-color" content="#061F25">
+<meta property="og:title" content="Naqiva – مسح الكالكير بصبعك">
+<meta property="og:image" content="img/og.jpg">
+<link rel="icon" href="img/symbol.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;600;700&family=Outfit:wght@300;400;500;600&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/e-hair.webp">
+<style>
+:root{
+  --bg:#061F25; --bg2:#0A2A31; --card:#0E333B; --line:rgba(255,255,255,.09);
+  --ink:#F4EFE5; --muted:#9FB8B5; --gold:#D6B36A; --gold2:#F0D9A0;
+  --goldgrad:linear-gradient(115deg,#B8893A 0%,#F0D9A0 48%,#C9A04F 62%,#B8893A 100%);
+  --chalk:#ECE8DF; --chalk-ink:#16353B;
+  --disp:"El Messiri","Tajawal",serif; --body:"Tajawal",system-ui,sans-serif; --lat:"Outfit",system-ui,sans-serif;
+  --sand:#0A2A31; --white:#0E333B; --teal:#D6B36A; --teal-dark:#04171B; --teal-soft:rgba(214,179,106,.12); --aqua:#0E333B; --gold-soft:rgba(214,179,106,.16); --danger:#F2A49C;
+}
+*{box-sizing:border-box}[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.75 var(--body);overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:var(--gold)}
+.wrap{width:100%;max-width:1180px;margin-inline:auto;padding-inline:20px}
+.gold{background:var(--goldgrad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 30px;border-radius:999px;border:0;font:700 18px/1 var(--body);cursor:pointer;text-decoration:none;transition:transform .2s,box-shadow .2s}
+.btn-primary{background:var(--goldgrad);background-size:200% 100%;color:#1A1307;box-shadow:0 16px 40px -18px rgba(214,179,106,.8)}
+.btn-primary:hover{transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--gold);border:1.5px solid rgba(214,179,106,.55)}
+.btn:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible,button:focus-visible{outline:3px solid var(--gold2);outline-offset:3px}
+.eyebrow{font:500 13px/1 var(--lat);letter-spacing:5px;text-transform:uppercase;color:var(--gold);display:inline-flex;align-items:center;gap:12px;margin:0 0 14px}
+.eyebrow::before{content:"";width:34px;height:1px;background:currentColor}
+h1,h2,h3{font-family:var(--disp);font-weight:700;line-height:1.15;margin:0}
+h2{font-size:clamp(34px,5.6vw,60px)}
+section{position:relative;scroll-margin-top:70px}
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* header */
+.top{position:fixed;top:0;inset-inline:0;z-index:30;transition:background .3s,backdrop-filter .3s}
+.top.solid{background:rgba(6,31,37,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.top img{height:30px;width:auto;transition:filter .6s}
+body:not(.cleaned) .top:not(.solid) img{filter:brightness(0) invert(17%) sepia(30%) saturate(900%) hue-rotate(150deg)}
+.top .btn{min-height:42px;padding:0 20px;font-size:15px}
+
+/* ===== 1. scratch hero ===== */
+.hero{height:100svh;min-height:560px;position:relative;overflow:hidden;background:#000}
+.hero .under{position:absolute;inset:0}
+.hero .under img.hair{width:100%;height:100%;object-fit:cover;filter:saturate(1.1)}
+.hero .under::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(6,31,37,.92) 0%,rgba(6,31,37,.25) 45%,rgba(6,31,37,.35) 100%)}
+.hero .bottle{height:auto;position:absolute;bottom:6%;left:4%;width:min(40vw,320px);-webkit-mask-image:radial-gradient(ellipse 50% 52% at 50% 50%,#000 70%,transparent 100%);mask-image:radial-gradient(ellipse 50% 52% at 50% 50%,#000 70%,transparent 100%);z-index:1;filter:drop-shadow(0 30px 40px rgba(0,0,0,.5));opacity:0;transform:translateY(30px) scale(.96);transition:opacity 1.2s .2s,transform 1.4s .2s cubic-bezier(.2,.7,.2,1)}
+.hero .after-txt{position:absolute;inset-inline:0;bottom:0;z-index:2;padding:0 0 56px;opacity:0;transform:translateY(24px);transition:opacity 1s .35s,transform 1s .35s}
+.hero.clean .bottle{opacity:1;transform:none}
+.hero.clean .after-txt{opacity:1;transform:none}
+.after-txt h1{font-size:clamp(40px,7vw,82px);color:#fff;max-width:11em}
+.after-txt p{color:#D4E1DE;font-size:19px;max-width:30em;margin:14px 0 22px}
+.after-txt .row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.after-txt .price{font:600 28px var(--lat);color:var(--gold2);direction:ltr;unicode-bidi:isolate}
+#crust{position:absolute;inset:0;width:100%;height:100%;z-index:3;touch-action:none;cursor:grab;transition:opacity 1.2s}
+.hero.clean #crust{opacity:0;pointer-events:none}
+.crust-txt{position:absolute;inset:0;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:90px 24px 40px;pointer-events:none;color:var(--chalk-ink);transition:opacity .6s}
+.hero.clean .crust-txt,.hero.wiping .crust-txt{opacity:0}
+.crust-txt h2{font-size:clamp(36px,6.4vw,72px);max-width:12em}
+.crust-txt p{font-size:19px;margin:12px 0 0;color:#3E5A5F}
+.hand{width:74px;height:74px;margin:26px auto 0;border-radius:50%;border:2px solid var(--chalk-ink);display:grid;place-items:center;animation:wipehint 2.4s ease-in-out infinite}
+@keyframes wipehint{0%,100%{transform:translateX(-40px) rotate(-8deg)}50%{transform:translateX(40px) rotate(8deg)}}
+.auto{pointer-events:auto;margin-top:22px;background:transparent;border:1.5px solid var(--chalk-ink);color:var(--chalk-ink);border-radius:999px;padding:10px 20px;font:700 15px var(--body);cursor:pointer}
+.meter{position:absolute;top:84px;inset-inline-start:20px;z-index:5;background:rgba(22,53,59,.85);color:#fff;border-radius:999px;padding:6px 14px;font:600 14px var(--lat);direction:ltr;transition:opacity .4s}
+.hero.clean .meter{opacity:0}
+@media (max-width:899px){
+  .hero .bottle{left:50%;bottom:auto;top:72px;width:min(36vw,170px);transform:translate(-50%,30px) scale(.96)}
+  .hero.clean .bottle{transform:translate(-50%,0)}
+  .after-txt{padding-bottom:36px}
+  .after-txt h1{font-size:clamp(34px,9vw,48px)}
+  .after-txt p{display:none}
+  .after-txt .eyebrow{font-size:11px;letter-spacing:3px}
+  .after-txt h1{margin-bottom:16px}
+  .hero .under::after{background:linear-gradient(0deg,rgba(6,31,37,.97) 0%,rgba(6,31,37,.85) 38%,rgba(6,31,37,.2) 70%,rgba(6,31,37,.45) 100%)}
+}
+@media (min-width:900px){.hero .bottle{left:9%;bottom:10%;width:300px}.after-txt{padding-bottom:80px}}
+
+/* ===== 2. journey of a drop ===== */
+.journey{padding:110px 0 60px;background:linear-gradient(180deg,#061F25,#0A2A31)}
+.journey .intro{text-align:center;max-width:760px;margin:0 auto 60px}
+.journey .intro p{color:var(--muted)}
+.track{position:relative;max-width:980px;margin:0 auto;padding-inline:20px}
+.track .rail{position:absolute;top:0;bottom:0;left:50%;width:2px;background:rgba(255,255,255,.08);transform:translateX(-50%)}
+.track .fill{position:absolute;top:0;left:50%;width:2px;height:0;background:linear-gradient(180deg,#8FD3E8,#ECE8DF 55%,#D6B36A);transform:translateX(-50%)}
+.track .drop{position:absolute;left:50%;top:0;width:34px;height:44px;transform:translate(-50%,-50%);z-index:2;filter:drop-shadow(0 6px 14px rgba(0,0,0,.4));transition:top .1s linear}
+.stop{position:relative;display:grid;grid-template-columns:1fr;gap:10px;padding:70px 0 70px 40px;min-height:38vh}
+.stop .num{font:300 56px/1 var(--lat);color:var(--gold)}
+.stop h3{font-size:30px}.stop p{color:var(--muted);margin:0;max-width:24em}
+.stop .ico{width:64px;height:64px;border-radius:18px;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;color:var(--gold2)}
+.stop.last h3{color:var(--gold2)}
+.track .rail,.track .fill,.track .drop{left:24px}
+.track{overflow:hidden}
+@media (min-width:860px){
+  .track .rail,.track .fill,.track .drop{left:50%}
+  .stop{grid-template-columns:1fr 1fr;padding:80px 0;gap:120px}
+  .stop .side{grid-column:1}
+  .stop:nth-child(odd) .side{grid-column:2;text-align:left}
+  .stop:nth-child(odd) .side p{margin-inline-start:auto}
+  .stop:nth-child(odd) .ico{margin-inline-start:auto}
+}
+
+/* ===== 3. microscope ===== */
+.micro{padding:110px 0;background:#0A2A31}
+.micro-grid{display:grid;grid-template-columns:1fr;gap:40px;align-items:center}
+.lens{position:relative;width:min(86vw,500px);aspect-ratio:1/1;margin:0 auto;border-radius:50%;background:radial-gradient(circle at 40% 35%,#123E47,#05191E 72%);border:10px solid #0E333B;box-shadow:0 0 0 2px rgba(214,179,106,.5),0 40px 80px -30px rgba(0,0,0,.7),inset 0 0 60px rgba(0,0,0,.5);overflow:hidden}
+.lens svg{width:100%;height:100%;display:block}
+.lens .tagl{position:absolute;bottom:16%;inset-inline:0;text-align:center;font:500 12px var(--lat);letter-spacing:3px;color:rgba(255,255,255,.45)}
+.slider{margin-top:26px}
+.slider label{display:flex;justify-content:space-between;font-weight:700;margin-bottom:10px}
+.slider input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:8px;border-radius:99px;background:linear-gradient(90deg,rgba(255,255,255,.12) var(--v,100%),var(--gold) var(--v,100%));outline:none}
+.slider input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:34px;height:34px;border-radius:50%;background:var(--goldgrad);border:3px solid #061F25;box-shadow:0 6px 16px rgba(0,0,0,.4);cursor:grab}
+.slider input[type=range]::-moz-range-thumb{width:30px;height:30px;border-radius:50%;background:#D6B36A;border:3px solid #061F25;cursor:grab}
+.readout{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:22px}
+.readout div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;text-align:center}
+.readout b{display:block;font:600 22px var(--lat);color:var(--gold2)}
+.readout span{font-size:14px;color:var(--muted)}
+.note{font-size:13.5px;color:#7F9895;margin-top:12px}
+@media (min-width:900px){.micro-grid{grid-template-columns:1fr 1fr;gap:80px}}
+
+/* ===== 4. bottle anatomy ===== */
+.anat{padding:110px 0;text-align:center;overflow:hidden}
+.anat-stage{position:relative;max-width:980px;margin:40px auto 0;display:grid;grid-template-columns:1fr;gap:20px;align-items:center}
+.anat-bottle{perspective:900px}
+.anat-bottle img{width:min(78vw,420px);margin:0 auto;border-radius:30px;transition:transform .2s ease-out;transform-style:preserve-3d;box-shadow:0 50px 90px -40px rgba(0,0,0,.8)}
+.callouts{display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:start}
+.call{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
+.call b{display:flex;align-items:center;gap:8px;font-size:17px}
+.call b::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--goldgrad);box-shadow:0 0 0 4px rgba(214,179,106,.18)}
+.call p{margin:4px 0 0;color:var(--muted);font-size:15px}
+@media (min-width:900px){
+  .anat-stage{grid-template-columns:1fr auto 1fr;gap:30px}
+  .callouts{grid-template-columns:1fr;gap:26px}
+}
+
+/* ===== 5. offer ===== */
+.offer{padding:110px 0;background:linear-gradient(180deg,#061F25,#04171B)}
+.offer .head{text-align:center;margin-bottom:40px}
+.offer .head .pnow{font:600 22px var(--lat);color:var(--gold2)}
+.packs-e{display:grid;grid-template-columns:1fr;gap:16px;max-width:820px;margin:0 auto}
+.pe{position:relative;display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;text-align:start;background:var(--card);border:1.5px solid var(--line);border-radius:24px;padding:22px;color:var(--ink);font-family:var(--body);cursor:pointer;transition:transform .25s,border-color .25s}
+.pe:hover{transform:translateY(-3px);border-color:rgba(214,179,106,.6)}
+.pe.pebest{border-color:var(--gold)}
+.pe .arches{display:flex;gap:6px}
+.pe .arches svg{width:34px;height:46px}
+.pe b{font-size:21px;display:block}.pe small{color:var(--muted);font-size:15px}
+.pe .p{font:600 30px/1 var(--lat);color:var(--gold2);direction:ltr;unicode-bidi:isolate;text-align:left}
+.pe .p s{display:block;font:400 15px var(--lat);color:var(--muted);margin-top:4px}
+.pe .bdg{position:absolute;top:-12px;inset-inline-start:22px;background:var(--goldgrad);color:#1A1307;font-weight:800;font-size:12.5px;border-radius:99px;padding:4px 10px}
+.trust3{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 26px;margin-top:26px;color:var(--muted);font-size:15.5px}
+.trust3 span{display:inline-flex;gap:8px;align-items:center}
+.offer-slot{max-width:820px;margin:20px auto 0;background:var(--card);border:1px solid var(--line);border-radius:22px}
+.offer-cta{padding:22px;display:grid;gap:10px;text-align:center}
+.offer-cta h3{font-size:22px}.offer-cta p{margin:0;color:var(--muted);font-size:16px}
+.offer-cta .btn{width:100%}.offer-cta small{color:var(--muted)}
+
+/* faq + footer */
+.faq{padding:90px 0;background:#04171B}
+.faq-list{max-width:820px;margin:30px auto 0;display:grid;gap:10px}
+details{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:0 20px}
+summary{cursor:pointer;list-style:none;padding:18px 0;font-weight:700;display:flex;justify-content:space-between;gap:14px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font:300 28px/1 var(--lat);color:var(--gold);transition:transform .25s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{color:var(--muted);margin:0 0 18px;font-size:16.5px}
+footer{background:#04171B;border-top:1px solid var(--line);padding:40px 0 120px;color:var(--muted);font-size:14.5px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:18px 30px;align-items:center;justify-content:space-between}
+footer a{color:var(--ink);text-decoration:none}
+@media (min-width:900px){footer{padding-bottom:40px}}
+
+.mobile-cta{position:fixed;bottom:0;inset-inline:0;z-index:35;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:rgba(6,31,37,.96);border-top:1px solid var(--line);display:flex;gap:12px;align-items:center;transform:translateY(110%);transition:transform .3s}
+.mobile-cta.show{transform:none}
+.mobile-cta .btn{flex:1;min-height:52px}
+.mobile-cta .mini{font-size:13.5px;color:var(--muted);line-height:1.35}
+.mobile-cta .mini b{color:var(--gold2);font:600 18px var(--lat);display:block;direction:ltr;unicode-bidi:isolate;text-align:right}
+.wa{position:fixed;bottom:18px;left:18px;z-index:40;width:58px;height:58px;border-radius:50%;background:#1F9D55;display:none;place-items:center}
+@media (min-width:900px){.mobile-cta{display:none}}
+
+/* shared form + popup (dark) */
+form{display:grid;gap:14px;padding:22px}
+.field{display:grid;gap:6px}
+label,.legend{font-weight:700;font-size:16px}
+.opt{font-weight:400;color:var(--muted);font-size:13.5px}
+input[type=text],input[type=tel]{width:100%;min-height:54px;border:1.5px solid rgba(255,255,255,.14);border-radius:14px;padding:0 16px;font:500 17px var(--body);color:var(--ink);background:#082329}
+input[type=tel]{direction:ltr;text-align:right;font-family:var(--lat)}
+input::placeholder{color:#6F8C89}
+input:focus{border-color:var(--gold);outline:none}
+fieldset{border:0;padding:0;margin:0}
+.err{color:var(--danger);font-size:14px}
+.form-foot{font-size:13px;color:var(--muted);text-align:center;margin:0}
+form .btn{width:100%;min-height:58px;font-size:19px}
+.packs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.pack{position:relative;display:block}
+.pack input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer;z-index:1}
+.pack>span{display:flex;flex-direction:column;gap:2px;min-height:80px;justify-content:center;padding:12px 14px;border:1.5px solid rgba(255,255,255,.14);border-radius:16px;background:#082329;position:relative}
+.pack b{font-size:16.5px}.pack small{display:block;font:600 16px/1.3 var(--lat);color:var(--gold2);text-align:right}
+.pack input:checked+span{border-color:var(--gold);background:rgba(214,179,106,.1);box-shadow:0 0 0 1px var(--gold) inset}
+.best{position:absolute;top:-11px;inset-inline-start:12px;background:var(--goldgrad);color:#1A1307;font:800 12px/1 var(--body);font-style:normal;padding:5px 9px;border-radius:99px}
+.strike{text-decoration:line-through;opacity:.55;font-weight:400;margin-inline-start:6px;font-size:13.5px}
+[data-price-now],[data-price-old],[data-pack1],[data-pack2],[data-total],[data-hero-price],[data-hero-old]{direction:ltr;unicode-bidi:isolate}
+.success{display:none;padding:34px 22px;text-align:center}
+.success .ic{width:72px;height:72px;border-radius:50%;background:rgba(214,179,106,.14);color:var(--gold);display:grid;place-items:center;margin:0 auto 14px}
+.success h3{font-size:26px;margin:0 0 10px}.success p{color:var(--muted)}
+.summary{background:#082329;border-radius:16px;padding:14px 18px;text-align:start;margin:0 auto 18px;max-width:360px;font-size:16px}
+.summary div{display:flex;justify-content:space-between;gap:12px;padding:4px 0}
+.modal{border:0;padding:0;width:min(560px,calc(100% - 24px));max-height:calc(100dvh - 24px);border-radius:26px;background:var(--bg2);color:var(--ink);box-shadow:0 30px 80px -20px rgba(0,0,0,.6);overflow:hidden;display:none;flex-direction:column}
+.modal[open]{display:flex}
+.modal::backdrop{background:rgba(2,10,12,.7);backdrop-filter:blur(4px)}
+.modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line);background:var(--bg)}
+.modal-prod{display:flex;align-items:center;gap:12px}
+.modal-prod img{width:56px;height:56px;border-radius:14px;object-fit:cover}
+.modal-prod b{display:block;font-size:16px}.modal-prod span{display:block;font-size:13.5px;color:var(--muted)}
+.modal-x{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);display:grid;place-items:center;cursor:pointer}
+.modal-body{overflow-y:auto}
+html.modal-open{overflow:hidden}
+@media (max-width:640px){.modal{width:100%;max-width:100%;max-height:92dvh;margin:auto 0 0;border-radius:24px 24px 0 0}}
+
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header class="top" id="top-bar">
+  <div class="wrap">
+    <a href="#top" aria-label="naqiva"><img src="img/logo.svg" alt="naqiva" height="30"></a>
+    <a class="btn btn-primary" href="#reserve" data-cta="header">اطلب دابا</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- 1. SCRATCH -->
+  <section class="hero" id="hero" aria-label="مسح الكالكير">
+    <div class="under">
+      <img class="hair" src="img/e-hair.webp" alt="شعر لامع وفيه قطرات الما" width="1280" height="720">
+    </div>
+    <img class="bottle" src="img/e-bottle.webp" alt="بوطة Naqiva Détox Anti-Calcaire" width="420" height="710">
+    <div class="after-txt">
+      <div class="wrap">
+        <p class="eyebrow">Naqiva · Détox Anti-Calcaire</p>
+        <h1>هكا كيدير Naqiva <span class="gold">فشعرك.</span></h1>
+        <p>داكشي اللي مسحتي دابا بصبعك، هو الكالكير اللي كيبقى فشعرك مع كل دوش. Naqiva كيحيدو، وكيرجع للشعر اللمعة ديالو.</p>
+        <div class="row"><a class="btn btn-primary" href="#reserve" data-cta="hero">اطلب دابا</a><span class="price" data-hero-price></span><span style="color:#B9CFCC;font-size:15px">التوصيل فابور · الخلاص عند الاستلام</span></div>
+      </div>
+    </div>
+    <canvas id="crust" aria-hidden="true"></canvas>
+    <div class="crust-txt">
+      <h2>شعرك مغطي بالكالكير.</h2>
+      <p>مسح بصبعك وشوف شنو كاين من تحت.</p>
+      <div class="hand" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V5a1.5 1.5 0 0 1 3 0v5"/><path d="M12 10V4a1.5 1.5 0 0 1 3 0v6"/><path d="M15 10V6a1.5 1.5 0 0 1 3 0v8a6 6 0 0 1-6 6h-1a6 6 0 0 1-5-2.7L4 14a1.5 1.5 0 0 1 2.5-1.7L9 15"/></svg></div>
+      <button type="button" class="auto" id="auto-clean">ولا نقيها بوحدها</button>
+    </div>
+    <div class="meter" id="meter" aria-live="polite">0%</div>
+  </section>
+
+  <!-- 2. JOURNEY -->
+  <section class="journey" id="journey" aria-labelledby="j-title">
+    <div class="intro wrap">
+      <p class="eyebrow reveal">Le voyage d'une goutte</p>
+      <h2 id="j-title" class="reveal"><span data-v-title>رحلة قطرة الما حتى لشعرك</span></h2>
+      <p class="reveal" data-v-sub>تبع القطرة ملي تنزل: كيفاش الما الصافي كيولي قاصح، وكيفاش كيوصل لشعرك.</p>
+    </div>
+    <div class="track" id="track">
+      <div class="rail"></div><div class="fill" id="fill"></div>
+      <svg class="drop" id="drop" viewBox="0 0 34 44" aria-hidden="true"><path id="drop-path" d="M17 2C17 2 3 18 3 28a14 14 0 0 0 28 0C31 18 17 2 17 2Z" fill="#8FD3E8"/><path d="M10 29a7 7 0 0 0 7 7" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".7"/></svg>
+      <div class="stop"><div class="side reveal"><div class="ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18c3 0 3-2 6-2s3 2 6 2 3-2 6-2"/><path d="M3 13c3 0 3-2 6-2s3 2 6 2 3-2 6-2"/><path d="M4 8l4-4 4 4 4-4 4 4"/></svg></div><div class="num">01</div><h3>فالسد، الما صافي</h3><p>القطرة كتبدا الرحلة ديالها نقية، من الشتا والعيون.</p></div></div>
+      <div class="stop"><div class="side reveal"><div class="ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="8" r="2"/><circle cx="15" cy="6" r="1.5"/><circle cx="17" cy="13" r="2.4"/><circle cx="9" cy="16" r="1.8"/></svg></div><div class="num">02</div><h3>كتدوز من الحجر، وكتتشحن</h3><p>فالطريق، كتدوز من الأرض والحجر الجيري، وكتهز معاها الكالسيوم والمانيزيوم.</p></div></div>
+      <div class="stop"><div class="side reveal"><div class="ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h6a5 5 0 0 1 5 5v1"/><path d="M11 13h8"/><path d="M12 17v1M15 17v2M18 17v1"/></svg></div><div class="num">03</div><h3>كتوصل للدوش ديالك قاصحة</h3><p>هادشي علاش كيبان ليك البياض على الروبيني والزاج. نفس الشي كيوقع فشعرك.</p></div></div>
+      <div class="stop last"><div class="side reveal"><div class="ico"><svg width="30" height="30" viewBox="0 0 34 44"><path d="M17 2C17 2 3 18 3 28a14 14 0 0 0 28 0C31 18 17 2 17 2Z" fill="none" stroke="currentColor" stroke-width="2.4"/></svg></div><div class="num">04</div><h3>Naqiva كيرجعها صافية</h3><p>مكون chélatant نباتي كيشد فالمعادن وكيخليهم يمشيو مع الما. الشعر كيرجع ناعم وفيه اللمعة.</p></div></div>
+    </div>
+  </section>
+
+  <!-- 3. MICROSCOPE -->
+  <section class="micro" aria-labelledby="m-title">
+    <div class="wrap micro-grid">
+      <div class="lens reveal" aria-hidden="true">
+        <svg viewBox="0 0 400 400" id="lens-svg">
+          <defs>
+            <linearGradient id="hairg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#4A3424"/><stop offset=".5" stop-color="#2C1D14"/><stop offset="1" stop-color="#1B120C"/></linearGradient>
+            <linearGradient id="shine" x1="0" x2="1"><stop offset="0" stop-color="#F0D9A0" stop-opacity="0"/><stop offset=".5" stop-color="#F0D9A0" stop-opacity=".9"/><stop offset="1" stop-color="#F0D9A0" stop-opacity="0"/></linearGradient>
+          </defs>
+          <g transform="rotate(-22 200 200)">
+            <rect x="-40" y="150" width="480" height="100" rx="50" fill="url(#hairg)"/>
+            <g stroke="#5A4230" stroke-width="2" fill="none" opacity=".8">
+              <path d="M10 170 l30 10 M60 168 l30 10 M110 166 l30 10 M160 164 l30 10 M210 162 l30 10 M260 160 l30 10 M310 158 l30 10 M360 156 l30 10"/>
+              <path d="M0 230 l30 -8 M50 232 l30 -8 M100 234 l30 -8 M150 236 l30 -8 M200 238 l30 -8 M250 240 l30 -8 M300 242 l30 -8 M350 244 l30 -8"/>
+            </g>
+            <rect id="hair-shine" x="-40" y="172" width="480" height="10" rx="5" fill="url(#shine)" opacity="0"/>
+            <g id="crystals"></g>
+          </g>
+        </svg>
+        <div class="tagl">×400 · رسم توضيحي</div>
+      </div>
+      <div>
+        <p class="eyebrow reveal">Sous le microscope</p>
+        <h2 id="m-title" class="reveal">شعرة <span class="gold">تحت الميكروسكوب</span></h2>
+        <p class="reveal" style="color:var(--muted)">هادي هي الشعرة ديالك من بعد شهور ديال الما القاصح: عامرة بحبيبات ديال الكالكير. جر الزر وشوف شنو كيوقع ملي كتغسلها بـ Naqiva.</p>
+        <div class="slider reveal">
+          <label for="wash"><span>بلا Naqiva</span><span>من بعد Naqiva</span></label>
+          <input type="range" id="wash" min="0" max="100" value="0" aria-label="شحال من غسلة بـ Naqiva">
+        </div>
+        <div class="readout reveal">
+          <div><b id="r-min">100%</b><span>بقايا الكالكير</span></div>
+          <div><b id="r-shine">0%</b><span>اللمعة</span></div>
+          <div><b id="r-soft">خشينة</b><span>الملمس</span></div>
+        </div>
+        <p class="note">رسم توضيحي باش تفهم الفكرة، ماشي قياس علمي ولا نتيجة مضمونة.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. ANATOMY -->
+  <section class="anat" aria-labelledby="a-title">
+    <div class="wrap">
+      <p class="eyebrow reveal">Le flacon</p>
+      <h2 id="a-title" class="reveal">بوطة <span class="gold">عملية فالدوش</span></h2>
+      <div class="anat-stage">
+        <div class="callouts">
+          <div class="call reveal"><b>كتوقف على الغطا</b><p>الشامبو ديما كيبقى لتحت، وكتخرج حتى آخر قطرة.</p></div>
+          <div class="call reveal"><b>بلاستيك مات وناعم</b><p>كتضغط عليها بالساهل، وما كتزلقش من يدك فالدوش.</p></div>
+        </div>
+        <div class="anat-bottle reveal"><img id="tilt" src="img/e-bottle.webp" alt="بوطة Naqiva Détox Anti-Calcaire" width="420" height="710" loading="lazy"></div>
+        <div class="callouts">
+          <div class="call reveal"><b>غطا flip-top</b><p>كيتحل بيد وحدة فالدوش، وكيتسد مزيان.</p></div>
+          <div class="call reveal"><b>300 ml · pH 5</b><p>بلا sulfate، بلا silicone. كتكفي تقريباً 2 حتى 3 شهور.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. OFFER -->
+  <section class="offer" id="reserve" aria-labelledby="o-title">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Offre de lancement</p>
+        <h2 id="o-title">اختار <span class="gold">العرض ديالك</span></h2>
+        <p class="pnow"><span data-price-now></span> <span data-price-old hidden style="text-decoration:line-through;color:var(--muted);font-size:17px"></span> · <bdi dir="ltr">-<span data-discount>25</span>%</bdi></p>
+      </div>
+      <div class="packs-e">
+        <button type="button" class="pe reveal" data-pick="1">
+          <span class="arches"><svg viewBox="0 0 34 46"><path d="M5 44V20a12 12 0 0 1 24 0v24z" fill="#0E4D5C" stroke="#D6B36A" stroke-width="1.5"/></svg></span>
+          <span><b>بوطة وحدة</b><small>300 ml · كتكفي 2 حتى 3 شهور</small></span>
+          <span class="p" data-e1></span>
+        </button>
+        <button type="button" class="pe pebest reveal" data-pick="2">
+          <span class="bdg">الأكثر توفيراً</span>
+          <span class="arches"><svg viewBox="0 0 34 46"><path d="M5 44V20a12 12 0 0 1 24 0v24z" fill="#0E4D5C" stroke="#D6B36A" stroke-width="1.5"/></svg><svg viewBox="0 0 34 46"><path d="M5 44V20a12 12 0 0 1 24 0v24z" fill="#0E4D5C" stroke="#D6B36A" stroke-width="1.5"/></svg></span>
+          <span><b>جوج بوطات</b><small>ليك ولشي حد فالدار</small></span>
+          <span class="p" data-e2></span>
+        </button>
+      </div>
+      <div class="offer-slot"><div><form id="lead-form" novalidate>
+            <div>
+              <h3 style="margin:0 0 4px;font-size:24px">اطلب دابا</h3>
+              <p style="margin:0;color:var(--muted);font-size:16px">عمر المعلومات ديالك. الخلاص عند الاستلام.</p>
+            </div>
+            <fieldset class="field">
+              <legend class="legend">اختار العرض</legend>
+              <div class="packs">
+                <label class="pack"><input type="radio" name="qty" value="1" checked><span><b>بوطة وحدة</b><small data-pack1></small></span></label>
+                <label class="pack"><input type="radio" name="qty" value="2"><span><em class="best">الأكثر توفيراً</em><b>جوج بوطات</b><small data-pack2></small></span></label>
+              </div>
+            </fieldset>
+            <div class="field">
+              <label for="f-name">السمية الكاملة</label>
+              <input id="f-name" name="name" type="text" autocomplete="name" required>
+              <div class="err" id="e-name" role="alert"></div>
+            </div>
+            <div class="field">
+              <label for="f-phone">رقم التيليفون <span class="opt">(كنعيطو عليه نأكدو الطلب)</span></label>
+              <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="06 00 00 00 00" required>
+              <div class="err" id="e-phone" role="alert"></div>
+            </div>
+            <div class="field">
+              <label for="f-city">المدينة</label>
+              <input id="f-city" name="city" type="text" list="cities" autocomplete="address-level2" placeholder="كتب المدينة ديالك" required>
+              <datalist id="cities"></datalist>
+              <div class="err" id="e-city" role="alert"></div>
+            </div>
+            <div class="field">
+              <label for="f-address">العنوان</label>
+              <input id="f-address" name="address" type="text" autocomplete="street-address" placeholder="الحي، الزنقة، الرقم" required>
+              <div class="err" id="e-address" role="alert"></div>
+            </div>
+            <button class="btn btn-primary" type="submit" id="f-submit"><span>أكد الطلب · <span data-total></span></span></button>
+            <p class="form-foot">الخلاص عند الاستلام. غادي نعيطو ليك نأكدو الطلب. المعلومات ديالك ما كنعطيوهاش لحتى واحد. <a href="privacy.html">الخصوصية</a></p>
+          </form>
+
+          <div class="success" id="success" role="status" tabindex="-1">
+            <div class="ic"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></div>
+            <h3>شكراً، الطلب ديالك توصلنا! 🎉</h3>
+            <div class="summary" id="order-summary"></div>
+            <p id="success-text">غادي نعيطو ليك باش نأكدو الطلب ونقولو ليك الوقت ديال التوصيل. الخلاص عند الاستلام.</p>
+            <a class="btn btn-ghost" id="success-share" href="#">شارك مع صحابك</a>
+          </div></div></div>
+      <div class="trust3"><span>🚚 التوصيل فابور</span><span>💵 الخلاص عند الاستلام</span><span>📞 كنعيطو ليك نأكدو</span><span>🇲🇦 صنع فالمغرب</span></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" aria-labelledby="faq-title">
+    <div class="wrap">
+      <h2 id="faq-title" style="text-align:center;font-size:clamp(30px,4.6vw,46px)">أسئلة</h2>
+      <div class="faq-list">
+        <details><summary>إمتى يوصلني الطلب؟</summary><p>من بعد ما تطلب، كنعيطو ليك باش نأكدو الطلب ونقولو ليك الوقت ديال التوصيل بالضبط. ما كتخلص والو حتى يوصلك.</p></details>
+        <details><summary>شحال من مرة نستعملو؟</summary><p>مرة ولا جوج فالسيمانة. فالأيام الأخرى الشامبو العادي ديالك.</p></details>
+        <details><summary>كيفاش نعرف واش الما عندي فيه الكالكير؟</summary><p>إلا كان كيبان ليك بياض على الروبيني ولا فالدوش، راه الما فيه الكالكير.</p></details>
+        <details><summary>واش كيداوي طيحان الشعر؟</summary><p>Naqiva ماشي دوا. هو شامبو كيحيد بقايا الكالكير. إلا كان الشعر كيطيح بزاف، شوف طبيب الجلد.</p></details>
+      </div>
+      <div hidden><div id="reviews-list"></div><div id="reviews-empty"></div></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="img/logo.svg" alt="naqiva" style="height:28px;width:auto">
+    <span>© <span id="year"></span> Naqiva · صنع فالمغرب · الصور توضيحية</span>
+    <span><a href="#" id="l-wa" hidden>WhatsApp</a> <a href="#" id="l-ig" hidden>Instagram</a> <a href="#" id="l-tt" hidden>TikTok</a> <a href="privacy.html">الخصوصية</a></span>
+  </div>
+</footer>
+
+<a class="wa" id="wa-float" href="#" target="_blank" rel="noopener" aria-label="تواصل معانا فالواتساب"><svg width="30" height="30" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg></a>
+<div class="mobile-cta" id="mobile-cta"><div class="mini"><b data-hero-price></b>التوصيل فابور · الدفع عند الاستلام</div><a class="btn btn-primary" href="#reserve" data-cta="sticky">اطلب دابا</a></div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>
+(function () {
+  var C = window.NAQIVA_CONFIG || {};
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var $ = function (s) { return document.querySelector(s); };
+
+  /* header becomes solid after the hero */
+  var bar = $("#top-bar");
+  var onScroll = function () { bar.classList.toggle("solid", window.scrollY > window.innerHeight * 0.6); };
+  window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
+  /* ---------- 1. scratch the limescale ---------- */
+  var hero = $("#hero"), cv = $("#crust"), meter = $("#meter");
+  var ctx = cv.getContext("2d");
+  var W, H, dpr = Math.min(window.devicePixelRatio || 1, 2), done = false;
+  function paintCrust() {
+    var r = cv.getBoundingClientRect(); W = r.width; H = r.height;
+    cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.globalCompositeOperation = "source-over";
+    var g = ctx.createLinearGradient(0, 0, W, H); g.addColorStop(0, "#EEEAE2"); g.addColorStop(1, "#E2DDD2");
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    // chalky speckles and crusty blotches
+    for (var i = 0; i < W * H / 260; i++) {
+      var x = Math.random() * W, y = Math.random() * H, s = Math.random() * 2.2;
+      ctx.fillStyle = Math.random() < .5 ? "rgba(255,255,255,.75)" : "rgba(150,140,120,.22)";
+      ctx.fillRect(x, y, s, s);
+    }
+    for (var j = 0; j < 90; j++) {
+      var cx = Math.random() * W, cy = Math.random() * H, rr = 10 + Math.random() * 60;
+      var rg = ctx.createRadialGradient(cx, cy, 0, cx, cy, rr);
+      rg.addColorStop(0, "rgba(255,255,255,.55)"); rg.addColorStop(1, "rgba(255,255,255,0)");
+      ctx.fillStyle = rg; ctx.beginPath(); ctx.arc(cx, cy, rr, 0, 7); ctx.fill();
+    }
+    // hairline cracks
+    ctx.strokeStyle = "rgba(120,110,95,.25)"; ctx.lineWidth = .8;
+    for (var k = 0; k < 26; k++) {
+      ctx.beginPath(); var px = Math.random() * W, py = Math.random() * H; ctx.moveTo(px, py);
+      for (var n = 0; n < 6; n++) { px += (Math.random() - .5) * 60; py += (Math.random() - .5) * 60; ctx.lineTo(px, py); }
+      ctx.stroke();
+    }
+    ctx.globalCompositeOperation = "destination-out";
+  }
+  function reveal() {
+    if (done) return; done = true;
+    hero.classList.add("clean");
+    document.body.classList.add("cleaned");
+    try { if (window.fbq) window.fbq("trackCustom", "ScratchDone"); } catch (e) {}
+  }
+  var last = null, moves = 0;
+  function brush(x, y) {
+    var rad = Math.max(34, Math.min(W, H) * 0.075);
+    var g = ctx.createRadialGradient(x, y, 0, x, y, rad);
+    g.addColorStop(0, "rgba(0,0,0,1)"); g.addColorStop(.6, "rgba(0,0,0,.9)"); g.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = g;
+    if (last) {
+      var dx = x - last[0], dy = y - last[1], d = Math.hypot(dx, dy), steps = Math.ceil(d / (rad / 3));
+      for (var i = 1; i <= steps; i++) { var ix = last[0] + dx * i / steps, iy = last[1] + dy * i / steps; ctx.beginPath(); ctx.arc(ix, iy, rad, 0, 7); ctx.fill(); }
+    } else { ctx.beginPath(); ctx.arc(x, y, rad, 0, 7); ctx.fill(); }
+    last = [x, y];
+    if (++moves % 8 === 0) measure();
+  }
+  function measure() {
+    var sw = 60, sh = Math.round(60 * H / W), tmp = document.createElement("canvas"); tmp.width = sw; tmp.height = sh;
+    tmp.getContext("2d").drawImage(cv, 0, 0, sw, sh);
+    var data = tmp.getContext("2d").getImageData(0, 0, sw, sh).data, clear = 0;
+    for (var i = 3; i < data.length; i += 4) if (data[i] < 60) clear++;
+    var pct = Math.round(clear / (sw * sh) * 100);
+    meter.textContent = pct + "% clean";
+    if (pct >= 38) reveal();
+  }
+  function pos(e) { var r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; }
+  var down = false;
+  cv.addEventListener("pointerdown", function (e) { down = true; last = null; hero.classList.add("wiping"); cv.setPointerCapture(e.pointerId); var p = pos(e); brush(p[0], p[1]); });
+  cv.addEventListener("pointermove", function (e) { if (!down) return; var p = pos(e); brush(p[0], p[1]); });
+  ["pointerup", "pointercancel", "pointerleave"].forEach(function (t) { cv.addEventListener(t, function () { down = false; last = null; measure(); }); });
+  $("#auto-clean").addEventListener("click", function () {
+    hero.classList.add("wiping");
+    if (reduce) { reveal(); return; }
+    var t0 = performance.now(), dur = 1600;
+    last = null;
+    (function step(t) {
+      var k = Math.min(1, (t - t0) / dur);
+      var rows = 5, row = Math.floor(k * rows), f = (k * rows) % 1;
+      var x = row % 2 ? W * (1 - f) : W * f, y = H * (0.12 + 0.19 * row + 0.19 * f * 0.2);
+      brush(x, y);
+      if (k < 1 && !done) requestAnimationFrame(step); else reveal();
+    })(t0);
+  });
+  if (reduce) { hero.classList.add("clean"); document.body.classList.add("cleaned"); done = true; }
+  paintCrust();
+  var rt; window.addEventListener("resize", function () { if (done) return; clearTimeout(rt); rt = setTimeout(paintCrust, 200); });
+
+  /* ---------- 2. journey of a drop ---------- */
+  var track = $("#track"), drop = $("#drop"), fill = $("#fill"), dp = $("#drop-path");
+  var cols = [[143, 211, 232], [236, 232, 223], [236, 232, 223], [214, 179, 106]];
+  function mix(a, b, t) { return a.map(function (v, i) { return Math.round(v + (b[i] - v) * t); }); }
+  function onJourney() {
+    var r = track.getBoundingClientRect(), vh = window.innerHeight;
+    var p = Math.min(1, Math.max(0, (vh * 0.55 - r.top) / r.height));
+    var y = p * r.height;
+    drop.style.top = y + "px"; fill.style.height = y + "px";
+    var seg = Math.min(2.999, p * 3), i = Math.floor(seg), c = mix(cols[i], cols[i + 1], seg - i);
+    dp.setAttribute("fill", "rgb(" + c.join(",") + ")");
+  }
+  window.addEventListener("scroll", onJourney, { passive: true }); onJourney();
+
+  /* ---------- 3. microscope slider ---------- */
+  var cg = $("#crystals"), NS = "http://www.w3.org/2000/svg", crystals = [];
+  for (var i = 0; i < 46; i++) {
+    var x = -20 + Math.random() * 440, top = Math.random() < .5, y = top ? 150 + Math.random() * 18 : 232 + Math.random() * 18;
+    var s = 6 + Math.random() * 12, pts = [];
+    for (var k = 0; k < 6; k++) { var a = k / 6 * Math.PI * 2 + Math.random() * .4, rr = s * (.6 + Math.random() * .5); pts.push((x + Math.cos(a) * rr).toFixed(1) + "," + (y + Math.sin(a) * rr).toFixed(1)); }
+    var poly = document.createElementNS(NS, "polygon");
+    poly.setAttribute("points", pts.join(" ")); poly.setAttribute("fill", "rgba(236,232,223,.92)"); poly.setAttribute("stroke", "rgba(160,150,130,.6)"); poly.setAttribute("stroke-width", "1");
+    poly.style.transition = "transform .5s ease-out, opacity .5s";
+    cg.appendChild(poly); crystals.push({ el: poly, th: Math.random(), dx: (Math.random() - .5) * 60, dy: (top ? -1 : 1) * (40 + Math.random() * 60) });
+  }
+  var wash = $("#wash"), shine = $("#hair-shine");
+  function onWash() {
+    var v = wash.value / 100;
+    wash.style.setProperty("--v", (100 - wash.value) + "%");
+    crystals.forEach(function (c) {
+      var gone = v > c.th;
+      c.el.style.opacity = gone ? 0 : 1;
+      c.el.style.transform = gone ? "translate(" + c.dx + "px," + c.dy + "px)" : "none";
+    });
+    shine.setAttribute("opacity", (v * .9).toFixed(2));
+    var left = crystals.filter(function (c) { return v <= c.th; }).length;
+    $("#r-min").textContent = Math.round(left / crystals.length * 100) + "%";
+    $("#r-shine").textContent = Math.round(v * 100) + "%";
+    $("#r-soft").textContent = v < .35 ? "خشينة" : v < .75 ? "أنعم" : "ناعمة";
+  }
+  wash.addEventListener("input", onWash); onWash();
+
+  /* ---------- 4. bottle tilt ---------- */
+  var tilt = $("#tilt");
+  if (tilt && !reduce && window.matchMedia("(pointer:fine)").matches) {
+    var st = tilt.parentElement;
+    st.addEventListener("mousemove", function (e) {
+      var r = st.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+      tilt.style.transform = "rotateY(" + (x * 18) + "deg) rotateX(" + (-y * 14) + "deg)";
+    });
+    st.addEventListener("mouseleave", function () { tilt.style.transform = "none"; });
+  }
+
+  /* ---------- 5. pack cards ---------- */
+  var set = function (sel, html) { var e = $(sel); if (e) e.innerHTML = html; };
+  set("[data-e1]", (C.PRICE_1 || 149) + " DH" + (C.PRICE_1_OLD ? "<s>" + C.PRICE_1_OLD + " DH</s>" : ""));
+  set("[data-e2]", (C.PRICE_2 || 249) + " DH" + (C.PRICE_2_OLD ? "<s>" + C.PRICE_2_OLD + " DH</s>" : ""));
+  document.querySelectorAll("[data-pick]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var r = document.querySelector('input[name=qty][value="' + b.getAttribute("data-pick") + '"]');
+      if (r) { r.checked = true; r.dispatchEvent(new Event("change", { bubbles: true })); }
+      var a = document.createElement("a"); a.href = "#reserve"; a.style.display = "none"; document.body.appendChild(a); a.click(); a.remove();
+    });
+  });
+})();
+</script>
+</body>
+</html>
