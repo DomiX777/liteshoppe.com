@@ -128,6 +128,57 @@
     $$(".reveal").forEach(function (el) { el.classList.add("in"); });
   }
 
+  /* ---------- order popup ---------- */
+  (function () {
+    var formEl = $("#lead-form");
+    if (!formEl || typeof document.createElement("dialog").showModal !== "function") return;
+    var wrap = formEl.parentElement;
+    var dlg = document.createElement("dialog");
+    dlg.id = "order-modal";
+    dlg.className = "modal";
+    dlg.setAttribute("aria-labelledby", "modal-title");
+    var thumb = ($(".thumb img") || {}).src || "";
+    dlg.innerHTML =
+      '<div class="modal-head">' +
+        '<div class="modal-prod">' + (thumb ? '<img src="' + thumb + '" alt="" width="56" height="56">' : "") +
+          '<div><b id="modal-title">Naqiva Détox Anti-Calcaire</b><span>التوصيل فابور · الخلاص عند الاستلام</span></div></div>' +
+        '<button type="button" class="modal-x" aria-label="سد">' +
+          '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>' +
+        '</button></div>';
+    var body = document.createElement("div");
+    body.className = "modal-body";
+    // leave a call-to-action where the form used to be
+    var ph = document.createElement("div");
+    ph.className = "offer-cta";
+    ph.innerHTML = '<h3>اطلب فـ 30 ثانية</h3><p>السمية، التيليفون، المدينة والعنوان. وهادشي كامل.</p>' +
+      '<a class="btn btn-primary" href="#reserve" data-cta="offer">اطلب دابا · <span data-total></span></a>' +
+      '<small>ما كتخلص والو حتى يوصلك الطلب</small>';
+    wrap.parentElement.replaceChild(ph, wrap);
+    body.appendChild(wrap);
+    dlg.appendChild(body);
+    document.body.appendChild(dlg);
+    var t = ph.querySelector("[data-total]"); if (t) t.textContent = totals[currentQty()] + " DH";
+    var open = function () {
+      if (dlg.open) return;
+      dlg.showModal();
+      document.documentElement.classList.add("modal-open");
+      var first = dlg.querySelector("#f-name");
+      if (first && !$("#success").offsetParent) setTimeout(function () { first.focus(); }, 60);
+      trackEvent("InitiateCheckout", "ClickButton", { position: "popup" });
+    };
+    var close = function () { dlg.close(); };
+    dlg.addEventListener("close", function () { document.documentElement.classList.remove("modal-open"); });
+    dlg.querySelector(".modal-x").addEventListener("click", close);
+    dlg.addEventListener("click", function (e) { if (e.target === dlg) close(); });
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest && e.target.closest('a[href="#reserve"]');
+      if (!a) return;
+      e.preventDefault();
+      open();
+    });
+    if (location.hash === "#order") open();
+  })();
+
   /* ---------- form ---------- */
   var form = $("#lead-form");
   var btn = $("#f-submit");
