@@ -13,7 +13,7 @@ HERE = __file__.rsplit('/', 1)[0]
 
 # Placement of every line on the video timeline (seconds)
 ORDER = [
-    ('P1', 0.5), ('D1', 5.6),
+    ('P1', 0.42), ('D1', 5.6),
     ('P2', 8.8), ('D2', 12.0),
     ('P3', 18.5), ('P4', 23.4),
     ('P5', 28.9), ('P6', 34.0),
@@ -71,17 +71,34 @@ for i, l in enumerate(H): segs[f'P{i+1}'] = l
 for i, l in enumerate(D): segs[f'D{i+1}'] = l
 
 
+def quiet_point(sig, a, b):
+    """time in [a,b] with the lowest short-term energy (a real gap between sentences)"""
+    a = max(0, a); b = min(len(sig) / SR, b)
+    if b - a < 0.02:
+        return (a + b) / 2
+    hop = int(0.01 * SR); i0, i1 = int(a * SR), int(b * SR)
+    best, bt = 1e9, (a + b) / 2
+    for i in range(i0, max(i0 + 1, i1 - hop), hop):
+        e = float(np.mean(sig[i:i + hop] ** 2))
+        if e < best:
+            best, bt = e, i / SR
+    return bt
+
+
 def clip_bounds(key):
     spk, idx = key[0], int(key[1:])
     group = H if spk == 'P' else D
+    sig = src[spk]
     l = group[idx - 1]
-    s = l[0]['start'] - 0.06
-    e = l[-1]['end'] + 0.12
-    if idx < len(group):
-        e = min(e, group[idx][0]['start'] - 0.03)
     if idx > 1:
-        s = max(s, group[idx - 2][-1]['end'] + 0.02)
-    return max(0, s), e
+        s = quiet_point(sig, group[idx - 2][-1]['end'] - 0.05, l[0]['start'] + 0.02)
+    else:
+        s = 0.0
+    if idx < len(group):
+        e = quiet_point(sig, l[-1]['end'] - 0.05, group[idx][0]['start'] + 0.02)
+    else:
+        e = min(len(sig) / SR, l[-1]['end'] + 0.45)
+    return s, e
 
 
 voice = {'P': np.zeros(int(TOTAL * SR), np.float32), 'D': np.zeros(int(TOTAL * SR), np.float32)}
@@ -89,8 +106,8 @@ lines_out = []
 for key, T in ORDER:
     s, e = clip_bounds(key)
     a = src[key[0]][int(s * SR):int(e * SR)].copy()
-    f = int(0.012 * SR)
-    a[:f] *= np.linspace(0, 1, f); a[-f:] *= np.linspace(1, 0, f)
+    f = int(0.008 * SR); g = int(0.05 * SR)
+    a[:f] *= np.linspace(0, 1, f); a[-g:] *= np.linspace(1, 0, g)
     i0 = int(T * SR)
     voice[key[0]][i0:i0 + len(a)] += a
     words = []
