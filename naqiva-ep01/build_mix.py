@@ -1,4 +1,4 @@
-"""HairLab EP01 – synthesizes SFX + background music and mixes them under the voice.
+"""Naqiva EP01 – synthesizes SFX + background music and mixes them under the voice.
 Outputs audio/sfx.wav, audio/music.wav, audio/mix.wav"""
 import json, wave
 import numpy as np

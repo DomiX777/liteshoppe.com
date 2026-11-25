@@ -1,4 +1,4 @@
-"""HairLab EP01 – builds the voice track, lip-sync curves and timeline.js.
+"""Naqiva EP01 – builds the voice track, lip-sync curves and timeline.js.
 
 Inputs : audio/host.wav, audio/drop.wav (+ *_words.json word timings)
 Outputs: audio/voice.wav, timeline.js (lines, words, scenes, mouth curves)

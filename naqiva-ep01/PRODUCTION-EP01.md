@@ -1,8 +1,8 @@
-# HairLab · EP01: سرّ الكالكير والماء القاصح
+# Naqiva · EP01: سرّ الكالكير والماء القاصح
 
 | | |
 |---|---|
-| Final video | `hairlab-ep01-9x16.mp4` (1080×1920, 30 fps, 75 s, with voice, music and SFX) |
+| Final video | `naqiva-ep01-9x16.mp4` (1080×1920, 30 fps, 75 s, with voice, music and SFX) |
 | Animation source | `ep01.html`, rendered frame by frame. Edit it, then re-render. |
 | Voice | ElevenLabs `eleven_v4`. Presenter: "Hamza – Moroccan Darija Narrator". Drop: "Karim Ben" with pitch raised ×1.22. |
 | Lip sync | The mouth follows the loudness of the voice on every frame (`build_audio.py` → `timeline.js`). |
@@ -39,7 +39,7 @@ See `stills/character-sheet.jpg`.
 | 4 | 0:28–0:41 | Hair under the microscope | Hair strand with its cuticle scales. A few deposits build up (small, not a rock crust), with a wash counter (🚿 ×1 → ×30). Then a comparison: clean strand vs strand with deposits, plus "حالة الشعر + نوع الما = النتيجة كتختالف". |
 | 5 | 0:41–0:50 | Clarification | ⚠️ "قشرة / جفاف ≠ كالكير". Then a water-hardness test: the strip goes into the glass and the colors change. |
 | 6 | 0:50–1:04 | Care | Qtira: "إيوا… شنو ندير؟". Checklist with 2 items. Then the lights go down, a spotlight hits a covered bottle with "؟", and the line "فالحلقة الجاية…" (product teaser). |
-| 7 | 1:04–1:15 | Ending | Card: "تابعنا باش تكتشف أسرار الشعر". A finger taps the button and it turns into "متابع ✓". Social icons, then Qtira: "نتلاقاو فالحلقة الجاية!", then the HairLab logo card. |
+| 7 | 1:04–1:15 | Ending | Card: "تابعنا باش تكتشف أسرار الشعر". A finger taps the button and it turns into "متابع ✓". Social icons, then Qtira: "نتلاقاو فالحلقة الجاية!", then the Naqiva logo card. |
 
 > The scene timings are based on the voice and differ from the storyboard by 1–2 seconds; the total is still exactly 75 s.
 
@@ -134,7 +134,7 @@ Paste this description at the start of every prompt so the characters stay the s
 4. **Hair under the microscope:** A golden-ringed microscope lens over a brown hair strand with visible cuticle scales. A few small white crystal deposits appear one by one along the cuticle edges (sparse, not a crust) while a shower counter rises. The lens shrinks; below it, two cards compare a clean shiny strand with a duller strand that has a few specks.
 5. **Clarification:** In the room, the presenter is serious and raises an index finger. A card shows dandruff flakes on the scalp ≠ mineral crystals on a hair strand. The card flips to a water-hardness test: a strip dips into a glass, its pads change color, and a result scale appears. The presenter points at it.
 6. **Care and teaser:** The water drop scratches its head and looks confused. A checklist card animates in with two green checkmarks. The lights dim and a spotlight reveals a silhouetted shampoo bottle with a big yellow question mark and sparkles. Mysterious mood.
-7. **Ending:** The presenter waves with the drop beside him. A follow card shows a yellow "Follow" button that gets tapped by a hand and turns green. Instagram, TikTok, YouTube and Facebook icons pop in. The scene fades to the HairLab logo (golden hair strand + blue drop in a circle) on purple.
+7. **Ending:** The presenter waves with the drop beside him. A follow card shows a yellow "Follow" button that gets tapped by a hand and turns green. Instagram, TikTok, YouTube and Facebook icons pop in. The scene fades to the white text-only "naqiva" wordmark on purple.
 
 ## 10. Changing something
 1. To change text or a scene: edit `ep01.html` (open it with `?t=12` to see the frame at 12 seconds).
